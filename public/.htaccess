@@ -1,0 +1,8 @@
+Options -Multiviews
+RewriteEngine On
+RewriteBase /covi_det/public
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond $1 !^(config|core|css|js|fonts|robots\.txt)
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
