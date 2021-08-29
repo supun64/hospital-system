@@ -1,6 +1,6 @@
 Options -Multiviews
 RewriteEngine On
-RewriteBase /covi_det/public
+RewriteBase /hospital-system/public
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
