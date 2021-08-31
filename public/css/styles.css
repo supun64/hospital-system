@@ -1,10 +1,24 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
-html,
-body {
+html,body{
   height: 100%;
+
 }
 
+.register-container{
+  height:100%;
+  background-image: linear-gradient(to bottom right,#324ca8,#9dcfe3) ;
+  position: relative;
+  
+}
+
+.register-wrapper{
+
+height: 80%;
+width: 40%;
+background-color: white;
+position: absolute;
+top: 10%;
+left: 30%;
+border-radius: 25px;
+padding: 10px;
+
+}
