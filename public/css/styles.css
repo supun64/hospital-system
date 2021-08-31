@@ -5,14 +5,13 @@ html,body{
 
 .register-container{
   height:100%;
-  background-image: linear-gradient(to bottom right,#324ca8,#9dcfe3) ;
   position: relative;
   
 }
 
 .register-wrapper{
 
-height: 80%;
+height: auto;
 width: 40%;
 background-color: white;
 position: absolute;
