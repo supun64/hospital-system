@@ -42,7 +42,7 @@
 
             <hr>
 
-        <div class="row">
+        <!-- <div class="row">
             <p style="margin:0px;">A verification code has been sent to the email adddress. Please Enter the verification code</p>
         </div>
 
@@ -52,7 +52,7 @@
               
                 <input type="text" class="form-control form-control-sm" id="verification-code" placeholder="Verification Code">
             </div>    
-        </div>
+        </div> -->
 
 
         <div class="row">
