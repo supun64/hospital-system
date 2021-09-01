@@ -1,19 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo SITE_NAME ?></title>
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="<?php echo URL_ROOT;?>/public/css/styles.css">
-   
+<?php  require APP_ROOT.'/views/includes/header.php';  ?>
 
-    
-</head>
 
-<body style="background-image: linear-gradient(to right,#324ca8,#9dcfe3) ;">
+<body style="background-image: linear-gradient(to right,#324ca8,#9dcfe3) ;"> 
 
 <div class="register-container">
   
@@ -23,9 +11,9 @@
         <h3 style="margin: 5px;">Registration Form</h3>
         <hr style="color: black;">
         
-        <form action="<?php echo URL_ROOT; ?>/users/register" method="POST">
+        <form action="<?php echo URL_ROOT; ?>/users/register" method="POST" name="register-form">
 
-        <div class="row">
+        <div class="row">   
             <div class="col-sm-4">
                 <label for="hospital-id" class="col-form-label-sm">Hospital ID</label>
                 <input type="text" readonly class="form-control form-control-sm" id="hospital-id" value="Hospital id">
@@ -35,6 +23,7 @@
                 <input type="text" readonly class="form-control form-control-sm" id="hospital-name" value="Hospital name">
             </div>
         </div>
+
 
         <div class="row">
             <div class="col-sm-4">
@@ -50,10 +39,13 @@
                 <input type="email" readonly class="form-control form-control-sm" id="email-address"  value="Enter email"> 
             </div>
         </div>
+
             <hr>
+
         <div class="row">
             <p style="margin:0px;">A verification code has been sent to the email adddress. Please Enter the verification code</p>
         </div>
+
 
         <div class="row">
             <div class="col-sm-4">
@@ -62,12 +54,14 @@
             </div>    
         </div>
 
+
         <div class="row">
             <div class="col-sm-4">
                 <label for="admin" class="col-form-label-sm">Admin User name</label>
                 <input type="text" class="form-control form-control-sm" id="admin" placeholder="Enter username"> 
             </div>
         </div>
+
 
         <div class="row">
             <div class="col-sm-4">
@@ -76,12 +70,14 @@
             </div>
         </div>
 
+
         <div class="row">
             <div class="col-sm-4">
                 <label for="confirm-password" class="col-form-label-sm">Confirm Password</label>
                 <input type="password" class="form-control form-control-sm" id="confirm-password" placeholder="Confirm password">
             </div>
         </div>
+
 
         <br>
         <button type="submit" class="btn btn-outline-primary" id="register-submit">Submit</button>
