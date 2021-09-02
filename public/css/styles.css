@@ -3,6 +3,8 @@ html,body{
 
 }
 
+/* registration form styles */
+
 .register-container{
   height:100%;
   position: relative;
@@ -21,3 +23,26 @@ border-radius: 25px;
 padding: 30px;
 
 }
+
+.verification-wrapper{
+
+  height: auto;
+  width: 30%;
+  background-color: white;
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  border-radius: 25px;
+  padding: 30px;
+  
+  }
+
+  .email-img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 30%;
+    width: 30%;
+
+  }
+

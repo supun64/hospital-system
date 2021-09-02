@@ -5,13 +5,13 @@
 
 <div class="register-container">
   
-
+                                                    <!-- registration form -->
     <div class="register-wrapper">
 
         <h3 style="margin: 5px;">Registration Form</h3>
         <hr style="color: black;">
         
-        <form action="<?php echo URL_ROOT; ?>/users/register" method="POST" name="register-form">
+        <form action="<?php echo URL_ROOT; ?>/users/login" method="POST" name="register-form">
 
         <div class="row">   
             <div class="col-sm-4">
@@ -41,19 +41,6 @@
         </div>
 
             <hr>
-
-        <!-- <div class="row">
-            <p style="margin:0px;">A verification code has been sent to the email adddress. Please Enter the verification code</p>
-        </div>
-
-
-        <div class="row">
-            <div class="col-sm-4">
-              
-                <input type="text" class="form-control form-control-sm" id="verification-code" placeholder="Verification Code">
-            </div>    
-        </div> -->
-
 
         <div class="row">
             <div class="col-sm-4">
@@ -86,6 +73,37 @@
 
   
     </div>
+
+                                                    <!-- vrification code -->
+
+    <!-- <div class="verification-wrapper">
+
+    <form action="<?php echo URL_ROOT; ?>/users/register" method="POST" name="verification-form">
+        <div class="row">
+            <img src="<?php echo URL_ROOT ;?>/public/images/email.png" alt="email" class="email-img">
+        </div>
+
+        <div class="row">
+            <h6>A verification code has been sent to the email given. Please enter the verification code below</h5>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-5">
+                <input type="text" class="form-control form-control-sm" id="verify-code" placeholder="Verification Code">
+            </div>
+        </div>
+
+        <br>
+        <div class="verification-btn-grp" style="padding-left:30%;">
+            <button type="submit" class="btn btn-outline-primary" name="resend"  style="margin-right: 10px;">Resend</button>
+            <button type="submit" class="btn btn-outline-primary" name="verify" style="margin-left: 10px;">Verify</button>
+        </div>
+
+
+    </form>
+
+    </div> -->
+
 
 </div>
 
