@@ -7,7 +7,7 @@ for (let i = 0; i < side_bar_options.length; i++) {
              side_bar_options[j].className = "option";
         }
         for (let j = 0; j < link_icons.length; j++) {
-             side_bar_options[j].className = "link-icon-img";
+             link_icons[j].className = "link-icon-img";
         }
         side_bar_options[i].className= "option active";
         link_icons[i - 1].className = "link-icon-img img-active";

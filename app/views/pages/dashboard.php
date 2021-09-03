@@ -65,4 +65,5 @@
     </div>
 
 </div>
+<?php require_once URL_ROOT."/public/javascript/script.js"?>
 <?php require_once APP_ROOT."/views/includes/footer.php"?>

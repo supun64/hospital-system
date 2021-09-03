@@ -11,33 +11,29 @@
 }
 .dashboard-text{
     position:relative;
-    margin-top:10px;
+    margin-top:6px;
     line-height: 35px;
-    font-size:1.1em;
+    font-size:0.9em;
 }
 .user-credentials{
     float:left;
     padding:0;
     margin-bottom: 15%;
     width:50%;
-    font-size: 0.9em;
-    line-height: 35px;
+    font-size: 0.7em;
+    line-height: 29px;
     color:white;
 }
 .icon,.toggle-icon{
     margin:0;
     position: relative;
     text-align: center;
-    font-size:3em;
+    font-size:2.5em;
     top:5px;
     padding-left:0;
-    margin-right:25px;
+    margin-right:15px;
     float:left;
-    min-width:60px;
-}
-.hospital-name .user-name {
-    padding:0;
-    height:20px;
+    min-width:55px;
 }
 .sidebar-container{
     padding:0;
@@ -69,21 +65,24 @@
 }
 .side-bar li{
     list-style: none;
-    line-height:5em;
-    max-height: 5em;
+    line-height:4em;
+    max-height: 4em;
     position: relative;
     width:100%;
     font-family: 'Poppins',sans-serif;
     text-align: center;
-    overflow: hidden;
+    overflow:hidden;
 }
 .side-bar li:nth-child(1){
-  border-bottom: 5px solid white;
+    border-bottom: 3px solid white;
+    display:flex;
+    flex-direction:row;
 }
 .side-bar li a{
     text-decoration: none;
     width: 100%;
     position: relative;
+    font-size:0.8em;
     display: block;
     display: flex;
     color: white;
@@ -91,6 +90,7 @@
 .side-bar li a .text{
   font-size: 1em;
   min-width:20%;
+  padding-top:5px;
 }
 .side-bar li .option.active{
     color: black;
@@ -108,15 +108,17 @@
 }
 .link-icon-img{
     position: relative;
-    min-width: 30px;
+    width:20px;
+    height:25px;
+    min-width: 25px;
     border-collapse: collapse;
   }
 .img-active{
     filter: brightness(0);
 }
 .link-icon{
-  min-width: 60px;
+  min-width: 50px;
   margin-top: 8px;
   font-size: 2em;
-  margin-right:30px;
+  margin-right:25px;
 }
