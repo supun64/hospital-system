@@ -1,9 +1,10 @@
+/*Dashboard Styles*/
 html,body{
     width:100%;
-    height:auto;
+    height:100%;
   }
   .container{
-    height:auto;
+    height:100%;
   }
   .dashboard-banner{
       margin:0;
@@ -129,4 +130,45 @@ html,body{
     font-size: 20px;
     margin-right:25px;
   }
+/* registration form styles */
+
+.register-container{
+  height:100%;
+  position: relative;
   
+}
+
+.register-wrapper{
+
+height: auto;
+width: 40%;
+background-color: white;
+position: absolute;
+top: 10%;
+left: 30%;
+border-radius: 25px;
+padding: 30px;
+
+}
+
+.verification-wrapper{
+
+  height: auto;
+  width: 30%;
+  background-color: white;
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  border-radius: 25px;
+  padding: 30px;
+  
+  }
+
+  .email-img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 30%;
+    width: 30%;
+
+  }
