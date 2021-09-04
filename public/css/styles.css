@@ -1,8 +1,135 @@
+/*Dashboard Styles*/
 html,body{
-  height: 100%;
-
-}
-
+    width:100%;
+    height:100%;
+  }
+  .container{
+    height:100%;
+  }
+  .dashboard-banner{
+      margin:0;
+      position:relative;
+      bottom:5px;
+      padding:0;
+      height: auto;
+      display:flex;
+      flex-direction: row;
+      overflow: hidden;
+      font-family: 'Montserrat',sans-serif;
+  }
+  .dashboard-text{
+      position:relative;
+      margin-top:3%;
+      line-height: 35px;
+      font-size:15px;
+      font-weight: bold ;
+  }
+  .user-credentials{
+      float:left;
+      padding:0;
+      width:50%;
+      font-size: 10px;
+      line-height: 28px;
+      color:white;
+  }
+  .icon,.toggle-icon{
+      margin:0;
+      position: relative;
+      text-align: center;
+      font-size:35px;
+      top:5px;
+      padding-left:0;
+      margin-right:15px;
+      float:left;
+      min-width:55px;
+  }
+  .sidebar-container{
+      padding:0;
+      margin:0;
+      position: fixed;
+      top:0;
+      left:0;
+      height:100%;
+      width:15%;
+      box-sizing: initial;
+  }
+  .side-bar{
+      margin:0;
+      width:100%;
+      height:100%;
+      top:0px;
+      left:5px;
+      position: relative;
+      display: block;
+      overflow:hidden;
+      padding-left: 0px;
+      background-color: #0a0bc4;
+      transition: width 0.5s;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
+  }
+  .side-bar.minimized{
+    width:60px;
+  }
+  .side-bar li{
+      list-style: none;
+      line-height:55px;
+      max-height: 55px;
+      position: relative;
+      width:100%;
+      font-family: 'Montserrat',sans-serif;
+      text-align: center;
+      overflow:hidden;
+  }
+  .side-bar li:nth-child(1){
+      border-bottom: 3px solid white;
+      display:flex;
+      flex-direction:row;
+  }
+  .side-bar li a{
+      text-decoration: none;
+      width: 100%;
+      position: relative;
+      font-size:18px;
+      display: block;
+      display: flex;
+      color: white;
+  }
+  .side-bar li a .text{
+    font-size: 14px;
+    min-width:20%;
+    padding-top:5px;
+  }
+  .side-bar li .option.active{
+      color: black;
+      background-color: white;
+  }
+  .side-bar li:hover a{
+      background-color: white;
+      color: black;
+  }
+  .side-bar li:hover a img{
+      filter: brightness(0);
+  }
+  .side-bar li:hover a .link-icon i{
+    color:black;
+  }
+  .link-icon-img{
+      position: relative;
+      width:20px;
+      height:25px;
+      min-width: 25px;
+      border-collapse: collapse;
+    }
+  .img-active{
+      filter: brightness(0);
+  }
+  .link-icon{
+    min-width: 50px;
+    margin-top: 8px;
+    font-size: 20px;
+    margin-right:25px;
+  }
 /* registration form styles */
 
 .register-container{
@@ -45,4 +172,3 @@ padding: 30px;
     width: 30%;
 
   }
-
