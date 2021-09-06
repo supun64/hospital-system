@@ -76,11 +76,11 @@
 
                                                     <!-- vrification code -->
 
-    <!-- <div class="verification-wrapper">
+    <!-- <div class="register-verification-wrapper">
 
     <form action="<?php echo URL_ROOT; ?>/users/register" method="POST" name="verification-form">
         <div class="row">
-            <img src="<?php echo URL_ROOT ;?>/public/images/email.png" alt="email" class="email-img">
+            <img src="<?php echo URL_ROOT ;?>/public/images/email.png" alt="email" class="register-email-img">
         </div>
 
         <div class="row">
