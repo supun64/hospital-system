@@ -22,13 +22,6 @@ body {
   overflow: hidden;
   font-family: "Montserrat", sans-serif;
 }
-.dashboard-text {
-  position: relative;
-  margin-top: 3%;
-  line-height: 35px;
-  font-size: 15px;
-  font-weight: bold;
-}
 .dashboard-user-credentials {
   float: left;
   padding: 0;
@@ -57,6 +50,7 @@ body {
   left: 0;
   height: 100%;
   width: 15%;
+  min-width:60px;
   box-sizing: initial;
 }
 .dashboard-side-bar {
@@ -70,7 +64,6 @@ body {
   overflow: hidden;
   padding-left: 0px;
   background-color: #0a0bc4;
-  transition: width 0.5s;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .dashboard-side-bar.minimized {
@@ -85,6 +78,13 @@ body {
   font-family: "Montserrat", sans-serif;
   text-align: center;
   overflow: hidden;
+}
+.dashboard-text {
+  position: relative;
+  margin-top: 10px;
+  line-height: 35px;
+  font-size: 15px;
+  font-weight: bold;
 }
 .dashboard-side-bar li:nth-child(1) {
   border-bottom: 3px solid white;
@@ -102,8 +102,6 @@ body {
 }
 .dashboard-side-bar li a .text {
   font-size: 14px;
-  min-width: 20%;
-  padding-top: 5px;
 }
 .dashboard-side-bar li .option.active {
   color: black;
@@ -115,6 +113,7 @@ body {
 }
 .dashboard-side-bar li:hover a img {
   filter: brightness(0);
+  -webkit-filter: brightness(0);
 }
 .dashboard-side-bar li:hover a .link-icon i {
   color: black;
@@ -131,9 +130,17 @@ body {
 }
 .dashboard-link-icon {
   min-width: 50px;
-  margin-top: 8px;
   font-size: 20px;
   margin-right: 25px;
+}
+
+@media screen and (max-width: 992px) {
+  .dashboard-side-bar{
+    width:60px;
+  }
+  .dashboard-sidebar-container{
+    width:60px;
+  }
 }
 /* registration form styles -------------------------------*/
 

@@ -15,49 +15,49 @@
                     <div class="user-name">USER NAME</div>
                 </div>
             </li>
-            <li class="dashboard-list">
+            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Home">
                 <a href="#" class="option">
                     <span class="dashboard-link-icon"><i class='bx bxs-home' ></i></span>
                     <span class="text">Home</span>
                 </a>
             </li>
-            <li class="dashboard-list">
+            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Vaccination">
                 <a href="#" class="option">
                     <span class="dashboard-link-icon"><img class="dashboard-link-icon-img" src="<?= URL_ROOT?>/public/images/vaccine_white.png" alt="" srcset=""></span>
                     <span class="text">Vaccination</span>
                 </a>
             </li>
-            <li class="dashboard-list">
+            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="PCR Test">
                 <a href="#" class="option">
                     <span class="dashboard-link-icon"><img class="dashboard-link-icon-img" src="<?= URL_ROOT?>/public/images/swab_white.png" alt="" srcset=""></span>
                     <span class="text">PCR Test</span>
                 </a>
             </li>
-            <li class="dashboard-list">
+            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Antigen Test">
                 <a href="#" class="option">
                     <span class="dashboard-link-icon"><img class="dashboard-link-icon-img" src="<?= URL_ROOT?>/public/images/blood_white.png" alt="" srcset=""></span>
                     <span class="text">Antigen Test</span>
                 </a>
             </li>
             <li class="dashboard-list">
-                <a href="#" class="option">
+                <a href="#" class="option"  data-toggle="tooltip" data-placement="right" title="COVID Patient">
                     <span class="dashboard-link-icon"><img class="dashboard-link-icon-img" src="<?= URL_ROOT?>/public/images/facial-mask_white.png" alt="" srcset=""></span>
                     <span class="text">COVID Patient</span>
                 </a>
             </li>
-            <li class="dashboard-list">
+            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="COVID Death">
                 <a href="#" class="option">
                     <span class="dashboard-link-icon"><img class="dashboard-link-icon-img" src="<?= URL_ROOT?>/public/images/death_white.png" alt="" srcset=""></span>
                     <span class="text">COVID Death</span>
                 </a>
             </li>
-            <li class="dashboard-list">
+            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Settings">
                 <a href="#" class="option">
                     <span class="dashboard-link-icon"><i class='bx bx-cog'></i></span>
                     <span class="text">Settings</span>
                 </a>
             </li>
-            <li class="dashboard-list">
+            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Log Out">
                 <a href="#" class="option">
                     <span class="dashboard-link-icon"><i class='bx bx-log-out-circle bx-flip-horizontal'  ></i></span>
                     <span class="text">Log Out</span>
@@ -90,12 +90,12 @@
     var toggle_button = document.querySelector('.dashboard-toggle-icon');
 
     toggle_button.onclick = function(){
-    let class_Name = side_bar.className;
-    if (class_Name.includes("minimized")) {
-        side_bar.className = "dashboard-side-bar";
-    } else {
-        side_bar.className = "dashboard-side-bar minimized";
-    }
+        let class_Name = side_bar.className;
+        if (class_Name.includes("minimized")) {
+            side_bar.className = "dashboard-side-bar";
+        } else {
+            side_bar.className = "dashboard-side-bar minimized";
+        }
     }
 
 
