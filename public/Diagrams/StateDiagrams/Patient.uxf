@@ -41,7 +41,7 @@ covid patient</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>760</x>
-      <y>368</y>
+      <y>360</y>
       <w>160</w>
       <h>32</h>
     </coordinates>
@@ -77,14 +77,14 @@ Positive</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>616</x>
-      <y>408</y>
+      <y>456</y>
       <w>288</w>
-      <h>168</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 Covid test
 negative</panel_attributes>
-    <additional_attributes>10.0;120.0;10.0;180.0;340.0;180.0;340.0;10.0;190.0;10.0</additional_attributes>
+    <additional_attributes>10.0;60.0;10.0;120.0;340.0;120.0;340.0;10.0;190.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLState</id>
@@ -263,5 +263,31 @@ Died</panel_attributes>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;230.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>928</x>
+      <y>392</y>
+      <w>104</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+Covid test
+Positive</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0;110.0;70.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>384</y>
+      <w>160</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+Covid test 
+negative</panel_attributes>
+    <additional_attributes>180.0;10.0;150.0;50.0;40.0;50.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
