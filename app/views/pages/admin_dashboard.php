@@ -2,7 +2,7 @@
 <body>
     
 <div class="dashboard-container">
-    <div class="dashboard-sidebar-container">
+    <div class="dashboard-sidebar-container admin">
       <div class="dashboard-banner">
           <span class="dashboard-toggle-icon"><i class='bx bx-menu'></i></span>
           <span class="dashboard-text">Dashboard</span>
@@ -21,51 +21,37 @@
                     <span class="text">Home</span>
                 </a>
             </li>
-            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Vaccination">
+            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="User Management">
                 <a href="#" class="option">
-                    <span class="dashboard-link-icon"><img class="dashboard-link-icon-img" src="<?= URL_ROOT?>/public/images/vaccine_white.png" alt="" srcset=""></span>
-                    <span class="text">Vaccination</span>
+                    <span class="dashboard-link-icon"><i class='bx bxs-user-detail' ></i></span>
+                    <span class="text">User Management</span>
                 </a>
             </li>
-            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="PCR Test">
+            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Data Management">
                 <a href="#" class="option">
-                    <span class="dashboard-link-icon"><img class="dashboard-link-icon-img" src="<?= URL_ROOT?>/public/images/swab_white.png" alt="" srcset=""></span>
-                    <span class="text">PCR Test</span>
+                    <span class="dashboard-link-icon"><i class='bx bxs-data'  ></i></span>
+                    <span class="text">Data Management</span>
                 </a>
             </li>
-            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Antigen Test">
-                <a href="#" class="option">
-                    <span class="dashboard-link-icon"><img class="dashboard-link-icon-img" src="<?= URL_ROOT?>/public/images/blood_white.png" alt="" srcset=""></span>
-                    <span class="text">Antigen Test</span>
-                </a>
-            </li>
-            <li class="dashboard-list">
-                <a href="#" class="option"  data-toggle="tooltip" data-placement="right" title="COVID Patient">
-                    <span class="dashboard-link-icon"><img class="dashboard-link-icon-img" src="<?= URL_ROOT?>/public/images/facial-mask_white.png" alt="" srcset=""></span>
-                    <span class="text">COVID Patient</span>
-                </a>
-            </li>
-            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="COVID Death">
-                <a href="#" class="option">
-                    <span class="dashboard-link-icon"><img class="dashboard-link-icon-img" src="<?= URL_ROOT?>/public/images/death_white.png" alt="" srcset=""></span>
-                    <span class="text">COVID Death</span>
-                </a>
-            </li>
-            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Settings">
-                <a href="#" class="option">
-                    <span class="dashboard-link-icon"><i class='bx bx-cog'></i></span>
-                    <span class="text">Settings</span>
-                </a>
-            </li>
-            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Log Out">
+            
+            <li class="dashboard-list admin-logout" data-toggle="tooltip" data-placement="right" title="Log Out">
                 <a href="#" class="option">
                     <span class="dashboard-link-icon"><i class='bx bx-log-out-circle bx-flip-horizontal'  ></i></span>
                     <span class="text">Log Out</span>
                 </a>
             </li>
+            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Settings">
+                <a href="#" class="option">
+                    <span class="dashboard-link-icon"><i class='bx bx-cog'></i></span>
+                    <!--<span class="text">Settings</span>-->
+                </a>
+            </li>
+            
         </ul>
     </div>
+    <div class="sub-division">
 
+    </div>
 </div>
 <script>
     //for highlighting the selected bar
@@ -86,15 +72,18 @@
     }
 
     //for minimizing the side banner
-    var side_bar = document.querySelector('.dashboard-side-bar');
+    var side_bar = document.querySelector('.dashboard-sidebar-container');
+    var division_bar = document.querySelector('.sub-division');
     var toggle_button = document.querySelector('.dashboard-toggle-icon');
 
     toggle_button.onclick = function(){
         let class_Name = side_bar.className;
         if (class_Name.includes("minimized")) {
-            side_bar.className = "dashboard-side-bar";
+            side_bar.className = "dashboard-sidebar-container admin";
+            division_bar.className = "sub-division";
         } else {
-            side_bar.className = "dashboard-side-bar minimized";
+            side_bar.className = "dashboard-sidebar-container admin side-minimized";
+            division_bar.className = "sub-division division-maximized";
         }
     }
 

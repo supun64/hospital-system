@@ -7,8 +7,12 @@ class Pages extends Controller{
         
     }
 
-    public function index(){
-        $this->view('/pages/dashboard');
+    public function user_index(){
+        $this->view('/pages/user_dashboard');
+    }
+
+    public function admin_index(){
+        $this->view('/pages/admin_dashboard');
     }
 
     public function antigen(){
