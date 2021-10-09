@@ -134,7 +134,7 @@ body {
   margin-right: 25px;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1200px) {
   .dashboard-side-bar{
     width:60px;
   }
