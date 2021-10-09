@@ -92,10 +92,10 @@
 
     toggle_button.onclick = function(){
         let class_Name = side_bar.className;
-        if (class_Name.includes("minimized")) {
+        if (class_Name.includes("side-minimized")) {
             side_bar.className = "dashboard-side-bar";
         } else {
-            side_bar.className = "dashboard-side-bar minimized";
+            side_bar.className = "dashboard-side-bar side-minimized";
         }
     }
 

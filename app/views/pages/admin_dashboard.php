@@ -33,24 +33,32 @@
                     <span class="text">Data Management</span>
                 </a>
             </li>
-            
-            <li class="dashboard-list admin-logout" data-toggle="tooltip" data-placement="right" title="Log Out">
-                <a href="#" class="option">
-                    <span class="dashboard-link-icon"><i class='bx bx-log-out-circle bx-flip-horizontal'  ></i></span>
-                    <span class="text">Log Out</span>
-                </a>
-            </li>
-            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Settings">
+            <li class="dashboard-list admin-settings" data-toggle="tooltip" data-placement="right" title="Settings">
                 <a href="#" class="option">
                     <span class="dashboard-link-icon"><i class='bx bx-cog'></i></span>
-                    <!--<span class="text">Settings</span>-->
+                    <span class="text">Settings</span>
                 </a>
             </li>
-            
+            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Log Out">
+                <a href="#" class="option">
+                    <span class="dashboard-link-icon"><i class='bx bx-log-out-circle bx-flip-horizontal'  ></i></span>
+                    <!--<span class="text">Log Out</span>-->
+                </a>
+            </li>
         </ul>
     </div>
+    <!--sub-divions which carry sections for each option-->
     <div class="sub-division">
-
+        <h1>division for home</h1>
+    </div>
+    <div class="sub-division">
+        <h1>division for user management</h1>
+    </div>
+    <div class="sub-division">
+        <h1>division for data management</h1>
+    </div>
+    <div class="sub-division">
+        <h1>division for settings</h1>
     </div>
 </div>
 <script>
@@ -68,7 +76,7 @@
             side_bar_options[i].className= "option active";
             link_icons[i - 1].className = "dashboard-link-icon-img dashboard-img-active";
         }
-
+        display_division();
     }
 
     //for minimizing the side banner
@@ -85,8 +93,24 @@
             side_bar.className = "dashboard-sidebar-container admin side-minimized";
             division_bar.className = "sub-division division-maximized";
         }
-    }
+        
+    };
 
+    //for displaying the division for the particular option
+    function display_division(){
+        var sub_divisions = document.querySelectorAll('.sub-division');
+        var side_bar_options = document.querySelectorAll('.option');
+        for (let i = 0; i < side_bar_options.length; i++) {
+            side_bar_options[i].onclick = function(){
+                for (let j = 0; j < sub_divisions.length; j++) {
+                    sub_divisions[j].className = "sub-division";
+                }
+                sub_divisions[i].className= "sub-division display";
+            }
+
+        }
+    }
+    
 
 </script>
 <?php require_once APP_ROOT."/views/includes/footer.php"?>
