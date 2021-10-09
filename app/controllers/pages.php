@@ -7,7 +7,10 @@ class Pages extends Controller{
         
     }
 
-    public function index(){
+    public function admin_index(){
+        $this->view('/pages/admin_dashboard');
+    }
+    public function user_index(){
         $this->view('/pages/dashboard');
     }
 
