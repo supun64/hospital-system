@@ -50,12 +50,8 @@ body {
   left: 0;
   height: 100%;
   width: 15%;
-  min-width: 60px;
+  min-width:60px;
   box-sizing: initial;
-}
-
-.admin{
-  width:18%;
 }
 .dashboard-side-bar {
   margin: 0;
@@ -70,10 +66,9 @@ body {
   background-color: #0a0bc4;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.side-minimized {
+.dashboard-side-bar.minimized {
   width: 60px;
 }
-
 .dashboard-side-bar li {
   list-style: none;
   line-height: 55px;
@@ -82,7 +77,7 @@ body {
   width: 100%;
   font-family: "Montserrat", sans-serif;
   text-align: center;
-  overflow:hidden;
+  overflow: hidden;
 }
 .dashboard-text {
   position: relative;
@@ -139,41 +134,12 @@ body {
   margin-right: 25px;
 }
 
-.dashboard-side-bar li:nth-child(8) {
-  margin-bottom: 120px;
-}
-
-.admin-settings{
-  margin-bottom: 280px;
-}
 @media screen and (max-width: 1200px) {
-  
-  .dashboard-sidebar-container{
+  .dashboard-side-bar{
     width:60px;
   }
-}
-/*data management division styles--------------------------*/
-.sub-division{
-  padding: 0;
-  margin: 0;
-  position:static;
-  float:right;
-  height:100%;
-  width:81%;
-  display:none;
-}
-
-.display{
-  display:inline;
-}
-.division-maximized{
-  width: 95%;
-}
-@media screen and (max-width: 1200px) {
-  
-  .sub-division{
-    width:94%;
-
+  .dashboard-sidebar-container{
+    width:60px;
   }
 }
 /* registration form styles -------------------------------*/
