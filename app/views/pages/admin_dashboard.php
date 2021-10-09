@@ -62,9 +62,11 @@
     </div>
 </div>
 <script>
-    //for highlighting the selected bar
-    var side_bar_options = document.querySelectorAll('.option');
+    //for highlighting the selected bar and for displaying the division for the particular option
     var link_icons = document.querySelectorAll('.dashboard-link-icon-img');
+    var side_bar_options = document.querySelectorAll('.option');
+    var sub_divisions = document.querySelectorAll('.sub-division');
+
     for (let i = 0; i < side_bar_options.length; i++) {
         side_bar_options[i].onclick = function(){
             for (let j = 0; j < side_bar_options.length; j++) {
@@ -73,11 +75,15 @@
             for (let j = 0; j < link_icons.length; j++) {
                 link_icons[j].className = "dashboard-link-icon-img";
             }
+            for (let j = 0; j < sub_divisions.length; j++) {
+                sub_divisions[j].className = "sub-division";
+            }
+            sub_divisions[i].className= "sub-division display";
             side_bar_options[i].className= "option active";
-            link_icons[i - 1].className = "dashboard-link-icon-img dashboard-img-active";
-        }
-        display_division();
+            link_icons[i - 1].className = "dashboard-link-icon-img dashboard-img-active";    
+        };
     }
+
 
     //for minimizing the side banner
     var side_bar = document.querySelector('.dashboard-sidebar-container');
@@ -96,21 +102,6 @@
         
     };
 
-    //for displaying the division for the particular option
-    function display_division(){
-        var sub_divisions = document.querySelectorAll('.sub-division');
-        var side_bar_options = document.querySelectorAll('.option');
-        for (let i = 0; i < side_bar_options.length; i++) {
-            side_bar_options[i].onclick = function(){
-                for (let j = 0; j < sub_divisions.length; j++) {
-                    sub_divisions[j].className = "sub-division";
-                }
-                sub_divisions[i].className= "sub-division display";
-            }
-
-        }
-    }
-    
 
 </script>
 <?php require_once APP_ROOT."/views/includes/footer.php"?>

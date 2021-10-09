@@ -164,7 +164,7 @@ body {
 }
 
 .display{
-  display:inline
+  display:inline;
 }
 .division-maximized{
   width: 95%;
