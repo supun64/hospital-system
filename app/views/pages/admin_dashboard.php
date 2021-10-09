@@ -96,16 +96,18 @@
     //for minimizing the side banner
     toggle_button.onclick = function(){
         let class_Name = side_bar.className;
-        if(sub_divisions[clicked].className == 'sub-division display'){
+        if(clicked != -1){
+            if(sub_divisions[clicked].className == 'sub-division display'){
             sub_divisions[clicked].className = 'sub-division display division-maximized';
-        }else{
-            sub_divisions[clicked].className = 'sub-division display'
+            }else{
+                sub_divisions[clicked].className = 'sub-division display';
+            }
         }
-        if (class_Name.includes("minimized")) {
+        
+        if (class_Name.includes("side-minimized")) {
             side_bar.className = "dashboard-sidebar-container admin";
         } else {
             side_bar.className = "dashboard-sidebar-container admin side-minimized";
-            sub_divisions.className = "sub-division division-maximized";
         }
         
     };
