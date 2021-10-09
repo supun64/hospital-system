@@ -154,7 +154,7 @@ body {
 @media screen and (max-width: 1200px) {
   .dashboard-sidebar-container{
     width:60px;
-
+  }
   .dashboard-side-bar {
     width: 60px;
   }
