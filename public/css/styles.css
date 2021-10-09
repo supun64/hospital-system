@@ -1,11 +1,16 @@
 /* General Styles------------------------------------ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html,
 body {
   width: 100%;
   height: 100%;
 }
-
-
 
 /*Dashboard Styles ------------------------------------*/
 .dashboard-container {
@@ -62,7 +67,7 @@ body {
   width: 100%;
   height: 100%;
   top: 0px;
-  left: 5px;
+  left: 0px;
   position: relative;
   display: block;
   overflow: hidden;
@@ -147,9 +152,11 @@ body {
   margin-bottom: 280px;
 }
 @media screen and (max-width: 1200px) {
-  
   .dashboard-sidebar-container{
     width:60px;
+
+  .dashboard-side-bar {
+    width: 60px;
   }
 }
 /*data management division styles--------------------------*/
@@ -213,7 +220,6 @@ body {
   width: 30%;
 }
 
-
 /* login-page styles -------------------------------- */
 
 .login-body {
@@ -237,7 +243,6 @@ body {
 
 .login-card {
   border-width: 0;
-
 }
 
 .login-main {
