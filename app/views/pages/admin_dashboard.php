@@ -66,9 +66,13 @@
     var link_icons = document.querySelectorAll('.dashboard-link-icon-img');
     var side_bar_options = document.querySelectorAll('.option');
     var sub_divisions = document.querySelectorAll('.sub-division');
+    var side_bar = document.querySelector('.dashboard-sidebar-container');
+    var toggle_button = document.querySelector('.dashboard-toggle-icon');
+    let clicked = -1;
 
     for (let i = 0; i < side_bar_options.length; i++) {
         side_bar_options[i].onclick = function(){
+            clicked = i;
             for (let j = 0; j < side_bar_options.length; j++) {
                 side_bar_options[j].className = "option";
             }
@@ -78,7 +82,11 @@
             for (let j = 0; j < sub_divisions.length; j++) {
                 sub_divisions[j].className = "sub-division";
             }
-            sub_divisions[i].className= "sub-division display";
+            if(side_bar.className == "dashboard-sidebar-container admin side-minimized"){
+                sub_divisions[clicked].className = 'sub-division display division-maximized';
+            }else{
+                sub_divisions[i].className= "sub-division display";
+            }
             side_bar_options[i].className= "option active";
             link_icons[i - 1].className = "dashboard-link-icon-img dashboard-img-active";    
         };
@@ -86,18 +94,18 @@
 
 
     //for minimizing the side banner
-    var side_bar = document.querySelector('.dashboard-sidebar-container');
-    var division_bar = document.querySelector('.sub-division');
-    var toggle_button = document.querySelector('.dashboard-toggle-icon');
-
     toggle_button.onclick = function(){
         let class_Name = side_bar.className;
+        if(sub_divisions[clicked].className == 'sub-division display'){
+            sub_divisions[clicked].className = 'sub-division display division-maximized';
+        }else{
+            sub_divisions[clicked].className = 'sub-division display'
+        }
         if (class_Name.includes("minimized")) {
             side_bar.className = "dashboard-sidebar-container admin";
-            division_bar.className = "sub-division";
         } else {
             side_bar.className = "dashboard-sidebar-container admin side-minimized";
-            division_bar.className = "sub-division division-maximized";
+            sub_divisions.className = "sub-division division-maximized";
         }
         
     };
