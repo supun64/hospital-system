@@ -51,18 +51,19 @@
                     <span class="text">COVID Death</span>
                 </a>
             </li>
-            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Settings">
-                <a href="#" class="option">
-                    <span class="dashboard-link-icon"><i class='bx bx-cog'></i></span>
-                    <span class="text">Settings</span>
-                </a>
-            </li>
             <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Log Out">
                 <a href="#" class="option">
                     <span class="dashboard-link-icon"><i class='bx bx-log-out-circle bx-flip-horizontal'  ></i></span>
                     <span class="text">Log Out</span>
                 </a>
             </li>
+            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Settings">
+                <a href="#" class="option">
+                    <span class="dashboard-link-icon"><i class='bx bx-cog'></i></span>
+                    <!--<span class="text">Settings</span>-->
+                </a>
+            </li>
+            
         </ul>
     </div>
 
@@ -91,10 +92,10 @@
 
     toggle_button.onclick = function(){
         let class_Name = side_bar.className;
-        if (class_Name.includes("minimized")) {
+        if (class_Name.includes("side-minimized")) {
             side_bar.className = "dashboard-side-bar";
         } else {
-            side_bar.className = "dashboard-side-bar minimized";
+            side_bar.className = "dashboard-side-bar side-minimized";
         }
     }
 
