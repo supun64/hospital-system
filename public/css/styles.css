@@ -209,6 +209,35 @@ body {
   width: 95%;
 }
 
+
+/*DEO subdivision related*/
+
+
+.deo-manage-rm-btn{
+  border-width: 0;
+  background-color: transparent;
+}
+
+.deo-manage-new-deo-form{
+  height: auto;
+  width: 60%;
+  background-color: white;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  border-radius: 25px;
+  padding: 30px;
+  
+}
+
+.bg-blur{
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+}
+
+
+
+
 /* registration form styles -------------------------------*/
 
 .register-container {
