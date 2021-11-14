@@ -66,7 +66,7 @@
             
         </ul>
     </div>
-
+    
 </div>
 <script>
     //for highlighting the selected bar

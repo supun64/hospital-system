@@ -16,25 +16,25 @@
                 </div>
             </li>
             <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Home">
-                <a href="#" class="option">
+                <a href="<?= URL_ROOT ?>/pages/home" class="option">
                     <span class="dashboard-link-icon"><i class='bx bxs-home' ></i></span>
                     <span class="text">Home</span>
                 </a>
             </li>
             <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="User Management">
-                <a href="#" class="option">
+                <a href="<?= URL_ROOT ?>/pages/user_management" class="option">
                     <span class="dashboard-link-icon"><i class='bx bxs-user-detail' ></i></span>
                     <span class="text">User Management</span>
                 </a>
             </li>
             <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Data Management">
-                <a href="#" class="option">
+                <a href="<?= URL_ROOT ?>/pages/data_management" class="option">
                     <span class="dashboard-link-icon"><i class='bx bxs-data'  ></i></span>
                     <span class="text">Data Management</span>
                 </a>
             </li>
             <li class="dashboard-list admin-settings" data-toggle="tooltip" data-placement="right" title="Settings">
-                <a href="#" class="option">
+                <a href="<?= URL_ROOT ?>/pages/settings" class="option">
                     <span class="dashboard-link-icon"><i class='bx bx-cog'></i></span>
                     <span class="text">Settings</span>
                 </a>
@@ -47,71 +47,4 @@
             </li>
         </ul>
     </div>
-    <!--sub-divions which carry sections for each option-->
-    <div class="sub-division">
-        <h1>division for home</h1>
-    </div>
-    <div class="sub-division">
-        <h1>division for user management</h1>
-    </div>
-    <div class="sub-division">
-        <h1>division for data management</h1>
-    </div>
-    <div class="sub-division">
-        <h1>division for settings</h1>
-    </div>
-</div>
-<script>
-    //for highlighting the selected bar and for displaying the division for the particular option
-    var link_icons = document.querySelectorAll('.dashboard-link-icon-img');
-    var side_bar_options = document.querySelectorAll('.option');
-    var sub_divisions = document.querySelectorAll('.sub-division');
-    var side_bar = document.querySelector('.dashboard-sidebar-container');
-    var toggle_button = document.querySelector('.dashboard-toggle-icon');
-    let clicked = -1;
 
-    for (let i = 0; i < side_bar_options.length; i++) {
-        side_bar_options[i].onclick = function(){
-            clicked = i;
-            for (let j = 0; j < side_bar_options.length; j++) {
-                side_bar_options[j].className = "option";
-            }
-            for (let j = 0; j < link_icons.length; j++) {
-                link_icons[j].className = "dashboard-link-icon-img";
-            }
-            for (let j = 0; j < sub_divisions.length; j++) {
-                sub_divisions[j].className = "sub-division";
-            }
-            if(side_bar.className == "dashboard-sidebar-container admin side-minimized"){
-                sub_divisions[clicked].className = 'sub-division display division-maximized';
-            }else{
-                sub_divisions[i].className= "sub-division display";
-            }
-            side_bar_options[i].className= "option active";
-            link_icons[i - 1].className = "dashboard-link-icon-img dashboard-img-active";    
-        };
-    }
-
-
-    //for minimizing the side banner
-    toggle_button.onclick = function(){
-        let class_Name = side_bar.className;
-        if(clicked != -1){
-            if(sub_divisions[clicked].className == 'sub-division display'){
-            sub_divisions[clicked].className = 'sub-division display division-maximized';
-            }else{
-                sub_divisions[clicked].className = 'sub-division display';
-            }
-        }
-        
-        if (class_Name.includes("side-minimized")) {
-            side_bar.className = "dashboard-sidebar-container admin";
-        } else {
-            side_bar.className = "dashboard-sidebar-container admin side-minimized";
-        }
-        
-    };
-
-
-</script>
-<?php require_once APP_ROOT."/views/includes/footer.php"?>
