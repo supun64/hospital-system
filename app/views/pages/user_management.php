@@ -11,7 +11,7 @@
             </button>           
         </div>
  
-            <form class="data-select-box" action="<?php echo URL_ROOT; ?>/pages/deo_manage" method="POST">           
+            <form class="data-select-box" action="<?php echo URL_ROOT; ?>/pages/user_management" method="POST">           
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="DEO's username" aria-label="DEO's username" aria-describedby="button-deo-serach">
                     <button class="btn btn-outline-primary" type="submit" id="button-deo-search">Search</button>
@@ -32,7 +32,7 @@
     </thead>
     <tbody>
         <tr class="table-primary">
-        <form action="<?php echo URL_ROOT; ?>/pages/deo_manage" method="POST">
+        <form action="<?php echo URL_ROOT; ?>/pages/user_management" method="POST">
             <th scope="row">1</th>
             <td>Mark</td>
             <td>Otto</td>
@@ -47,7 +47,7 @@
         </form>
         </tr>
         <tr class="table-primary">
-        <form action="<?php echo URL_ROOT; ?>/pages/deo_manage" method="POST">
+        <form action="<?php echo URL_ROOT; ?>/pages/user_management" method="POST">
             <th scope="row">2</th>
             <td>Jacob</td>
             <td>Thornton</td>
@@ -61,7 +61,7 @@
         </form>
         </tr>
         <tr class="table-primary">
-        <form action="<?php echo URL_ROOT; ?>/pages/deo_manage" method="POST">
+        <form action="<?php echo URL_ROOT; ?>/pages/user_management" method="POST">
             <th scope="row">3</th>
             <td >Larry</td>
             <td >Bird</td>
@@ -91,7 +91,7 @@
 
     <div class="modal-body">
 
-        <form class="row g-3 requires-validation" novalidate>
+        <form action="<?php echo URL_ROOT; ?>/pages/user_management" class="row g-3 requires-validation" novalidate method="POST">
         <div class="col-md-4">
             <label for="deo_fname" class="form-label">First name</label>
             <input type="text" class="form-control" name="deo_fname" required>
