@@ -31,7 +31,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr class="table-primary">
+        <tr class="data-table-row">
         <form action="<?php echo URL_ROOT; ?>/pages/user_management" method="POST">
             <th scope="row">1</th>
             <td>Mark</td>
@@ -46,7 +46,7 @@
             </td>
         </form>
         </tr>
-        <tr class="table-primary">
+        <tr class="data-table-row">
         <form action="<?php echo URL_ROOT; ?>/pages/user_management" method="POST">
             <th scope="row">2</th>
             <td>Jacob</td>
@@ -60,7 +60,7 @@
             </td>
         </form>
         </tr>
-        <tr class="table-primary">
+        <tr class="data-table-row">
         <form action="<?php echo URL_ROOT; ?>/pages/user_management" method="POST">
             <th scope="row">3</th>
             <td >Larry</td>

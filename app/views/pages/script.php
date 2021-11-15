@@ -3,7 +3,7 @@
     var sub_division = document.querySelector('.sub-division');
     var side_bar = document.querySelector('.dashboard-sidebar-container');
     var toggle_button = document.querySelector('.dashboard-toggle-icon');
-
+    
     //for minimizing the side banner
     toggle_button.onclick = function(){
         console.log("clicked");
