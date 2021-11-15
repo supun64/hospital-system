@@ -1,36 +1,65 @@
 <?php require APP_ROOT . '/views/includes/header.php';  ?>
 
-<body class="index-body">
-    <section class="Form my-5 mx-5">
+<body class="index-body align-items-center">
+    <section class="index-main">
         <div class="container">
             <div class="index-row no-gutters">
-                <div class="col-lg-7">
+                <div class="col-lg-6">
                     <img src="<?php echo URL_ROOT; ?>/public/images/family1.jpeg" class="index-img img-fluid" alt="family">
                 </div>
-                <div class="col-lg-5 index-login-form text-center px-5 py-3">
-                    <h3 class="font-weight-bold py-3">
-                        HOSPITAL DATA MANAGEMENT SYSTEM
-                    </h3>
-                    <h2></h2>
-                    <form>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <select id="Hospital" class="form-control">
-                                    <option value="" disabled selected hidden>
-                                        Select your hospital
-                                    </option>
-                                    <option>Colombo National Hospital</option>
-                                    <option>Gampaha Base Hospital</option>
-                                    <option>Anuradhapura General Hospital</option>
-                                    <option>Kalutara Base Hospital</option>
-                                    <option>Karapitiya Teaching Hospital</option>
-                                    <option>Kandy National Hospital</option>
-                                    <option>Batticaloa Teaching Hospital</option>
-                                    <option>Jaffna Teaching Hospital</option>
-                                    <option>Ragama Teaching Hospital</option>
-                                </select>
+                <div class="col-lg-6 index-login-form text-center px-5 py-3">
+
+                    <div class="index-form-container">
+
+                        <h3 class="font-weight-bold py-3">
+                            HOSPITAL DATA MANAGEMENT SYSTEM
+                        </h3>
+                        <h2></h2>
+                        <form>
+                            <div class="form-row">
+                                <div class="form-group col-md-12 index-input-container">
+                                    <select id="Hospital" class="form-control form-select">
+                                        <option value="" disabled selected hidden>
+                                            Select your hospital
+                                        </option>
+                                        <option>Colombo National Hospital</option>
+                                        <option>Gampaha Base Hospital</option>
+                                        <option>Anuradhapura General Hospital</option>
+                                        <option>Kalutara Base Hospital</option>
+                                        <option>Karapitiya Teaching Hospital</option>
+                                        <option>Kandy National Hospital</option>
+                                        <option>Batticaloa Teaching Hospital</option>
+                                        <option>Jaffna Teaching Hospital</option>
+                                        <option>Ragama Teaching Hospital</option>
+                                    </select>
+                                </div>
+
                             </div>
-                            <!-- <div class="select-box">
+                            <div class="form-row">
+                                <div class="col-lg-6 index-btn-container">
+                                    <button type="submit" class="index-btn1">
+                                        Register
+                                    </button>
+                                </div>
+                                <div class="col-lg-6 index-btn-container">
+                                    <button type="submit" class="index-btn1">
+                                        Login
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+
+
+<!-- <div class="select-box">
                   <div class="options-container">
                     <div class="option">
                       <input
@@ -104,22 +133,3 @@
                     <input type="text" placeholder="Type here..." />
                   </div>
                 </div> -->
-                        </div>
-                        <div class="form-row">
-                            <div class="col-lg-6 index-btn-container">
-                                <button type="submit" class="index-btn1">
-                                    Register
-                                </button>
-                            </div>
-                            <div class="col-lg-6 index-btn-container">
-                                <button type="submit" class="index-btn1">
-                                    Login
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-</body>
