@@ -35,4 +35,20 @@ class Pages extends Controller{
         $this->view('/pages/vaccination');
     }
 
+    public function home(){
+        $this->view('/pages/admin_home');
+    }
+
+    public function settings(){
+        $this->view('/pages/admin_settings');
+    }
+
+    public function data_management(){
+        $this->view('/pages/data_management');
+    }
+
+    public function user_management(){
+        $this->view('/pages/user_management');
+    }
+
 }
