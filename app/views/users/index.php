@@ -14,7 +14,7 @@
                         <h3 class="font-weight-bold py-3">
                             HOSPITAL DATA MANAGEMENT SYSTEM
                         </h3>
-                        <h2></h2>
+                    
                         <form>
                             <div class="form-row">
                                 <div class="form-group col-md-12 index-input-container">
@@ -35,7 +35,7 @@
                                 </div>
 
                             </div>
-                            <div class="form-row">
+                            <div class="form-row index-form-row">
                                 <div class="col-lg-6 index-btn-container">
                                     <button type="submit" class="index-btn1">
                                         Register
@@ -49,7 +49,11 @@
                             </div>
                         </form>
 
+                        
+
                     </div>
+
+                    <p class="mt-5 mb-0 text-muted index-team-logo"> Squ4dOption &trade;</p>
 
                 </div>
             </div>

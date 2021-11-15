@@ -22,7 +22,7 @@ body {
 .index-main{
   position: absolute;
 
-  width: 70%;
+  width: 80%;
   
 
   transform: translate(-50%, -50%);
@@ -44,7 +44,7 @@ body {
 }
 
 .index-form-container{
-  margin-top: 17%;
+  margin-top: 12%;
 
   padding: 20px;
   text-align: center;
@@ -100,8 +100,12 @@ body {
   transition-duration: 0.2s;
 }
 
-.form-row{
+.index-form-row{
   display: flex;
+}
+
+.index-team-logo{
+  font-size: 20pt;
 }
 
 /* select box*/
