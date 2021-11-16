@@ -12,6 +12,28 @@ body {
   height: 100%;
 }
 
+/* Main container of Vaccination, antigen, pcr, etc sites */
+.main-info {
+  height: 100%;
+  width: 100%;
+}
+
+/* Used to hide content */
+.hidden{
+  display: none;
+}
+
+/* Animation : Fade in */
+.animation-fade-in{
+  opacity: 100%;
+  transition: all 0.8s ease-in-out;
+}
+.animation-fade-in-pre-state{
+  visibility: hidden;
+  opacity: 0;
+}
+
+
 /* index page Styles------------------------------------ */
 
 .index-body {
@@ -425,6 +447,263 @@ body {
 .login-btn-signup:active {
   transition: 50ms ease-in;
 }
+
+
+/* Vaccination page ----------------------------------------------------------------------------------- */
+
+/* Main */
+.vaccine-logo {
+  height: 150px;
+  width: auto;
+}
+
+.vaccine-title {
+  text-align: center;
+  margin-bottom: 50px;
+
+  font-family: "Times New Roman", Times, serif;
+}
+
+.vaccine-search-div {
+  display: flex;
+}
+
+.vaccine-search {
+  position: relative;
+
+  width: 40%;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
+.vaccine-search-bar {
+  margin-right: 20px;
+}
+
+/* Shrunken serch result css */
+.vaccine-shrunk-search {
+  width: 30%;
+
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  margin-bottom: 50px;
+
+  transition: all 0.6s;
+}
+
+.vaccine-search-result {
+  position: relative;
+
+  width: 70%;
+
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  background-color: rgba(131, 209, 240, 0.534);
+  padding: 10px;
+
+  border-radius: 5px;
+
+}
+
+.vaccine-patient-detail {
+  border-top: 1px solid black;
+
+  width: auto;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.vaccine-detail-title {
+  min-width: 100px;
+  text-align: left;
+}
+
+/* customized table css */
+.vaccine-tr {
+  display: flex;
+
+  border-bottom: 1px solid black;
+
+  background-color: rgba(80, 198, 253, 0.459);
+
+  min-height: 35px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.vaccine-tr:hover {
+  background-color: rgb(80, 198, 253);
+  cursor: pointer;
+}
+
+.vaccine-top-tr {
+  border-top: 1px solid black;
+  background-color: rgba(0, 79, 248, 0.678);
+
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.vaccine-top-tr:hover {
+  background-color: rgba(0, 79, 248, 0.678);
+  cursor: default;
+}
+
+.vaccine-bottom-tr {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.vaccine-th {
+  font-weight: bold;
+}
+
+.vaccine-td {
+  width: 30%;
+  height: 100%;
+
+  text-align: center;
+}
+
+.vaccine-btn-new {
+  margin-top: 10px;
+}
+
+.vaccine-last-btn {
+  text-align: right;
+}
+
+/* Search result not found division */
+
+.vaccine-sad-face{
+
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  
+}
+
+.vaccine-sad-face-img{
+  height: 150px;
+}
+
+.vaccine-no-result-message{
+  width: 100%;
+  font-size: 20pt;
+
+  text-align: center;
+}
+
+/* UI modal */
+
+.vaccine-modal-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.vaccine-modal-title {
+  font-size: 20pt;
+}
+
+.vaccine-modal-footer {
+  display: flex;
+  flex-direction: column;
+}
+
+.vaccine-submit-btn {
+  min-width: 150px;
+  letter-spacing: 5px;
+
+  font-size: 20pt;
+}
+
+.vaccine-input {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.vaccine-input-label {
+  min-width: 130px;
+
+  padding-left: 5px;
+
+  border: 1px solid rgb(2, 27, 255);
+  border-right-style: none;
+  color: rgb(0, 0, 0);
+
+
+  display: flex;
+  align-items: center;
+
+  text-align: center;
+
+  
+  letter-spacing: 1px;
+
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+
+  background-color: rgba(13, 109, 253, 0.849);
+  /* background-color: rgba(80, 198, 253, 0.781); */
+}
+
+.vaccine-form-comment{
+  width: 100%;
+  text-align: center;
+}
+
+.vaccine-input-field {
+  border-left-style: none;
+
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.vaccine-input-field:hover {
+  border-left-style: none;
+  outline: none;
+}
+
+
+
+
+.vaccine-textarea{
+  resize:none;
+}
+
+.vaccine-textarea::-webkit-scrollbar {
+  width: 0.2em;
+}
+
+.vaccine-textarea::-webkit-scrollbar-track {
+  background-color: rgb(133, 194, 209);
+
+  border-radius: 5px;
+
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.vaccine-textarea::-webkit-scrollbar-thumb {
+  background-color: rgba(13, 109, 253, 0.849);
+  outline: none;
+
+  border-radius: 5px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+
+
+
+
 
 
 /* 
