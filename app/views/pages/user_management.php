@@ -1,6 +1,19 @@
 <?php require_once APP_ROOT."/views/pages/admin_dashboard.php"?>
+
+
 <div class= 'sub-division' style="padding: 5px;">
-<div class="data-heading">
+
+<!-- code snippet to show error message for existing username -->
+<?php 
+if(isset($_GET['duplicate'])){?>
+    <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert" >
+        <div class="deo-manage-error-text">Username already exist !!</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php } ?>
+
+        <div class="data-heading">
+
             <h1>User Management</h1>
         </div>
         <div class="data-search-bar d-flex flex-row justify-content-between">
@@ -25,55 +38,31 @@
         <tr>
         <th scope="col">Emp. ID</th>
         <th scope="col">Username</th>
-        <th scope="col">Name</th>
         <th scope="col">Email</th>
         <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
-        <tr class="data-table-row">
-        <form action="<?php echo URL_ROOT; ?>/pages/user_management" method="POST">
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            
-            <td>
-            <button type="submit" class="deo-manage-rm-btn" name="rm_submit">
-            <span data-feather="user-x"></span>
-            </button>
-            <!-- TO-DO   onclick -> popup dialogue for confirmation -->
-            </td>
-        </form>
-        </tr>
-        <tr class="data-table-row">
-        <form action="<?php echo URL_ROOT; ?>/pages/user_management" method="POST">
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            
-            <td>
-            <button type="submit" class="deo-manage-rm-btn" name="rm_submit">
-            <span data-feather="user-x"></span>
-            </button>
-            </td>
-        </form>
-        </tr>
-        <tr class="data-table-row">
-        <form action="<?php echo URL_ROOT; ?>/pages/user_management" method="POST">
-            <th scope="row">3</th>
-            <td >Larry</td>
-            <td >Bird</td>
-            <td>@twitter</td>
-            
-            <td>
-            <button type="submit" class="deo-manage-rm-btn" name="rm_submit">
-            <span data-feather="user-x" ></span>
-            </button>
-            </td>
-        </form>
-        </tr>
+        <!-- code snippet to loop through array and show users -->
+    <?php foreach($data as $deo): ?> 
+                <tr class="data-table-row">
+                <form action="<?php echo URL_ROOT; ?>/pages/user_management" method="POST">
+                    <th scope="row"><?php echo $deo['user_id'] ?></th>
+                    <td><?php echo $deo['user_name'] ?></td>
+                    <td><?php echo $deo['user_email'] ?></td>
+                    
+                    <td>
+                    <button type="submit" class="deo-manage-rm-btn" name="rm_submit">
+                    <span data-feather="user-x"></span>
+                    </button>
+
+                    <!-- TO-DO   onclick -> popup dialogue for confirmation -->
+                    
+                    </td>
+                </form>
+               
+                </tr>
+                <?php endforeach; ?>
 
     </tbody>
 </table>
@@ -92,23 +81,17 @@
     <div class="modal-body">
 
         <form action="<?php echo URL_ROOT; ?>/pages/user_management" class="row g-3 requires-validation" novalidate method="POST">
-        <div class="col-md-4">
-            <label for="deo_fname" class="form-label">First name</label>
-            <input type="text" class="form-control" name="deo_fname" required>
+        <div class="col-md-6">
+            <label for="deo_fname" class="form-label">Username</label>
+            <input type="text" class="form-control" name="deo_username" required>
             <div class="invalid-feedback">
             This Field can't be empty
             </div>
         </div>
-        <div class="col-md-4">
-            <label for="deo_lname" class="form-label">Last name</label>
-            <input type="text" class="form-control" name="deo_lname" required>
-            <div class="invalid-feedback">
-            This Field can't be empty
-            </div>
-        </div>
-        <div class="col-md-4">
+
+        <div class="col-md-6">
             <label for="deo_mail" class="form-label">Email</label>
-            <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+            <input type="text" class="form-control" name="deo_email" aria-describedby="inputGroupPrepend" required>
             <div class="invalid-feedback">
             This Field can't be empty
             </div>
