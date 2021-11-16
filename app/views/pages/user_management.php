@@ -26,14 +26,14 @@ if(isset($_GET['duplicate'])){?>
  
             <form class="data-select-box" action="<?php echo URL_ROOT; ?>/pages/user_management" method="POST">           
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="DEO's username" aria-label="DEO's username" aria-describedby="button-deo-serach">
-                    <button class="btn btn-outline-primary" type="submit" id="button-deo-search">Search</button>
+                    <input type="text" id="deo-search-bar" class="form-control" placeholder="Search" aria-label="DEO's username" aria-describedby="button-deo-serach">
+                    <!-- <button class="btn btn-outline-primary" type="submit" id="button-deo-search">Search</button> -->
                 </div>
             </form>
         </div>
 
 <!-- DEO table -->
-<table class="table table-hover">
+<table class="table table-hover" id="deo-table">
     <thead>
         <tr>
         <th scope="col">Emp. ID</th>
@@ -124,6 +124,39 @@ if(isset($_GET['duplicate'])){?>
 </div>
 </div>
 </div>
+
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+    //live search bar
+    $(document).ready(function(){
+        $("#deo-search-bar").keyup(function(){
+            search_table($(this).val());
+        });
+
+        function search_table(value){
+            
+            $('#deo-table tr').each(function(){
+                var found = 0;
+                $(this).each(function(){
+
+                if($(this).text().toLocaleLowerCase().indexOf(value.toLocaleLowerCase())>=0){
+                    found = 1;
+                }
+            });
+            if(found ==1){
+                $(this).show();
+            }else{
+                $(this).hide();
+            }
+         }); 
+        }
+
+    });
+
+
+</script>
+
+
 
 <script type="text/javascript">
     //scrypt to validate password matching in new deo forum 
