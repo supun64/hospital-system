@@ -59,7 +59,7 @@ class Pages extends Controller{
         if(isset($_POST['newrecord'])){
             $this->admin_model->update_record($_GET['record_type'],$_POST['newrecord']);
         }
-        if(isset($_GET['record_type'])){
+        if(isset($_GET['record_type']) && $_GET['record_type']){
 
             $type = $_GET['record_type'];
             $records = $this->admin_model->load_by_type($type);

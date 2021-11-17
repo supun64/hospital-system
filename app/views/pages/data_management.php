@@ -2,7 +2,7 @@
 <div class="sub-division">
         <div class="data-heading">
             <h1>Data Management</h1>
-            <?= isset($_GET['record_type'])?implode(' ',explode('_',strtoupper($_GET['record_type']))):"";?>
+            <?= isset($_GET['record_type'])?implode(' ',explode('_',strtoupper($_GET['record_type']))):"Please select the record type..";?>
         </div>
         <div class="data-search-bar d-flex flex-row justify-content-between">
             <div class="dropdown">
@@ -24,7 +24,7 @@
             </form>
         </div>
         <div>
-            <?php if(isset($data['type'])):?>
+            <?php if(isset($data['type']) && count($data)>2):?>
                 <table class="data-table table  table-hover table-responsive" id="deo-table">
                     <tbody>
                         <thead>
@@ -172,6 +172,16 @@
                         <?php endforeach;?>
                     </tbody>
                 </table>
+            <?php else:?>
+                <?php if(!isset($data['type']) ):?>
+                    <div class="alert alert-danger" role="alert">
+                        <h5>You haven't selected the record type yet..</h5>
+                    </div>
+                <?php elseif(count($data)<3):?>
+                    <div class="alert alert-danger" role="alert">
+                        <h5>No records of <?=implode(' ',explode('_',$_GET['record_type']))?> were edited / inserted today..</h5>
+                    </div>
+                <?php endif;?>
             <?php endif;?>
         </div>
     </div>

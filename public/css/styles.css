@@ -175,7 +175,7 @@ body {
   height: 100%;
   width: 15%;
   min-width: 60px;
-  box-sizing: initial;
+  box-sizing: border-box;
 }
 
 .admin{
@@ -286,8 +286,7 @@ body {
   right:0;
   height:100%;
   width:81%;
-  display:inline; 
-  overflow: hidden;
+  overflow:hidden;
 }
 
 @media screen and (max-width: 1200px) {
