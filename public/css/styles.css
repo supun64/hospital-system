@@ -304,7 +304,7 @@ body {
 }
 .data-search-bar{
   padding-top: 2%;
-  padding-bottom: 2%;
+  padding-bottom: 4%;
 }
 .data-table{
   border-top:grey 1px solid;
@@ -324,6 +324,16 @@ body {
 .data-edit-button{
   font-size: 20px;
   padding: 0;
+}
+.data-select-li{
+  margin: 10px 1px;
+  padding: 5px;
+  line-height: 25px;
+  font-size: 15px;
+  border: rgba(0, 0, 0, 0.19) solid 1px;
+  text-decoration: none;
+  color: black;
+  text-align: left;
 }
 /*DEO subdivision related*/
 

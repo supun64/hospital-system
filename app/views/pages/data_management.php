@@ -2,11 +2,11 @@
 <div class="sub-division">
         <div class="data-heading">
             <h1>Data Management</h1>
-            <?= implode(' ',explode('_',strtoupper($_GET['record_type'])));?>
+            <?= isset($_GET['record_type'])?implode(' ',explode('_',strtoupper($_GET['record_type']))):"";?>
         </div>
         <div class="data-search-bar d-flex flex-row justify-content-between">
             <div class="dropdown">
-                <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                     Select the record type..
                 </a>
 
@@ -19,7 +19,7 @@
             </div>
             <form class="data-select-box">
                 <div class="row row-cols-auto d-flex justify-content-end">
-                    <div class="col"><input class="form-control" id='deo-search-bar' type="text" placeholder="Enter Record ID" required></div>
+                    <div class="col"><input class="data-search-bar form-control" id='deo-search-bar' type="text" placeholder="Enter Record ID" required></div>
                 </div>
             </form>
         </div>
@@ -76,7 +76,7 @@
 
                                                 <form method="post"  action="<?=URL_ROOT;?>/pages/data_management?record_type=<?= $data[count($data)-1]?>">
                                                     <div class="form-floating mb-3">
-                                                        <input type="text" class="form-control" id="floatingInput" placeholder="Health ID"name="newrecord[health_id]" value="<?=$record['health_id']?>" >
+                                                        <input type="text" class="form-control" id="floatingInput" placeholder="Health ID"name="newrecord[health_id]" value="<?=$record['health_id']?>" disabled>
                                                         <label for="floatingInput">Health ID</label>
                                                     </div>
                                                     <div class="form-floating">
@@ -106,7 +106,7 @@
 
                                                 <form method="post"  action="<?=URL_ROOT;?>/pages/data_management?record_type=<?= $data[count($data)-1]?>">
                                                     <div class="form-floating mb-3">
-                                                        <input type="text" class="form-control" id="floatingInput" placeholder="Health ID"name="newrecord[health_id]" value="<?=$record['health_id']?>" >
+                                                        <input type="text" class="form-control" id="floatingInput" placeholder="Health ID"name="newrecord[health_id]" value="<?=$record['health_id']?>" disabled>
                                                         <label for="floatingInput">Health ID</label>
                                                     </div>
                                                     <div class="form-floating mb-3">
@@ -147,7 +147,7 @@
 
                                                 <form method="post"  action="<?=URL_ROOT;?>/pages/data_management?record_type=<?= $data[count($data)-1]?>">
                                                     <div class="form-floating mb-3">
-                                                        <input type="text" class="form-control" id="floatingInput" placeholder="Health ID"name="newrecord[health_id]" value="<?=$record['health_id']?>" >
+                                                        <input type="text" class="form-control" id="floatingInput" placeholder="Health ID"name="newrecord[health_id]" value="<?=$record['health_id']?>" disabled>
                                                         <label for="floatingInput">Health ID</label>
                                                     </div>
                                                     <div class="form-floating mb-3">
@@ -180,6 +180,5 @@
 
 
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<?php require_once  APP_ROOT."/views/pages/script.php"?>
-
+<script src="<?=URL_ROOT?>./public/script/admin.js"></script>
 <?php require_once APP_ROOT."/views/includes/footer.php"?>

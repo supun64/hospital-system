@@ -57,19 +57,18 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Select the record type...
-        <div class="dropdown">
-                <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                    Select the record type..
-                </a>
-
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li><a class="dropdown-item" href="<?=URL_ROOT; ?>/pages/data_management?record_type=vaccinations">Vaccination</a></li>
-                    <li><a class="dropdown-item" href="<?=URL_ROOT; ?>/pages/data_management?record_type=antigen_tests">Antigen</a></li>
-                    <li><a class="dropdown-item" href="<?=URL_ROOT; ?>/pages/data_management?record_type=covid_deaths">COVID deaths</a></li>
-                    <li><a class="dropdown-item" href="<?=URL_ROOT; ?>/pages/data_management?record_type=pcr_tests">PCR tests</a></li>
-                </ul>
+          <div class="data-modal-heading">
+              <h5>Select the preferred record type..</h5>
+          </div>
+        <div class="data-selection">
+                <nav class="data-select-ul nav flex-column">
+                    <a class="data-select-li btn btn-outline-primary" href="<?=URL_ROOT; ?>/pages/data_management?record_type=vaccinations">Vaccination</a>
+                    <a class="data-select-li btn btn-outline-primary" href="<?=URL_ROOT; ?>/pages/data_management?record_type=antigen_tests">Antigen</a>
+                    <a class="data-select-li btn btn-outline-primary" href="<?=URL_ROOT; ?>/pages/data_management?record_type=covid_deaths">COVID deaths</a>
+                    <a class="data-select-li btn btn-outline-primary" href="<?=URL_ROOT; ?>/pages/data_management?record_type=pcr_tests">PCR tests</a>
+                </nav>
             </div>
+
       </div>
     </div>
   </div>
