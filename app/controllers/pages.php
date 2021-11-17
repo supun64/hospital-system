@@ -43,13 +43,46 @@ class Pages extends Controller{
         $this->view('/pages/admin_settings');
     }
 
+    public function data_management_update(){
+        $record_type = $_GET['record_type'];
+        $id = $_GET['id'];
+        
+        $this->view('/pages/data_management_update');
+    }
     public function data_management(){
+        $records = [];
+        $rows = ["antigen_tests"=>["HealthID", "Test status"],
+                 "covid_deaths"=>["HealthID","Place","Comments"],
+                 "pcr_tests"=>["HealthID","Test Status"],
+                 "vaccinations"=>["HealthID","Dose","Name of Vaccine","Conducted Place","Allergies / Disorders"]];
+
+        if(isset($_POST['newrecord'])){
+            $this->admin_model->update_record($_GET['record_type'],$_POST['newrecord']);
+        }
+        if(isset($_GET['record_type']) && $_GET['record_type']){
+
+            $type = $_GET['record_type'];
+            $records = $this->admin_model->load_by_type($type);
+            $records["type"] = $rows[$type];
+            array_push($records,$type);
+            $this->view('/pages/data_management',$records);
+            return;
+
+        }
+
         $this->view('/pages/data_management');
     }
 
+    public function data_delete(){
+        $type = $_GET['record_type'];
+        if($this->admin_model->delete_by_id($type,$_POST['id'])){
+            header('location:'.URL_ROOT."/pages/data_management?record_type=$type");
+        }else{
+            die('Something went wrong');
+        }
+    }
+
     public function user_management(){
-
-
 
         $data = $this->admin_model->load_deo();      //array list of users
 

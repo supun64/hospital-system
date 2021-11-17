@@ -199,5 +199,5 @@ if(isset($_GET['duplicate'])){?>
     })()
 </script>
 
-<?php require_once  APP_ROOT."/views/pages/script.php"?>
+<script src="<?=URL_ROOT?>./public/script/admin.js"></script>
 <?php require_once APP_ROOT."/views/includes/footer.php"?>

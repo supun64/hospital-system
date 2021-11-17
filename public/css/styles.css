@@ -175,7 +175,7 @@ body {
   height: 100%;
   width: 15%;
   min-width: 60px;
-  box-sizing: initial;
+  box-sizing: border-box;
 }
 
 .admin{
@@ -286,8 +286,7 @@ body {
   right:0;
   height:100%;
   width:81%;
-  display:inline; 
-  overflow: hidden;
+  overflow:hidden;
 }
 
 @media screen and (max-width: 1200px) {
@@ -304,31 +303,37 @@ body {
 }
 .data-search-bar{
   padding-top: 2%;
-  padding-bottom: 2%;
+  padding-bottom: 4%;
 }
 .data-table{
   border-top:grey 1px solid;
-  margin-top: 1%;
   box-shadow:0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-bottom: grey 1px solid;
-  margin-bottom: 1%;
-  font-size: 15px;
-}
-.data-table-row:hover{
-  display: absolute;
-  height: 30px;
+  font-size: 14px;
 }
 .data-edit{
   font-size: 20px;
 }
 .data-delete{
-  padding-top: 5px;
+  padding-top: 2px;
 }
 .division-maximized{
   width: 95%;
 }
-
-
+.data-edit-button{
+  font-size: 20px;
+  padding: 0;
+}
+.data-select-li{
+  margin: 10px 1px;
+  padding: 5px;
+  line-height: 25px;
+  font-size: 15px;
+  border: rgba(0, 0, 0, 0.19) solid 1px;
+  text-decoration: none;
+  color: black;
+  text-align: left;
+}
 /*DEO subdivision related*/
 
 

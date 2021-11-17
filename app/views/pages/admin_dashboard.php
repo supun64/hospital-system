@@ -28,7 +28,7 @@
                 </a>
             </li>
             <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Data Management">
-                <a href="<?= URL_ROOT ?>/pages/data_management" class="option">
+                <a href="<?= URL_ROOT ?>/pages/data_management" class="option"  data-bs-toggle="modal" data-bs-target="#modalfordata">
                     <span class="dashboard-link-icon"><i class='bx bxs-data'  ></i></span>
                     <span class="text">Data Management</span>
                 </a>
@@ -47,4 +47,30 @@
             </li>
         </ul>
     </div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalfordata" data-bs-backdrop="static" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="dataModalLabel">Data Management</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="data-modal-heading">
+              <h5>Select the preferred record type..</h5>
+          </div>
+        <div class="data-selection">
+                <nav class="data-select-ul nav flex-column">
+                    <a class="data-select-li btn btn-outline-primary" href="<?=URL_ROOT; ?>/pages/data_management?record_type=vaccinations">Vaccination</a>
+                    <a class="data-select-li btn btn-outline-primary" href="<?=URL_ROOT; ?>/pages/data_management?record_type=antigen_tests">Antigen</a>
+                    <a class="data-select-li btn btn-outline-primary" href="<?=URL_ROOT; ?>/pages/data_management?record_type=covid_deaths">COVID deaths</a>
+                    <a class="data-select-li btn btn-outline-primary" href="<?=URL_ROOT; ?>/pages/data_management?record_type=pcr_tests">PCR tests</a>
+                </nav>
+            </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 
