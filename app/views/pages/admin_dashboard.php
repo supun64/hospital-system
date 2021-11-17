@@ -28,7 +28,7 @@
                 </a>
             </li>
             <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Data Management">
-                <a href="<?= URL_ROOT ?>/pages/data_management" class="option">
+                <a href="<?= URL_ROOT ?>/pages/data_management" class="option"  data-bs-toggle="modal" data-bs-target="#modalfordata">
                     <span class="dashboard-link-icon"><i class='bx bxs-data'  ></i></span>
                     <span class="text">Data Management</span>
                 </a>
@@ -47,4 +47,31 @@
             </li>
         </ul>
     </div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalfordata" data-bs-backdrop="static" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="dataModalLabel">Data Management</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Select the record type...
+        <div class="dropdown">
+                <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    Select the record type..
+                </a>
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="<?=URL_ROOT; ?>/pages/data_management?record_type=vaccinations">Vaccination</a></li>
+                    <li><a class="dropdown-item" href="<?=URL_ROOT; ?>/pages/data_management?record_type=antigen_tests">Antigen</a></li>
+                    <li><a class="dropdown-item" href="<?=URL_ROOT; ?>/pages/data_management?record_type=covid_deaths">COVID deaths</a></li>
+                    <li><a class="dropdown-item" href="<?=URL_ROOT; ?>/pages/data_management?record_type=pcr_tests">PCR tests</a></li>
+                </ul>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
 

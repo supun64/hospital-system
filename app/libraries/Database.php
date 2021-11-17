@@ -46,14 +46,5 @@ class Database{
     function safe($var){
         return mysqli_real_escape_string($this->conn,$var);
     }
-
-
-
-
-
-
-
-
-
-
+    
 }

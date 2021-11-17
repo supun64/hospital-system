@@ -308,27 +308,23 @@ body {
 }
 .data-table{
   border-top:grey 1px solid;
-  margin-top: 1%;
   box-shadow:0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-bottom: grey 1px solid;
-  margin-bottom: 1%;
-  font-size: 15px;
-}
-.data-table-row:hover{
-  display: absolute;
-  height: 30px;
+  font-size: 14px;
 }
 .data-edit{
   font-size: 20px;
 }
 .data-delete{
-  padding-top: 5px;
+  padding-top: 2px;
 }
 .division-maximized{
   width: 95%;
 }
-
-
+.data-edit-button{
+  font-size: 20px;
+  padding: 0;
+}
 /*DEO subdivision related*/
 
 
