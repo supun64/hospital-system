@@ -41,13 +41,6 @@ public function username_exist($username){
         $email = $this->db->safe($deo['email']);
         $password = $this->db->safe($deo['password']);
         $hos_id = $deo['hospital_id'];
-
-        $username = $this->db->safe($deo['username']);
-        $email = $this->db->safe($deo['email']);
-        $password = $this->db->safe($deo['password']);
-        $hos_id = $deo['hospital_id'];
-
-
             $sql = "INSERT INTO users (user_name, user_email, password, hospital_id) VALUES ('$username','$email','$password',$hos_id)";
             $result = $this->db->sql_execute($sql);
 
