@@ -1,7 +1,7 @@
 <?php require_once APP_ROOT."/views/pages/admin_dashboard.php"?>
 
 
-<div class= 'sub-division' style="padding: 5px;">
+<div class= 'sub-division' style="padding: 5px; padding-right:10px;">
 
 <!-- code snippet to show error message for existing username -->
 <?php 
@@ -126,58 +126,11 @@ if(isset($_GET['duplicate'])){?>
 </div>
 
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script type="text/javascript">
-    //live search bar
-    $(document).ready(function(){
-        $("#deo-search-bar").keyup(function(){
-            search_table($(this).val());
-        });
-
-        function search_table(value){
-            
-            $('#deo-table tr').each(function(){
-                var found = 0;
-                $(this).each(function(){
-
-                if($(this).text().toLocaleLowerCase().indexOf(value.toLocaleLowerCase())>=0){
-                    found = 1;
-                }
-            });
-            if(found ==1){
-                $(this).show();
-            }else{
-                $(this).hide();
-            }
-         }); 
-        }
-
-    });
-
-
-</script>
-
-
-
-<script type="text/javascript">
-    //scrypt to validate password matching in new deo forum 
-    function Validate() {
-        var password = document.getElementById("pwd").value;
-        var confirmPassword = document.getElementById("cpwd").value;
-        if (password != confirmPassword) {
-            const msg = document.querySelector('.pwd-error-msg')
-            msg.classList.remove('invisible')
-            return false;
-        }
-        return true;
-    }
-</script>
-
-
+<script src="<?php echo URL_ROOT;?>/public/script/deo_man.js"></script>
 <script>
     // scrypt to active feather icons
         feather.replace()
 </script>
-
 
 <script>
     //scrypt to validate filled/empty add new deo forum fields

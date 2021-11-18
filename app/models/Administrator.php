@@ -20,26 +20,31 @@ class Administrator{
         return $data;
     }
 
-    //function to check whether an existing username
-    public function username_exist($username){
-        $sql = "SELECT * FROM users WHERE user_name = '$username'";
-        $this->db->sql_execute($sql);
-        $data = $this->db->result_set();
-        if($data){
-            return true;
-        }else{
-            return false;
-        }
-    }
 
+//function to check whether an existing username
+public function username_exist($username){
+    
+    $username = $this->db->safe($username);
+    $sql = "SELECT * FROM users WHERE user_name = '$username'";
+    $this->db->sql_execute($sql);
+    $data = $this->db->result_set();
+    if($data){
+        return true;
+    }else{
+        return false;
+    }
+}
 
     //function to add new deo
     public function add_deo($deo){
 
-        $username = $deo['username'];
-        $email = $deo['email'];
-        $password = $deo['password'];
-        $hos_id = $deo['hospital_id'];
+
+
+    $username = $this->db->safe($deo['username']);
+    $email = $this->db->safe($deo['email']);
+    $password = $this->db->safe($deo['password']);
+    $hos_id = $deo['hospital_id'];
+
 
         $sql = "INSERT INTO users (user_name, user_email, password, hospital_id) VALUES ('$username','$email','$password',$hos_id)";
         $result = $this->db->sql_execute($sql);
