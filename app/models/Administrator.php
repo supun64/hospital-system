@@ -35,21 +35,24 @@ public function username_exist($username){
     }
 }
 
-    //function to add new deo
-    public function add_deo($deo){
-        $username = $this->db->safe($deo['username']);
-        $email = $this->db->safe($deo['email']);
-        $password = $this->db->safe($deo['password']);
-        $hos_id = $deo['hospital_id'];
-            $sql = "INSERT INTO users (user_name, user_email, password, hospital_id) VALUES ('$username','$email','$password',$hos_id)";
-            $result = $this->db->sql_execute($sql);
 
-            if($result){
-                return true;
-            }else{
-                return false;
-            }
+//function to add new deo
+public function add_deo($deo){
+
+    $username = $this->db->safe($deo['username']);
+    $email = $this->db->safe($deo['email']);
+    $password = $this->db->safe($deo['password']);
+    $hos_id = $deo['hospital_id'];
+
+    $sql = "INSERT INTO users (user_name, user_email, password, hospital_id) VALUES ('$username','$email','$password',$hos_id)";
+    $result = $this->db->sql_execute($sql);
+
+    if($result){
+        return true;
+    }else{
+        return false;
     }
+}
 
     //getter for hospital_id
     public function get_hospital_id(){
