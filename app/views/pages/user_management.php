@@ -132,25 +132,6 @@ if(isset($_GET['duplicate'])){?>
         feather.replace()
 </script>
 
-<script>
-    //scrypt to validate filled/empty add new deo forum fields
-        (function () {
-    'use strict'
-    const forms = document.querySelectorAll('.requires-validation')
-    Array.from(forms)
-    .forEach(function (form) {
-        form.addEventListener('submit', function (event) {   
-        if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-        }
-
-        form.classList.add('was-validated')
-
-        }, false)
-    })
-    })()
-</script>
 
 <script src="<?=URL_ROOT?>./public/script/admin.js"></script>
 <?php require_once APP_ROOT."/views/includes/footer.php"?>
