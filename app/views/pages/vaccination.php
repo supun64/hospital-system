@@ -1,148 +1,166 @@
 <?php require APP_ROOT . '/views/includes/header.php';  ?>
 
+
+
 <body>
 
     <section class="main-info">
 
 
         <!-- vaccine-shrunk-search class should add after the search -->
-        <div class="vaccine-search" id="vaccine-main-search-engine">
+        <div class="vaccine-search vaccine-shrunk-search" id="vaccine-main-search-engine">
             <div class="vaccine-title">
-                <img class="vaccine-logo" src="<?php echo URL_ROOT;?>/public/images/vaccine-logo.png" alt="covid-19 vaccine">
+                <img class="vaccine-logo" src="<?php echo URL_ROOT; ?>/public/images/vaccine-logo.png" alt="covid-19 vaccine">
                 <h1 class="text-primary">Vaccination</h1>
             </div>
 
-            <form class="form mb-3 vaccine-search-div">
-                <input type="email" class="vaccine-search-bar form-control" id="vaccine-search-bar-input" placeholder="Enter health ID here" required>
-                <input type="submit" class="btn btn-primary" id="vaccine-search-btn" value="Search">
+            <form class="form mb-3 vaccine-search-div" method="POST" action="<?php echo URL_ROOT; ?>/pages/vaccination">
+
+                <input type="text" class="vaccine-search-bar form-control" id="vaccine-search-bar-input" placeholder="Enter health ID here" name="vaccine-search-bar-input" required>
+
+                <input type="submit" class="btn btn-primary" id="vaccine-search-btn" name="vaccine-search" value="Search">
+
             </form>
 
         </div>
 
         <!-- This is what should display after search -->
 
-        <div class="vaccine-search-result animation-fade-in-pre-state" id="vaccine-search-result-section">
+        <!-- Add addmination-fade-in-pre-state to add the animation -->
+        <div class="vaccine-search-result" id="vaccine-search-result-section">
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-vac-person">Add new vaccinated person +</button>
 
             <!-- This is the division to display if the search result available -->
-            <div class="vaccine-details">
 
-                <div class="vaccine-patient-detail">
-                    <table>
-                        <tr>
-                            <th class="vaccine-detail-title">
-                                Name
-                            </th>
-                            <th>
-                                :
-                            </th>
+            <?php if ($data["vaccinations"]) { ?>
 
-                            <!-- This is a dummy -->
-                            <td class="vaccine-detail-data">
-                                Basil Premadasa
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <th class="vaccine-detail-title">
-                                Date
-                            </th>
-                            <th>
-                                :
-                            </th>
+                <div class="vaccine-details">
 
-                            <!-- This is a dummy -->
-                            <td class="vaccine-detail-data">
-                                2020
-                            </td>
-                        </tr>
+                    <div class="vaccine-patient-detail">
+                        <table>
+                            <tr>
+                                <th class="vaccine-detail-title">
+                                    Health ID
+                                </th>
+                                <th>
+                                    :
+                                </th>
 
-                        <tr>
-                            <th class="vaccine-detail-title">
-                                Age
-                            </th>
-                            <th>
-                                :
-                            </th>
+                                <!-- This is a dummy -->
+                                <td class="vaccine-detail-data">
+                                    <?php echo $data['health_id'] ?>
+                                </td>
+                            </tr>
 
-                            <!-- This is a dummy -->
-                            <td class="vaccine-detail-data">
-                                96
-                            </td>
-                        </tr>
-                    </table>
+                            <tr>
+                                <th class="vaccine-detail-title">
+                                    Name
+                                </th>
+                                <th>
+                                    :
+                                </th>
+
+                                <!-- This is a dummy -->
+                                <td class="vaccine-detail-data">
+                                    <?php echo $data['name'] ?>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th class="vaccine-detail-title">
+                                    Age
+                                </th>
+                                <th>
+                                    :
+                                </th>
+
+                                <!-- This is a dummy -->
+                                <td class="vaccine-detail-data">
+                                    <?php echo $data['dob'] ?>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+
+                    <!-- These are the vaccination details -->
+
+                    <div class="vaccine-previous-details">
+
+                        <div class="vaccine-tr vaccine-top-tr">
+                            <div class="vaccine-th vaccine-td">Vaccine ID </div>
+                            <div class="vaccine-th vaccine-td">Vaccine Name</div>
+                            <div class="vaccine-th vaccine-td">Hospital Id</div>
+                            <div class="vaccine-th vaccine-td">Date of Vaccination</div>
+                            <div class="vaccine-th vaccine-td">Dose</div>
+                            <div class="vaccine-th vaccine-td">Place of Vaccination</div>
+                            <div class="vaccine-th vaccine-td">Comments</div>
+                        </div>
+
+
+                        <?php
+
+                        $vaccinations = $data["vaccinations"];
+
+                        foreach ($vaccinations as $vaccine) :
+                        ?>
+
+
+                            <div class="vaccine-tr">
+                                <div class="vaccine-td">
+                                    <?php echo $vaccine["id"] ?>
+                                </div>
+
+                                <div class="vaccine-td"><?php echo $vaccine["vaccine_name"] ?></div>
+
+                                <div class="vaccine-td"><?php echo $vaccine["hospital_id"] ?></div>
+
+                                <div class="vaccine-td"><?php echo $vaccine["date"] ?></div>
+
+                                <div class="vaccine-td"><?php echo $vaccine["dose"] ?></div>
+
+                                <div class="vaccine-td"><?php echo $vaccine["vaccinated_place"] ?></div>
+
+                                <div class="vaccine-td"><?php echo $vaccine["comments"] ?></div>
+
+                            </div>
+
+                        <?php endforeach; ?>
+
+
+
+
+                    </div>
+
+                    <div class="vaccine-last-btn">
+
+                        <button class="btn btn-primary vaccine-btn-new" data-bs-toggle="modal" data-bs-target="#add-new-vac">Add new vaccination +</button>
+
+                    </div>
+
+
+
                 </div>
 
+            <?php } else { ?>
 
-                <!-- These are the vaccination details -->
 
-                <div class="vaccine-previous-details">
+                <!-- This is the division to display if the search result not available -->
+                <div class="vaccine-details vaccine-no-result-div">
 
-                    <div class="vaccine-tr vaccine-top-tr">
-                        <div class="vaccine-th vaccine-td">Vaccine Name </div>
-                        <div class="vaccine-th vaccine-td">Vaccine Name</div>
-                        <div class="vaccine-th vaccine-td">Vaccine Name</div>
-                        <div class="vaccine-th vaccine-td">Vaccine Name</div>
-                        <div class="vaccine-th vaccine-td">Vaccine Name</div>
+                    <div class="vaccine-sad-face image-centered">
+                        <img class="vaccine-sad-face-img" src="<?php echo URL_ROOT; ?>/public/images/sad-face.png" alt="">
                     </div>
-
-                    <div class="vaccine-tr">
-                        <div class="vaccine-td">Vaccine Name </div>
-                        <div class="vaccine-td">Vaccine Name</div>
-                        <div class="vaccine-td">Vaccine Name</div>
-                        <div class="vaccine-td">Vaccine Name</div>
-                        <div class="vaccine-td">Vaccine Name</div>
-                    </div>
-
-                    <div class="vaccine-tr">
-                        <div class="vaccine-td">Vaccine Name </div>
-                        <div class="vaccine-td">Vaccine Name</div>
-                        <div class="vaccine-td">Vaccine Name</div>
-                        <div class="vaccine-td">Vaccine Name</div>
-                        <div class="vaccine-td">Vaccine Name</div>
-                    </div>
-
-                    <div class="vaccine-tr">
-                        <div class="vaccine-td">Vaccine Name </div>
-                        <div class="vaccine-td">Vaccine Name</div>
-                        <div class="vaccine-td">Vaccine Name</div>
-                        <div class="vaccine-td">Vaccine Name</div>
-                        <div class="vaccine-td">Vaccine Name</div>
-                    </div>
-
-                    <div class="vaccine-tr vaccine-bottom-tr">
-                        <div class="vaccine-td">Vaccine Name </div>
-                        <div class="vaccine-td">Vaccine Name</div>
-                        <div class="vaccine-td">Vaccine Name</div>
-                        <div class="vaccine-td">Vaccine Name</div>
-                        <div class="vaccine-td">Vaccine Name</div>
-                    </div>
-
-
+                    <p class="vaccine-no-result-message">
+                        No search results found
+                    </p>
 
                 </div>
 
-                <div class="vaccine-last-btn">
-
-                    <button class="btn btn-primary vaccine-btn-new" data-bs-toggle="modal" data-bs-target="#add-new-vac">Add new vaccination +</button>
-
-                </div>
+            <?php } ?>
 
 
-
-            </div>
-
-            <!-- This is the division to display if the search result not available -->
-            <div class="vaccine-details vaccine-no-result-div hidden">
-
-                <div class="vaccine-sad-face image-centered">
-                    <img class="vaccine-sad-face-img" src="sad-face.png" alt="">
-                </div>
-                <p class="vaccine-no-result-message">
-                    No search results found
-                </p>
-
-            </div>
 
         </div>
 
@@ -274,7 +292,8 @@
         <!-- This is the UI modal for add new vaccinated person -->
         <div class="modal fade" id="add-new-vac-person" tabindex="-1" aria-labelledby="vac-forum" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
-                <form class="modal-content">
+                
+                <form class="modal-content" method="POST" action="<?php echo URL_ROOT; ?>/pages/vaccination">
                     <div class="modal-header vaccine-modal-header">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
@@ -409,6 +428,6 @@
     </section>
 
 
-    <script src="<?php echo URL_ROOT;?>/public/script/vaccine.js"></script>
+    <script src="<?php echo URL_ROOT; ?>/public/script/vaccine.js"></script>
 
 </body>

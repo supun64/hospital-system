@@ -5,6 +5,8 @@ class Pages extends Controller{
     public function __construct()
     {
         $this->admin_model = $this->model('Administrator');  //create admin object
+
+        $this->operator_model = $this->model('Operator'); // Create Operator object
     }
 
     public function user_index(){
@@ -32,7 +34,25 @@ class Pages extends Controller{
     }
 
     public function vaccination(){
-        $this->view('/pages/vaccination');
+
+        
+    
+        if(isset($_POST["vaccine-search"])){
+
+            $id = $_POST["vaccine-search-bar-input"]; // TO get the search input
+
+            $data = $this->operator_model->load_citizen($id);      //array list of users
+
+            $data["vaccinations"] = $this->operator_model->load_vaccination($id);
+
+            if(!$data){
+                die("Data not found");
+            }
+
+
+        }
+
+        $this->view('/pages/vaccination', $data);
     }
 
     public function home(){
