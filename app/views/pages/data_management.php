@@ -19,7 +19,7 @@
             </div>
             <form class="data-select-box">
                 <div class="row row-cols-auto d-flex justify-content-end">
-                    <div class="col"><input class="data-search-bar form-control" id='deo-search-bar' type="text" placeholder="Enter Record ID" required></div>
+                    <div class="col"><input class="data-search-bar form-control" id='deo-search-bar' type="text" placeholder="Enter Health ID" required></div>
                 </div>
             </form>
         </div>
