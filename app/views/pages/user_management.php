@@ -132,6 +132,5 @@ if(isset($_GET['duplicate'])){?>
         feather.replace()
 </script>
 
-
 <script src="<?=URL_ROOT?>./public/script/admin.js"></script>
 <?php require_once APP_ROOT."/views/includes/footer.php"?>
