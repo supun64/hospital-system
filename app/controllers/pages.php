@@ -45,6 +45,8 @@ class Pages extends Controller{
 
             $data["vaccinations"] = $this->operator_model->load_vaccination($id);
 
+            $data["hospitals"] = $this->operator_model->load_hospitals();
+
             if(!$data){
                 die("Data not found");
             }

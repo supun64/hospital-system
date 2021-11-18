@@ -1,3 +1,5 @@
+<?php var_dump($data["hospitals"]); ?>
+
 <?php require APP_ROOT . '/views/includes/header.php';  ?>
 
 
@@ -193,55 +195,23 @@
                             <!-- THis is the code for drop down -->
                             <div class="select-box">
                                 <div class="options-container">
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="inputOption1" name="category" />
-                                        <label for="inputOption1">Gampaha General Hospital</label>
-                                    </div>
 
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="inputOption2" name="category" />
-                                        <label for="inputOption2">Colombu General Hospital</label>
-                                    </div>
 
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="inputOption3" name="category" />
-                                        <label for="inputOption3">Negambu General Hospital</label>
-                                    </div>
+                                    <!-- This is the code to add hospitals for the drop down list -->
+                                    <?php
 
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="inputOption4" name="category" />
-                                        <label for="inputOption4">Jaffna General hospital</label>
-                                    </div>
+                                    $counter = 1;
 
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="inputOption5" name="category" />
-                                        <label for="inputOption5">Kaluthara General Hospital</label>
-                                    </div>
+                                    foreach ($data["hospitals"] as $hospital) : ?>
 
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="inputOption6" name="category" />
-                                        <label for="inputOption6">Sirisena Pvt Hospital</label>
-                                    </div>
+                                        <div class="option">
+                                            <input type="radio" class="radio" id="inputOption<?php echo $counter; ?>" name="category" />
+                                            <label for="inputOption<?php echo $counter; ?>"><?php echo $hospital["name"]; ?></label>
+                                        </div>
 
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="inputOption7" name="category" />
-                                        <label for="inputOption7">Moratuwa General Hospital</label>
-                                    </div>
-
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="inputOption8" name="category" />
-                                        <label for="inputOption8">Sirikotha Mental Hospital</label>
-                                    </div>
-
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="inputOption9" name="category" />
-                                        <label for="inputOption9">Wikramasinghe Private Hospital</label>
-                                    </div>
-
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="inputOption10" name="category" />
-                                        <label for="inputOption10">Namal health care center</label>
-                                    </div>
+                                    <?php
+                                        $counter++;
+                                    endforeach; ?>
 
 
 
@@ -292,7 +262,7 @@
         <!-- This is the UI modal for add new vaccinated person -->
         <div class="modal fade" id="add-new-vac-person" tabindex="-1" aria-labelledby="vac-forum" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
-                
+
                 <form class="modal-content" method="POST" action="<?php echo URL_ROOT; ?>/pages/vaccination">
                     <div class="modal-header vaccine-modal-header">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -328,55 +298,20 @@
                             <!-- THis is the code for drop down -->
                             <div class="select-box">
                                 <div class="options-container">
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="inputOption1" name="category" />
-                                        <label for="inputOption1">Gampaha General Hospital</label>
-                                    </div>
 
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="inputOption2" name="category" />
-                                        <label for="inputOption2">Colombu General Hospital</label>
-                                    </div>
+                                    <!-- This is the code to add hospitals for the drop down list -->
+                                    <?php foreach ($data["hospitals"] as $hospital) : ?>
 
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="inputOption3" name="category" />
-                                        <label for="inputOption3">Negambu General Hospital</label>
-                                    </div>
+                                        <div class="option">
+                                            <input type="radio" class="radio" id="inputOption<?php echo $counter; ?>" name="category" />
+                                            <label for="inputOption<?php echo $counter; ?>"><?php echo $hospital["name"]; ?></label>
+                                        </div>
 
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="inputOption4" name="category" />
-                                        <label for="inputOption4">Jaffna General hospital</label>
-                                    </div>
+                                    <?php
 
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="inputOption5" name="category" />
-                                        <label for="inputOption5">Kaluthara General Hospital</label>
-                                    </div>
+                                        $counter++;
 
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="inputOption6" name="category" />
-                                        <label for="inputOption6">Sirisena Pvt Hospital</label>
-                                    </div>
-
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="inputOption7" name="category" />
-                                        <label for="inputOption7">Moratuwa General Hospital</label>
-                                    </div>
-
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="inputOption8" name="category" />
-                                        <label for="inputOption8">Sirikotha Mental Hospital</label>
-                                    </div>
-
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="inputOption9" name="category" />
-                                        <label for="inputOption9">Wikramasinghe Private Hospital</label>
-                                    </div>
-
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="inputOption10" name="category" />
-                                        <label for="inputOption10">Namal health care center</label>
-                                    </div>
+                                    endforeach; ?>
 
 
 

@@ -41,6 +41,15 @@ public function load_vaccination($id){
         return [];
     }
 }
+
+public function load_hospitals(){
+    $sql = "SELECT name FROM hospitals";
+    $this->db->sql_execute($sql);
+
+    $hospitals = $this->db->result_set();
+
+    return $hospitals;
+}
 }
 
 
