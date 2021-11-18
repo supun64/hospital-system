@@ -46,20 +46,22 @@ if(isset($_GET['duplicate'])){?>
         <!-- code snippet to loop through array and show users -->
     <?php foreach($data as $deo): ?> 
                 <tr class="data-table-row">
-                <form action="<?php echo URL_ROOT; ?>/pages/user_management" method="POST">
-                    <th scope="row"><?php echo $deo['user_id'] ?></th>
+               
+                    <td><?php echo $deo['user_id'] ?></th>
                     <td><?php echo $deo['user_name'] ?></td>
                     <td><?php echo $deo['user_email'] ?></td>
                     
                     <td>
+                <form action="<?php echo URL_ROOT; ?>/pages/user_management" method="POST">
+                    <input type="hidden" name="deo_id_record" value="<?=$deo['user_id'] ?>">
                     <button type="submit" class="deo-manage-rm-btn" name="rm_submit">
                     <span data-feather="user-x"></span>
                     </button>
 
-                    <!-- TO-DO   onclick -> popup dialogue for confirmation -->
-                    
+                    <!-- TO_DO:   onclick -> popup dialogue for confirmation -->
+                </form>    
                     </td>
-                </form>
+               
                
                 </tr>
                 <?php endforeach; ?>

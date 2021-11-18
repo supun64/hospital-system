@@ -86,6 +86,7 @@ class Pages extends Controller{
 
         $data = $this->admin_model->load_deo();      //array list of users
 
+        //add new deo
         if(isset($_POST['nw_deo_submit'])){
             
             $hos_id = $this->admin_model->get_hospital_id();   //relevent hospital id
@@ -114,9 +115,20 @@ class Pages extends Controller{
                 
              }
 
-
-
         }
+
+        //remove deo
+        if(isset($_POST['rm_submit'])){
+            $id = $_POST["deo_id_record"];
+            if($this->admin_model->remove_deo($id)){
+                header('location:'.URL_ROOT.'/pages/user_management');
+            }else{
+                die('Something went wrong');
+            }
+        }
+
+
+
         $this->view('/pages/user_management',$data);
     }
 

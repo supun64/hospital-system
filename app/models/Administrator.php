@@ -10,7 +10,9 @@ class Administrator{
         $this->hospital_id = 1;//this should be changed -> id should be gained through constructor (using session)        
     }
 
-    //function to load all the deos
+//----------------------------User Management--------------------------------
+
+//function to load all the deos
     public function load_deo(){
 
     
@@ -54,10 +56,27 @@ public function add_deo($deo){
     }
 }
 
-    //getter for hospital_id
+//delete existing deo
+
+    public function remove_deo($id){
+        $sql = "DELETE FROM users WHERE user_id = $id";
+        $result = $this->db->sql_execute($sql);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
+
+
+//getter for hospital_id
     public function get_hospital_id(){
         return $this->hospital_id;
     }
+
+
+//----------------------------Data Management-----------------------------------------------------
 
     //load all the records edited or inserted today in the selected record type
     public function load_by_type($record_type){
