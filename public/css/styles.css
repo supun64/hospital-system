@@ -134,6 +134,7 @@ body {
 /*Dashboard Styles ------------------------------------*/
 .dashboard-container {
   height: 100%;
+  width:100%;
 }
 .dashboard-banner {
   margin: 0;
@@ -280,13 +281,13 @@ body {
 }
 /*sub divisions styles--------------------------*/
 .sub-division{
-  padding: 0;
+  padding-right: 10px;
   margin: 0;
   float:right;
   right:0;
   height:100%;
   width:81%;
-  overflow:hidden;
+  
 }
 
 @media screen and (max-width: 1200px) {
