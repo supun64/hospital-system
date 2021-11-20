@@ -138,8 +138,45 @@ class Administrator
     //update a record in a table.
     public function update_user_details($param_list)
     {
-        $sql = "UPDATE `users` SET user_name = '$param_list[name]', user_email = '$param_list[email]'
-        WHERE user_id = $this->user_id";
+        if ($this->db->safe($param_list['name']) && $this->db->safe($param_list['email'])) {
+            $sql = "UPDATE `users` SET user_name = '$param_list[name]', user_email = '$param_list[email]'
+            WHERE user_id = $this->user_id";
+        } else {
+            die("You have been hacked:))");
+        }
         return $this->db->sql_execute($sql);
+    }
+
+    public function update_password_details($param_list)
+    {
+        var_dump($param_list);
+        $errors = "";
+
+        if ($this->db->safe($param_list['old_password']) && $this->db->safe($param_list['new_password']) && $this->db->safe($param_list['confirm_password'])) {
+            if ($param_list['new_password'] === $param_list['confirm_password']) {
+                if ($param_list['new_password'] !== $param_list['old_password']) {
+                    $sql_password = "SELECT password FROM users WHERE user_id=$this->user_id";
+                    $this->db->sql_execute($sql_password);
+                    $password = $this->db->result_set()[0]["password"];
+                    if (password_verify($param_list['old_password'], $password)/*$param_list['old_password'] === $password*/) {
+                        $hash_password = password_hash($param_list['new_password'], PASSWORD_DEFAULT);
+                        $sql = "UPDATE `users` SET password = '$hash_password' /*'$param_list[new_password]'*/ 
+                        WHERE user_id = $this->user_id";
+                        $this->db->sql_execute($sql);
+                    } else {
+                        $errors = "Your current password is incorrect.";
+                    }
+                } else {
+                    $errors = "Your new password can not be same as your recent passwords.";
+                }
+            } else {
+                $errors = "Please make sure your passwords match.";
+            }
+            $_POST['passwords'] = [];
+        } else {
+            die("You have been hacked:))");
+        }
+
+        return $errors;
     }
 }

@@ -51,13 +51,23 @@ class Pages extends Controller
     //to change or view user details
     public function settings()
     {
+        $errors = "";
         //Check whether users array is updated
         if (isset($_POST["users"])) {
             // if yes, update database
             $this->admin_model->update_user_details($_POST["users"]);
+        } //Check whether passwords array is updated
+        else if (isset($_POST["passwords"]) && count($_POST["passwords"]) !== 0) {
+            // if yes, update database
+            $errors = $this->admin_model->update_password_details($_POST["passwords"]);
         }
         //Retrieve details from the database
         $records = $this->admin_model->load_user_details();
+
+        if (strlen($errors) !== 0) {
+            $records['errors'] = $errors;
+            var_dump($records);
+        }
         //Retrieved data will be shown in the settings page
         $this->view('/pages/admin_settings', $records);
     }
