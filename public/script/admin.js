@@ -43,3 +43,21 @@ $(document).ready(function(){
      }); 
     }
 });
+
+//email validation in settings info
+function validate_password(){
+    var old_password = document.querySelector('#old_password').value;
+    var new_password = document.querySelector('#new_password').value;
+    var confirmed_password = document.querySelector('#confirmed_password').value;
+
+    if(old_password==new_password && old_password != ""){
+        document.querySelector('#same-password').classList.remove('invisible');
+        return false;
+    }
+    else if(confirmed_password != new_password && new_password != ""){
+        document.querySelector('#matching-passwords').classList.remove('invisible');
+        return false;
+    }
+    return true;
+
+}
