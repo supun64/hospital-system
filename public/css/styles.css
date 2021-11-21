@@ -335,6 +335,52 @@ body {
   color: black;
   text-align: left;
 }
+
+/*Settings sub division*/
+.settings-heading{
+  position:fixed;
+  background-color: white;
+  width: 100%;
+}
+.settings-body{
+  margin-top: 50px;
+}
+.settings-navigation{
+  padding-top: 60px;
+}
+.settings-info-link,
+.settings-password-link{
+  border-bottom: rgba(10, 84, 180, 0.747) solid 1px;
+  
+}
+.settings-info-link a,
+.settings-password-link a{
+  text-decoration: none;
+  padding: 10px;
+  color: black;
+  
+}
+.settings-arrow{
+  position: relative;
+  top:20px;
+  left:150px;
+}
+.settings-info{
+  border: grey solid 1px;
+  border-radius: 10px;
+  padding: 35px;
+  margin: 50px;
+}
+.settings-info-element{
+  margin: 15px 0 15px 0;
+}
+#same-password,
+#matching-passwords{
+  color: red;
+}
+#old_password{
+  margin-bottom: 50px;
+}
 /*DEO subdivision related*/
 
 
