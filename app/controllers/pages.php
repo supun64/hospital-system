@@ -35,6 +35,11 @@ class Pages extends Controller{
 
     public function vaccination(){
 
+
+        $data = [];
+        $data['vaccinations'] = [];
+        
+        
         
     
         if(isset($_POST["vaccine-search"])){
@@ -45,7 +50,7 @@ class Pages extends Controller{
 
             $data["vaccinations"] = $this->operator_model->load_vaccination($id);
 
-            $data["hospitals"] = $this->operator_model->load_hospitals();
+            
 
             if(!$data){
                 die("Data not found");
@@ -54,6 +59,35 @@ class Pages extends Controller{
 
         }
 
+
+        if(isset($_POST["add-patient-submit"])){
+            
+            $hospital_id = (int)explode(" - ", $_POST["add-patient-hospital-name"]);
+            
+
+            // TODO: need to validate hospital validate
+            $vaccine_detail = ["health_id"=>$_POST["add-patient-health-id"],
+             "vac_name"=> $_POST["add-patient-vaccination-name"],
+             "vac_date"=> $_POST["add-patient-vaccinated-date"], 
+             "hospital"=> $hospital_id, 
+             "vac_place"=> $_POST["add-patient-vaccinated-place"] , 
+             "dose" => $_POST["add-patient-dose"], 
+             "comment" => $_POST["add-patient-comment"]];
+
+             if($this->operator_model->health_id_exist($vaccine_detail["health_id"])){
+                if($this->operator_model->add_vaccinated_person($vaccine_detail)){
+                    header('location:'.URL_ROOT.'/pages/vaccination');
+                } 
+                else{
+                    die("Something went wrong");
+                }
+             }
+             else{
+                 die("Health ID Not Found");
+             }
+        }
+
+        $data["hospitals"] = $this->operator_model->load_hospitals();
         $this->view('/pages/vaccination', $data);
     }
 

@@ -1,5 +1,3 @@
-<?php var_dump($data["hospitals"]); ?>
-
 <?php require APP_ROOT . '/views/includes/header.php';  ?>
 
 
@@ -206,7 +204,7 @@
 
                                         <div class="option">
                                             <input type="radio" class="radio" id="inputOption<?php echo $counter; ?>" name="category" />
-                                            <label for="inputOption<?php echo $counter; ?>"><?php echo $hospital["name"]; ?></label>
+                                            <label for="inputOption<?php echo $counter; ?>"><?php echo $hospital["name"].' - '.$hospital["hospital_id"]; ?></label>
                                         </div>
 
                                     <?php
@@ -273,23 +271,18 @@
                     <div class="modal-body">
 
                         <div class="col-md-8 vaccine-input">
-                            <label for="inputPatientName" class="form-label-primary label-primary vaccine-input-label">Patient's Full Name</label>
-                            <input type="text" class="form-control vaccine-input-field" id="inputPatientName" required>
-                        </div>
-
-                        <div class="col-md-8 vaccine-input">
                             <label for="inputHealthID" class="form-label-primary label-primary vaccine-input-label">Patient's Health ID</label>
-                            <input type="text" class="form-control vaccine-input-field" id="inputHealthID" required>
+                            <input type="number" class="form-control vaccine-input-field" id="inputHealthID" name="add-patient-health-id" min="1" required>
                         </div>
 
                         <div class="col-md-8 vaccine-input">
                             <label for="inputVaccineName" class="form-label-primary label-primary vaccine-input-label">Vaccination Name</label>
-                            <input type="text" class="form-control vaccine-input-field" id="inputVaccineName" required>
+                            <input type="text" class="form-control vaccine-input-field" id="inputVaccineName" name="add-patient-vaccination-name" required>
                         </div>
 
                         <div class="col-md-6 vaccine-input">
                             <label for="inputDate" class="form-label-primary vaccine-input-label">Vaccinated Date</label>
-                            <input type="date" value="<?php echo date('Y-m-d'); ?>" class="form-control vaccine-input-field" id="inputDate" required>
+                            <input type="date" value="<?php echo date('d-m-Y'); ?>" class="form-control vaccine-input-field" id="inputDate" name="add-patient-vaccinated-date"  required>
                         </div>
 
                         <div class="col-md-8 vaccine-input">
@@ -304,7 +297,7 @@
 
                                         <div class="option">
                                             <input type="radio" class="radio" id="inputOption<?php echo $counter; ?>" name="category" />
-                                            <label for="inputOption<?php echo $counter; ?>"><?php echo $hospital["name"]; ?></label>
+                                            <label for="inputOption<?php echo $counter; ?>"><?php echo $hospital["name"].' - '.$hospital["hospital_id"]; ?></label>
                                         </div>
 
                                     <?php
@@ -320,7 +313,7 @@
                                 <div class="selected">
 
                                     <!-- This is the input that need to be grabed -->
-                                    <input type="text" class="selected-text" placeholder="Choose" maxlength="0" required>
+                                    <input type="text" class="selected-text" placeholder="Choose" maxlength="0" name="add-patient-hospital-name" required>
 
                                 </div>
 
@@ -339,22 +332,22 @@
 
                         <div class="col-md-8 vaccine-input">
                             <label for="inputVaccinePlace" class="form-label-primary label-primary vaccine-input-label">Vaccinated Place</label>
-                            <input type="text" class="form-control vaccine-input-field" id="inputVaccinePlace" placeholder="(Optional)">
+                            <input type="text" class="form-control vaccine-input-field" id="inputVaccinePlace" name="add-patient-vaccinated-place" placeholder="(Optional)">
                         </div>
 
                         <div class="col-md-3 vaccine-input">
                             <label for="inputDose" class="form-label-primary vaccine-input-label">Number of Dosage</label>
-                            <input type="number" class="form-control vaccine-input-field" id="inputDose" min="1" required>
+                            <input type="number" class="form-control vaccine-input-field" id="inputDose" min="1" name="add-patient-dose" required>
                         </div>
 
                         <div class="col-md-8 vaccine-input">
                             <label for="inputComments" class="form-label-primary label-primary vaccine-input-label"> <span class="vaccine-form-comment">Comments</span></label>
-                            <textarea class="form-control vaccine-input-field vaccine-textarea" id="inputComments" rows="4" placeholder="(Optional)"></textarea>
+                            <textarea class="form-control vaccine-input-field vaccine-textarea" id="inputComments" rows="4" placeholder="(Optional)" name="add-patient-comment"></textarea>
                         </div>
 
                     </div>
                     <div class="modal-footer vaccine-modal-footer">
-                        <button type="submit" class="btn btn-primary vaccine-submit-btn">Submit</button>
+                        <button type="submit" class="btn btn-primary vaccine-submit-btn" name="add-patient-submit">Submit</button>
                     </div>
                 </form>
             </div>
