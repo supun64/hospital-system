@@ -8,10 +8,14 @@
     <div class="settings-body row">
       <div class="settings-navigation col-6 col-md-4">
         <div class="settings-info-link">
-          <a href="#settings-info-ul"><i class='settings-arrow bx bx-right-arrow' style='color:black'  ></i><h5>Account Information</h5></a> 
+          <a href="#settings-info-ul">
+            <i class='settings-arrow bx bx-right-arrow' style='color:black'  ></i>
+            <h5>Account Information</h5></a> 
         </div>
         <div class="settings-password-link">
-        <a href="#settings-password-ul"><i class='settings-arrow bx bx-right-arrow' style='color:black'  ></i><h5>Password Information</h5></a> 
+        <a href="#settings-password-ul ">
+          <i class='settings-arrow bx bx-right-arrow' style='color:black'  ></i>
+          <h5>Password Information</h5></a> 
         </div>
       </div>
       <div class="settings-info-password col-12 col-md-8">
