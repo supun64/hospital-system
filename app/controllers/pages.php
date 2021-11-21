@@ -85,7 +85,7 @@ class Pages extends Controller
             "antigen_tests" => ["HealthID", "Test status"],
             "covid_deaths" => ["HealthID", "Place", "Comments"],
             "pcr_tests" => ["HealthID", "Test Status"],
-            "vaccinations" => ["HealthID", "Dose", "Name of Vaccine", "Conducted Place", "Allergies / Disorders"]
+            "vaccinations" => ["HealthID", "Dose", "Name of Vaccine", "Conducted Place", "Comments"]
         ];
 
         if (isset($_POST['newrecord'])) {

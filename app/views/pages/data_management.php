@@ -122,8 +122,8 @@
                                                         <label for="floatingPassword">Conducted Place</label>
                                                     </div>
                                                     <div class="form-floating mb-3">
-                                                        <input type="textarea" class="form-control" id="floatingPassword" placeholder="Allergies / Disorders" name="newrecord[dissabilities]" value="<?=$record['dissabilities']?>" style="height: 100px">
-                                                        <label for="floatingPassword">Allergies / Disorders</label>   
+                                                        <input type="textarea" class="form-control" id="floatingPassword" placeholder="Comments" name="newrecord[comments]" value="<?=$record['comments']?>" style="height: 100px">
+                                                        <label for="floatingPassword">Comments</label>   
                                                     </div>
                                                     <input type="hidden" name="newrecord[id]" value="<?=$record['id']?>">
                                                     <div class="modal-footer">
