@@ -56,28 +56,28 @@ for (let i = 0; i < selected.length; i++) {
 
 // Search Transition-------------------------------------------------------------
 
-// This is the variables used for search transisions
-const vaccineMainSearchEngine = document.querySelector("#vaccine-main-search-engine");
-const vaccineSearchResult = document.querySelector("#vaccine-search-result-section");
+// // This is the variables used for search transisions
+// const vaccineMainSearchEngine = document.querySelector("#vaccine-main-search-engine");
+// const vaccineSearchResult = document.querySelector("#vaccine-search-result-section");
 
-const vaccineSearchBtn = document.querySelector("#vaccine-search-btn");
-const vaccineSearchBar = document.querySelector("#vaccine-search-bar-input");
+// const vaccineSearchBtn = document.querySelector("#vaccine-search-btn");
+// const vaccineSearchBar = document.querySelector("#vaccine-search-bar-input");
 
-// Event listner for search btn click
-vaccineSearchBtn.addEventListener("click", function () {
-  if (vaccineSearchBar.value.length != 0) {
-    // Transition for search engine
-    if (!vaccineMainSearchEngine.classList.contains("vaccine-shrunk-search")) {
-      vaccineMainSearchEngine.classList.add("vaccine-shrunk-search");
-    }
+// // Event listner for search btn click
+// vaccineSearchBtn.addEventListener("click", function () {
+//   if (vaccineSearchBar.value.length != 0) {
+//     // Transition for search engine
+//     if (!vaccineMainSearchEngine.classList.contains("vaccine-shrunk-search")) {
+//       vaccineMainSearchEngine.classList.add("vaccine-shrunk-search");
+//     }
 
-    // fade in animation for the search results
-    if (vaccineSearchResult.classList.contains("animation-fade-in-pre-state")) {
-      vaccineSearchResult.classList.remove("animation-fade-in-pre-state");
-    }
+//     // fade in animation for the search results
+//     if (vaccineSearchResult.classList.contains("animation-fade-in-pre-state")) {
+//       vaccineSearchResult.classList.remove("animation-fade-in-pre-state");
+//     }
 
-    if (!vaccineSearchResult.classList.contains("animation-fade-in")) {
-      vaccineSearchResult.classList.add("animation-fade-in");
-    }
-  }
-});
+//     if (!vaccineSearchResult.classList.contains("animation-fade-in")) {
+//       vaccineSearchResult.classList.add("animation-fade-in");
+//     }
+//   }
+// });
