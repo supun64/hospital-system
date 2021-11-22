@@ -186,8 +186,8 @@ class Pages extends Controller
                 "hospital_id" => $hos_id
             ];
 
-            //checking whether an existing username
-            if ($this->admin_model->username_exist($deo['username'])) {
+            //checking whether an existing email
+            if ($this->admin_model->email_exist($deo['email'])) {
 
                 header('location:' . URL_ROOT . '/pages/user_management?duplicate');  //redirect with error message
             } else {

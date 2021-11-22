@@ -7,7 +7,7 @@
 <?php 
 if(isset($_GET['duplicate'])){?>
     <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert" >
-        <div class="deo-manage-error-text">Username already exist !!</div>
+        <div class="deo-manage-error-text">User email already exist !!</div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 <?php } ?>
