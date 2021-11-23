@@ -113,7 +113,7 @@ class Pages extends Controller
             $this->admin_model->update_user_details($_POST["users"]);
         } //Check whether passwords array is updated
         else if (isset($_POST['password-changed'])) {
-            // if yes, update database
+            // if yes, take the errors
             $errors = $this->admin_model->update_password_details($_POST["passwords"]);
         }
         //Retrieve details from the database
