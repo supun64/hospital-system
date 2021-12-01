@@ -47,16 +47,9 @@ class Pages extends Controller
         $data['vaccinations'] = [];
         
         
-<<<<<<< HEAD
-        if(isset($_GET['health_id'])){
-            $id = $_GET['health_id'];
-            $data["vaccinations"] = $this->operator_model->load_vaccination($id);
-        }
-    
-=======
         
         // code to search a vaccination
->>>>>>> 5593cd3e5ec5802a902ac183f3957ba8a9f44e73
+
         if(isset($_POST["vaccine-search"])){
 
             $id = $_POST["vaccine-search-bar-input"]; // TO get the search input
@@ -93,7 +86,7 @@ class Pages extends Controller
              // This is the code to check whether health id exists
              if($this->operator_model->health_id_exist($vaccine_detail["health_id"])){
                 if($this->operator_model->add_vaccinated_person($vaccine_detail)){
-                    header('location:'.URL_ROOT.'/pages/vaccination/health_id='.$vaccine_detail['health_id']);
+                    header('location:'.URL_ROOT.'/pages/vaccination');
                 } 
                 else{
                     die("Something went wrong");
