@@ -48,7 +48,7 @@ class Pages extends Controller
         
         
         
-    
+        // code to search a vaccination
         if(isset($_POST["vaccine-search"])){
 
             $id = $_POST["vaccine-search-bar-input"]; // TO get the search input
@@ -67,6 +67,7 @@ class Pages extends Controller
         }
 
 
+        // This is the code to check whether user click submit button
         if(isset($_POST["add-patient-submit"])){
             
             $hospital_id = (int)explode(" - ", $_POST["add-patient-hospital-name"]);
@@ -81,6 +82,7 @@ class Pages extends Controller
              "dose" => $_POST["add-patient-dose"], 
              "comment" => $_POST["add-patient-comment"]];
 
+             // This is the code to check whether health id exists
              if($this->operator_model->health_id_exist($vaccine_detail["health_id"])){
                 if($this->operator_model->add_vaccinated_person($vaccine_detail)){
                     header('location:'.URL_ROOT.'/pages/vaccination');

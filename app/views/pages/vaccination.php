@@ -28,7 +28,7 @@
 
         <!-- Add addmination-fade-in-pre-state to add the animation -->
         <div class="vaccine-search-result" id="vaccine-search-result-section">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-vac-person">Add new vaccinated person +</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-vac-person">Add new vaccination +</button>
 
             <!-- This is the division to display if the search result available -->
 
@@ -47,7 +47,7 @@
                                     :
                                 </th>
 
-                                <!-- This is a dummy -->
+                            
                                 <td class="vaccine-detail-data">
                                     <?php echo $data['health_id'] ?>
                                 </td>
@@ -61,7 +61,7 @@
                                     :
                                 </th>
 
-                                <!-- This is a dummy -->
+                                
                                 <td class="vaccine-detail-data">
                                     <?php echo $data['name'] ?>
                                 </td>
@@ -75,7 +75,7 @@
                                     :
                                 </th>
 
-                                <!-- This is a dummy -->
+                                
                                 <td class="vaccine-detail-data">
                                     <?php echo $data['dob'] ?>
                                 </td>
@@ -133,11 +133,11 @@
 
                     </div>
 
-                    <div class="vaccine-last-btn">
+                    <!-- <div class="vaccine-last-btn">
 
                         <button class="btn btn-primary vaccine-btn-new" data-bs-toggle="modal" data-bs-target="#add-new-vac">Add new vaccination +</button>
 
-                    </div>
+                    </div> -->
 
 
 
