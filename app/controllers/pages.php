@@ -115,7 +115,7 @@ class Pages extends Controller
             $this->admin_model->update_user_details($_POST["users"]);
         } //Check whether passwords array is updated
         else if (isset($_POST['password-changed'])) {
-            // if yes, update database
+            // if yes, take the errors
             $errors = $this->admin_model->update_password_details($_POST["passwords"]);
         }
         //Retrieve details from the database
@@ -142,7 +142,7 @@ class Pages extends Controller
             "antigen_tests" => ["HealthID", "Test status"],
             "covid_deaths" => ["HealthID", "Place", "Comments"],
             "pcr_tests" => ["HealthID", "Test Status"],
-            "vaccinations" => ["HealthID", "Dose", "Name of Vaccine", "Conducted Place", "Allergies / Disorders"]
+            "vaccinations" => ["HealthID", "Dose", "Name of Vaccine", "Conducted Place", "Comments"]
         ];
 
         if (isset($_POST['newrecord'])) {
@@ -188,8 +188,8 @@ class Pages extends Controller
                 "hospital_id" => $hos_id
             ];
 
-            //checking whether an existing username
-            if ($this->admin_model->username_exist($deo['username'])) {
+            //checking whether an existing email
+            if ($this->admin_model->email_exist($deo['email'])) {
 
                 header('location:' . URL_ROOT . '/pages/user_management?duplicate');  //redirect with error message
             } else {

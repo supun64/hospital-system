@@ -17,8 +17,6 @@ class Administrator
     //function to load all the deos
     public function load_deo()
     {
-
-
         $sql = "SELECT * FROM users WHERE hospital_id = $this->hospital_id";
         $this->db->sql_execute($sql);
         $data = $this->db->result_set();
@@ -26,12 +24,11 @@ class Administrator
     }
 
 
-    //function to check whether an existing username
-    public function username_exist($username)
+    //function to check whether an existing email
+    public function email_exist($email)
     {
-
-        $username = $this->db->safe($username);
-        $sql = "SELECT * FROM users WHERE user_name = '$username'";
+        $email = $this->db->safe($email);
+        $sql = "SELECT * FROM users WHERE user_email = '$email'";
         $this->db->sql_execute($sql);
         $data = $this->db->result_set();
         if ($data) {
@@ -45,7 +42,6 @@ class Administrator
     //function to add new deo
     public function add_deo($deo)
     {
-
         $username = $this->db->safe($deo['username']);
         $email = $this->db->safe($deo['email']);
         $password = $this->db->safe($deo['password']);
@@ -165,7 +161,6 @@ class Administrator
         } else {
             die("You have been hacked:))");
         }
-
         return $errors;
     }
 }
