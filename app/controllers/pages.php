@@ -43,24 +43,27 @@ class Pages extends Controller
     public function vaccination(){
 
 
-        $data = [];
+        $data['personal'] = [];
         $data['vaccinations'] = [];
         
         
-        
+        if(isset($_GET['health_id'])){
+            $id = $_GET['health_id'];
+            $data["vaccinations"] = $this->operator_model->load_vaccination($id);
+        }
     
         if(isset($_POST["vaccine-search"])){
 
             $id = $_POST["vaccine-search-bar-input"]; // TO get the search input
 
-            $data = $this->operator_model->load_citizen($id);      //array list of users
+            $data['personal'] = $this->operator_model->load_citizen($id);      //array list of users
 
             $data["vaccinations"] = $this->operator_model->load_vaccination($id);
 
             
 
-            if(!$data){
-                die("Data not found");
+            if(!$data['personal']){
+                die("User not found");
             }
 
 
@@ -83,7 +86,7 @@ class Pages extends Controller
 
              if($this->operator_model->health_id_exist($vaccine_detail["health_id"])){
                 if($this->operator_model->add_vaccinated_person($vaccine_detail)){
-                    header('location:'.URL_ROOT.'/pages/vaccination');
+                    header('location:'.URL_ROOT.'/pages/vaccination/health_id='.$vaccine_detail['health_id']);
                 } 
                 else{
                     die("Something went wrong");

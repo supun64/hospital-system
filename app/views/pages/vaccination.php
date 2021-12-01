@@ -25,15 +25,15 @@
         </div>
 
         <!-- This is what should display after search -->
-
+        <?php if ($data["personal"]) { ?> 
         <!-- Add addmination-fade-in-pre-state to add the animation -->
         <div class="vaccine-search-result" id="vaccine-search-result-section">
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-vac-person">Add new vaccinated person +</button>
 
             <!-- This is the division to display if the search result available -->
-
-            <?php if ($data["vaccinations"]) { ?>
-
+             
+            
+           
 
                 <div class="vaccine-details">
 
@@ -49,7 +49,7 @@
 
                                 <!-- This is a dummy -->
                                 <td class="vaccine-detail-data">
-                                    <?php echo $data['health_id'] ?>
+                                    <?php echo $data['personal']['health_id'] ?>
                                 </td>
                             </tr>
 
@@ -63,7 +63,7 @@
 
                                 <!-- This is a dummy -->
                                 <td class="vaccine-detail-data">
-                                    <?php echo $data['name'] ?>
+                                    <?php echo $data['personal']['name'] ?>
                                 </td>
                             </tr>
 
@@ -77,13 +77,13 @@
 
                                 <!-- This is a dummy -->
                                 <td class="vaccine-detail-data">
-                                    <?php echo $data['dob'] ?>
+                                    <?php echo $data['personal']['dob'] ?>
                                 </td>
                             </tr>
                         </table>
                     </div>
 
-
+                <?php if($data['vaccinations']){?>
                     <!-- These are the vaccination details -->
 
                     <div class="vaccine-previous-details">
@@ -133,15 +133,15 @@
 
                     </div>
 
-                    <div class="vaccine-last-btn">
+                    <!-- <div class="vaccine-last-btn">
 
                         <button class="btn btn-primary vaccine-btn-new" data-bs-toggle="modal" data-bs-target="#add-new-vac">Add new vaccination +</button>
 
-                    </div>
+                    </div> -->
 
 
 
-                </div>
+                
 
             <?php } else { ?>
 
@@ -158,104 +158,14 @@
 
                 </div>
 
+
+            <?php } ?>
+            </div>
             <?php } ?>
 
 
 
         </div>
-
-
-        <!-- This is the UI modal for add new vaccine -->
-
-        <!-- Modal -->
-        <div class="modal fade" id="add-new-vac" tabindex="-1" aria-labelledby="vac-forum" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <form class="modal-content">
-                    <div class="modal-header vaccine-modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-                        <h5 class="modal-title vaccine-modal-title" id="vac-forum">Vaccination Forum</h5>
-
-                    </div>
-                    <div class="modal-body">
-
-                        <div class="col-md-8 vaccine-input">
-                            <label for="inputVaccineName" class="form-label-primary label-primary vaccine-input-label">Vaccination Name</label>
-                            <input type="text" class="form-control vaccine-input-field" id="inputVaccineName" required>
-                        </div>
-                        <div class="col-md-6 vaccine-input">
-                            <label for="inputDate" class="form-label-primary vaccine-input-label">Vaccinated Date</label>
-                            <input type="date" value="<?php echo date('Y-m-d'); ?>" class="form-control vaccine-input-field" id="inputDate" required>
-                        </div>
-                        <div class="col-md-8 vaccine-input">
-                            <label for="inputHospital" class="form-label-primary vaccine-input-label">Conducted Hospital</label>
-
-                            <!-- THis is the code for drop down -->
-                            <div class="select-box">
-                                <div class="options-container">
-
-
-                                    <!-- This is the code to add hospitals for the drop down list -->
-                                    <?php
-
-                                    $counter = 1;
-
-                                    foreach ($data["hospitals"] as $hospital) : ?>
-
-                                        <div class="option">
-                                            <input type="radio" class="radio" id="inputOption<?php echo $counter; ?>" name="category" />
-                                            <label for="inputOption<?php echo $counter; ?>"><?php echo $hospital["name"].' - '.$hospital["hospital_id"]; ?></label>
-                                        </div>
-
-                                    <?php
-                                        $counter++;
-                                    endforeach; ?>
-
-
-
-                                </div>
-
-                                <div class="selected">
-
-                                    <!-- This is the input that need to be grabed -->
-                                    <input type="text" class="selected-text" placeholder="Choose" maxlength="0" required>
-
-                                </div>
-
-
-
-
-                                <div class="search-box">
-                                    <input type="text" placeholder="Start Typing..." />
-                                </div>
-                            </div>
-
-                            <!-- End of drop down -->
-
-                        </div>
-
-
-                        <div class="col-md-8 vaccine-input">
-                            <label for="inputVaccinePlace" class="form-label-primary label-primary vaccine-input-label">Vaccinated Place</label>
-                            <input type="text" class="form-control vaccine-input-field" id="inputVaccinePlace" placeholder="(Optional)">
-                        </div>
-                        <div class="col-md-3 vaccine-input">
-                            <label for="inputDose" class="form-label-primary vaccine-input-label">Number of Dosage</label>
-                            <input type="number" class="form-control vaccine-input-field" id="inputDose" min="1" required>
-                        </div>
-                        <div class="col-md-8 vaccine-input">
-                            <label for="inputComments" class="form-label-primary label-primary vaccine-input-label"> <span class="vaccine-form-comment">Comments</span></label>
-                            <textarea class="form-control vaccine-input-field vaccine-textarea" id="inputComments" rows="4" placeholder="(Optional)"></textarea>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer vaccine-modal-footer">
-                        <button type="submit" class="btn btn-primary vaccine-submit-btn">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
 
         <!-- This is the UI modal for add new vaccinated person -->
         <div class="modal fade" id="add-new-vac-person" tabindex="-1" aria-labelledby="vac-forum" aria-hidden="true">
@@ -293,6 +203,7 @@
                                 <div class="options-container">
 
                                     <!-- This is the code to add hospitals for the drop down list -->
+                                    <?php $counter = 0;?>
                                     <?php foreach ($data["hospitals"] as $hospital) : ?>
 
                                         <div class="option">
@@ -352,7 +263,7 @@
                 </form>
             </div>
         </div>
-
+        
     </section>
 
 
