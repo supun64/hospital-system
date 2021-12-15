@@ -15,34 +15,32 @@
                             HOSPITAL DATA MANAGEMENT SYSTEM
                         </h3>
                     
-                        <form>
+                        <form action="<?php echo URL_ROOT;?>/users/index" method="POST">
                             <div class="form-row">
                                 <div class="form-group col-md-12 index-input-container">
                                     <select id="Hospital" class="form-control form-select">
                                         <option value="" disabled selected hidden>
                                             Select your hospital
                                         </option>
-                                        <option>Colombo National Hospital</option>
-                                        <option>Gampaha Base Hospital</option>
-                                        <option>Anuradhapura General Hospital</option>
-                                        <option>Kalutara Base Hospital</option>
-                                        <option>Karapitiya Teaching Hospital</option>
-                                        <option>Kandy National Hospital</option>
-                                        <option>Batticaloa Teaching Hospital</option>
-                                        <option>Jaffna Teaching Hospital</option>
-                                        <option>Ragama Teaching Hospital</option>
+                                        <?php foreach($data as $hospital):?>
+
+                                        <option value="<?php echo $hospital['is_registered'].",".$hospital['hospital_id'];?>"><?php echo $hospital['hospital_id'].". ".$hospital['name'] ; ?></option>
+                                        <?php endforeach; ?>
                                     </select>
+  
+
+
                                 </div>
 
                             </div>
                             <div class="form-row index-form-row">
                                 <div class="col-lg-6 index-btn-container">
-                                    <button type="submit" class="index-btn1">
+                                    <button id='reg_btn' name='register-submit' type="submit" class="index-btn1" disabled>
                                         Register
                                     </button>
                                 </div>
                                 <div class="col-lg-6 index-btn-container">
-                                    <button type="submit" class="index-btn1">
+                                    <button id='login_btn' name='login-submit' type="submit" class="index-btn1" disabled>
                                         Login
                                     </button>
                                 </div>
@@ -62,6 +60,21 @@
 </body>
 
 
+<script>
+                                    document.getElementById('Hospital').addEventListener('change', function() {
+                                      var x = this.value.split(",")[0];
+
+                                      //in case of  user selecting more than one time -> both buttons disabled first then enable one
+                                      document.getElementById('reg_btn').disabled = true;
+                                      document.getElementById('login_btn').disabled = true;
+
+                                    //console.log('You selected: ', x);
+
+                                    if(x == 0){document.getElementById('reg_btn').disabled = false;}
+                                    else{document.getElementById('login_btn').disabled = false;}
+                                   
+                                  });
+ </script>  
 
 <!-- <div class="select-box">
                   <div class="options-container">
