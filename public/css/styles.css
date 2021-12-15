@@ -1047,6 +1047,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.toggle-font{
+  font-size: 10pt;
+}
+
 .toggle-input:checked + .slider .on {
   display: block;
 }

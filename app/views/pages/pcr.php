@@ -130,7 +130,7 @@
 
                         <div class="vaccine-td">
 
-                            <label class="switch">
+                            pending
 
 
 
@@ -141,17 +141,7 @@
 
 
                     </div>
-
-
-
-
                 </div>
-
-                <!-- <div class="vaccine-last-btn">
-
-                        <button class="btn btn-primary vaccine-btn-new" data-bs-toggle="modal" data-bs-target="#add-new-vac">Add new vaccination +</button>
-
-                    </div> -->
 
 
 
@@ -188,25 +178,19 @@
                     <div class="modal-header vaccine-modal-header">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
-                        <h5 class="modal-title vaccine-modal-title" id="vac-forum">Vaccination Forum</h5>
+                        <h5 class="modal-title vaccine-modal-title" id="vac-forum">PCR Test Forum</h5>
 
                     </div>
                     <div class="modal-body">
 
                         <div class="col-md-8 vaccine-input">
                             <label for="inputHealthID" class="form-label-primary label-primary vaccine-input-label">Patient's Health ID</label>
-                            <!-- <input type="number" class="form-control vaccine-input-field" id="inputHealthID" name="add-patient-health-id" min="1" required> -->
-                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-health-id" value=" <?php echo $data['personal']['health_id'] ?>">
-                        </div>
-
-                        <div class="col-md-8 vaccine-input">
-                            <label for="inputVaccineName" class="form-label-primary label-primary vaccine-input-label">Vaccination Name</label>
-                            <input type="text" class="form-control vaccine-input-field" id="inputVaccineName" name="add-patient-vaccination-name" required>
+                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-health-id" value='Patient HI'>
                         </div>
 
                         <div class="col-md-6 vaccine-input">
-                            <label for="inputDate" class="form-label-primary vaccine-input-label">Vaccinated Date</label>
-                            <input type="date" value="<?php echo date('d-m-Y'); ?>" class="form-control vaccine-input-field" id="inputDate" name="add-patient-vaccinated-date" required>
+                            <label for="inputDate" class="form-label-primary vaccine-input-label">Tested Date</label>
+                            <input type="date" value="<?php echo date('d-m-Y'); ?>" class="form-control vaccine-input-field" id="inputDate" name="add-patient-pcr-date" required>
                         </div>
 
                         <div class="col-md-8 vaccine-input">
@@ -238,7 +222,7 @@
                                 <div class="selected">
 
                                     <!-- This is the input that need to be grabed -->
-                                    <input type="text" class="selected-text" placeholder="Choose" maxlength="0" name="add-patient-hospital-name" required>
+                                    <input type="text" class="selected-text" placeholder="Choose" maxlength="0" name="add-patient-pcr-hospital" required>
 
                                 </div>
 
@@ -256,18 +240,14 @@
 
 
                         <div class="col-md-8 vaccine-input">
-                            <label for="inputVaccinePlace" class="form-label-primary label-primary vaccine-input-label">Vaccinated Place</label>
-                            <input type="text" class="form-control vaccine-input-field" id="inputVaccinePlace" name="add-patient-vaccinated-place" placeholder="(Optional)">
+                            <label for="inputVaccinePlace" class="form-label-primary label-primary vaccine-input-label">PCR Conducted Place</label>
+                            <input type="text" class="form-control vaccine-input-field" id="inputVaccinePlace" name="add-patient-pcr-place" placeholder="(Optional)">
                         </div>
 
-                        <div class="col-md-3 vaccine-input">
-                            <label for="inputDose" class="form-label-primary vaccine-input-label">Number of Dosage</label>
-                            <input type="number" class="form-control vaccine-input-field" id="inputDose" min="1" name="add-patient-dose" required>
-                        </div>
 
                         <div class="col-md-8 vaccine-input">
                             <label for="inputComments" class="form-label-primary label-primary vaccine-input-label"> <span class="vaccine-form-comment">Comments</span></label>
-                            <textarea class="form-control vaccine-input-field vaccine-textarea" id="inputComments" rows="4" placeholder="(Optional)" name="add-patient-comment"></textarea>
+                            <textarea class="form-control vaccine-input-field vaccine-textarea" id="inputComments" rows="4" placeholder="(Optional)" name="add-pcr-comment"></textarea>
                         </div>
 
                     </div>
@@ -294,13 +274,14 @@
                             <label for="togBtn" class="form-label label pcr-toggle-label">PCR Test result</label>
                             </label>
 
+                            <!-- This is the code to toggle button -->
                             <div class="form-control pcr-toggle-input">
                                 <label class="switch">
                                     <input type="checkbox" class="toggle-input" id="togBtn">
                                     <div class="slider round">
                                         <!--ADDED HTML -->
-                                        <span class="on">Possitive</span>
-                                        <span class="off">Negetive</span>
+                                        <span class="on toggle-font" >Possitive</span>
+                                        <span class="off toggle-font">Negetive</span>
                                         <!--END-->
                                     </div>
                                 </label>
