@@ -7,18 +7,18 @@
     <section class="main-info">
 
 
-        <!-- vaccine-shrunk-search class should add after the search -->
-        <div class="vaccine-search vaccine-shrunk-search" id="vaccine-main-search-engine">
-            <div class="vaccine-title">
-                <img class="vaccine-logo" src="<?php echo URL_ROOT; ?>/public/images/vaccine-logo.png" alt="covid-19 vaccine">
+        <!-- covid-shrunk-search class should add after the search -->
+        <div class="covid-search covid-shrunk-search" id="covid-main-search-engine">
+            <div class="covid-title">
+                <img class="covid-logo" src="<?php echo URL_ROOT; ?>/public/images/vaccine-logo.png" alt="covid-19 vaccine">
                 <h1 class="text-primary">Vaccination</h1>
             </div>
 
-            <form class="form mb-3 vaccine-search-div" method="POST" action="<?php echo URL_ROOT; ?>/pages/vaccination">
+            <form class="form mb-3 covid-search-div" method="POST" action="<?php echo URL_ROOT; ?>/pages/vaccination">
 
-                <input type="text" class="vaccine-search-bar form-control" id="vaccine-search-bar-input" placeholder="Enter health ID here" name="vaccine-search-bar-input" required>
+                <input type="text" class="covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter health ID here" name="vaccine-search-bar-input" required>
 
-                <input type="submit" class="btn btn-primary" id="vaccine-search-btn" name="vaccine-search" value="Search">
+                <input type="submit" class="btn btn-primary" id="covid-search-btn" name="vaccine-search" value="Search">
 
             </form>
 
@@ -27,7 +27,7 @@
         <!-- This is what should display after search -->
         <?php if ($data["personal"]) { ?> 
         <!-- Add addmination-fade-in-pre-state to add the animation -->
-        <div class="vaccine-search-result" id="vaccine-search-result-section">
+        <div class="covid-search-result" id="covid-search-result-section">
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-vaccination">Add new vaccination +</button>
 
             <!-- This is the division to display if the search result available -->
@@ -35,12 +35,12 @@
             
            
 
-                <div class="vaccine-details">
+                <div class="covid-details">
 
-                    <div class="vaccine-patient-detail">
+                    <div class="covid-patient-detail">
                         <table>
                             <tr>
-                                <th class="vaccine-detail-title">
+                                <th class="covid-detail-title">
                                     Health ID
                                 </th>
                                 <th>
@@ -48,13 +48,13 @@
                                 </th>
 
                             
-                                <td class="vaccine-detail-data">
+                                <td class="covid-detail-data">
                                     <?php echo $data['personal']['health_id'] ?>
                                 </td>
                             </tr>
 
                             <tr>
-                                <th class="vaccine-detail-title">
+                                <th class="covid-detail-title">
                                     Name
                                 </th>
                                 <th>
@@ -62,13 +62,13 @@
                                 </th>
 
                                 
-                                <td class="vaccine-detail-data">
+                                <td class="covid-detail-data">
                                     <?php echo $data['personal']['name'] ?>
                                 </td>
                             </tr>
 
                             <tr>
-                                <th class="vaccine-detail-title">
+                                <th class="covid-detail-title">
                                     Age
                                 </th>
                                 <th>
@@ -76,7 +76,7 @@
                                 </th>
 
                                 
-                                <td class="vaccine-detail-data">
+                                <td class="covid-detail-data">
                                     <?php echo $data['personal']['dob'] ?>
                                 </td>
                             </tr>
@@ -86,16 +86,16 @@
                 <?php if($data['vaccinations']){?>
                     <!-- These are the vaccination details -->
 
-                    <div class="vaccine-previous-details">
+                    <div class="covid-previous-details">
 
-                        <div class="vaccine-tr vaccine-top-tr">
-                            <div class="vaccine-th vaccine-td">Vaccine ID </div>
-                            <div class="vaccine-th vaccine-td">Vaccine Name</div>
-                            <div class="vaccine-th vaccine-td">Hospital Id</div>
-                            <div class="vaccine-th vaccine-td">Date of Vaccination</div>
-                            <div class="vaccine-th vaccine-td">Dose</div>
-                            <div class="vaccine-th vaccine-td">Place of Vaccination</div>
-                            <div class="vaccine-th vaccine-td">Comments</div>
+                        <div class="covid-tr covid-top-tr">
+                            <div class="covid-th covid-td">Vaccine ID </div>
+                            <div class="covid-th covid-td">Vaccine Name</div>
+                            <div class="covid-th covid-td">Hospital Id</div>
+                            <div class="covid-th covid-td">Date of Vaccination</div>
+                            <div class="covid-th covid-td">Dose</div>
+                            <div class="covid-th covid-td">Place of Vaccination</div>
+                            <div class="covid-th covid-td">Comments</div>
                         </div>
 
 
@@ -107,22 +107,22 @@
                         ?>
 
 
-                            <div class="vaccine-tr <?php if($vaccine === $vaccinations[sizeof($vaccinations) - 1]) echo 'vaccine-bottom-tr' ?>">
-                                <div class="vaccine-td">
+                            <div class="covid-tr <?php if($vaccine === $vaccinations[sizeof($vaccinations) - 1]) echo 'covid-bottom-tr' ?>">
+                                <div class="covid-td">
                                     <?php echo $vaccine["id"] ?>
                                 </div>
 
-                                <div class="vaccine-td"><?php echo $vaccine["vaccine_name"] ?></div>
+                                <div class="covid-td"><?php echo $vaccine["vaccine_name"] ?></div>
 
-                                <div class="vaccine-td"><?php echo $vaccine["hospital_id"] ?></div>
+                                <div class="covid-td"><?php echo $vaccine["hospital_id"] ?></div>
 
-                                <div class="vaccine-td"><?php echo $vaccine["date"] ?></div>
+                                <div class="covid-td"><?php echo $vaccine["date"] ?></div>
 
-                                <div class="vaccine-td"><?php echo $vaccine["dose"] ?></div>
+                                <div class="covid-td"><?php echo $vaccine["dose"] ?></div>
 
-                                <div class="vaccine-td"><?php echo $vaccine["vaccinated_place"] ?></div>
+                                <div class="covid-td"><?php echo $vaccine["vaccinated_place"] ?></div>
 
-                                <div class="vaccine-td"><?php echo $vaccine["comments"] ?></div>
+                                <div class="covid-td"><?php echo $vaccine["comments"] ?></div>
 
                             </div>
 
@@ -133,9 +133,9 @@
 
                     </div>
 
-                    <!-- <div class="vaccine-last-btn">
+                    <!-- <div class="covid-last-btn">
 
-                        <button class="btn btn-primary vaccine-btn-new" data-bs-toggle="modal" data-bs-target="#add-new-vac">Add new vaccination +</button>
+                        <button class="btn btn-primary covid-btn-new" data-bs-toggle="modal" data-bs-target="#add-new-vac">Add new vaccination +</button>
 
                     </div> -->
 
@@ -147,12 +147,12 @@
 
 
                 <!-- This is the division to display if the search result not available -->
-                <div class="vaccine-details vaccine-no-result-div">
+                <div class="covid-details covid-no-result-div">
 
-                    <div class="vaccine-sad-face image-centered">
-                        <img class="vaccine-sad-face-img" src="<?php echo URL_ROOT; ?>/public/images/sad-face.png" alt="">
+                    <div class="covid-sad-face image-centered">
+                        <img class="covid-sad-face-img" src="<?php echo URL_ROOT; ?>/public/images/sad-face.png" alt="">
                     </div>
-                    <p class="vaccine-no-result-message">
+                    <p class="covid-no-result-message">
                         No search results found
                     </p>
 
@@ -172,32 +172,32 @@
             <div class="modal-dialog modal-dialog-centered modal-lg">
 
                 <form class="modal-content" method="POST" action="<?php echo URL_ROOT; ?>/pages/vaccination">
-                    <div class="modal-header vaccine-modal-header">
+                    <div class="modal-header covid-modal-header">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
-                        <h5 class="modal-title vaccine-modal-title" id="vac-forum">Vaccination Forum</h5>
+                        <h5 class="modal-title covid-modal-title" id="vac-forum">Vaccination Forum</h5>
 
                     </div>
                     <div class="modal-body">
 
-                        <div class="col-md-8 vaccine-input">
-                            <label for="inputHealthID" class="form-label-primary label-primary vaccine-input-label">Patient's Health ID</label>
-                            <!-- <input type="number" class="form-control vaccine-input-field" id="inputHealthID" name="add-patient-health-id" min="1" required> -->
+                        <div class="col-md-8 covid-input">
+                            <label for="inputHealthID" class="form-label-primary label-primary covid-input-label">Patient's Health ID</label>
+                            <!-- <input type="number" class="form-control covid-input-field" id="inputHealthID" name="add-patient-health-id" min="1" required> -->
                             <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-health-id" value=" <?php echo $data['personal']['health_id']?>">
                         </div>
 
-                        <div class="col-md-8 vaccine-input">
-                            <label for="inputVaccineName" class="form-label-primary label-primary vaccine-input-label">Vaccination Name</label>
-                            <input type="text" class="form-control vaccine-input-field" id="inputVaccineName" name="add-patient-vaccination-name" required>
+                        <div class="col-md-8 covid-input">
+                            <label for="inputVaccineName" class="form-label-primary label-primary covid-input-label">Vaccination Name</label>
+                            <input type="text" class="form-control covid-input-field" id="inputVaccineName" name="add-patient-vaccination-name" required>
                         </div>
 
-                        <div class="col-md-6 vaccine-input">
-                            <label for="inputDate" class="form-label-primary vaccine-input-label">Vaccinated Date</label>
-                            <input type="date" value="<?php echo date('d-m-Y'); ?>" class="form-control vaccine-input-field" id="inputDate" name="add-patient-vaccinated-date"  required>
+                        <div class="col-md-6 covid-input">
+                            <label for="inputDate" class="form-label-primary covid-input-label">Vaccinated Date</label>
+                            <input type="date" value="<?php echo date('d-m-Y'); ?>" class="form-control covid-input-field" id="inputDate" name="add-patient-vaccinated-date"  required>
                         </div>
 
-                        <div class="col-md-8 vaccine-input">
-                            <label for="inputHospital" class="form-label-primary vaccine-input-label">Conducted Hospital</label>
+                        <div class="col-md-8 covid-input">
+                            <label for="inputHospital" class="form-label-primary covid-input-label">Conducted Hospital</label>
 
                             <!-- THis is the code for drop down -->
                             <div class="select-box">
@@ -242,24 +242,24 @@
                         </div>
 
 
-                        <div class="col-md-8 vaccine-input">
-                            <label for="inputVaccinePlace" class="form-label-primary label-primary vaccine-input-label">Vaccinated Place</label>
-                            <input type="text" class="form-control vaccine-input-field" id="inputVaccinePlace" name="add-patient-vaccinated-place" placeholder="(Optional)">
+                        <div class="col-md-8 covid-input">
+                            <label for="inputVaccinePlace" class="form-label-primary label-primary covid-input-label">Vaccinated Place</label>
+                            <input type="text" class="form-control covid-input-field" id="inputVaccinePlace" name="add-patient-vaccinated-place" placeholder="(Optional)">
                         </div>
 
-                        <div class="col-md-3 vaccine-input">
-                            <label for="inputDose" class="form-label-primary vaccine-input-label">Number of Dosage</label>
-                            <input type="number" class="form-control vaccine-input-field" id="inputDose" min="1" name="add-patient-dose" required>
+                        <div class="col-md-3 covid-input">
+                            <label for="inputDose" class="form-label-primary covid-input-label">Number of Dosage</label>
+                            <input type="number" class="form-control covid-input-field" id="inputDose" min="1" name="add-patient-dose" required>
                         </div>
 
-                        <div class="col-md-8 vaccine-input">
-                            <label for="inputComments" class="form-label-primary label-primary vaccine-input-label"> <span class="vaccine-form-comment">Comments</span></label>
-                            <textarea class="form-control vaccine-input-field vaccine-textarea" id="inputComments" rows="4" placeholder="(Optional)" name="add-patient-comment"></textarea>
+                        <div class="col-md-8 covid-input">
+                            <label for="inputComments" class="form-label-primary label-primary covid-input-label"> <span class="covid-form-comment">Comments</span></label>
+                            <textarea class="form-control covid-input-field covid-textarea" id="inputComments" rows="4" placeholder="(Optional)" name="add-patient-comment"></textarea>
                         </div>
 
                     </div>
-                    <div class="modal-footer vaccine-modal-footer">
-                        <button type="submit" class="btn btn-primary vaccine-submit-btn" name="add-patient-submit">Submit</button>
+                    <div class="modal-footer covid-modal-footer">
+                        <button type="submit" class="btn btn-primary covid-submit-btn" name="add-patient-submit">Submit</button>
                     </div>
                 </form>
             </div>

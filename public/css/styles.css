@@ -504,23 +504,23 @@ body {
 /* Vaccination page ----------------------------------------------------------------------------------- */
 
 /* Main */
-.vaccine-logo {
+.covid-logo {
   height: 150px;
   width: auto;
 }
 
-.vaccine-title {
+.covid-title {
   text-align: center;
   margin-bottom: 50px;
 
   font-family: "Times New Roman", Times, serif;
 }
 
-.vaccine-search-div {
+.covid-search-div {
   display: flex;
 }
 
-.vaccine-search {
+.covid-search {
   position: relative;
 
   width: 40%;
@@ -531,12 +531,12 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.vaccine-search-bar {
+.covid-search-bar {
   margin-right: 20px;
 }
 
 /* Shrunken serch result css */
-.vaccine-shrunk-search {
+.covid-shrunk-search {
   width: 30%;
 
   top: 0;
@@ -548,7 +548,7 @@ body {
   transition: all 0.6s;
 }
 
-.vaccine-search-result {
+.covid-search-result {
   position: relative;
 
   width: 70%;
@@ -563,7 +563,7 @@ body {
 
 }
 
-.vaccine-patient-detail {
+.covid-patient-detail {
   border-top: 1px solid black;
 
   width: auto;
@@ -572,13 +572,13 @@ body {
   margin-bottom: 10px;
 }
 
-.vaccine-detail-title {
+.covid-detail-title {
   min-width: 100px;
   text-align: left;
 }
 
 /* customized table css */
-.vaccine-tr {
+.covid-tr {
   display: flex;
 
   border-bottom: 1px solid black;
@@ -590,12 +590,12 @@ body {
   padding-right: 10px;
 }
 
-.vaccine-tr:hover {
+.covid-tr:hover {
   background-color: rgb(80, 198, 253);
   cursor: pointer;
 }
 
-.vaccine-top-tr {
+.covid-top-tr {
   border-top: 1px solid black;
   background-color: rgba(0, 79, 248, 0.678);
 
@@ -603,38 +603,38 @@ body {
   border-top-right-radius: 5px;
 }
 
-.vaccine-top-tr:hover {
+.covid-top-tr:hover {
   background-color: rgba(0, 79, 248, 0.678);
   cursor: default;
 }
 
-.vaccine-bottom-tr {
+.covid-bottom-tr {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 
-.vaccine-th {
+.covid-th {
   font-weight: bold;
 }
 
-.vaccine-td {
+.covid-td {
   width: 30%;
   height: 100%;
 
   text-align: center;
 }
 
-.vaccine-btn-new {
+.covid-btn-new {
   margin-top: 10px;
 }
 
-.vaccine-last-btn {
+.covid-last-btn {
   text-align: right;
 }
 
 /* Search result not found division */
 
-.vaccine-sad-face{
+.covid-sad-face{
 
   display: flex;
   justify-content: center;
@@ -642,11 +642,11 @@ body {
   
 }
 
-.vaccine-sad-face-img{
+.covid-sad-face-img{
   height: 150px;
 }
 
-.vaccine-no-result-message{
+.covid-no-result-message{
   width: 100%;
   font-size: 20pt;
 
@@ -655,33 +655,33 @@ body {
 
 /* UI modal */
 
-.vaccine-modal-header {
+.covid-modal-header {
   display: flex;
   flex-direction: column;
 }
 
-.vaccine-modal-title {
+.covid-modal-title {
   font-size: 20pt;
 }
 
-.vaccine-modal-footer {
+.covid-modal-footer {
   display: flex;
   flex-direction: column;
 }
 
-.vaccine-submit-btn {
+.covid-submit-btn {
   min-width: 150px;
   letter-spacing: 5px;
 
   font-size: 20pt;
 }
 
-.vaccine-input {
+.covid-input {
   display: flex;
   margin-bottom: 20px;
 }
 
-.vaccine-input-label {
+.covid-input-label {
   min-width: 130px;
 
   padding-left: 5px;
@@ -706,19 +706,19 @@ body {
   /* background-color: rgba(80, 198, 253, 0.781); */
 }
 
-.vaccine-form-comment{
+.covid-form-comment{
   width: 100%;
   text-align: center;
 }
 
-.vaccine-input-field {
+.covid-input-field {
   border-left-style: none;
 
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
 }
 
-.vaccine-input-field:hover {
+.covid-input-field:hover {
   border-left-style: none;
   outline: none;
 }
@@ -726,15 +726,15 @@ body {
 
 
 
-.vaccine-textarea{
+.covid-textarea{
   resize:none;
 }
 
-.vaccine-textarea::-webkit-scrollbar {
+.covid-textarea::-webkit-scrollbar {
   width: 0.2em;
 }
 
-.vaccine-textarea::-webkit-scrollbar-track {
+.covid-textarea::-webkit-scrollbar-track {
   background-color: rgb(133, 194, 209);
 
   border-radius: 5px;
@@ -743,7 +743,7 @@ body {
   border-top-left-radius: 0;
 }
 
-.vaccine-textarea::-webkit-scrollbar-thumb {
+.covid-textarea::-webkit-scrollbar-thumb {
   background-color: rgba(13, 109, 253, 0.849);
   outline: none;
 
