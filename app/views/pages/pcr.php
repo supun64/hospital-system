@@ -25,117 +25,129 @@
         </div>
 
         <!-- This is what should display after search -->
-    
-        <?php if ($data["personal"]) { ?> 
+
 
         <!-- Add addmination-fade-in-pre-state to add the animation -->
         <div class="vaccine-search-result" id="vaccine-search-result-section">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-vac-person">Add new PCR +</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-pcr">Add new PCR +</button>
 
             <!-- This is the division to display if the search result available -->
-             
-            
-           
 
-                <div class="vaccine-details">
 
-                    <div class="vaccine-patient-detail">
-                        <table>
-                            <tr>
-                                <th class="vaccine-detail-title">
-                                    Health ID
-                                </th>
-                                <th>
-                                    :
-                                </th>
 
-                            
-                                <td class="vaccine-detail-data">
-                                    <?php echo $data['personal']['health_id'] ?>
-                                </td>
-                            </tr>
 
-                            <tr>
-                                <th class="vaccine-detail-title">
-                                    Name
-                                </th>
-                                <th>
-                                    :
-                                </th>
+            <div class="vaccine-details">
 
-                                
-                                <td class="vaccine-detail-data">
-                                    <?php echo $data['personal']['name'] ?>
-                                </td>
-                            </tr>
+                <div class="vaccine-patient-detail">
+                    <table>
+                        <tr>
+                            <th class="vaccine-detail-title">
+                                Health ID
+                            </th>
+                            <th>
+                                :
+                            </th>
 
-                            <tr>
-                                <th class="vaccine-detail-title">
-                                    Age
-                                </th>
-                                <th>
-                                    :
-                                </th>
 
-                                
-                                <td class="vaccine-detail-data">
-                                    <?php echo $data['personal']['dob'] ?>
-                                </td>
-                            </tr>
-                        </table>
+                            <td class="vaccine-detail-data">
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th class="vaccine-detail-title">
+                                Name
+                            </th>
+                            <th>
+                                :
+                            </th>
+
+
+                            <td class="vaccine-detail-data">
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th class="vaccine-detail-title">
+                                Age
+                            </th>
+                            <th>
+                                :
+                            </th>
+
+
+                            <td class="vaccine-detail-data">
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+
+                <!-- These are the vaccination details -->
+
+                <div class="vaccine-previous-details">
+
+                    <div class="vaccine-tr vaccine-top-tr">
+                        <div class="vaccine-th vaccine-td">PCR ID </div>
+                        <div class="vaccine-th vaccine-td">Date</div>
+                        <div class="vaccine-th vaccine-td">Hospital Id</div>
+                        <div class="vaccine-th vaccine-td">Result</div>
+                        <div class="vaccine-th vaccine-td">Comments</div>
                     </div>
 
-                <?php if($data['vaccinations']){?>
-                    <!-- These are the vaccination details -->
 
-                    <div class="vaccine-previous-details">
 
-                        <div class="vaccine-tr vaccine-top-tr">
-                            <div class="vaccine-th vaccine-td">Vaccine ID </div>
-                            <div class="vaccine-th vaccine-td">Vaccine Name</div>
-                            <div class="vaccine-th vaccine-td">Hospital Id</div>
-                            <div class="vaccine-th vaccine-td">Date of Vaccination</div>
-                            <div class="vaccine-th vaccine-td">Dose</div>
-                            <div class="vaccine-th vaccine-td">Place of Vaccination</div>
-                            <div class="vaccine-th vaccine-td">Comments</div>
+
+                    <div class="vaccine-tr" data-bs-toggle="modal" data-bs-target="#pcr-result">
+                        <div class="vaccine-td">
+                            1
                         </div>
 
+                        <div class="vaccine-td">Dummy</div>
 
-                        <?php
+                        <div class="vaccine-td">Dummy</div>
 
-                        $vaccinations = $data["vaccinations"];
+                        <div class="vaccine-td">Pending</div>
 
-                        foreach ($vaccinations as $vaccine) :
-                        ?>
-
-
-                            <div class="vaccine-tr">
-                                <div class="vaccine-td">
-                                    <?php echo $vaccine["id"] ?>
-                                </div>
-
-                                <div class="vaccine-td"><?php echo $vaccine["vaccine_name"] ?></div>
-
-                                <div class="vaccine-td"><?php echo $vaccine["hospital_id"] ?></div>
-
-                                <div class="vaccine-td"><?php echo $vaccine["date"] ?></div>
-
-                                <div class="vaccine-td"><?php echo $vaccine["dose"] ?></div>
-
-                                <div class="vaccine-td"><?php echo $vaccine["vaccinated_place"] ?></div>
-
-                                <div class="vaccine-td"><?php echo $vaccine["comments"] ?></div>
-
-                            </div>
-
-                        <?php endforeach; ?>
-
+                        <div class="vaccine-td">Dummy</div>
 
 
 
                     </div>
 
-                    <!-- <div class="vaccine-last-btn">
+
+                    <!-- TODO: add vaccine-bottom-tr class to the end of the table -->
+                    <div class="vaccine-tr vaccine-bottom-tr" data-bs-toggle="modal" data-bs-target="#pcr-result">
+                        <div class="vaccine-td">
+                            1
+                        </div>
+
+                        <div class="vaccine-td">Dummy</div>
+
+                        <div class="vaccine-td">Dummy</div>
+
+                        <div class="vaccine-td">
+
+                            <label class="switch">
+
+
+
+                        </div>
+
+                        <div class="vaccine-td">Dummy</div>
+
+
+
+                    </div>
+
+
+
+
+                </div>
+
+                <!-- <div class="vaccine-last-btn">
 
                         <button class="btn btn-primary vaccine-btn-new" data-bs-toggle="modal" data-bs-target="#add-new-vac">Add new vaccination +</button>
 
@@ -143,13 +155,13 @@
 
 
 
-                
 
-            <?php } else { ?>
+
+
 
 
                 <!-- This is the division to display if the search result not available -->
-                <div class="vaccine-details vaccine-no-result-div">
+                <div class="vaccine-details vaccine-no-result-div hidden">
 
                     <div class="vaccine-sad-face image-centered">
                         <img class="vaccine-sad-face-img" src="<?php echo URL_ROOT; ?>/public/images/sad-face.png" alt="">
@@ -161,16 +173,15 @@
                 </div>
 
 
-            <?php } ?>
             </div>
-            <?php } ?>
+
 
 
 
         </div>
 
         <!-- This is the UI modal for add new vaccinated person -->
-        <div class="modal fade" id="add-new-vac-person" tabindex="-1" aria-labelledby="vac-forum" aria-hidden="true">
+        <div class="modal fade" id="add-new-pcr" tabindex="-1" aria-labelledby="vac-forum" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
 
                 <form class="modal-content" method="POST" action="<?php echo URL_ROOT; ?>/pages/vaccination">
@@ -185,7 +196,7 @@
                         <div class="col-md-8 vaccine-input">
                             <label for="inputHealthID" class="form-label-primary label-primary vaccine-input-label">Patient's Health ID</label>
                             <!-- <input type="number" class="form-control vaccine-input-field" id="inputHealthID" name="add-patient-health-id" min="1" required> -->
-                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-health-id" value=" <?php echo $data['personal']['health_id']?>">
+                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-health-id" value=" <?php echo $data['personal']['health_id'] ?>">
                         </div>
 
                         <div class="col-md-8 vaccine-input">
@@ -195,7 +206,7 @@
 
                         <div class="col-md-6 vaccine-input">
                             <label for="inputDate" class="form-label-primary vaccine-input-label">Vaccinated Date</label>
-                            <input type="date" value="<?php echo date('d-m-Y'); ?>" class="form-control vaccine-input-field" id="inputDate" name="add-patient-vaccinated-date"  required>
+                            <input type="date" value="<?php echo date('d-m-Y'); ?>" class="form-control vaccine-input-field" id="inputDate" name="add-patient-vaccinated-date" required>
                         </div>
 
                         <div class="col-md-8 vaccine-input">
@@ -206,12 +217,12 @@
                                 <div class="options-container">
 
                                     <!-- This is the code to add hospitals for the drop down list -->
-                                    <?php $counter = 0;?>
+                                    <?php $counter = 0; ?>
                                     <?php foreach ($data["hospitals"] as $hospital) : ?>
 
                                         <div class="option">
                                             <input type="radio" class="radio" id="inputOption<?php echo $counter; ?>" name="category" />
-                                            <label for="inputOption<?php echo $counter; ?>"><?php echo $hospital["name"].' - '.$hospital["hospital_id"]; ?></label>
+                                            <label for="inputOption<?php echo $counter; ?>"><?php echo $hospital["name"] . ' - ' . $hospital["hospital_id"]; ?></label>
                                         </div>
 
                                     <?php
@@ -266,10 +277,53 @@
                 </form>
             </div>
         </div>
-        
+
+
+        <!-- This is the model for updating result of pcr -->
+        <div class="modal fade" id="pcr-result" tabindex="-1" aria-labelledby="vac-forum" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+
+                <form class="modal-content" method="POST" action="<?php echo URL_ROOT; ?>/pages/vaccination">
+
+                <div class="modal-header pcr-toggle-modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <div class="modal-body pcr-toggle-modal-body">
+
+                        <div class="col-md-8 vaccine-input">
+                            <label for="togBtn" class="form-label label pcr-toggle-label">PCR Test result</label>
+                            </label>
+
+                            <div class="form-control pcr-toggle-input">
+                                <label class="switch">
+                                    <input type="checkbox" class="toggle-input" id="togBtn">
+                                    <div class="slider round">
+                                        <!--ADDED HTML -->
+                                        <span class="on">Possitive</span>
+                                        <span class="off">Negetive</span>
+                                        <!--END-->
+                                    </div>
+                                </label>
+
+                            </div>
+
+
+
+
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer pcr-toggle-footer">
+                        <button type="submit" class="btn btn-primary pcr-toggle-submit-btn" name="add-patient-submit">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
     </section>
 
 
-    <script src="<?php echo URL_ROOT; ?>/public/script/vaccine.js"></script>
+    <script src="<?php echo URL_ROOT; ?>/public/script/pcr.js"></script>
 
 </body>

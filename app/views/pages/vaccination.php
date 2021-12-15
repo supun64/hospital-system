@@ -28,7 +28,7 @@
         <?php if ($data["personal"]) { ?> 
         <!-- Add addmination-fade-in-pre-state to add the animation -->
         <div class="vaccine-search-result" id="vaccine-search-result-section">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-vac-person">Add new vaccination +</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-vaccination">Add new vaccination +</button>
 
             <!-- This is the division to display if the search result available -->
              
@@ -107,7 +107,7 @@
                         ?>
 
 
-                            <div class="vaccine-tr">
+                            <div class="vaccine-tr <?php if($vaccine === $vaccinations[sizeof($vaccinations) - 1]) echo 'vaccine-bottom-tr' ?>">
                                 <div class="vaccine-td">
                                     <?php echo $vaccine["id"] ?>
                                 </div>
@@ -168,7 +168,7 @@
         </div>
 
         <!-- This is the UI modal for add new vaccinated person -->
-        <div class="modal fade" id="add-new-vac-person" tabindex="-1" aria-labelledby="vac-forum" aria-hidden="true">
+        <div class="modal fade" id="add-new-vaccination" tabindex="-1" aria-labelledby="vac-forum" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
 
                 <form class="modal-content" method="POST" action="<?php echo URL_ROOT; ?>/pages/vaccination">
