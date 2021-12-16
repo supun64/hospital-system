@@ -78,7 +78,7 @@ public function register($params=''){
            
                         //checking whether an existing email
                         if ($this->hos_ldr_model->email_exist($admin['email'])) {
-                            header('location:'.URL_ROOT.'/users/index/duplicate');  //redirect with error message
+                            header('location:'.URL_ROOT.'/users/register/hospital-id='.$admin['hospital_id'].'?duplicate');  //redirect with error message   
                          } else {
                         //     //hash the password
                              $admin['password'] = password_hash($admin['password'], PASSWORD_DEFAULT);
@@ -94,7 +94,7 @@ public function register($params=''){
 
 
         }else{
-            header('location:'.URL_ROOT.'/users/index/fail/');  //redirect with error message
+            header('location:'.URL_ROOT.'/users/register/hospital-id='.$admin['hospital_id'].'?fail');  //redirect with error message  TODO: error mesaage
         }
 
 

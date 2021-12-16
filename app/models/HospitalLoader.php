@@ -41,6 +41,7 @@ class HospitalLoader{
         }
     }
 
+    // TODO: do this using sql Transactions 
 
         //function to add new admin
         public function add_admin($admin)

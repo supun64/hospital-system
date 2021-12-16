@@ -183,7 +183,7 @@
                         <div class="col-md-8 vaccine-input">
                             <label for="inputHealthID" class="form-label-primary label-primary vaccine-input-label">Patient's Health ID</label>
                             <!-- <input type="number" class="form-control vaccine-input-field" id="inputHealthID" name="add-patient-health-id" min="1" required> -->
-                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-health-id" value="<?php echo $data['personal']['health_id']?>">
+                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-health-id" value=" <?php echo $data['personal']['health_id']?>">
                         </div>
 
                         <div class="col-md-8 vaccine-input">

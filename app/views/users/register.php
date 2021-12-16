@@ -1,6 +1,25 @@
 <?php  require APP_ROOT.'/views/includes/header.php';  ?>
 
 <body style="background-image: linear-gradient(to right,#324ca8,#9dcfe3) ;"> 
+<!-- code snippet to show error message for existing email -->
+<?php 
+if(isset($_GET['duplicate'])){?>
+    <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert" >
+        <div class="deo-manage-error-text">User email already exist !!</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php } ?>
+
+<!-- code snippet to show error message for verification fail -->
+<?php 
+if(isset($_GET['fail'])){?>
+    <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert" >
+        <div class="deo-manage-error-text">Verifycation failed. Restart the process !!</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php } ?>
+
+
 
 <div class="register-container">
   
@@ -105,36 +124,6 @@
 
 </div>
 
-<script>
-
-    function trigger() {
-
-    document.getElementById('complete-btn').disabled = false;
-    let x = Math.floor((Math.random() * 100000) + 1);
-    document.getElementById("ran-id1").value = x;
-    document.getElementById("ran-id2").value = x;
-
-
-    }
-
-</script>
-
-
-
-<script>
-    //scrypt to validate password matching in new registration forum 
-    function Validate() {
-        var code = document.getElementById("admin-password").value;
-        var act_code = document.getElementById("admin-confirm-password").value;
-        var output = true;
-        if (code != act_code) {
-            const msg = document.querySelector('.pwd-error-msg')
-            msg.classList.remove('invisible')
-            event.stopPropagation()
-            return false;
-        }
-        return true;
-    }
-</script>
+<script src="<?php echo URL_ROOT;?>/public/script/register.js"></script>
 
 <?php  require APP_ROOT.'/views/includes/footer.php';  ?>

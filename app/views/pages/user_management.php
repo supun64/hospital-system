@@ -3,11 +3,11 @@
 
 <div class= 'sub-division' style="padding: 5px; padding-right:10px;">
 
-<!-- code snippet to show error message for existing username -->
+<!-- code snippet to show error message for existing email -->
 <?php 
 if(isset($_GET['duplicate'])){?>
     <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert" >
-        <div class="deo-manage-error-text">User email already exist !!</div>
+        <div class="deo-manage-error-text">User email already exist.Restart the process !!</div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 <?php } ?>
