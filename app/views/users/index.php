@@ -18,7 +18,7 @@
                         <form action="<?php echo URL_ROOT;?>/users/index" method="POST">
                             <div class="form-row">
                                 <div class="form-group col-md-12 index-input-container">
-                                    <select id="Hospital" class="form-control form-select">
+                                    <select id="Hospital"  name='slct-hos' class="form-control form-select">
                                         <option value="" disabled selected hidden>
                                             Select your hospital
                                         </option>
