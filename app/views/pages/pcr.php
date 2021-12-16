@@ -240,7 +240,7 @@
 
 
                         <div class="col-md-8 covid-input">
-                            <label for="inputPCRPlace" class="form-label-primary label-primary covid-input-label">PCR Conducted Place</label>
+                            <label for="inputPCRPlace" class="form-label-primary label-primary covid-input-label">Conducted Place</label>
                             <input type="text" class="form-control covid-input-field" id="inputPCRPlace" name="add-patient-pcr-place" placeholder="(Optional)">
                         </div>
 
@@ -265,17 +265,17 @@
 
                 <form class="modal-content" method="POST" action="<?php echo URL_ROOT; ?>/pages/vaccination">
 
-                <div class="modal-header pcr-toggle-modal-header">
+                <div class="modal-header test-toggle-modal-header">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                    <div class="modal-body pcr-toggle-modal-body">
+                    <div class="modal-body test-toggle-modal-body">
 
                         <div class="col-md-8 covid-input">
-                            <label for="togBtn" class="form-label label pcr-toggle-label">PCR Test result</label>
+                            <label for="togBtn" class="form-label label test-toggle-label">PCR Test result</label>
                             </label>
 
                             <!-- This is the code to toggle button -->
-                            <div class="form-control pcr-toggle-input">
+                            <div class="form-control test-toggle-input">
                                 <label class="switch">
                                     <input type="checkbox" class="toggle-input" id="togBtn">
                                     <div class="slider round">
@@ -295,7 +295,7 @@
                         </div>
 
                     </div>
-                    <div class="modal-footer pcr-toggle-footer">
+                    <div class="modal-footer test-toggle-footer">
                         <button type="submit" class="btn btn-primary pcr-toggle-submit-btn" name="add-patient-submit">Update</button>
                     </div>
                 </form>
@@ -305,6 +305,6 @@
     </section>
 
 
-    <script src="<?php echo URL_ROOT; ?>/public/script/pcr.js"></script>
+    <script src="<?php echo URL_ROOT; ?>/public/script/test.js"></script>
 
 </body>
