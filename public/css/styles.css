@@ -752,10 +752,10 @@ body {
   border-top-left-radius: 0;
 }
 
-/* PCR Styles ---------------------------------------- */
+/* test Styles ---------------------------------------- */
 
-.pcr-toggle-label {
-  min-width: 130px;
+.test-toggle-label {
+  min-width: 180px;
 
   padding-left: 5px;
 
@@ -779,25 +779,25 @@ body {
   /* background-color: rgba(80, 198, 253, 0.781); */
 }
 
-.pcr-toggle-modal-header{
+.test-toggle-modal-header{
   border-style: none;
   padding-bottom: 0px;
 }
 
-.pcr-toggle-modal-body{
+.test-toggle-modal-body{
   height: 60px;
 }
 
-.pcr-toggle-input {
+.test-toggle-input {
   border-style: none;
 }
 
-.pcr-toggle-footer{
+.test-toggle-footer{
   padding-top: 0;
   border-style: none;
 }
 
-.pcr-toggle-submit-btn{
+.test-toggle-submit-btn{
   font-size: 12pt;
 
 }
