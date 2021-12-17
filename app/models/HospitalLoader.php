@@ -72,7 +72,8 @@ class HospitalLoader{
 
     public function find($useremail){
         $this->db->sql_execute("SELECT * FROM `users` WHERE user_email = '$useremail'");
-        return $this->db->result_set()[0];
+        $loggedin_user = $this->db->result_set();
+        return $loggedin_user?$loggedin_user[0]:false;
     }
     
     //save the log-in info in a session(only if the login stat are correct)
@@ -81,7 +82,7 @@ class HospitalLoader{
         $password = $this->db->safe($password);
         $loggedin_user = $this->find($useremail);
 
-        if(!empty($loggedin_user) && password_verify($password,$loggedin_user["password"])){
+        if($loggedin_user && password_verify($password,$loggedin_user["password"])){
             session_regenerate_id();
             $_SESSION["is_admin"] = $loggedin_user["is_admin"];
             $_SESSION["useremail"] = $loggedin_user["user_email"];
