@@ -52,7 +52,7 @@
                 </a>
             </li>
             <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Log Out">
-                <a href="#" class="option">
+                <a href="<?= URL_ROOT ?>/users/logout" class="option">
                     <span class="dashboard-link-icon"><i class='bx bx-log-out-circle bx-flip-horizontal'  ></i></span>
                     <span class="text">Log Out</span>
                 </a>
