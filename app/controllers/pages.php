@@ -7,18 +7,17 @@ class Pages extends Controller
     public function __construct()
     {
         $this->admin_model = $this->model('Administrator');  //create admin object
-
+        $this->hospital_loader_model = $this->model('HospitalLoader');  /**************/
         $this->operator_model = $this->model('Operator'); // Create Operator object
+
+        //if someone tries access the pages without logging in, they will be redirected to the users/index page
+        if(!$this->hospital_loader_model->is_logged_in())
+            header('location:'.URL_ROOT.'/users/index');
     }
 
-    public function user_index()
+    public function index()
     {
-        $this->view('/pages/user_dashboard');
-    }
-
-    public function admin_index()
-    {
-        $this->view('/pages/admin_dashboard');
+        $_SESSION["is_admin"]?$this->view('/pages/admin_dashboard'):$this->view('/pages/user_dashboard');
     }
 
     public function antigen()
@@ -226,5 +225,11 @@ class Pages extends Controller
 
 
         $this->view('/pages/user_management', $data);
+    }
+
+    public function logout()
+    {   
+        $this->hospital_loader_model->logout();
+        header('location:' . URL_ROOT . '/users/login');
     }
 }
