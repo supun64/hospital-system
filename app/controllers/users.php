@@ -2,7 +2,7 @@
 
 class Users extends Controller{
 
-<<<<<<< HEAD
+
 public function __construct()
 {
     $this->hos_ldr_model = $this->model('RegistrationHandler');

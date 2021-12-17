@@ -7,7 +7,7 @@ class Pages extends Controller
     public function __construct()
     {
         $this->admin_model = $this->model('Administrator');  //create admin object
-        $this->hospital_loader_model = $this->model('HospitalLoader');  /**************/
+        $this->hospital_loader_model =  $this->model('RegistrationHandler');
         $this->operator_model = $this->model('Operator'); // Create Operator object
 
         //if someone tries access the pages without logging in, they will be redirected to the users/index page

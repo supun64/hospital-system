@@ -4,12 +4,16 @@
 class Administrator
 {
 
+    private $hospital_id;
+    private $user_id;
+    private $deo_handler;
 
     public function __construct()
     {
         $this->db = new Database();
         $this->hospital_id = $_SESSION['hospital_id']; //this should be changed -> id should be gained through constructor (using session)    
         $this->user_id = $_SESSION['userID'];
+        $this->deo_handler = new OperatorHandler();
     }
 
     //----------------------------User Management--------------------------------
@@ -17,9 +21,7 @@ class Administrator
     //function to load all the deos
     public function load_deo()
     {
-        $sql = "SELECT * FROM users WHERE hospital_id = $this->hospital_id";
-        $this->db->sql_execute($sql);
-        $data = $this->db->result_set();
+        $data = $this->deo_handler->load_deo($this->hospital_id);
         return $data;
     }
 
@@ -27,47 +29,30 @@ class Administrator
     //function to check whether an existing email
     public function email_exist($email)
     {
-        $email = $this->db->safe($email);
-        $sql = "SELECT * FROM users WHERE user_email = '$email'";
-        $this->db->sql_execute($sql);
-        $data = $this->db->result_set();
-        if ($data) {
-            return true;
-        } else {
-            return false;
-        }
+
+        $data = $this->deo_handler->email_exist($email);
+        return $data;
+        
     }
 
 
     //function to add new deo
     public function add_deo($deo)
     {
-        $username = $this->db->safe($deo['username']);
-        $email = $this->db->safe($deo['email']);
-        $password = $this->db->safe($deo['password']);
-        $hos_id = $deo['hospital_id'];
 
-        $sql = "INSERT INTO users (user_name, user_email, password, hospital_id) VALUES ('$username','$email','$password',$hos_id)";
-        $result = $this->db->sql_execute($sql);
+        $result = $this->deo_handler->add_deo($deo);
+        return $result;
 
-        if ($result) {
-            return true;
-        } else {
-            return false;
-        }
+
     }
 
     //delete existing deo
 
     public function remove_deo($id)
     {
-        $sql = "DELETE FROM users WHERE user_id = $id";
-        $result = $this->db->sql_execute($sql);
-        if ($result) {
-            return true;
-        } else {
-            return false;
-        }
+        $result = $this->deo_handler->remove_deo($id);
+        return $result;
+        
     }
 
 
