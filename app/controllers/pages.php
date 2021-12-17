@@ -1,5 +1,6 @@
 <?php
 
+
 class Pages extends Controller
 {
 
@@ -45,6 +46,7 @@ class Pages extends Controller
 
         $data['personal'] = [];
         $data['vaccinations'] = [];
+        $data['hospital_id'] = NULL;
         
         
         
@@ -53,15 +55,20 @@ class Pages extends Controller
         if(isset($_POST["vaccine-search"])){
 
             $id = $_POST["vaccine-search-bar-input"]; // TO get the search input
-
-            $data['personal'] = $this->operator_model->load_citizen($id);      //array list of users
-
-            $data["vaccinations"] = $this->operator_model->load_vaccination($id);
-
+            $citzen = $this->operator_model->load_citizen($id);
+            if($citzen != NULL){
+                
+                $data['personal'] =   ['health_id'=> $citzen->get_id(), 'name'=> $citzen->get_name(), 'dob'=> $citzen->get_dob()];    //array list of users
+            }
+            
+            $search_record = $this->operator_model->load_vaccination($id);
+            if($search_record != NULL){$data["vaccinations"] = $search_record->get_records();}
+            
+            $data['hospital_id'] = $this->operator_model->get_hospital_id();
             
 
             if(!$data['personal']){
-                die("User not found");
+                die("User not found");      //TODO: error message
             }
 
 
@@ -71,7 +78,8 @@ class Pages extends Controller
         // This is the code to check whether user click submit button
         if(isset($_POST["add-patient-submit"])){
             
-            $hospital_id = (int)explode(" - ", $_POST["add-patient-hospital-name"]);
+            // $hospital_id = (int)explode(" - ", $_POST["add-patient-hospital-name"]);
+            $hospital_id = $this->operator_model->get_hospital_id();
             
 
             // TODO: need to validate hospital validate
@@ -97,7 +105,7 @@ class Pages extends Controller
              }
         }
 
-        $data["hospitals"] = $this->operator_model->load_hospitals();
+        //  TODO: remove drop down in vaccination view page
         $this->view('/pages/vaccination', $data);
     }
 

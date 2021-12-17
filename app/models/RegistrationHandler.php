@@ -1,6 +1,6 @@
 <?php  
 
-class HospitalLoader{
+class RegistrationHandler{
 
 
 

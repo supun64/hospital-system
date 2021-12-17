@@ -4,7 +4,7 @@ class Users extends Controller{
 
 public function __construct()
 {
-    $this->hos_ldr_model = $this->model('HospitalLoader');
+    $this->hos_ldr_model = $this->model('RegistrationHandler');
 }
 
 public function index(){
