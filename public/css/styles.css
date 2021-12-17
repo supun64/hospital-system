@@ -500,6 +500,9 @@ body {
   transition: 50ms ease-in;
 }
 
+#login-errors{
+  color: red;
+}
 
 /* Vaccination page ----------------------------------------------------------------------------------- */
 
