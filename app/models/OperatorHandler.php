@@ -7,7 +7,7 @@ class OperatorHandler{
 
     public function __construct()
     {
-        $this->db = new Database();
+        $this->db = Database::get_instance();
     }
 
     public function load_deo($hospital_id)

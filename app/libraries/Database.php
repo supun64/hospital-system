@@ -10,7 +10,9 @@ class Database{
     private $conn;
     private $result;
 
-    public function __construct()
+    private static $instance = NULL;
+
+    private function __construct()
     {
         $this->conn = mysqli_connect($this->db_host,$this->db_user,$this->db_pass, $this->db_name);
 
@@ -21,6 +23,18 @@ class Database{
             //echo "Connected to db"."<br>";
         }
     }
+
+
+    public static function get_instance(){
+
+        if(self::$instance == NULL){
+            self::$instance = new Database();
+        }
+        return self::$instance;
+
+    }
+
+
 
 
     //execute sql command

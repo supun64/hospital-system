@@ -7,7 +7,7 @@ abstract class Factory{
 
     public function __construct()
     {
-        $this->db = new Database();
+        $this->db = Database::get_instance();
     }
 
     public abstract function get_product($id);

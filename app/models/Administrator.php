@@ -10,7 +10,7 @@ class Administrator
 
     public function __construct()
     {
-        $this->db = new Database();
+        $this->db = Database::get_instance();
         $this->hospital_id = $_SESSION['hospital_id']; //this should be changed -> id should be gained through constructor (using session)    
         $this->user_id = $_SESSION['userID'];
         $this->deo_handler = new OperatorHandler();

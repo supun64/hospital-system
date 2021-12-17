@@ -7,7 +7,7 @@ class VaccinationCenter{
 
     public function __construct()
     {
-        $this->db = new Database();
+        $this->db = Database::get_instance();
         $this->vaccination_factory = new VaccinationFactory();
     }
 
