@@ -1,0 +1,7 @@
+* Use DataBaseWrapper class in Registration handler
+* It has some methods which can be implemeted in UserHandler (like add / delete users)
+* It will be better, if we can remove the user related methods form there and make it the controller of hospitals
+* Administrator also contains some user related methods :((
+* add_record() in all center classes are not implemented.
+* organize VaccinationCenter
+* are we going to keep all those classes in the model itself:)))

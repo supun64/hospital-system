@@ -62,45 +62,6 @@ class Administrator
         return $this->hospital_id;
     }
 
-
-    //----------------------------Data Management-----------------------------------------------------
-
-    //load all the records edited or inserted today in the selected record type
-    public function load_by_type($record_type)
-    {
-        $sql = "SELECT * FROM `$record_type` WHERE hospital_id = $this->hospital_id and date = CURDATE()";
-        $this->db->sql_execute($sql);
-        return $this->db->result_set();
-    }
-
-    //delete the selected record
-    public function delete_by_id($record_type, $id)
-    {
-        if ($this->db->safe($id)) {
-            return $this->db->sql_execute("DELETE FROM  `$record_type` WHERE id = $id");
-        } else {
-            die("You have been hacked:)");
-        }
-    }
-
-    //update a record in a table.
-    public function update_record($record_type, $param_list)
-    {
-        $sql = ' UPDATE `' . $record_type . '` SET ';
-        foreach ($param_list as $key => $value) {
-            if ($this->db->safe($value)) {
-                if ($key !== 'id') {
-                    $sql .=  $key . " = '" . $value . "',";
-                }
-            } else {
-                die("You have been hacked:))");
-            }
-        }
-        $sql = rtrim($sql, ',');
-        $sql .= ' WHERE id  = ' . $param_list['id'];
-        return $this->db->sql_execute($sql);
-    }
-
     //----------------------------Admin Settings-----------------------------------------------------
 
     //load user details

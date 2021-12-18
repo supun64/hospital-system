@@ -9,35 +9,38 @@ class Pages extends Controller
         $this->admin_model = $this->model('Administrator');  //create admin object
         $this->hospital_loader_model =  $this->model('RegistrationHandler');
         $this->operator_model = $this->model('Operator'); // Create Operator object
+        $this->record_factory = $this->model('RecordFactory');
+        $this->center_factory = $this->model('CentersFactory');
+        $this->user_handler= $this->model('UserHandler');
 
         //if someone tries access the pages without logging in, they will be redirected to the users/index page
-        if(!$this->hospital_loader_model->is_logged_in())
+        if(!$this->user_handler->is_logged_in())
             header('location:'.URL_ROOT.'/users/index');
     }
 
     public function index()
     {
-        $_SESSION["is_admin"]?$this->view('/pages/admin_dashboard'):$this->view('/pages/user_dashboard');
+        $_SESSION["is_admin"]?$this->view('/pages/admin_home'):$this->view('/pages/user_dashboard');
     }
 
     public function antigen()
     {
-        $this->view('/pages/antigen');
+        $_SESSION["is_admin"]?header('location:'.URL_ROOT.'/pages/index'):$this->view('/pages/antigen');
     }
 
     public function covid_deaths()
     {
-        $this->view('/pages/covid_deaths');
+        $_SESSION["is_admin"]?header('location:'.URL_ROOT.'/pages/index'):$this->view('/pages/covid_deaths');
     }
 
     public function covid_patients()
     {
-        $this->view('/pages/covid_patients');
+        $_SESSION["is_admin"]?header('location:'.URL_ROOT.'/pages/index'):$this->view('/pages/covid_patients');
     }
 
     public function pcr()
     {
-        $this->view('/pages/pcr');
+        $_SESSION["is_admin"]?header('location:'.URL_ROOT.'/pages/index'):$this->view('/pages/pcr');
     }
 
     public function vaccination(){
@@ -105,12 +108,7 @@ class Pages extends Controller
         }
 
         //  TODO: remove drop down in vaccination view page
-        $this->view('/pages/vaccination', $data);
-    }
-
-    public function home()
-    {
-        $this->view('/pages/admin_home');
+        $_SESSION["is_admin"]?header('location:'.URL_ROOT.'/pages/index'):$this->view('/pages/vaccination', $data);
     }
 
     //to change or view user details
@@ -133,16 +131,9 @@ class Pages extends Controller
             $records['errors'] = $errors;
         }
         //Retrieved data will be shown in the settings page
-        $this->view('/pages/admin_settings', $records);
+        $_SESSION["is_admin"]?$this->view('/pages/admin_settings', $records):header('location:'.URL_ROOT.'/pages/index');
     }
 
-    public function data_management_update()
-    {
-        $record_type = $_GET['record_type'];
-        $id = $_GET['id'];
-
-        $this->view('/pages/data_management_update');
-    }
     public function data_management()
     {
         $records = [];
@@ -154,25 +145,36 @@ class Pages extends Controller
         ];
 
         if (isset($_POST['newrecord'])) {
-            $this->admin_model->update_record($_GET['record_type'], $_POST['newrecord']);
+            $type = $_GET['record_type'];
+            $record = $this->record_factory->get_record($type, $_POST['newrecord']);
+            $center = $this->center_factory->get_center($type);
+            $center->update_record($record);
         }
         if (isset($_GET['record_type']) && $_GET['record_type']) {
 
             $type = $_GET['record_type'];
-            $records = $this->admin_model->load_by_type($type);
+            $center = $this->center_factory->get_center($type);
+            $results_set = $center->give_all_records();
+
+            foreach ($results_set as $result) {
+                array_push($records,$center->to_array($result));
+            }
+
             $records["type"] = $rows[$type];
             array_push($records, $type);
+            
             $this->view('/pages/data_management', $records);
             return;
         }
 
-        $this->view('/pages/data_management');
+        $_SESSION["is_admin"]?$this->view('/pages/data_management'):header('location:'.URL_ROOT.'/pages/index');
     }
 
     public function data_delete()
     {
         $type = $_GET['record_type'];
-        if ($this->admin_model->delete_by_id($type, $_POST['id'])) {
+        $center = $this->center_factory->get_center($type);
+        if ($center->delete_record($_POST['id'])) {
             header('location:' . URL_ROOT . "/pages/data_management?record_type=$type");
         } else {
             die('Something went wrong');
@@ -183,12 +185,12 @@ class Pages extends Controller
     {
 
         $data = $this->admin_model->load_deo();      //array list of users
-
+        
         //add new deo
         if (isset($_POST['nw_deo_submit'])) {
 
             $hos_id = $this->admin_model->get_hospital_id();   //relevent hospital id
-
+            
             $deo = [
                 "username" => $_POST['deo_username'],
                 "email" => $_POST['deo_email'],
@@ -224,12 +226,12 @@ class Pages extends Controller
 
 
 
-        $this->view('/pages/user_management', $data);
+        $_SESSION["is_admin"]?$this->view('/pages/user_management',$data):header('location:'.URL_ROOT.'/pages/index');
     }
 
     public function logout()
     {   
-        $this->hospital_loader_model->logout();
+        $this->user_handler->logout();
         header('location:' . URL_ROOT . '/users/login');
     }
 }

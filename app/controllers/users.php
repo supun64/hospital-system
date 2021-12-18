@@ -6,6 +6,7 @@ class Users extends Controller{
 public function __construct()
 {
     $this->hos_ldr_model = $this->model('RegistrationHandler');
+    $this->user_handler= $this->model('UserHandler');
 }
 
     public function index(){
@@ -108,7 +109,7 @@ public function __construct()
     public function login(){
         $data = [];
         if($_SERVER['REQUEST_METHOD'] == "POST"){
-            $is_confirmed = $this->hos_ldr_model->log_in(trim($_POST["useremail"]),trim($_POST["password"]));
+            $is_confirmed = $this->user_handler->log_in(trim($_POST["useremail"]),trim($_POST["password"]));
             if(!$is_confirmed){ //either entered wrong password or password mismatch
                 $data["user_email"] = trim($_POST["useremail"]);
                 $data["password"] = trim($_POST["password"]);
@@ -127,6 +128,7 @@ public function __construct()
             //if not registered hospital try to access using url with paramas
             if(!$data['is_registered'] || $data == NULL){ header('location:'.URL_ROOT.'/users/index');}
             $_SESSION['hospital_id'] = $hospital_id;
+            $_SESSION['hospitalname'] = $data['name'];
         
         }else{header('location:'.URL_ROOT.'/users/index');}  //no permission without correct url
         $this->view('/users/login',$data);
@@ -134,7 +136,7 @@ public function __construct()
 
     public function logout()
     {   
-        $this->hos_ldr_model->logout();
+        $this->user_handler->logout();
         header('location:' . URL_ROOT . '/users/login');
     }
 
