@@ -5,8 +5,7 @@ class VaccinationFactory extends Factory{
     public function __construct() {
         parent::__construct();
     }
-
-
+    
     public function get_product($id){
 
         $id = $this->db->safe($id);
@@ -22,14 +21,5 @@ class VaccinationFactory extends Factory{
         else{
             return NULL;
         }
-
-
-
-
-
     }
-
-
-
-
 }

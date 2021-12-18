@@ -54,11 +54,6 @@ class Citizen{
     public function get_email(){
         return $this->email;
     }
-
-
-
-
-
 }
 
 

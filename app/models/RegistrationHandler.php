@@ -69,47 +69,4 @@ class RegistrationHandler{
                 return false;
             }
         }
-
-    public function find($useremail){
-        $this->db->sql_execute("SELECT * FROM `users` WHERE user_email = '$useremail'");
-        $loggedin_user = $this->db->result_set();
-        return $loggedin_user?$loggedin_user[0]:false;
-    }
-    
-    //save the log-in info in a session(only if the login stat are correct)
-    public function log_in($useremail,$password){
-        $useremail = $this->db->safe($useremail);
-        $password = $this->db->safe($password);
-        $loggedin_user = $this->find($useremail);
-
-        if($loggedin_user && password_verify($password,$loggedin_user["password"])){
-            session_regenerate_id();
-            $_SESSION["is_admin"] = $loggedin_user["is_admin"];
-            $_SESSION["useremail"] = $loggedin_user["user_email"];
-            $_SESSION["password"] = $loggedin_user["password"];
-            $_SESSION["userID"] = $loggedin_user["user_id"];
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-
-    //to check whether the user is still logged in
-    public function is_logged_in(){
-        if(empty($_SESSION["useremail"])) return false;
-        else{
-            $user = $this->find($_SESSION["useremail"]);
-            return !empty($user) && ($user["password"]=== $_SESSION['password']);
-        }
-    }
-
-    //logout---> unset the session fields
-    public function logout(){
-        unset($_SESSION['userID']);
-        unset($_SESSION["is_admin"]);
-        unset($_SESSION['userID']);
-        unset($_SESSION["password"]);
-        session_destroy();
-    }
 }
