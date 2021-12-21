@@ -1,36 +1,43 @@
-<?php 
-    class CentersFactory extends Factory
+<?php
+class CentersFactory extends Factory
+{
+    public function __construct()
     {
-        public function __construct() {
-            parent::__construct();
-        }
+        parent::__construct();
+    }
 
-        public function get_product($id){}
+    public function get_product($id)
+    {
+    }
 
-        public function get_center($type){
-            
-            switch($type){
+    public function get_center($type)
+    {
 
-                case 'antigen_tests':
-                    return new AntigenTestsCenter();
-                    break;
-                
-                case 'pcr_tests':
-                    return new PcrTestsCenter();
-                    break;
+        switch ($type) {
 
-                case 'covid_deaths':
-                    return new CovidDeathsCenter();
-                    break;
+            case 'antigen_tests':
+                return new AntigenTestsCenter();
+                break;
 
-                case 'vaccinations':
-                    return new VaccinationCenter();
-                    break;
+            case 'pcr_tests':
+                return new PcrTestsCenter();
+                break;
 
-                default:
-                    return null;
-                    break;
-            }
+            case 'covid_deaths':
+                return new CovidDeathsCenter();
+                break;
+
+            case 'vaccinations':
+                return new VaccinationCenter();
+                break;
+
+            case 'vaccinations':
+                return new VaccinationCenter();
+                break;
+
+            default:
+                return null;
+                break;
         }
     }
-?>
+}
