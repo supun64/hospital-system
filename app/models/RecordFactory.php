@@ -37,7 +37,8 @@
                                         $records['health_id'],
                                         $records['hospital_id'],
                                         $records['date'],
-                                        $records['status']);
+                                        $records['status'],
+                                        $records['place']);
                     break;
 
                 case 'vaccinations':

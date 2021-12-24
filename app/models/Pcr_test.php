@@ -6,13 +6,15 @@
         private  $hospital_id;
         private  $date;
         private  $status;
+        private $place;
     
-        public function __construct( $id,  $health_id,  $hospital_id,  $date,  $status) {
+        public function __construct( $id,  $health_id,  $hospital_id,  $date,  $status, $place) {
             $this->id = $id;
             $this->health_id = $health_id;
             $this->hospital_id = $hospital_id;
             $this->date = $date;
             $this->status = $status;
+            $this->place = $place;
         }
     
         public function get_id() {
@@ -34,6 +36,10 @@
         public function get_status() {
             return $this->status;
         }
+
+        public function get_place() {
+            return $this->place;
+        }
     
         public function set_id( $id) {
             $this->$id = $id;
@@ -53,6 +59,10 @@
     
         public function set_status( $status) {
             $this->$status = $status;
+        }
+
+        public function set_place( $place) {
+            $this->$place = $place;
         }
     }
 ?>

@@ -3,7 +3,21 @@
 
 
 <body>
+<?php 
+if(isset($_GET['not-user'])){?>
+    <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert" >
+        <div class="deo-manage-error-text"> Wrong Health ID !!</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php } ?>
 
+<?php 
+if(isset($_GET['success'])){?>
+    <div class="alert alert-success alert-dismissible fade show deo-manage-error-box" role="alert" >
+        <div class="deo-manage-error-text"> Record successfully added</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php } ?>
     <section class="main-info">
 
 
@@ -83,7 +97,9 @@
                         </table>
                     </div>
 
-                <?php if($data['vaccinations']){?>
+                <?php 
+                 $last_dose = 0;
+                if($data['vaccinations']){?>
                     <!-- These are the vaccination details -->
 
                     <div class="covid-previous-details">
@@ -102,7 +118,7 @@
                         <?php
 
                         $vaccinations = $data["vaccinations"];
-                        $last_dose = 1;
+                       
                         foreach ($vaccinations as $vaccine) :
                         ?>
 
@@ -123,7 +139,7 @@
                                 <div class="covid-td"><?php echo $vaccine["vaccinated_place"] ?></div>
 
                                 <div class="covid-td"><?php echo $vaccine["comments"] ?></div>
-
+                                
                             </div>
                         <?php $last_dose = $vaccine["dose"];    ?>
                         <?php endforeach; ?>
@@ -183,7 +199,7 @@
                         <div class="col-md-8 covid-input">
                             <label for="inputHealthID" class="form-label-primary label-primary covid-input-label">Patient's Health ID</label>
                             <!-- <input type="number" class="form-control covid-input-field" id="inputHealthID" name="add-patient-health-id" min="1" required> -->
-                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-health-id" value="<?php echo $data['personal']['health_id']?>">
+                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-health-id" value="<?php echo $data['personal']['health_id'];?>">
                         </div>
 
                         <div class="col-md-8 covid-input">
@@ -198,7 +214,7 @@
 
                         <div class="col-md-8 covid-input">
                             <label for="inputHospital" class="form-label-primary covid-input-label">Conducted Hospital</label>
-                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-hospital" value="<?php echo $data['hospital_id']?>">                           
+                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-hospital" value="<?php echo $data['hospital_id'];?>">                           
 
                         </div>
 
@@ -211,7 +227,7 @@
                         <div class="col-md-3 covid-input">
                             <label for="inputDose" class="form-label-primary covid-input-label">Dosage</label>
                             
-                            <input type="text" readonly class="form-control form-control-sm" id="inputDose" name="add-patient-dose" value="<?php echo $last_dose+1?>">
+                            <input type="text" readonly class="form-control form-control-sm" id="inputDose" name="add-patient-dose" value="<?php echo $last_dose + 1?>">
                         </div>
 
                         <div class="col-md-8 covid-input">
