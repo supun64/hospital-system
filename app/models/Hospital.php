@@ -48,11 +48,11 @@ class Hospital{
 
     public function get_contact_num($contact_num)
     {
-        return $this->hospital_id;
+        return $this->contact_num;
     }
 
-    public function is_registered($hospital_id)
+    public function get_is_registered($hospital_id)
     {
-        return $this->contact_num;
+        return $this->is_registered;
     }
 }

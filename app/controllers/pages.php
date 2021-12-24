@@ -50,23 +50,27 @@ class Pages extends Controller
         $data['vaccinations'] = [];
         $data['hospital_id'] = NULL;
         
-        
+        $center = $this->center_factory->get_center('vaccinations');
         
         // code to search a vaccination
 
         if(isset($_POST["vaccine-search"])){
 
             $id = $_POST["vaccine-search-bar-input"]; // TO get the search input
-            $citzen = $this->operator_model->load_citizen($id);
+            $citzen = $center->get_citizen($id);
             if($citzen != NULL){
                 
                 $data['personal'] =   ['health_id'=> $citzen->get_id(), 'name'=> $citzen->get_name(), 'dob'=> $citzen->get_dob()];    //array list of users
             }
             
-            $search_record = $this->operator_model->load_vaccination($id);
-            if($search_record != NULL){$data["vaccinations"] = $search_record->get_records();}
+            $search_records = $center->load_details_by_id($id);
+            if($search_records != NULL)
+            { foreach ($search_records as $result) {
+                array_push($data["vaccinations"],$center->to_array($result));
+              }
+            }
             
-            $data['hospital_id'] = $this->operator_model->get_hospital_id();
+            $data['hospital_id'] = $center->get_hospital_id();
             
 
             if(!$data['personal']){
@@ -81,30 +85,28 @@ class Pages extends Controller
         if(isset($_POST["add-patient-submit"])){
             
             // $hospital_id = (int)explode(" - ", $_POST["add-patient-hospital-name"]);
-            $hospital_id = $this->operator_model->get_hospital_id();
+            $hospital_id = $center->get_hospital_id();
             
 
             // TODO: need to validate hospital validate
-            $vaccine_detail = ["health_id"=>$_POST["add-patient-health-id"],
-             "vac_name"=> $_POST["add-patient-vaccination-name"],
-             "vac_date"=> $_POST["add-patient-vaccinated-date"], 
-             "hospital"=> $hospital_id, 
-             "vac_place"=> $_POST["add-patient-vaccinated-place"] , 
-             "dose" => $_POST["add-patient-dose"], 
-             "comment" => $_POST["add-patient-comment"]];
+            $vaccine_detail = ["id"=>NULL,"health_id"=>$_POST["add-patient-health-id"],
+             "date"=> $_POST["add-patient-vaccinated-date"],
+             "dose" => $_POST["add-patient-dose"],
+             "vaccine_name"=> $_POST["add-patient-vaccination-name"],  
+             "hospital_id"=> $hospital_id, 
+             "vaccinated_place"=> $_POST["add-patient-vaccinated-place"] ,  
+             "comments" => $_POST["add-patient-comment"]];
 
-             // This is the code to check whether health id exists
-             if($this->operator_model->health_id_exist($vaccine_detail["health_id"])){
-                if($this->operator_model->add_vaccinated_person($vaccine_detail)){
+             $new_vaccine = $this->record_factory->get_record('vaccinations', $vaccine_detail);
+             // not checking health id exists since we already in a existing health id and the field is auto filled
+            
+                if($center->add_record($new_vaccine)){
                     header('location:'.URL_ROOT.'/pages/vaccination');
                 } 
                 else{
                     die("Something went wrong");
                 }
-             }
-             else{
-                 die("Health ID Not Found");
-             }
+            
         }
 
         //  TODO: remove drop down in vaccination view page
@@ -134,6 +136,7 @@ class Pages extends Controller
         $_SESSION["is_admin"]?$this->view('/pages/admin_settings', $records):header('location:'.URL_ROOT.'/pages/index');
     }
 
+    //TODO: any record even from otheer hospitals ?????
     public function data_management()
     {
         $records = [];
@@ -183,30 +186,25 @@ class Pages extends Controller
 
     public function user_management()
     {
-
-        $data = $this->admin_model->load_deo();      //array list of users
+        $hos_id = $_SESSION['hospital_id'] ;  //relevent hospital id
+        $data = $this->user_handler->find_All_Users($hos_id);      //array list of users
         
         //add new deo
         if (isset($_POST['nw_deo_submit'])) {
 
-            $hos_id = $this->admin_model->get_hospital_id();   //relevent hospital id
             
-            $deo = [
-                "username" => $_POST['deo_username'],
-                "email" => $_POST['deo_email'],
-                "password" => $_POST['password'],
-                "hospital_id" => $hos_id
-            ];
-
+            
+            $deo = new User(NULL,$_POST['deo_username'],$_POST['password'],$hos_id,$_POST['deo_email'],0);
+          
             //checking whether an existing email
-            if ($this->admin_model->email_exist($deo['email'])) {
+            if ($this->user_handler->email_exist($deo->get_user_email())) {
 
                 header('location:' . URL_ROOT . '/pages/user_management?duplicate');  //redirect with error message
             } else {
                 //hash the password
-                $deo['password'] = password_hash($deo['password'], PASSWORD_DEFAULT);
+                $deo->set_password(password_hash($deo->get_password(), PASSWORD_DEFAULT));
                 //add new deo
-                if ($this->admin_model->add_deo($deo)) {
+                if ($this->user_handler->add_user($deo)) {
                     header('location:' . URL_ROOT . '/pages/user_management');
                 } else {
                     die('Something went wrong');
@@ -217,7 +215,7 @@ class Pages extends Controller
         //remove deo
         if (isset($_POST['rm_submit'])) {
             $id = $_POST["deo_id_record"];
-            if ($this->admin_model->remove_deo($id)) {
+            if ($this->user_handler->remove_user($id)) {
                 header('location:' . URL_ROOT . '/pages/user_management');
             } else {
                 die('Something went wrong');

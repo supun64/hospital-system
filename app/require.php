@@ -15,7 +15,7 @@ require_once 'models/Vaccination.php';
 require_once 'models/Antigen_Test.php';
 
 require_once 'models/Factory.php';
-require_once 'models/UserFactory.php';
+require_once 'models/CitizenFactory.php';
 require_once 'models/RecordFactory.php';
 require_once 'models/CentersFactory.php';
 require_once 'models/SearchRecord.php';

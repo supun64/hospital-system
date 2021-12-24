@@ -13,7 +13,7 @@ public function __construct()
 {
     // $this->db = new Database();
     $this->hospital_id = $_SESSION['hospital_id'];           //this should be changed -> id should be gained through constructor (using session)
-    $this->user_factory = new UserFactory();
+    $this->user_factory = new CitizenFactory();
     $this->vaccination_center = new VaccinationCenter();
     
 }

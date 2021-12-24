@@ -16,46 +16,6 @@ class Administrator
         $this->deo_handler = new OperatorHandler();
     }
 
-    //----------------------------User Management--------------------------------
-
-    //function to load all the deos
-    public function load_deo()
-    {
-        $data = $this->deo_handler->load_deo($this->hospital_id);
-        return $data;
-    }
-
-
-    //function to check whether an existing email
-    public function email_exist($email)
-    {
-
-        $data = $this->deo_handler->email_exist($email);
-        return $data;
-        
-    }
-
-
-    //function to add new deo
-    public function add_deo($deo)
-    {
-
-        $result = $this->deo_handler->add_deo($deo);
-        return $result;
-
-
-    }
-
-    //delete existing deo
-
-    public function remove_deo($id)
-    {
-        $result = $this->deo_handler->remove_deo($id);
-        return $result;
-        
-    }
-
-
     //getter for hospital_id
     public function get_hospital_id()
     {

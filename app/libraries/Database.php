@@ -62,9 +62,10 @@ class Database{
     {
         $sql = ' UPDATE `' . $table . '` SET ';
         foreach ($param_list as $key => $value) {
-            if ($this->safe($value)) {
+            if (is_int($value) || $this->safe($value) || $value=='') {
                 if ($key !== $primary_key) {
-                    $sql .=  $key . " = '" . $value . "',";
+                   $sql .=  $key . " = '" . $value . "',";
+                   
                 }
             } else {
                 die("You have been hacked:))");
@@ -75,13 +76,15 @@ class Database{
         return $this->sql_execute($sql);
     }
 
-    public function insert($table,$fields){
+    public function insert($table,$fields){          //changed the if clause since safe method only takes strings
+        $count = -1;
         $sql = 'INSERT INTO `'.$table.'`(';
         foreach ($fields as $key => $value) {
-            if ($this->safe($value)) {
+            $count++;
+            if (is_int($value) || $this->safe($value) || $value=='') {
                 $sql .=  $key . ',';
             } else {
-                die("You have been hacked:))");
+                die("You have been hacked:))".$count);
             }
         }
         $sql = rtrim($sql, ',');
@@ -96,7 +99,7 @@ class Database{
       }
 
     public function delete($table,$primary_key,$id) {
-        if ($this->safe($id)) {
+        if (is_int($id) || $this->safe($id)) {
             return $this->sql_execute('DELETE FROM `'.$table.'`WHERE '.$primary_key.' = '.$id);
         } else {
             die("You have been hacked:)");
@@ -110,7 +113,7 @@ class Database{
     }
 
     public function findById($table,$primary_key,$value) {
-        if($this->safe($value)){
+        if(is_int($value) || $this->safe($value)){
             $query = 'SELECT * FROM `' . $table . '`WHERE ' . $primary_key . ' ='.$value;
             $query = $this->sql_execute($query);
             return $this->result_set();
@@ -120,7 +123,7 @@ class Database{
     }
 
     public function find($table,$column, $value) {
-        if($this->safe($value)){
+        if(is_int($value) || $this->safe($value)){
             $query = 'SELECT * FROM ' . $table . ' WHERE ' .$column . " = '".$value."'";
             $this->sql_execute($query);
             return $this->result_set();
@@ -130,14 +133,20 @@ class Database{
     }
 
     public function findByHosID_nd_Date($table,$hospital_id) {
-        if($this->safe($hospital_id)){
+        if(is_int($hospital_id) || $this->safe($hospital_id)){
             $sql = "SELECT * FROM `".$table."` WHERE hospital_id = $hospital_id and date = CURDATE()";
-            $this->sql_execute($sql);
-            return$this->result_set();
+            return $this->sql_execute($sql);
+            
         }else{
             die("Something went wrong");
         }
         
     }
+
+   public function register($hos_id){
+       $sql = "UPDATE hospitals SET is_registered = 1 WHERE hospital_id = $hos_id";
+       return $this->sql_execute($sql);
+       
+   }
     
 }

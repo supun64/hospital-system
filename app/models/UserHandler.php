@@ -8,15 +8,42 @@
             $this->db = new DataBaseWrapper();
         }
 
-        public function add_user(){} //implement
+        public function add_user($user){
+            $data = [
+                'user_name'=> $user->get_user_name(),
+                'user_email'=> $user->get_user_email(),
+                'password'=> $user->get_password(),
+                'hospital_id' => $user->get_hospital_id(),
+                'is_admin' => $user->get_is_admin()
+            ];
+             return $this->db->insert('users',$data);
+        } 
 
-        public function remove_user(){}//implement
+        public function remove_user($id){
+            $result = $this->db->delete('users','user_id',$id);
+            if($result){return true;}
+            return false;
+        }
 
-        public function is_exist(){}//implement
+        public function email_exist($email){
+            $result = $this->db->find("users","user_email",$email);
+            if($result){return true;}
+            return false;
+        }
 
-        public function delete_user(){}//implement
 
-        public function find_All_Users(){}//implement
+        public function find_All_Users($hos_id){
+
+            $result_set =  $this->db->find('users','hospital_id',$hos_id);
+            $count = 0;
+            while($count < sizeof($result_set)){
+                if($result_set[$count]['is_admin']== 1){unset($result_set[$count]);break;}
+                $count++;
+            }
+            return $result_set;
+
+
+        }
 
         private function findByMail($email){
             $loggedin_user = $this->db->find("users","user_email",$email);

@@ -39,5 +39,10 @@
         function safe($var){
             return $this->db->safe($var);
         }
+
+        public function register($hos_id){
+           return $this->db->register($hos_id);
+           
+        }
     }
 ?>

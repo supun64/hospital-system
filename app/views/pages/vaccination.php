@@ -102,7 +102,7 @@
                         <?php
 
                         $vaccinations = $data["vaccinations"];
-
+                        $last_dose = 1;
                         foreach ($vaccinations as $vaccine) :
                         ?>
 
@@ -125,7 +125,7 @@
                                 <div class="covid-td"><?php echo $vaccine["comments"] ?></div>
 
                             </div>
-
+                        <?php $last_dose = $vaccine["dose"];    ?>
                         <?php endforeach; ?>
 
 
@@ -198,46 +198,7 @@
 
                         <div class="col-md-8 covid-input">
                             <label for="inputHospital" class="form-label-primary covid-input-label">Conducted Hospital</label>
-
-                            <!-- THis is the code for drop down -->
-                            <div class="select-box">
-                                <div class="options-container">
-
-                                    <!-- This is the code to add hospitals for the drop down list -->
-                                    <?php $counter = 0;?>
-                                    <?php foreach ($data["hospitals"] as $hospital) : ?>
-
-                                        <div class="option">
-                                            <input type="radio" class="radio" id="inputOption<?php echo $counter; ?>" name="category" />
-                                            <label for="inputOption<?php echo $counter; ?>"><?php echo $hospital["name"].' - '.$hospital["hospital_id"]; ?></label>
-                                        </div>
-
-                                    <?php
-
-                                        $counter++;
-
-                                    endforeach; ?>
-
-
-
-                                </div>
-
-                                <div class="selected">
-
-                                    <!-- This is the input that need to be grabed -->
-                                    <input type="text" class="selected-text" placeholder="Choose" maxlength="0" name="add-patient-hospital-name" required>
-
-                                </div>
-
-
-
-
-                                <div class="search-box">
-                                    <input type="text" placeholder="Start Typing..." />
-                                </div>
-                            </div>
-
-                            <!-- End of drop down -->
+                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-hospital" value="<?php echo $data['hospital_id']?>">                           
 
                         </div>
 
@@ -248,8 +209,9 @@
                         </div>
 
                         <div class="col-md-3 covid-input">
-                            <label for="inputDose" class="form-label-primary covid-input-label">Number of Dosage</label>
-                            <input type="number" class="form-control covid-input-field" id="inputDose" min="1" name="add-patient-dose" required>
+                            <label for="inputDose" class="form-label-primary covid-input-label">Dosage</label>
+                            
+                            <input type="text" readonly class="form-control form-control-sm" id="inputDose" name="add-patient-dose" value="<?php echo $last_dose+1?>">
                         </div>
 
                         <div class="col-md-8 covid-input">

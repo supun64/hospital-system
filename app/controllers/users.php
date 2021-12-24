@@ -5,13 +5,14 @@ class Users extends Controller{
 
 public function __construct()
 {
-    $this->hos_ldr_model = $this->model('RegistrationHandler');
+ 
+    $this->reg_handler = $this->model('RegistrationHandler');
     $this->user_handler= $this->model('UserHandler');
 }
 
     public function index(){
 
-        $data = $this->hos_ldr_model->get_all_hospitals();
+        $data = $this->reg_handler->get_all_hospitals();
 
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
@@ -35,7 +36,7 @@ public function __construct()
         if(!empty($params)){
             
             $hospital_id = (int)explode('=',$params)[1];
-            $data = $this->hos_ldr_model->get_hospital($hospital_id);
+            $data = $this->reg_handler->get_hospital($hospital_id);
 
             //if registered hospital try to access using url with paramas
             if($data['is_registered'] || $data == NULL){ header('location:'.URL_ROOT.'/users/index/3');}
@@ -68,24 +69,23 @@ public function __construct()
             
             $ver_code = $_POST['verify-code'];
             $act_code = $_POST['ran-2'];
-            $admin = [
-                "hospital_id" => $_POST['hos-id'],
-                "username" => $_POST['admin-name'],
-                "email" => $_POST['admin-email'],
-                "password" => $_POST['admin-pwd']
-            ];
 
-            if($ver_code == $act_code){
+            $admin = new User(NULL, $_POST['admin-name'], $_POST['admin-pwd'], (int)$_POST['hos-id'],$_POST['admin-email'],1);
             
+            if($ver_code == $act_code){
+                
                             //checking whether an existing email
-                            if ($this->hos_ldr_model->email_exist($admin['email'])) {
-                                header('location:'.URL_ROOT.'/users/register/hospital-id='.$admin['hospital_id'].'?duplicate');  //redirect with error message   
-                            } else {
+                            if ($this->reg_handler->email_exist($admin->get_user_email())) {
+                                header('location:'.URL_ROOT.'/users/register/hospital-id='.$admin->get_hospital_id().'?duplicate');  //redirect with error message  
+                                //header('location:'.URL_ROOT.'/users/index/6'); 
+                            } else { 
                             //     //hash the password
-                                $admin['password'] = password_hash($admin['password'], PASSWORD_DEFAULT);
+                                $admin->set_password(password_hash($admin->get_password(), PASSWORD_DEFAULT));
                                 // //add new admin
-                                if ($this->hos_ldr_model->add_admin($admin)) {
-                                    header('location:'.URL_ROOT.'/users/login?hospital-id='.$admin['hospital_id']);
+                                $result1 = $this->user_handler->add_user($admin);
+                                $result2 = $this->reg_handler->register($admin->get_hospital_id());
+                                if ( $result1 && $result2) {
+                                    header('location:'.URL_ROOT.'/users/login?hospital-id='.$admin->get_hospital_id());
                                 }else {
                                         die('Something went wrong');
                                     
@@ -95,7 +95,7 @@ public function __construct()
 
 
             }else{
-                header('location:'.URL_ROOT.'/users/register/hospital-id='.$admin['hospital_id'].'?fail');  //redirect with error message  TODO: error mesaage
+                header('location:'.URL_ROOT.'/users/register/hospital-id='.$admin->get_hospital_id().'?fail');  //redirect with error message  TODO: error mesaage
             }
 
 
@@ -124,7 +124,7 @@ public function __construct()
 
         
             $hospital_id = $_GET["hospital-id"];
-            $data = $this->hos_ldr_model->get_hospital($hospital_id);
+            $data = $this->reg_handler->get_hospital($hospital_id);
             //if not registered hospital try to access using url with paramas
             if(!$data['is_registered'] || $data == NULL){ header('location:'.URL_ROOT.'/users/index');}
             $_SESSION['hospital_id'] = $hospital_id;
