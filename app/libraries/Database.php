@@ -135,7 +135,8 @@ class Database{
     public function findByHosID_nd_Date($table,$hospital_id) {
         if(is_int($hospital_id) || $this->safe($hospital_id)){
             $sql = "SELECT * FROM `".$table."` WHERE hospital_id = $hospital_id and date = CURDATE()";
-            return $this->sql_execute($sql);
+            $this->sql_execute($sql);
+            return $this->result_set();
             
         }else{
             die("Something went wrong");
