@@ -265,7 +265,7 @@ if(isset($_GET['success'])){?>
 
                     </div>
                     <div class="modal-footer test-toggle-footer">
-                        <button type="submit" class="btn btn-primary pcr-toggle-submit-btn" name="update-patient-submit">Update</button>
+                        <button type="submit" class="btn btn-primary pcr-toggle-submit-btn" name="update-patient-submit" id="update-btn">Update</button>
                     </div>
                 </form>
             </div>
@@ -305,12 +305,15 @@ document.querySelectorAll('.pcr-rw').forEach(item => {
 
     //disable button for unauthorized hospitals
     document.getElementById('togBtn').disabled = false;  //enable continue button
+    document.getElementById('update-btn').disabled = false;  //enable continue button
     if(document.getElementById('cur-hos').value != document.getElementById('hidden-hid').value){
      document.getElementById('togBtn').disabled = true;
+     document.getElementById('update-btn').disabled = true;  //enable continue button
     }
 
     if(arr[3] != "pending"){
         document.getElementById('togBtn').disabled = true;
+        document.getElementById('update-btn').disabled = true;  //enable continue button
     }
 
   });
