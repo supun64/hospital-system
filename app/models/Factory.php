@@ -1,15 +1,17 @@
 <?php  
+class Factory{
 
+    private static $factories = [];
 
-abstract class Factory{
+    private function __construct(){}
 
-    protected $db;
+    //give the factory type as same as it appears in the class name
+    public static function getFactory($factory_type){
 
-    public function __construct()
-    {
-        $this->db = Database::get_instance();
+        if(!array_key_exists($factory_type,self::$factories)){
+            self::$factories[$factory_type] = new $factory_type();
+        }
+
+        return self::$factories[$factory_type];
     }
-
-    public abstract function get_product($id);
-
 }

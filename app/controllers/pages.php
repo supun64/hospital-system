@@ -9,11 +9,11 @@ class Pages extends Controller
         $this->admin_model = $this->model('Administrator');  //create admin object
         $this->hospital_loader_model =  $this->model('RegistrationHandler');
         $this->operator_model = $this->model('Operator'); // Create Operator object
-        $this->record_factory = $this->model('RecordFactory');
-        $this->center_factory = $this->model('CentersFactory');
+        $this->record_factory = Factory::getFactory("RecordFactory");
+        $this->center_factory = Factory::getFactory("CentersFactory");
         $this->user_handler= $this->model('UserHandler');
 
-        //if someone tries access the pages without logging in, they will be redirected to the users/index page
+        //if someone tries to access the pages without logging in, they will be redirected to the users/index page
         if(!$this->user_handler->is_logged_in())
             header('location:'.URL_ROOT.'/users/index');
     }
@@ -236,14 +236,13 @@ class Pages extends Controller
         $_SESSION["is_admin"]?$this->view('/pages/admin_settings', $records):header('location:'.URL_ROOT.'/pages/index');
     }
 
-    //TODO: any record even from otheer hospitals ?????
     public function data_management()
     {
         $records = [];
         $rows = [
-            "antigen_tests" => ["HealthID", "Test status"],
+            "antigen_tests" => ["HealthID", "Test status","place"],
             "covid_deaths" => ["HealthID", "Place", "Comments"],
-            "pcr_tests" => ["HealthID", "Test Status"],
+            "pcr_tests" => ["HealthID", "Test Status","Place"],
             "vaccinations" => ["HealthID", "Dose", "Name of Vaccine", "Conducted Place", "Comments"]
         ];
 

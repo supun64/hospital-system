@@ -10,8 +10,8 @@
         {
             $this->db = new DataBaseWrapper();
             $this->hospital_id = $_SESSION['hospital_id'];
-            $this->factory = new RecordFactory();
-            $this->citizen_factory = new CitizenFactory();
+            $this->factory = Factory::getFactory("RecordFactory");
+            $this->citizen_factory = Factory::getFactory("CitizenFactory");
         }
 
         public abstract function add_record($record);

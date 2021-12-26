@@ -24,9 +24,10 @@
 
         public  function update_record($record){
             $status = $record->get_status();
+            $place = $record->get_place();
             $id = $record->get_id();
             
-            $params = ["status"=>$status , "id"=>$id];
+            $params = ["status"=>$status , "id"=>$id, "place"=>$place];
 
             return $this->db->update("pcr_tests","id",$params);
         }

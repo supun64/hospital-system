@@ -2,23 +2,20 @@
 
 class VaccinationCenter extends COVID_Department{
 
-    private $vaccination_factory;
-
     public function __construct()
     {
         parent::__construct();
-        $this->vaccination_factory = new VaccinationFactory();
     }
 
     public  function add_record($record_obj){
 
         $data = ["health_id"=>$record_obj->get_health_id(),
-        "date"=>$record_obj->get_date(),
-        "dose"=>$record_obj->get_dose(),
-        "vaccine_name"=>$record_obj->get_vaccine_name(),
-        "hospital_id"=>$record_obj->get_hospital_id(),
-        "vaccinated_place"=>$record_obj->get_vaccinated_place(),
-        "comments"=>$record_obj->get_comments()];
+                "date"=>$record_obj->get_date(),
+                "dose"=>$record_obj->get_dose(),
+                "vaccine_name"=>$record_obj->get_vaccine_name(),
+                "hospital_id"=>$record_obj->get_hospital_id(),
+                "vaccinated_place"=>$record_obj->get_vaccinated_place(),
+                "comments"=>$record_obj->get_comments()];
      
         $result = $this->db->insert("vaccinations",$data);
     

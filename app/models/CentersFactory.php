@@ -1,13 +1,11 @@
 <?php
-class CentersFactory extends Factory
+class CentersFactory
 {
+    private $db;
+
     public function __construct()
     {
-        parent::__construct();
-    }
-
-    public function get_product($id)
-    {
+        $this->db = new DataBaseWrapper();
     }
 
     public function get_center($type)
@@ -25,10 +23,6 @@ class CentersFactory extends Factory
 
             case 'covid_deaths':
                 return new CovidDeathsCenter();
-                break;
-
-            case 'vaccinations':
-                return new VaccinationCenter();
                 break;
 
             case 'vaccinations':

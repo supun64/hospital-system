@@ -19,7 +19,6 @@ require_once 'models/CitizenFactory.php';
 require_once 'models/RecordFactory.php';
 require_once 'models/CentersFactory.php';
 require_once 'models/SearchRecord.php';
-require_once 'models/VaccinationFactory.php';
 require_once 'models/COVID_Department.php';
 require_once 'models/PcrTestsCenter.php';
 require_once 'models/CovidDeathsCenter.php';
