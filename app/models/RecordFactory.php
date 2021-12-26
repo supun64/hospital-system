@@ -26,7 +26,8 @@ class RecordFactory extends Factory
                     $records['health_id'],
                     $records['date'],
                     $records['status'],
-                    $records['hospital_id']
+                    $records['hospital_id'],
+                    $records['place']
                 );
                 break;
 

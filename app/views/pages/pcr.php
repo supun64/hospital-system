@@ -274,7 +274,7 @@ if(isset($_GET['success'])){?>
     </section>
 
     <script src="<?php echo URL_ROOT; ?>/public/script/test.js"></script>
-    <script src="<?php echo URL_ROOT; ?>/public/script/test_center.js"></script>
+    <script src="<?php echo URL_ROOT; ?>/public/script/pcr.js"></script>
 
 </body>
 
