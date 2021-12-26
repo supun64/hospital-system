@@ -140,11 +140,6 @@ if(isset($_GET['success'])){?>
                         <div class="covid-td" >
                         <?php echo $pcr["place"] ?>
                         </div>
-
-
-
-
-
                     </div>
                 </div>
                     <?php endforeach; ?>
@@ -257,12 +252,8 @@ if(isset($_GET['success'])){?>
                                         <!--END-->
                                     </div>
                                 </label>
-
                             </div>
-
-                    
                         </div>
-
                     </div>
                     <div class="modal-footer test-toggle-footer">
                         <button type="submit" class="btn btn-primary pcr-toggle-submit-btn" name="update-patient-submit" id="update-btn">Update</button>
@@ -270,7 +261,6 @@ if(isset($_GET['success'])){?>
                 </form>
             </div>
         </div>
-
     </section>
 
 <script>
@@ -278,7 +268,7 @@ if(isset($_GET['success'])){?>
     hdn_btn = document.getElementById("hidden-status");
     document.getElementById("hidden-status").value = "negative";
     hdn_btn = 
-tog_btn.onclick= function(){
+    tog_btn.onclick= function(){
     if(tog_btn.checked){
         document.getElementById("hidden-status").value = "positive";
         
@@ -296,7 +286,6 @@ document.querySelectorAll('.pcr-rw').forEach(item => {
   item.addEventListener('click', event => {
     children = item.childNodes;
     arr = children[1].innerText.split("\n");
-   // console.log(arr);
    //backend purposes -> get values
      document.getElementById('hidden-id').value = arr[0];
      document.getElementById('hidden-hid').value = arr[1];

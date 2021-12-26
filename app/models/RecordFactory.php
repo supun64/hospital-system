@@ -1,14 +1,11 @@
 <?php
-class RecordFactory extends Factory
+class RecordFactory
 {
+    private $db;
 
     public function __construct()
     {
-        parent::__construct();
-    }
-
-    public function get_product($id)
-    {
+        $this->db = new DataBaseWrapper();
     }
 
     public function get_record($recordtype, $records)
@@ -18,7 +15,6 @@ class RecordFactory extends Factory
         if (!isset($records['hospital_id'])) $records['hospital_id'] = "";
         if (!isset($records['health_id'])) $records['health_id'] = "";
 
-
         switch ($recordtype) {
             case 'antigen_tests':
                 return new Antigen_test(
@@ -26,7 +22,8 @@ class RecordFactory extends Factory
                     $records['health_id'],
                     $records['date'],
                     $records['status'],
-                    $records['hospital_id']
+                    $records['hospital_id'],
+                    $records['place']
                 );
                 break;
 

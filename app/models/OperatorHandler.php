@@ -58,17 +58,5 @@ class OperatorHandler{
         } else {
             return false;
         }
-    }
-
-
-
-
-
-
-
-
-
-
-
-    
+    }    
 }
