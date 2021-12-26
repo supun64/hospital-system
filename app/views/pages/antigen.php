@@ -1,8 +1,24 @@
 <?php require APP_ROOT . '/views/includes/header.php';  ?>
 
-
+<?php $cur_hos = $_SESSION['hospital_id'];?>
+<input type="text" id="cur-hos" hidden value="<?php echo $cur_hos?>">
 
 <body>
+<?php 
+if(isset($_GET['not-user'])){?>
+    <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert" >
+        <div class="deo-manage-error-text"> Wrong Health ID !!</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php } ?>
+
+<?php 
+if(isset($_GET['success'])){?>
+    <div class="alert alert-success alert-dismissible fade show deo-manage-error-box" role="alert" >
+        <div class="deo-manage-error-text"> Record successfully added</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php } ?>
 
     <section class="main-info">
 
@@ -11,21 +27,21 @@
         <div class="covid-search covid-shrunk-search" id="covid-main-search-engine">
             <div class="covid-title">
                 <img class="covid-logo" src="<?php echo URL_ROOT; ?>/public/images/antigen-logo.png" alt="covid-19 covid">
-                <h1 class="text-primary">Rapid Antigen Tests</h1>
+                <h1 class="text-primary">Rapid Antigen Test</h1>
             </div>
 
-            <form class="form mb-3 covid-search-div" method="POST" action="<?php echo URL_ROOT; ?>/pages/vaccination">
+            <form class="form mb-3 covid-search-div" method="POST" action="<?php echo URL_ROOT; ?>/pages/antigen">
 
-                <input type="text" class="covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter health ID here" name="covid-search-bar-input" required>
+                <input type="text" class="covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter health ID here" name="antigen-search-bar-input" required>
 
-                <input type="submit" class="btn btn-primary" id="covid-search-btn" name="covid-search" value="Search">
+                <input type="submit" class="btn btn-primary" id="covid-search-btn" name="antigen-search" value="Search">
 
             </form>
 
         </div>
 
         <!-- This is what should display after search -->
-
+        <?php if ($data["personal"]) { ?> 
 
         <!-- Add addmination-fade-in-pre-state to add the animation -->
         <div class="covid-search-result" id="covid-search-result-section">
@@ -39,7 +55,7 @@
             <div class="covid-details">
 
                 <div class="covid-patient-detail">
-                    <table>
+                    <table id="antigen-table">
                         <tr>
                             <th class="covid-detail-title">
                                 Health ID
@@ -50,7 +66,7 @@
 
 
                             <td class="covid-detail-data">
-
+                            <?php echo $data['personal']['health_id'] ?>
                             </td>
                         </tr>
 
@@ -64,7 +80,7 @@
 
 
                             <td class="covid-detail-data">
-
+                            <?php echo $data['personal']['name'] ?>
                             </td>
                         </tr>
 
@@ -78,80 +94,70 @@
 
 
                             <td class="covid-detail-data">
-
+                            <?php echo $data['personal']['dob'] ?>
                             </td>
                         </tr>
                     </table>
                 </div>
 
-
+            <?php if($data['antigen_tests']){?>
                 <!-- These are the vaccination details -->
 
                 <div class="covid-previous-details">
 
                     <div class="covid-tr covid-top-tr">
                         <div class="covid-th covid-td">Antigen ID </div>
-                        <div class="covid-th covid-td">Date</div>
                         <div class="covid-th covid-td">Hospital Id</div>
-                        <div class="covid-th covid-td">Result</div>
-                        <div class="covid-th covid-td">Comments</div>
+                        <div class="covid-th covid-td">Date</div>
+                        <div class="covid-th covid-td">Status</div>
+                        <div class="covid-th covid-td">Conducted Place</div>
                     </div>
 
+             
+                <?php
+                $antigen_tests = $data["antigen_tests"];
+                foreach ($antigen_tests as $antigen) :
+                ?>
 
-
-
+                <div class="antigen-rw">
                     <div class="covid-tr" data-bs-toggle="modal" data-bs-target="#antigen-result">
-                        <div class="covid-td">
-                            1
+                        <div class="covid-td" >
+                        <?php echo $antigen["id"] ?>
                         </div>
 
-                        <div class="covid-td">Dummy</div>
-
-                        <div class="covid-td">Dummy</div>
-
-                        <div class="covid-td">Pending</div>
-
-                        <div class="covid-td">Dummy</div>
-
-
-
-                    </div>
-
-
-                    <!-- TODO: add covid-bottom-tr class to the end of the table -->
-                    <div class="covid-tr covid-bottom-tr" data-bs-toggle="modal" data-bs-target="#antigen-result">
                         <div class="covid-td">
-                            1
+                        <?php echo $antigen["hospital_id"] ?>
                         </div>
 
-                        <div class="covid-td">Dummy</div>
-
-                        <div class="covid-td">Dummy</div>
-
                         <div class="covid-td">
-
-                            pending
-
-
-
+                        <?php echo $antigen["date"] ?>
                         </div>
 
-                        <div class="covid-td">Dummy</div>
+                        <div class="covid-td" >
+                        <?php echo $antigen["status"] ?>
+                        </div>
+
+                        <div class="covid-td" >
+                        <?php echo $antigen["place"] ?>
+                        </div>
+
+
 
 
 
                     </div>
                 </div>
+                    <?php endforeach; ?>
+
+                    <!-- TODO: add covid-bottom-tr class to the end of the table -->
+
+                </div>
 
 
-
-
-
-
-
+                <?php } else { ?>
 
                 <!-- This is the division to display if the search result not available -->
-                <div class="covid-details covid-no-result-div hidden">
+                <div class="covid-details covid-no-result-div">
 
                     <div class="covid-sad-face image-centered">
                         <img class="covid-sad-face-img" src="<?php echo URL_ROOT; ?>/public/images/sad-face.png" alt="">
@@ -163,7 +169,9 @@
                 </div>
 
 
+             <?php } ?>
             </div>
+            <?php } ?>
 
 
 
@@ -174,18 +182,18 @@
         <div class="modal fade" id="add-new-antigen" tabindex="-1" aria-labelledby="vac-forum" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
 
-                <form class="modal-content" method="POST" action="<?php echo URL_ROOT; ?>/pages/vaccination">
+                <form class="modal-content" method="POST" action="<?php echo URL_ROOT; ?>/pages/antigen">
                     <div class="modal-header covid-modal-header">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
-                        <h5 class="modal-title covid-modal-title" id="vac-forum">Antigen Test Forum</h5>
+                        <h5 class="modal-title covid-modal-title" id="antigen-forum">Antigen Test Forum</h5>
 
                     </div>
                     <div class="modal-body">
 
                         <div class="col-md-8 covid-input">
                             <label for="inputHealthID" class="form-label-primary label-primary covid-input-label">Patient's Health ID</label>
-                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-health-id" value='Patient HI'>
+                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-health-id" value="<?php echo $data['personal']['health_id']?>">
                         </div>
 
                         <div class="col-md-6 covid-input">
@@ -195,60 +203,15 @@
 
                         <div class="col-md-8 covid-input">
                             <label for="inputHospital" class="form-label-primary covid-input-label">Conducted Hospital</label>
-
-                            <!-- THis is the code for drop down -->
-                            <div class="select-box">
-                                <div class="options-container">
-
-                                    <!-- This is the code to add hospitals for the drop down list -->
-                                    <?php $counter = 0; ?>
-                                    <?php foreach ($data["hospitals"] as $hospital) : ?>
-
-                                        <div class="option">
-                                            <input type="radio" class="radio" id="inputOption<?php echo $counter; ?>" name="category" />
-                                            <label for="inputOption<?php echo $counter; ?>"><?php echo $hospital["name"] . ' - ' . $hospital["hospital_id"]; ?></label>
-                                        </div>
-
-                                    <?php
-
-                                        $counter++;
-
-                                    endforeach; ?>
-
-
-
-                                </div>
-
-                                <div class="selected">
-
-                                    <!-- This is the input that need to be grabed -->
-                                    <input type="text" class="selected-text" placeholder="Choose" maxlength="0" name="add-patient-antigen-hospital" required>
-
-                                </div>
-
-
-
-
-                                <div class="search-box">
-                                    <input type="text" placeholder="Start Typing..." />
-                                </div>
-                            </div>
-
-                            <!-- End of drop down -->
+                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-hospital" value="<?php echo $data['hospital_id']?>">                           
 
                         </div>
-
 
                         <div class="col-md-8 covid-input">
                             <label for="inputAntigenPlace" class="form-label-primary label-primary covid-input-label">Conducted Place</label>
                             <input type="text" class="form-control covid-input-field" id="inputAntigenPlace" name="add-patient-antigen-place" placeholder="(Optional)">
                         </div>
 
-
-                        <div class="col-md-8 covid-input">
-                            <label for="inputComments" class="form-label-primary label-primary covid-input-label"> <span class="covid-form-comment">Comments</span></label>
-                            <textarea class="form-control covid-input-field covid-textarea" id="inputComments" rows="4" placeholder="(Optional)" name="add-antigen-comment"></textarea>
-                        </div>
 
                     </div>
                     <div class="modal-footer covid-modal-footer">
@@ -259,11 +222,11 @@
         </div>
 
 
-        <!-- This is the model for updating result of antigen -->
-        <div class="modal fade" id="antigen-result" tabindex="-1" aria-labelledby="vac-forum" aria-hidden="true">
+        <!-- This is the model for updating result of Antigen -->
+        <div class="modal fade" id="antigen-result" tabindex="-1" aria-labelledby="antigen-forum" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-md">
 
-                <form class="modal-content" method="POST" action="<?php echo URL_ROOT; ?>/pages/vaccination">
+                <form class="modal-content" method="POST" action="<?php echo URL_ROOT; ?>/pages/antigen">
 
                 <div class="modal-header test-toggle-modal-header">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -274,10 +237,19 @@
                             <label for="togBtn" class="form-label label test-toggle-label">Antigen Test result</label>
                             </label>
 
+                        <!-- backend purposes only -->
+                        <input type="text" name="final-id" id="hidden-antigen-id" hidden>
+                        <input type="text" name="final-hid" id="hidden-antigen-hid" hidden>
+                        <input type="text" name="final-htid" id="hidden-antigen-htid" hidden value="<?php echo $data['personal']['health_id'] ?>">
+                        <input type="text" name="final-date" id="hidden-antigen-date" hidden>
+                        <input type="text" name="final-place" id="hidden-antigen-place" hidden>
+                        <input type="text" name="final-status" id="hidden-antigen-status" hidden>
+                        
+
                             <!-- This is the code to toggle button -->
                             <div class="form-control test-toggle-input">
                                 <label class="switch">
-                                    <input type="checkbox" class="toggle-input" id="togBtn">
+                                    <input type="checkbox" class="toggle-input" id="antigen-togBtn">
                                     <div class="slider round">
                                         <!--ADDED HTML -->
                                         <span class="on toggle-font" >Possitive</span>
@@ -288,15 +260,12 @@
 
                             </div>
 
-
-
-
-
+                    
                         </div>
 
                     </div>
                     <div class="modal-footer test-toggle-footer">
-                        <button type="submit" class="btn btn-primary test-toggle-submit-btn" name="add-patient-submit">Update</button>
+                        <button type="submit" class="btn btn-primary antigen-toggle-submit-btn" name="update-patient-submit" id="antigen-update-btn">Update</button>
                     </div>
                 </form>
             </div>
@@ -304,7 +273,25 @@
 
     </section>
 
-
     <script src="<?php echo URL_ROOT; ?>/public/script/test.js"></script>
+    <script src="<?php echo URL_ROOT; ?>/public/script/antigen.js"></script>
 
 </body>
+
+
+<?php 
+
+if(isset($_GET['updated']) && $data['notification']!=[]){
+    ini_set('display_errors',1);
+    error_reporting(E_ALL);
+    
+    $from = "squ4doption@gmail.com";
+    $to = $data['notification'][0];
+    $subject = $data['notification'][1];
+    $txt = $data['notification'][2];
+    $headers = "From: ".$from ;
+    
+    mail($to,$subject,$txt,$headers);
+}
+
+?>

@@ -40,25 +40,33 @@
         public function get_hospital_id() {
             return $this->hospital_id;
         }
+
+        public function get_place() {
+            return $this->place;
+        }
     
         public function set_id(int $id) {
-            $this->$id = $id;
+            $this->id = $id;
         }
     
         public function set_health_id($health_id) {
-            $this->$health_id = $health_id;
+            $this->health_id = $health_id;
         }
     
         public function set_date($date) {
-            $this->$date = $date;
+            $this->date = $date;
         }
     
         public function set_status($status) {
-            $this->$status = $status;
+            $this->status = $status;
         }
     
         public function set_hospital_id($hospital_id) {
-            $this->$hospital_id = $hospital_id;
+            $this->hospital_id = $hospital_id;
+        }
+
+        public function set_place($place) {
+            $this->place = $place;
         }
     }
     
