@@ -2,10 +2,12 @@
     class UserHandler{
 
         private $db;
+        private $hos_handler;
         
         public function __construct()
         {
             $this->db = new DataBaseWrapper();
+            $this->hos_handler = new RegistrationHandler();
         }
 
         public function add_user($user){
@@ -41,8 +43,47 @@
                 $count++;
             }
             return $result_set;
+        }
 
+        public function load_loggedin_user(){
+            $hospital_id = $_SESSION['hospital_id'];
+            $user_id = $_SESSION['userID'];
+           
+            $user_details = $this->db->findByHosID_nd_UserID("users",$hospital_id,$user_id)[0];
+            $hos_details =  $this->hos_handler->get_hospital($hospital_id);
+            $user_details["hospital_name"] = $hos_details["name"];
+            return $user_details;
+        }
 
+        public function update_user_details($param_list){
+            $data = [];
+            if ($this->db->safe($param_list['name']) && $this->db->safe($param_list['email'])) {
+                $data['user_name'] = $param_list['name'];
+                $data['user_email'] = $param_list['email'];
+                $data['user_id'] = $_SESSION['userID'];
+                
+                return $this->db->update('users','user_id',$data);
+            } else {
+                die("You have been hacked:))");
+            }
+        }
+
+        public function update_password_details($param_list){
+            $errors = "";
+            $data = [];
+            if ($this->db->safe($param_list['old_password']) && $this->db->safe($param_list['new_password']) && $this->db->safe($param_list['confirm_password'])) {
+                $password = $this->db->findById("users",'user_id',$_SESSION['userID'])[0]["password"];
+                if (password_verify($param_list['old_password'], $password)) {
+                    $data['password'] = password_hash($param_list['new_password'], PASSWORD_DEFAULT);
+                    $data['user_id'] = $_SESSION['userID'];
+                    $this->db->update('users','user_id',$data);
+                } else {
+                    $errors = "Your current password is incorrect.";
+                }
+            } else {
+                die("You have been hacked:))");
+            }
+            return $errors;
         }
 
         private function findByMail($email){
@@ -54,8 +95,7 @@
         public function log_in($useremail,$password){
             $password = $this->db->safe($password);
             $loggedin_user = $this->findByMail($useremail);
-
-            if($loggedin_user && password_verify($password,$loggedin_user["password"])){
+            if($loggedin_user && password_verify($password,$loggedin_user["password"]) && $loggedin_user['hospital_id']==$_SESSION['hospital_id']){
                 session_regenerate_id();
                 $_SESSION["is_admin"] = $loggedin_user["is_admin"];
                 $_SESSION["useremail"] = $loggedin_user["user_email"];

@@ -6,9 +6,8 @@ class Pages extends Controller
 
     public function __construct()
     {
-        $this->admin_model = $this->model('Administrator');  //create admin object
         $this->hospital_loader_model =  $this->model('RegistrationHandler');
-        $this->operator_model = $this->model('Operator'); // Create Operator object
+        $this->operator_model = $this->model('Operator'); // Create Operator object /// do we still need this ??
         $this->record_factory = Factory::getFactory("RecordFactory");
         $this->center_factory = Factory::getFactory("CentersFactory");
         $this->user_handler= $this->model('UserHandler');
@@ -364,14 +363,14 @@ class Pages extends Controller
         //Check whether users array is updated
         if (isset($_POST["users"])) {
             // if yes, update database
-            $this->admin_model->update_user_details($_POST["users"]);
+            $this->user_handler->update_user_details($_POST["users"]);
         } //Check whether passwords array is updated
         else if (isset($_POST['password-changed'])) {
             // if yes, take the errors
-            $errors = $this->admin_model->update_password_details($_POST["passwords"]);
+            $errors = $this->user_handler->update_password_details($_POST["passwords"]);
         }
         //Retrieve details from the database
-        $records = $this->admin_model->load_user_details();
+        $records = $this->user_handler->load_loggedin_user();
 
         if (strlen($errors) !== 0) {
             $records['errors'] = $errors;
