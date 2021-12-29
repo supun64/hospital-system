@@ -10,6 +10,7 @@ class Core{
 
     public function __construct()
     {
+        session_start();
         $url = $this->getUrl();
       
         //if the controller exits in controllers foldeer

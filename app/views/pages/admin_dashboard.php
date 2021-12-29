@@ -11,12 +11,12 @@
             <li class="dashboard-list">
                 <div class="dashboard-icon"><i class='bx bx-user-circle' style='color:#fff6f6'  ></i></div>
                 <div class="dashboard-user-credentials">
-                    <div class="hospital-name">HOSPITAL NAME</div>
-                    <div class="user-name">USER NAME</div>
+                    <div class="hospital-name"><?=strtoupper($_SESSION['hospitalname'])?></div>
+                    <div class="user-name"><?=strtoupper($_SESSION['username'])?></div>
                 </div>
             </li>
             <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Home">
-                <a href="<?= URL_ROOT ?>/pages/home" class="option">
+                <a href="<?= URL_ROOT ?>/pages/index" class="option">
                     <span class="dashboard-link-icon"><i class='bx bxs-home' ></i></span>
                     <span class="text">Home</span>
                 </a>
@@ -40,7 +40,7 @@
                 </a>
             </li>
             <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Log Out">
-                <a href="#" class="option">
+                <a href="<?= URL_ROOT ?>/pages/logout" class="option">
                     <span class="dashboard-link-icon"><i class='bx bx-log-out-circle bx-flip-horizontal'  ></i></span>
                     <!--<span class="text">Log Out</span>-->
                 </a>

@@ -79,9 +79,13 @@
                                                         <input type="text" class="form-control" id="floatingInput" placeholder="Health ID"name="newrecord[health_id]" value="<?=$record['health_id']?>" disabled>
                                                         <label for="floatingInput">Health ID</label>
                                                     </div>
-                                                    <div class="form-floating">
+                                                    <div class="form-floating mb-3">
                                                         <input type="text" class="form-control" id="floatingPassword" placeholder="Test status" name="newrecord[status]" value="<?=$record['status']?>">
                                                         <label for="floatingPassword">Test Status</label>   
+                                                    </div>
+                                                    <div class="form-floating mb-3">
+                                                        <input type="text" class="form-control" id="floatingPassword" placeholder="Place" name="newrecord[place]" value="<?=$record['place']?>">
+                                                        <label for="floatingPassword">Place</label>   
                                                         </div>
                                                     </div>
                                                     <input type="hidden" name="newrecord[id]" value="<?=$record['id']?>">
