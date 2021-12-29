@@ -7,7 +7,6 @@ class Pages extends Controller
     public function __construct()
     {
         $this->hospital_loader_model =  $this->model('RegistrationHandler');
-        $this->operator_model = $this->model('Operator'); // Create Operator object /// do we still need this ??
         $this->record_factory = Factory::getFactory("RecordFactory");
         $this->center_factory = Factory::getFactory("CentersFactory");
         $this->user_handler = $this->model('UserHandler');
@@ -151,7 +150,6 @@ class Pages extends Controller
         $death_center = $this->center_factory->get_center('covid_deaths');
         $data = [];
         $data['hospital_id'] = $death_center->get_hospital_id();
-        var_dump($data);
         if (isset($_POST["death-search-bar-input"])) {
             $id = $_POST["death-search-bar-input"]; // TO get the search input
             $citizen = $death_center->get_citizen($id);
@@ -184,7 +182,6 @@ class Pages extends Controller
             ];
 
             $new_death = $this->record_factory->get_record('covid_deaths', $death_details);
-            var_dump($new_death);
             if ($death_center->add_record($new_death)) {
                 header('location:' . URL_ROOT . '/pages/death?success');
             } else {
