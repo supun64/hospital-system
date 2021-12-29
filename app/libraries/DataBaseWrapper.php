@@ -91,17 +91,26 @@
             }else{
                 die("Something went wrong");
             }
-            
         }
 
-    public function register($hos_id){
-        $sql = "UPDATE hospitals SET is_registered = 1 WHERE hospital_id = $hos_id";
-        return $this->db->sql_execute($sql);
-        
-    }
+        public function findByHosID_nd_UserID($table,$hospital_id,$user_id){
+            if(is_int($hospital_id) || $this->db->safe($hospital_id)){
+                $sql = "SELECT * FROM `".$table."` WHERE hospital_id = $hospital_id and user_id = $user_id";
+                $this->db->sql_execute($sql);
+                return $this->db->result_set();
+                
+            }else{
+                die("Something went wrong");
+            }
+        }
 
-    function safe($value){
-        return $this->db->safe($value);
-    }
+        public function register($hos_id){
+            $sql = "UPDATE hospitals SET is_registered = 1 WHERE hospital_id = $hos_id";
+            return $this->db->sql_execute($sql);
+        }
+
+        function safe($value){
+            return $this->db->safe($value);
+        }
 }
 ?>
