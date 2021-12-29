@@ -525,6 +525,11 @@ body {
   display: flex;
 }
 
+#covid_death-add{
+  position: relative;
+  float: right;
+}
+
 .covid-search {
   position: relative;
 

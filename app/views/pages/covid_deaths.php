@@ -1,7 +1,6 @@
 <?php require APP_ROOT . '/views/includes/header.php';  ?>
 
 <body>
-
     <section class="main-info">
 
         <!-- covid-shrunk-search class should add after the search -->
@@ -12,22 +11,18 @@
             </div>
 
             <form class="form mb-3 covid-search-div" method="POST" action="<?php echo URL_ROOT; ?>/pages/covid_deaths">
-
-                <input type="text" class="covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter health ID here" name="death-search-bar-input" required>
-
+                <input type="text" class="covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter health ID here" name="death-search-bar-input" value="<?= isset($_POST['death-search-bar-input'])?$_POST['death-search-bar-input']:""?>"required>
                 <input type="submit" class="btn btn-primary" id="covid-search-btn" name="death-search" value="Search">
-
             </form>
 
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-death">Add a Death +</button>
+            <button class="btn btn-primary" id = "covid_death-add" data-bs-toggle="modal" data-bs-target="#add-new-death">Add a Death +</button>
 
         </div>
-
+        <?php if (isset($data["death"])) : ?>
         <!-- Add addmination-fade-in-pre-state to add the animation -->
         <div class="covid-search-result" id="covid-search-result-section">
             <!-- This is what should display after search -->
-            <?php if (isset($data["death"])) : ?>
-
+            
                 <!-- This is the division to display if the search result available -->
                 <div class="covid-details">
 
@@ -125,12 +120,14 @@
                             </tr>
                         </table>
                     </div>
+                </div>
+            </div>
                 <?php
 
             elseif (isset($data["personal"])) : ?>
 
                     <!-- This is the division to display if the search result not available -->
-                    <div class="covid-details covid-no-result-div">
+                    <div class="covid-details covid-no-result-div covid-search-result">
 
                         <div class="covid-sad-face image-centered">
                             <img class="covid-sad-face-img" src="<?php echo URL_ROOT; ?>/public/images/sad-face.png" alt="">
@@ -140,21 +137,24 @@
                         </p>
 
                     </div>
-                <?php else : ?>
+                </div>
+            </div>
+                <?php elseif (isset($data["hospital_id"])) : ?>
                     <!-- This is the division to display if the search result not available -->
-                    <div class="covid-details covid-no-result-div">
+                    <div class="covid-details covid-no-result-div covid-search-result">
 
                         <div class="covid-sad-face image-centered">
                             <img class="covid-sad-face-img" src="<?php echo URL_ROOT; ?>/public/images/sad-face.png" alt="">
                         </div>
                         <p class="covid-no-result-message">
-                            Wrong Health ID
+                            <?= isset($data['error'])?$data['error']:"Wrong Health ID";?>
                         </p>
 
                     </div>
-                <?php endif ?>
                 </div>
-        </div>
+            </div>
+                <?php endif ?>
+        
 
         <!-- This is the UI modal for add new vaccinated person -->
         <div class="modal fade" id="add-new-death" tabindex="-1" aria-labelledby="death-form" aria-hidden="true">
@@ -171,7 +171,7 @@
 
                         <div class="col-md-8 covid-input">
                             <label for="inputHealthID" class="form-label-primary label-primary covid-input-label">Health ID</label>
-                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-death-health-id" value="<?= isset($data["personal"]) ? $data['personal']['health_id'] : "" ?>">
+                            <input type="text"  class="form-control form-control-sm" id="inputHealthID" name="add-death-health-id" value="<?= isset($data["personal"]) ? $data['personal']['health_id'] : "" ?>">
                         </div>
 
                         <div class=" col-md-6 covid-input">
@@ -181,7 +181,7 @@
 
                         <div class="col-md-8 covid-input">
                             <label for="inputHospital" class="form-label-primary covid-input-label">Hospital ID</label>
-                            <input type="text" readonly class="form-control form-control-sm" id="inputHospital" name="add-death-hospital" value="<?= $_SESSION["hospital_id"] ?>">
+                            <input type="text"  readonly class="form-control form-control-sm" id="inputHospital" name="add-death-hospital" value="<?= $_SESSION["hospital_id"] ?>">
                         </div>
 
                         <div class="col-md-8 covid-input">

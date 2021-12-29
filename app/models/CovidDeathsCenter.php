@@ -66,6 +66,9 @@ class CovidDeathsCenter extends COVID_Department
         return $result_set;
     }
 
+    public function isexist_user_id($health_id){
+        return $this->db->find('covid_deaths','health_id',$health_id)?true:false;
+    }
     public function to_array($record_obj)
     {
         return [

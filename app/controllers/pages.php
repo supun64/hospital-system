@@ -150,10 +150,14 @@ class Pages extends Controller
 
         $death_center = $this->center_factory->get_center('covid_deaths');
         $data = [];
-        $data['hospital_id'] = $death_center->get_hospital_id();
-        var_dump($data);
-        if (isset($_POST["death-search-bar-input"])) {
-            $id = $_POST["death-search-bar-input"]; // TO get the search input
+        if (isset($_POST["death-search-bar-input"]) || isset($_GET['updated'])) {
+            $data['hospital_id'] = $death_center->get_hospital_id();
+            if(isset($_GET['updated'])){
+                $id = $_GET['updated'];
+            }else{
+                $id = $_POST["death-search-bar-input"]; // TO get the search input
+            }
+            
             $citizen = $death_center->get_citizen($id);
             if ($citizen != NULL) {
 
@@ -164,8 +168,9 @@ class Pages extends Controller
                 $data['death'] =   ['date' => $death_records->get_date(), 'place' => $death_records->get_place(), 'comments' => $death_records->get_comments()];    //array list of user details
             }
 
-            if (!$data['personal']) {
-                header('location:' . URL_ROOT . '/pages/covid_deaths?not-user');
+            if(isset($data['personal'])){
+                $this->view('/pages/covid_deaths', $data);
+                return;
             }
             $this->view('/pages/covid_deaths', $data);
         }
@@ -173,6 +178,7 @@ class Pages extends Controller
         if (isset($_POST["add-death-submit"])) {
 
             $hospital_id = $death_center->get_hospital_id();
+            $data['hospital_id']=$hospital_id;
 
             $death_details = [
                 "id" => NULL,
@@ -183,13 +189,21 @@ class Pages extends Controller
                 "comments" => $_POST["add-death-comments"]
             ];
 
-            $new_death = $this->record_factory->get_record('covid_deaths', $death_details);
-            var_dump($new_death);
-            if ($death_center->add_record($new_death)) {
-                header('location:' . URL_ROOT . '/pages/death?success');
-            } else {
-                die("Something went wrong");
+            $is_citizen =$death_center->get_citizen($death_details['health_id']);
+            if($is_citizen && !$death_center->isexist_user_id($death_details['health_id'])){
+                $new_death = $this->record_factory->get_record('covid_deaths', $death_details);
+                
+                if ($death_center->add_record($new_death)) {
+                    header('location:' . URL_ROOT . '/pages/covid_deaths?updated='.$_POST["add-death-health-id"]);
+                } else {
+                    die("Something went wrong");
+                }
+            }else{
+                $data['error']=!$is_citizen?"Invalid UserID":"Overriding an existing record is prohibitted.";
+                $this->view('/pages/covid_deaths',$data);
+                return;
             }
+            
         }
         $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/covid_deaths');
     }
