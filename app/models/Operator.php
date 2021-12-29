@@ -33,9 +33,11 @@ public function load_vaccination($id){
     return $records;
 }
 
+
 // public function load_hospitals(){
 //     $sql = "SELECT hospital_id,name FROM hospitals WHERE is_registered=1";
 //     $this->db->sql_execute($sql);
+
 
 //     $hospitals = $this->db->result_set();
 

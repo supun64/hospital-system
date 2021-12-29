@@ -38,7 +38,7 @@ body {
 
 .index-body {
   background: rgb(255,255,255);
-  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(156,45,212,1) 50%);
+  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, #0d6dfd 50%);
 }
 
 .index-main{
@@ -102,7 +102,7 @@ body {
   outline: none;
   height: 50px;
   width: 100%;
-  background-color: rgba(156,45,212,1);
+  background-color: #0d6dfd;
   color: white;
   border-radius: 4px;
   font-weight: bold;
@@ -116,8 +116,8 @@ body {
 
 .index-btn1:hover {
   background: white;
-  border: 1px solid rgba(156,45,212,1);
-  color: rgba(156,45,212,1);
+  border: 1px solid #0d6dfd;
+  color: #0d6dfd;
 
   transition-duration: 0.2s;
 }
