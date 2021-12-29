@@ -32,11 +32,7 @@
         public function get_status() {
             return $this->status;
         }
-
-        public function get_place() {
-            return $this->place;
-        }
-    
+  
         public function get_hospital_id() {
             return $this->hospital_id;
         }
