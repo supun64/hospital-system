@@ -174,6 +174,8 @@ class Pages extends Controller
             if(isset($data['personal'])){
                 $this->view('/pages/covid_deaths', $data);
                 return;
+            }else{
+                header('location:' . URL_ROOT . '/pages/covid_deaths?not-user');
             }
             $this->view('/pages/covid_deaths', $data);
         }

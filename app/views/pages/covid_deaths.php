@@ -1,5 +1,14 @@
 <?php require_once APP_ROOT."/views/pages/user_dashboard.php"?>
+
 <div class= 'sub-division'>
+
+<?php 
+if(isset($_GET['not-user'])){?>
+    <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert" >
+        <div class="deo-manage-error-text"> Wrong Health ID !!</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php } ?>
 
 <section class="main-info">
 
@@ -134,20 +143,6 @@
                 </div>
                 <p class="covid-no-result-message">
                     No search results found
-                </p>
-
-            </div>
-        </div>
-    </div>
-        <?php elseif (isset($data["hospital_id"])) : ?>
-            <!-- This is the division to display if the search result not available -->
-            <div class="covid-details covid-no-result-div covid-search-result">
-
-                <div class="covid-sad-face image-centered">
-                    <img class="covid-sad-face-img" src="<?php echo URL_ROOT; ?>/public/images/sad-face.png" alt="">
-                </div>
-                <p class="covid-no-result-message">
-                    <?= isset($data['error'])?$data['error']:"Wrong Health ID";?>
                 </p>
 
             </div>
