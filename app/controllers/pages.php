@@ -21,6 +21,11 @@ class Pages extends Controller
         $_SESSION["is_admin"] ? $this->view('/pages/admin_home') : $this->view('/pages/user_dashboard');
     }
 
+    public function home()
+    {
+        $_SESSION["is_admin"]?header('location:'.URL_ROOT.'/pages/index'):$this->view('/pages/home');
+    }
+
     public function antigen()
     {
         $data['personal'] = [];
