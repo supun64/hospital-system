@@ -1,8 +1,8 @@
-<?php 
-if($_SESSION['is_admin']){
-    require_once APP_ROOT . "/views/pages/admin_dashboard.php" ;
-}else{
-    require_once APP_ROOT . "/views/pages/user_dashboard.php" ;
+<?php
+if ($_SESSION['is_admin']) {
+    require_once APP_ROOT . "/views/pages/admin_dashboard.php";
+} else {
+    require_once APP_ROOT . "/views/pages/user_dashboard.php";
 }
 
 ?>
@@ -20,29 +20,41 @@ if($_SESSION['is_admin']){
         data.addColumn('number', 'Covid Cases');
         data.addColumn('number', 'Covid Deaths');
 
-        data.addRows([                                              
-   
+        data.addRows([
 
-            <?php $count =1;?>
-            <?php foreach($data['monthly_result'] as $monthly_res){
-                $date = explode('-',$monthly_res['date'])[2];
-            echo "[".$date.",".$monthly_res['addmit'].",".$monthly_res['death']."],";
-            
-            $count++;
+
+            <?php $count = 1; ?>
+            <?php foreach ($data['monthly_result'] as $monthly_res) {
+                $date = explode('-', $monthly_res['date'])[2];
+                echo "[" . $date . "," . $monthly_res['addmit'] . "," . $monthly_res['death'] . "],";
+
+                $count++;
             }
             ?>
 
         ]);
         const d = new Date();
         var year = d.getFullYear();
-        var month = d.toLocaleString('default', { month: 'long' });
+        var month = d.toLocaleString('default', {
+            month: 'long'
+        });
 
         var options = {
- 
-            'title': "Daily Covid results (" + year +"/" + month +")",               
-            'width': 800,
+
+            'title': "Daily Covid Results (" + year + "/" + month + ")",
+            'width': 700,
             'height': 500,
-            backgroundColor: {fill:'transparent'},
+
+            'chartArea': {
+                'width': '75%',
+                'height': '70%'
+            },
+            'legend': {
+                'position': 'bottom'
+            },
+            backgroundColor: {
+                fill: 'transparent'
+            },
 
             hAxis: {
                 title: 'Day',
@@ -121,8 +133,78 @@ if($_SESSION['is_admin']){
 
             </header>
 
-            <section calss="daily-chart">
-                <div id="chart_div" class="home-graph"></div>
+            <section calss="containter">
+                <div class="row home-daily-chart">
+                    <div id="chart_div" class="home-graph col"></div>
+
+                    <!-- Last 24 hours update -->
+                    <div class="col-3 home-status">
+
+                        <header class="row home-stat-header">
+                            <span class="home-stat-title">
+                                COVID STATICTICS
+                            </span>
+                            <span class="home-stat-subtitle">
+                                    Last 24 hours
+                            </span>
+
+                        </header>
+
+                        <!-- Code for new covid cases stat -->
+                        <div class="home-cases-stat row">
+
+                            <div class="col-4">
+                                <img src="<?php echo URL_ROOT; ?>/public/images/new-cases.gif" class="home-stat-icon" alt="new cases">
+
+                            </div>
+
+                            <div class="col">
+                                <span class="home-stat-labal">New Cases <br>
+                                    <h3 class="text-primary">400</h3>
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <!-- Code for new covid deaths stats -->
+                        <div class="home-cases-stat row">
+
+                            <div class="col-4">
+                                <img src="<?php echo URL_ROOT; ?>/public/images/new-deaths.gif" class="home-stat-icon" alt="new cases">
+
+                            </div>
+
+                            <div class="col">
+                                <span class="home-stat-labal">Deaths <br>
+                                    <h3 class="text-danger">69</h3>
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <!-- Code for new covid recoveries stats -->
+                        <div class="home-cases-stat row">
+
+                            <div class="col-4">
+                                <img src="<?php echo URL_ROOT; ?>/public/images/recovered.gif" class="home-stat-icon" alt="new cases">
+
+                            </div>
+
+                            <div class="col">
+                                <span class="home-stat-labal">Recovered <br>
+                                    <h3 class="text-success">96</h3>
+                                </span>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
             </section>
 
 
