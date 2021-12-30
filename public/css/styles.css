@@ -866,8 +866,13 @@ body {
 }
 
 /* Charts */
+
+.home-daily-chart{
+  margin: 0;
+}
+
 .home-graph{
-  width: fit-content;
+  width: 70%;
   padding: 10px;
 
   margin-top: 30px;
@@ -880,6 +885,55 @@ body {
   backdrop-filter: blur(1px);
 }
 
+.home-status{
+  height: 521px;
+
+  padding: 10px;
+
+  margin-left: 20px;
+  margin-top: 30px;
+
+  border-radius: 10px;
+  background-color: #ddf2fcc7;
+
+  border: 1px solid black;
+
+  backdrop-filter: blur(1px);
+
+
+}
+
+.home-stat-header{
+  margin-bottom: 50px;
+}
+
+.home-stat-title{
+  font-size: 14pt;
+  font-weight: bold;
+
+  letter-spacing: 3px;
+}
+
+.home-stat-subtitle{
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.home-cases-stat{
+  margin: 70px 0;
+}
+
+.home-stat-icon{
+  width: 70px;
+  height: auto;
+}
+
+.home-stat-labal{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12pt;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
 
 
 
