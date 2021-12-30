@@ -269,9 +269,15 @@ body {
   margin-right: 25px;
 }
 
-.dashboard-side-bar li:nth-child(8) {
+/* .dashboard-side-bar li:nth-child(8) {
   margin-bottom: 120px;
+} */
+
+.dashboard-side-bar li:last-child{
+  position: absolute;
+  bottom: 53px;
 }
+
 
 .admin-settings{
   margin-bottom: 280px;

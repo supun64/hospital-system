@@ -55,18 +55,20 @@ background-attachment: fixed;">
                 </a>
             </li>
 
+            <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Settings">
+                <a href="<?= URL_ROOT ?>/pages/settings" class="option">
+                    <span class="dashboard-link-icon"><i class='bx bx-cog'></i></span>
+                    <span class="text">Settings</span>
+                </a>
+            </li>
+
             <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Log Out">
                 <a href="<?= URL_ROOT ?>/users/logout" class="option">
                     <span class="dashboard-link-icon"><i class='bx bx-log-out-circle bx-flip-horizontal'  ></i></span>
                     <span class="text">Log Out</span>
                 </a>
             </li>
-            <li class="dashboard-list admin-settings" data-toggle="tooltip" data-placement="right" title="Settings">
-                <a href="<?= URL_ROOT ?>/pages/settings" class="option">
-                    <span class="dashboard-link-icon"><i class='bx bx-cog'></i></span>
-                    <span class="text">Settings</span>
-                </a>
-            </li>
+            
             
         </ul>
     </div>
