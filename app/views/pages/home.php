@@ -16,7 +16,7 @@ if ($_SESSION['is_admin']) {
 
     function drawCurveTypes() {
         var data = new google.visualization.DataTable();
-        data.addColumn('number', 'X')
+        data.addColumn('string', 'X')
         data.addColumn('number', 'Covid Cases');
         data.addColumn('number', 'Covid Deaths');
 
@@ -26,7 +26,7 @@ if ($_SESSION['is_admin']) {
             <?php $count = 1; ?>
             <?php foreach ($data['monthly_result'] as $monthly_res) {
                 $date = explode('-', $monthly_res['date'])[2];
-                echo "[" . $date . "," . $monthly_res['addmit'] . "," . $monthly_res['death'] . "],";
+                echo "['" . $monthly_res['date'] . "'," . $monthly_res['addmit'] . "," . $monthly_res['death'] . "],";
 
                 $count++;
             }
@@ -65,14 +65,10 @@ if ($_SESSION['is_admin']) {
                 fill: 'transparent'
             },
 
-            hAxis: {
-                title: 'Day',
-                format: '0',
+            pointSize: 5,
 
-                viewWindow: {
-                    min: 1,
-                    max: 31
-                }
+            hAxis: {
+                title: 'Date',
             },
             vAxis: {
                 title: '',
@@ -80,11 +76,6 @@ if ($_SESSION['is_admin']) {
                     min: 0
                 },
                 format: '0'
-            },
-            series: {
-                1: {
-                    curveType: 'function'
-                }
             }
         };
 
