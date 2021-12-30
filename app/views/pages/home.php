@@ -82,6 +82,112 @@ if ($_SESSION['is_admin']) {
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         chart.draw(data, options);
     }
+
+    // This is the function to draw pie chart
+    google.charts.setOnLoadCallback(drawChart);
+
+    
+    function drawChart() {
+
+        
+
+        var data = google.visualization.arrayToDataTable([
+            ['Case Name', 'Count'],
+            ['Recovered', 20],
+            ['Active Cases', 11],
+            ['Deaths', 2]
+        ]);
+
+        var options = {
+            'width': 700,
+            'height': 500,
+
+            'chartArea': {
+                'width': '75%',
+                'height': '70%'
+            },
+            'legend': {
+                'position': 'bottom'
+            },
+            backgroundColor: {
+                fill: 'transparent'
+            },
+
+            title: 'Total Covid Results',
+            slices: {1: {color: "#0d6efd"}, 0: {color: "#20c997"}, 2: {color: "#dc3545"}}
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+    }
+
+
+    // This is the code to draw the column chart
+    google.charts.setOnLoadCallback(drawStuff);
+
+      function drawStuff() {
+
+        var button = document.getElementById('change-chart');
+        var chartDiv = document.getElementById('col_chart');
+
+        var data = google.visualization.arrayToDataTable([
+          ['Galaxy', 'Distance', 'Brightness'],
+          ['Canis Major Dwarf', 8000, 23.3],
+          ['Sagittarius Dwarf', 24000, 4.5],
+          ['Ursa Major II Dwarf', 30000, 14.3],
+          ['Lg. Magellanic Cloud', 50000, 0.9],
+          ['Bootes I', 60000, 13.1]
+        ]);
+
+        var materialOptions = {
+          width: 900,
+          chart: {
+            title: 'Nearby galaxies',
+            subtitle: 'distance on the left, brightness on the right'
+          },
+          series: {
+            0: { axis: 'distance' }, // Bind series 0 to an axis named 'distance'.
+            1: { axis: 'brightness' } // Bind series 1 to an axis named 'brightness'.
+          },
+          axes: {
+            y: {
+              distance: {label: 'parsecs'}, // Left y-axis.
+              brightness: {side: 'right', label: 'apparent magnitude'} // Right y-axis.
+            }
+          }
+        };
+
+        var classicOptions = {
+          width: 900,
+          series: {
+            0: {targetAxisIndex: 0},
+            1: {targetAxisIndex: 1}
+          },
+          title: 'Nearby galaxies - distance on the left, brightness on the right',
+          vAxes: {
+            // Adds titles to each axis.
+            0: {title: 'parsecs'},
+            1: {title: 'apparent magnitude'}
+          }
+        };
+
+        function drawMaterialChart() {
+          var materialChart = new google.charts.Bar(chartDiv);
+          materialChart.draw(data, google.charts.Bar.convertOptions(materialOptions));
+          button.innerText = 'Change to Classic';
+          button.onclick = drawClassicChart;
+        }
+
+        function drawClassicChart() {
+          var classicChart = new google.visualization.ColumnChart(chartDiv);
+          classicChart.draw(data, classicOptions);
+          button.innerText = 'Change to Material';
+          button.onclick = drawMaterialChart;
+        }
+
+        drawMaterialChart();
+    };
 </script>
 
 </head>
@@ -134,6 +240,8 @@ if ($_SESSION['is_admin']) {
             </header>
 
             <section calss="containter">
+
+                <!-- Row - 1 Daily update and daily stats -->
                 <div class="row home-daily-chart">
                     <div id="chart_div" class="home-graph col"></div>
 
@@ -145,7 +253,7 @@ if ($_SESSION['is_admin']) {
                                 COVID STATICTICS
                             </span>
                             <span class="home-stat-subtitle">
-                                    Last 24 hours
+                                Last 24 hours
                             </span>
 
                         </header>
@@ -200,6 +308,84 @@ if ($_SESSION['is_admin']) {
 
 
                     </div>
+
+                </div>
+
+                <!-- Row - 2 Pie chart and total stats -->
+
+                <div class="row home-daily-chart">
+                    <div id="piechart" class="home-graph col"></div>
+
+                    <!-- Last 24 hours update -->
+                    <div class="col-3 home-status">
+
+                        <header class="row home-stat-header">
+                            <span class="home-stat-title">
+                                COVID STATICTICS
+                            </span>
+                            <span class="home-stat-subtitle">
+                                Overall - Sri Lanka
+                            </span>
+
+                        </header>
+
+                        <!-- Code for new covid cases stat -->
+                        <div class="home-cases-stat row">
+
+                            <div class="col-4">
+                                <img src="<?php echo URL_ROOT; ?>/public/images/new-cases.gif" class="home-stat-icon" alt="new cases">
+
+                            </div>
+
+                            <div class="col">
+                                <span class="home-stat-labal">Total Cases <br>
+                                    <h3 class="text-primary">400</h3>
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <!-- Code for new covid deaths stats -->
+                        <div class="home-cases-stat row">
+
+                            <div class="col-4">
+                                <img src="<?php echo URL_ROOT; ?>/public/images/new-deaths.gif" class="home-stat-icon" alt="new cases">
+
+                            </div>
+
+                            <div class="col">
+                                <span class="home-stat-labal">Deaths<br>
+                                    <h3 class="text-danger">69</h3>
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <!-- Code for new covid recoveries stats -->
+                        <div class="home-cases-stat row">
+
+                            <div class="col-4">
+                                <img src="<?php echo URL_ROOT; ?>/public/images/recovered.gif" class="home-stat-icon" alt="new cases">
+
+                            </div>
+
+                            <div class="col">
+                                <span class="home-stat-labal">Recovered <br>
+                                    <h3 class="text-success">96</h3>
+                                </span>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <!-- Row - 3 Draw column chart -->
+
+                <div class="row home-daily-chart">
+                    <div id="col_chart" class="home-graph col"></div>
 
                 </div>
 
