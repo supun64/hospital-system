@@ -67,7 +67,7 @@
 
     <div class='sub-division'>
 
-        <main class="home-main">
+        <main class="sub-division-main">
             <header class="home-header">
                 <div class="home-header-title">
                     <img src="<?php echo URL_ROOT; ?>/public/images/SquadOption-logo.png" class="squadoption-logo">

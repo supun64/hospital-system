@@ -298,6 +298,10 @@ body {
   
 }
 
+.sub-division-user{
+  width: 81%;
+}
+
 @media screen and (max-width: 1200px) {
   
   .sub-division{
@@ -820,17 +824,7 @@ body {
 
 
 /* Home page --------------------------------------------------------- */
-.home-main{
-  margin-top: 10px;
 
-  padding: 30px;
-  background-color: rgba(24, 97, 255, 0.144);
-
-  backdrop-filter: blur(2px);
-
-  border-radius: 10px;
-
-}
 
 .home-carousel{
   background-color: white;
@@ -908,6 +902,21 @@ body {
 -
 -
 */
+
+/* General css for dash board */
+.sub-division-main{
+  margin-top: 10px;
+
+  min-height: 100%;
+
+  padding: 30px;
+  background-color: rgba(24, 97, 255, 0.144);
+
+  backdrop-filter: blur(2px);
+
+  border-radius: 10px;
+
+}
 
 /* This is a general css can be used for all the dropdowns */
 

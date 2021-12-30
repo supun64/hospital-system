@@ -1,5 +1,8 @@
 <?php require_once APP_ROOT."/views/includes/header.php"?>
-<body>
+<body style="
+background-image: url('<?php echo URL_ROOT; ?>/public/images/dashboard-background.jpg');
+background-repeat: repeat;
+background-attachment: fixed;">
     
 <div class="dashboard-container">
     <div class="dashboard-sidebar-container">
