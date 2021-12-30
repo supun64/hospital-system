@@ -8,14 +8,14 @@ class RecordFactory
         $this->db = new DataBaseWrapper();
     }
 
-    public function get_record($recordtype, $records)
+    public function get_record($recordType, $records)
     {
 
         if (!isset($records['date'])) $records['date'] = "";
         if (!isset($records['hospital_id'])) $records['hospital_id'] = "";
         if (!isset($records['health_id'])) $records['health_id'] = "";
 
-        switch ($recordtype) {
+        switch ($recordType) {
             case 'antigen_tests':
                 return new Antigen_test(
                     $records['id'],
@@ -64,9 +64,9 @@ class RecordFactory
 
             case 'covid_patient':
                 return new CovidPatient(
-                    $records['id'],
+                    $records['admission_id'],
                     $records['health_id'],
-                    $records['admit_date'],
+                    $records['admission_date'],
                     $records['discharge_date'],
                     $records['conditions'],
                     $records['hospital_id']

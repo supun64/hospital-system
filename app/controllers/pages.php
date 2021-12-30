@@ -19,11 +19,11 @@ class Pages extends Controller
 
     public function index()
     {
-       
+
         $data['monthly_result'] = $this->chart_loader->load_monthly_result();
 
 
-        $this->view('/pages/home',$data);
+        $this->view('/pages/home', $data);
     }
 
 
@@ -151,7 +151,7 @@ class Pages extends Controller
     }
 
 
-//TODO: different from others -> invalid user id, 
+    //TODO: different from others -> invalid user id, 
 
     public function covid_deaths()
     {
@@ -161,12 +161,12 @@ class Pages extends Controller
         $data = [];
         if (isset($_POST["death-search-bar-input"]) || isset($_GET['updated'])) {
             $data['hospital_id'] = $death_center->get_hospital_id();
-            if(isset($_GET['updated'])){
+            if (isset($_GET['updated'])) {
                 $id = $_GET['updated'];
-            }else{
+            } else {
                 $id = $_POST["death-search-bar-input"]; // TO get the search input
             }
-            
+
 
             $citizen = $death_center->get_citizen($id);
             if ($citizen != NULL) {
@@ -178,10 +178,10 @@ class Pages extends Controller
                 $data['death'] =   ['date' => $death_records->get_date(), 'place' => $death_records->get_place(), 'comments' => $death_records->get_comments()];    //array list of user details
             }
 
-            if(isset($data['personal'])){
+            if (isset($data['personal'])) {
                 $this->view('/pages/covid_deaths', $data);
                 return;
-            }else{
+            } else {
                 header('location:' . URL_ROOT . '/pages/covid_deaths?not-user');
             }
             $this->view('/pages/covid_deaths', $data);
@@ -190,7 +190,7 @@ class Pages extends Controller
         if (isset($_POST["add-death-submit"])) {
 
             $hospital_id = $death_center->get_hospital_id();
-            $data['hospital_id']=$hospital_id;
+            $data['hospital_id'] = $hospital_id;
 
             $death_details = [
                 "id" => NULL,
@@ -201,28 +201,141 @@ class Pages extends Controller
                 "comments" => $_POST["add-death-comments"]
             ];
 
-            $is_citizen =$death_center->get_citizen($death_details['health_id']);
-            if($is_citizen && !$death_center->isexist_user_id($death_details['health_id'])){
+            $is_citizen = $death_center->get_citizen($death_details['health_id']);
+            if ($is_citizen && !$death_center->isexist_user_id($death_details['health_id'])) {
                 $new_death = $this->record_factory->get_record('covid_deaths', $death_details);
-                
+
                 if ($death_center->add_record($new_death)) {
-                    header('location:' . URL_ROOT . '/pages/covid_deaths?updated='.$_POST["add-death-health-id"]);
+                    header('location:' . URL_ROOT . '/pages/covid_deaths?updated=' . $_POST["add-death-health-id"]);
                 } else {
                     die("Something went wrong");
                 }
-            }else{
-                $data['error']=!$is_citizen?"Invalid UserID":"Overriding an existing record is prohibitted.";
-                $this->view('/pages/covid_deaths',$data);
+            } else {
+                $data['error'] = !$is_citizen ? "Invalid UserID" : "Overriding an existing record is prohibitted.";
+                $this->view('/pages/covid_deaths', $data);
                 return;
             }
         }
         $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/covid_deaths');
     }
 
-
     public function covid_patients()
     {
-        $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/covid_patients');
+        $data['personal'] = [];
+        $data['patient_history'] = [];
+        $data['hospital_id'] = NULL;
+        $data['notification'] = [];
+
+        $center = $this->center_factory->get_center('covid_patients');
+
+        // code to search 
+        if (isset($_POST["patient-search"])) {
+
+            $id = $_POST["patient-search-bar-input"]; // To get the search input(health ID)
+            $citizen = $center->get_citizen($id);
+            if ($citizen != NULL) {
+                $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob(), 'gender' => $citizen->get_gender()];    //array list of users
+            }
+
+            $admission_records = $center->load_details_by_id($id);
+            if ($admission_records != NULL) {
+                foreach ($admission_records as $result) {
+                    array_push($data["patient_history"], $center->to_array($result));
+                }
+            }
+
+            //$data['hospital_id'] = $center->get_hospital_id();
+
+            if (!$data['personal']) {
+                header('location:' . URL_ROOT . '/pages/covid_patients?not-user');
+            }
+        }
+
+        // This is the code to check whether user click submit button
+        if (isset($_POST["add-patient-submit"])) {
+
+            // $hospital_id = (int)explode(" - ", $_POST["add-patient-hospital-name"]);
+            $hospital_id = $center->get_hospital_id();
+
+            $patient_detail = [
+                "admission_id" => NULL,
+                "health_id" => $_POST["add-patient-health-id"],
+                "hospital_id" => $hospital_id,
+                "admission_date" => $_POST["add-patient-admission-date"],
+                "discharge_date" => NULL,
+                "status" => "admitted",
+                "conditions" => $_POST["add-patient-conditions"]
+            ];
+
+            $new_patient = $this->record_factory->get_record('covid_patient', $patient_detail);
+            // not checking health id exists since we already in a existing health id and the field is auto filled
+
+            if ($center->add_record($new_patient)) {
+                header('location:' . URL_ROOT . '/pages/covid_patients?success');
+            } else {
+                die("Something went wrong");
+            }
+        }
+
+
+        // This is the code to check whether user click update button
+        /*  if (isset($_POST["update-patient-submit"])) {
+
+            $hospital_id = $center->get_hospital_id();
+            $patient_detail = [
+                "admission_id" => $_POST['final-admission-id'],
+                "health_id" => $_POST["final-health-id"],
+                "hospital_id" => $hospital_id,
+                "admission_date" => $_POST["final-admission-date"],
+                "status" => $_POST['final-status'],
+                "conditions" => $_POST["final-conditions"]
+            ];
+
+            $new_patient = $this->record_factory->get_record('covid_patient', $patient_detail);
+            if ($center->update_record($new_patient)) {
+                $admission_id = (string)$new_patient->get_id();
+                header('location:' . URL_ROOT . '/pages/covid_patients?updated=' . $patient_detail['health_id'] . "-" . $admission_id);
+            } else {
+                die("Something went wrong");
+            }
+        } */
+
+        /* //after updatting
+        if (isset($_GET['updated'])) {
+            $health_id = explode("-", $_GET['updated'])[0];
+            $pcr_id = (int)explode("-", $_GET['updated'])[1];
+
+            $citizen = $center->get_citizen($health_id);
+
+            if ($citizen != NULL) {
+
+                $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob()];    //array list of users
+            }
+            $updated_record = NULL;
+            $search_records = $center->load_details_by_id($health_id);
+            if ($search_records != NULL) {
+                foreach ($search_records as $result) {
+                    array_push($data["pcr_tests"], $center->to_array($result));
+                    if ($result->get_id() == $pcr_id) {
+                        $updated_record = $result;
+                    }
+                }
+            }
+
+            $data['hospital_id'] = $center->get_hospital_id();
+
+            $email = $citizen->get_email();
+            $id = $citizen->get_id();
+            $name = $citizen->get_name();
+
+            if ($email) {
+                $subject = "PCR Test result by " . $_SESSION['hospitalname'];
+                $content = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "PCR ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
+                $data['notification'] = [$email, $subject, $content];
+            }
+        } */
+
+        $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/covid_patients', $data);
     }
 
 
@@ -419,7 +532,7 @@ class Pages extends Controller
 
         $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/vaccination', $data);
     }
-//TODO: why only admin ????
+    //TODO: why only admin ????
     //to change or view user details
     public function settings()
     {
@@ -439,8 +552,8 @@ class Pages extends Controller
         if (strlen($errors) !== 0) {
             $records['errors'] = $errors;
         }
-       
-         $this->view('/pages/settings', $records) ;
+
+        $this->view('/pages/settings', $records);
     }
 
     public function data_management()
@@ -500,7 +613,7 @@ class Pages extends Controller
         if (isset($_POST['nw_deo_submit'])) {
 
 
-            
+
             $deo = new User(NULL, $_POST['deo_username'], $_POST['password'], $hos_id, $_POST['deo_email'], 0);
 
             //checking whether an existing email
@@ -515,13 +628,12 @@ class Pages extends Controller
                     //send password via email 
                     $email = $deo->get_user_email();
                     $subject = "Data Entry Operator Registration";
-                    $content =  "Please use your email address to login to our system.\nHospital ID: ".$_SESSION['hospital_id']."\nHospital Name: ".$_SESSION['hospitalname']."\nTemporary Password: ".$_POST['password'];
+                    $content =  "Please use your email address to login to our system.\nHospital ID: " . $_SESSION['hospital_id'] . "\nHospital Name: " . $_SESSION['hospitalname'] . "\nTemporary Password: " . $_POST['password'];
                     $data['notification'] = [$email, $subject, $content];
 
                     //header('location:' . URL_ROOT . '/pages/user_management');
                     $data['users'] = $this->user_handler->find_All_Users($hos_id);      //array list of users
                     $this->view('/pages/user_management', $data);
-                
                 } else {
                     die('Something went wrong');
                 }
@@ -548,6 +660,4 @@ class Pages extends Controller
         $this->user_handler->logout();
         header('location:' . URL_ROOT . '/users/login');
     }
-
-
 }

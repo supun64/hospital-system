@@ -1,28 +1,28 @@
 <?php 
     class CovidPatient {
 
-        private  $id;
+        private  $admission_id;
         private  $health_id;
-        private  $admit_date;
+        private  $admission_date;
         private  $hospital_id;
         private  $discharge_date;
         private  $conditions;
     
-        public function __construct($id, $health_id, $admit_date, $discharge_date, $conditions, $hospital_id) {
-            $this->id = $id;
+        public function __construct($admission_id, $health_id, $admission_date, $discharge_date, $conditions, $hospital_id) {
+            $this->admission_id = $admission_id;
             $this->health_id = $health_id;
-            $this->admit_date = $admit_date;
+            $this->admission_date = $admission_date;
             $this->discharge_date = $discharge_date;
             $this->conditions = $conditions;
             $this->hospital_id = $hospital_id;       
         }
     
-        public function get_id() {
-            return $this->id;
+        public function get_admission_id() {
+            return $this->admission_id;
         }
     
-        public function set_id(int $id) {
-            $this->id = $id;
+        public function set_admission_id(int $admission_id) {
+            $this->admission_id = $admission_id;
         }
     
         public function get_health_id() {
@@ -33,12 +33,12 @@
             $this->health_id = $health_id;
         }
     
-        public function get_admit_date() {
-            return $this->admit_date;
+        public function get_admission_date() {
+            return $this->admission_date;
         }
     
-        public function set_admit_date($admit_date) {
-            $this->admit_date = $admit_date;
+        public function set_admission_date($admission_date) {
+            $this->admission_date = $admission_date;
         }
 
         public function get_discharge_date() {
