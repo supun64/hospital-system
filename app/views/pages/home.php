@@ -41,7 +41,16 @@ if ($_SESSION['is_admin']) {
 
         var options = {
 
-            'title': "Daily Covid Results (" + year + "/" + month + ")",
+            title: "Daily Covid Results (" + year + "/" + month + ")",
+
+            titleTextStyle : {
+                bold: true,
+                color: "black",
+                
+                fontSize: 14,
+
+            },
+
             'width': 700,
             'height': 500,
 
@@ -84,12 +93,12 @@ if ($_SESSION['is_admin']) {
     }
 
     // This is the function to draw pie chart
-    google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawPieChart);
 
-    
-    function drawChart() {
 
-        
+    function drawPieChart() {
+
+
 
         var data = google.visualization.arrayToDataTable([
             ['Case Name', 'Count'],
@@ -112,9 +121,28 @@ if ($_SESSION['is_admin']) {
             backgroundColor: {
                 fill: 'transparent'
             },
-
+            
             title: 'Total Covid Results',
-            slices: {1: {color: "#0d6efd"}, 0: {color: "#20c997"}, 2: {color: "#dc3545"}}
+
+            titleTextStyle : {
+                bold: true,
+                color: "black",
+                
+                fontSize: 14,
+
+            },
+
+            slices: {
+                1: {
+                    color: "#0d6efd"
+                },
+                0: {
+                    color: "#20c997"
+                },
+                2: {
+                    color: "#dc3545"
+                }
+            }
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -124,70 +152,73 @@ if ($_SESSION['is_admin']) {
 
 
     // This is the code to draw the column chart
-    google.charts.setOnLoadCallback(drawStuff);
+    google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawColChart);
 
-      function drawStuff() {
-
-        var button = document.getElementById('change-chart');
-        var chartDiv = document.getElementById('col_chart');
-
+      function drawColChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Galaxy', 'Distance', 'Brightness'],
-          ['Canis Major Dwarf', 8000, 23.3],
-          ['Sagittarius Dwarf', 24000, 4.5],
-          ['Ursa Major II Dwarf', 30000, 14.3],
-          ['Lg. Magellanic Cloud', 50000, 0.9],
-          ['Bootes I', 60000, 13.1]
+          ['Date', 'PCR positive', 'Antigen Positive'],
+          ['2021-12-01', 1170, 460],
+          ['2021-12-02', 660, 1120],
+          ['2021-12-03', 1000, 400],
+          ['2021-12-04', 1170, 460],
+          ['2021-12-05', 660, 1120],
+          ['2021-12-06', 1000, 400],
+          ['2021-12-07', 1170, 460],
+          ['2021-12-08', 1170, 460],
+          ['2021-12-09', 660, 1120],
+          ['2021-12-10', 1000, 400],
+          ['2021-12-11', 1170, 460],
+          ['2021-12-12', 1000, 400],
+          ['2021-12-13', 1170, 460],
+          ['2021-12-14', 660, 1120],
+          ['2021-12-15', 1030, 540],
+          ['2021-12-16', 1000, 400],
+          ['2021-12-17', 1170, 460],
+          ['2021-12-18', 660, 1120],
+          ['2021-12-19', 1000, 400],
+          ['2021-12-20', 1170, 460],
+          ['2021-12-21', 660, 1120],
+          ['2021-12-22', 1000, 400],
+          ['2021-12-23', 1170, 460],
+          ['2021-12-24', 660, 1120],
+          ['2021-12-25', 1000, 400],
+          ['2021-12-26', 1170, 460],
+          ['2021-12-27', 660, 1120],
+          ['2021-12-28', 1170, 460],
+          ['2021-12-29', 660, 1120],
+          ['2021-12-30', 1000, 400],
+          ['2021-12-31', 1170, 460]
+          
         ]);
 
-        var materialOptions = {
-          width: 900,
-          chart: {
-            title: 'Nearby galaxies',
-            subtitle: 'distance on the left, brightness on the right'
-          },
-          series: {
-            0: { axis: 'distance' }, // Bind series 0 to an axis named 'distance'.
-            1: { axis: 'brightness' } // Bind series 1 to an axis named 'brightness'.
-          },
-          axes: {
-            y: {
-              distance: {label: 'parsecs'}, // Left y-axis.
-              brightness: {side: 'right', label: 'apparent magnitude'} // Right y-axis.
+        var options = {
+          
+            title: 'Daily PCR/Antigen Test positive',
+
+            titleTextStyle : {
+                bold: true,
+                color: "black",
+                
+                fontSize: 14,
+
+            },
+          
+
+          backgroundColor: {
+                fill: 'transparent'
+            },
+
+            height: 500,
+            chartArea: {
+                backgroundColor: 'transparent'
             }
-          }
         };
 
-        var classicOptions = {
-          width: 900,
-          series: {
-            0: {targetAxisIndex: 0},
-            1: {targetAxisIndex: 1}
-          },
-          title: 'Nearby galaxies - distance on the left, brightness on the right',
-          vAxes: {
-            // Adds titles to each axis.
-            0: {title: 'parsecs'},
-            1: {title: 'apparent magnitude'}
-          }
-        };
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
-        function drawMaterialChart() {
-          var materialChart = new google.charts.Bar(chartDiv);
-          materialChart.draw(data, google.charts.Bar.convertOptions(materialOptions));
-          button.innerText = 'Change to Classic';
-          button.onclick = drawClassicChart;
-        }
-
-        function drawClassicChart() {
-          var classicChart = new google.visualization.ColumnChart(chartDiv);
-          classicChart.draw(data, classicOptions);
-          button.innerText = 'Change to Material';
-          button.onclick = drawMaterialChart;
-        }
-
-        drawMaterialChart();
-    };
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
 </script>
 
 </head>
@@ -385,7 +416,7 @@ if ($_SESSION['is_admin']) {
                 <!-- Row - 3 Draw column chart -->
 
                 <div class="row home-daily-chart">
-                    <div id="col_chart" class="home-graph col"></div>
+                    <div id="columnchart_material" class="home-graph col"></div>
 
                 </div>
 
