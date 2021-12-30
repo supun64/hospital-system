@@ -1,6 +1,9 @@
 <?php 
     class AntigenTestsCenter extends COVID_Department{
 
+
+        private $observer;
+
         public function __construct()
         {
             parent::__construct();
@@ -30,7 +33,12 @@
             
             $params = ["status"=>$status , "id"=>$id, "place"=>$place];
 
-            return $this->db->update("antigen_tests","id",$params);
+            $result = $this->db->update("antigen_tests","id",$params);
+
+            if($result && $status=='positive'){
+                $this->observer->increment_count();
+            }
+            return $result;
         }
 
         public  function delete_record($id){
@@ -69,6 +77,20 @@
             }
             return $records;
         }
+
+        public function set_observer($observer){
+            if($this->observer == NULL){
+                $this->observer = $observer;
+            }
+        }
+
+        public function unset_observer(){
+            if($this->observer != NULL){
+                $this->observer = NUll;
+            }
+        }
+
+
 
     }
     

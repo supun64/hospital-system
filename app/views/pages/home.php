@@ -1,4 +1,11 @@
-<?php require_once APP_ROOT . "/views/pages/admin_dashboard.php" ?>
+<?php 
+if($_SESSION['is_admin']){
+    require_once APP_ROOT . "/views/pages/admin_dashboard.php" ;
+}else{
+    require_once APP_ROOT . "/views/pages/user_dashboard.php" ;
+}
+
+?>
 
 <!-- This is the code of the line chart -->
 <script type="text/javascript">
@@ -13,22 +20,26 @@
         data.addColumn('number', 'Covid Cases');
         data.addColumn('number', 'Covid Deaths');
 
-        data.addRows([
-            [1, 12, 1],
-            [2, 10, 2],
-            [3, 14, 5],
-            [4, 13, 6],
-            [5, 20, 11],
-            [6, 25, 10],
-            [7, 30, 12],
-            [8, 29, 15],
-            [9, 37, 20],
-            [10, 72, 31],
+        data.addRows([                                              
+   
+
+            <?php $count =1;?>
+            <?php foreach($data['monthly_result'] as $monthly_res){
+                $date = explode('-',$monthly_res['date'])[2];
+            echo "[".$date.",".$monthly_res['addmit'].",".$monthly_res['death']."],";
+            
+            $count++;
+            }
+            ?>
 
         ]);
+        const d = new Date();
+        var year = d.getFullYear();
+        var month = d.toLocaleString('default', { month: 'long' });
 
         var options = {
-            'title': "Daily Covid results (Year/Month)",
+ 
+            'title': "Daily Covid results (" + year +"/" + month +")",               
             'width': 800,
             'height': 500,
             backgroundColor: {fill:'transparent'},

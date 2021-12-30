@@ -10,6 +10,7 @@ class Pages extends Controller
         $this->record_factory = Factory::getFactory("RecordFactory");
         $this->center_factory = Factory::getFactory("CentersFactory");
         $this->user_handler = $this->model('UserHandler');
+        $this->chart_loader = $this->model('ChartLoader');
 
         //if someone tries to access the pages without logging in, they will be redirected to the users/index page
         if (!$this->user_handler->is_logged_in())
@@ -18,13 +19,13 @@ class Pages extends Controller
 
     public function index()
     {
-        $_SESSION["is_admin"] ? $this->view('/pages/admin_home') : $this->view('/pages/user_dashboard');
+       
+        $data['monthly_result'] = $this->chart_loader->load_monthly_result();
+
+
+        $this->view('/pages/home',$data);
     }
 
-    public function home()
-    {
-        $_SESSION["is_admin"]?header('location:'.URL_ROOT.'/pages/index'):$this->view('/pages/home');
-    }
 
     public function antigen()
     {
@@ -34,7 +35,7 @@ class Pages extends Controller
         $data['notification'] = [];
 
         $center = $this->center_factory->get_center('antigen_tests');
-
+        $center->set_observer(new AntigenObserver());
         // code to search a vaccination
 
         if (isset($_POST["antigen-search"])) {
@@ -156,6 +157,7 @@ class Pages extends Controller
     {
 
         $death_center = $this->center_factory->get_center('covid_deaths');
+        $death_center->set_observer(new CovidDeathObserver());
         $data = [];
         if (isset($_POST["death-search-bar-input"]) || isset($_GET['updated'])) {
             $data['hospital_id'] = $death_center->get_hospital_id();
@@ -179,6 +181,8 @@ class Pages extends Controller
             if(isset($data['personal'])){
                 $this->view('/pages/covid_deaths', $data);
                 return;
+            }else{
+                header('location:' . URL_ROOT . '/pages/covid_deaths?not-user');
             }
             $this->view('/pages/covid_deaths', $data);
         }
@@ -230,7 +234,7 @@ class Pages extends Controller
         $data['notification'] = [];
 
         $center = $this->center_factory->get_center('pcr_tests');
-
+        $center->set_observer(new PcrObserver());
         // code to search a vaccination
 
         if (isset($_POST["pcr-search"])) {
@@ -337,7 +341,7 @@ class Pages extends Controller
             $id = $citizen->get_id();
             $name = $citizen->get_name();
 
-            if ($email) {
+            if ($email && $updated_record) {
                 $subject = "PCR Test result by " . $_SESSION['hospitalname'];
                 $content = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "PCR ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
                 $data['notification'] = [$email, $subject, $content];
@@ -435,8 +439,8 @@ class Pages extends Controller
         if (strlen($errors) !== 0) {
             $records['errors'] = $errors;
         }
-        //Retrieved data will be shown in the settings page
-        $_SESSION["is_admin"] ? $this->view('/pages/admin_settings', $records) : header('location:' . URL_ROOT . '/pages/index');
+       
+         $this->view('/pages/settings', $records) ;
     }
 
     public function data_management()
@@ -489,13 +493,14 @@ class Pages extends Controller
     public function user_management()
     {
         $hos_id = $_SESSION['hospital_id'];  //relevent hospital id
-        $data = $this->user_handler->find_All_Users($hos_id);      //array list of users
+        $data['notification'] = [];
+        $data['users'] = $this->user_handler->find_All_Users($hos_id);      //array list of users
 
         //add new deo
         if (isset($_POST['nw_deo_submit'])) {
 
 
-
+            
             $deo = new User(NULL, $_POST['deo_username'], $_POST['password'], $hos_id, $_POST['deo_email'], 0);
 
             //checking whether an existing email
@@ -507,7 +512,16 @@ class Pages extends Controller
                 $deo->set_password(password_hash($deo->get_password(), PASSWORD_DEFAULT));
                 //add new deo
                 if ($this->user_handler->add_user($deo)) {
-                    header('location:' . URL_ROOT . '/pages/user_management');
+                    //send password via email 
+                    $email = $deo->get_user_email();
+                    $subject = "Data Entry Operator Registration";
+                    $content =  "Please use your email address to login to our system.\nHospital ID: ".$_SESSION['hospital_id']."\nHospital Name: ".$_SESSION['hospitalname']."\nTemporary Password: ".$_POST['password'];
+                    $data['notification'] = [$email, $subject, $content];
+
+                    //header('location:' . URL_ROOT . '/pages/user_management');
+                    $data['users'] = $this->user_handler->find_All_Users($hos_id);      //array list of users
+                    $this->view('/pages/user_management', $data);
+                
                 } else {
                     die('Something went wrong');
                 }

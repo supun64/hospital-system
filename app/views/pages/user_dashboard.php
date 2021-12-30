@@ -19,7 +19,7 @@ background-attachment: fixed;">
                 </div>
             </li>
             <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Home">
-                <a href="#" class="option">
+                <a href="<?= URL_ROOT ?>/pages/index" class="option">
                     <span class="dashboard-link-icon"><i class='bx bxs-home' ></i></span>
                     <span class="text">Home</span>
                 </a>

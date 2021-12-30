@@ -104,6 +104,37 @@
             }
         }
 
+        //for observers
+        public function increment($table,$field){
+            $today = date("Y-m-d");
+            
+            $sql = "";
+            if($this->date_exist($today)){
+                $sql = "UPDATE $table SET $field=$field+1 WHERE date='$today'";
+            }else{
+            $sql = "INSERT INTO $table (date,$field) VALUES ('$today',1)";
+            }
+            $output = $this->db->sql_execute($sql);
+            return $output;
+        }
+
+
+        //for ChartLoader
+
+        public function give_monthly_result(){
+            $cur = date("Y-m-");
+            $sql = "SELECT * FROM report WHERE date LIKE '$cur%'";
+            $this->db->sql_execute($sql);
+            $result = $this->db->result_set();
+            return $result;
+        }
+
+
+
+
+
+
+
         public function register($hos_id){
             $sql = "UPDATE hospitals SET is_registered = 1 WHERE hospital_id = $hos_id";
             return $this->db->sql_execute($sql);
@@ -112,5 +143,20 @@
         function safe($value){
             return $this->db->safe($value);
         }
+
+        private function date_exist($date){
+            $sql = "SELECT * FROM report WHERE date='$date'";
+            $this->db->sql_execute($sql);
+            $result = $this->db->result_set();
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+
+
+
 }
 ?>
