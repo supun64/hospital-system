@@ -25,7 +25,6 @@ require_once 'models/CovidDeathsCenter.php';
 require_once 'models/AntigenTestsCenter.php';
 require_once 'models/VaccinationCenter.php';
 
-require_once 'models/OperatorHandler.php';
 require_once 'models/UserHandler.php';
 
 

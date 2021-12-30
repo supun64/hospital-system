@@ -1,5 +1,5 @@
-<?php require APP_ROOT . '/views/includes/header.php';  ?>
-
+<?php require_once APP_ROOT."/views/pages/user_dashboard.php"?>
+<div class= 'sub-division'>
 <?php $cur_hos = $_SESSION['hospital_id'];?>
 <input type="text" id="cur-hos" hidden value="<?php echo $cur_hos?>">
 
@@ -273,10 +273,17 @@ if(isset($_GET['success'])){?>
 
     </section>
 
-    <script src="<?php echo URL_ROOT; ?>/public/script/test.js"></script>
-    <script src="<?php echo URL_ROOT; ?>/public/script/antigen.js"></script>
 
-</body>
+
+
+</div>
+
+<script src="<?=URL_ROOT?>./public/script/admin.js"></script>
+<script src="<?php echo URL_ROOT; ?>/public/script/test.js"></script>
+<script src="<?php echo URL_ROOT; ?>/public/script/antigen.js"></script>
+<?php require_once APP_ROOT."/views/includes/footer.php"?>
+
+
 
 
 <?php 

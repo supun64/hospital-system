@@ -25,6 +25,10 @@ class CentersFactory
                 return new CovidDeathsCenter();
                 break;
 
+            case 'covid_patients':
+                return new CovidPatientCenter();
+                break;
+
             case 'vaccinations':
                 return new VaccinationCenter();
                 break;

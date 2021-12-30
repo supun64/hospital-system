@@ -6,21 +6,19 @@ class Pages extends Controller
 
     public function __construct()
     {
-        $this->admin_model = $this->model('Administrator');  //create admin object
         $this->hospital_loader_model =  $this->model('RegistrationHandler');
-        $this->operator_model = $this->model('Operator'); // Create Operator object
         $this->record_factory = Factory::getFactory("RecordFactory");
         $this->center_factory = Factory::getFactory("CentersFactory");
-        $this->user_handler= $this->model('UserHandler');
+        $this->user_handler = $this->model('UserHandler');
 
         //if someone tries to access the pages without logging in, they will be redirected to the users/index page
-        if(!$this->user_handler->is_logged_in())
-            header('location:'.URL_ROOT.'/users/index');
+        if (!$this->user_handler->is_logged_in())
+            header('location:' . URL_ROOT . '/users/index');
     }
 
     public function index()
     {
-        $_SESSION["is_admin"]?$this->view('/pages/admin_home'):$this->view('/pages/user_dashboard');
+        $_SESSION["is_admin"] ? $this->view('/pages/admin_home') : $this->view('/pages/user_dashboard');
     }
 
     public function home()
@@ -34,134 +32,193 @@ class Pages extends Controller
         $data['antigen_tests'] = [];
         $data['hospital_id'] = NULL;
         $data['notification'] = [];
-        
+
         $center = $this->center_factory->get_center('antigen_tests');
-        
+
         // code to search a vaccination
 
-        if(isset($_POST["antigen-search"])){
+        if (isset($_POST["antigen-search"])) {
 
             $id = $_POST["antigen-search-bar-input"]; // TO get the search input
             $citizen = $center->get_citizen($id);
-            if($citizen != NULL){
-                
-                $data['personal'] =   ['health_id'=> $citizen->get_id(), 'name'=> $citizen->get_name(), 'dob'=> $citizen->get_dob()];    //array list of users
+            if ($citizen != NULL) {
+
+                $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob()];    //array list of users
             }
-            
+
             $search_records = $center->load_details_by_id($id);
-            if($search_records != NULL)
-            { foreach ($search_records as $result) {
-                array_push($data["antigen_tests"],$center->to_array($result));
-              }
+            if ($search_records != NULL) {
+                foreach ($search_records as $result) {
+                    array_push($data["antigen_tests"], $center->to_array($result));
+                }
             }
-            
+
             $data['hospital_id'] = $center->get_hospital_id();
-            
 
-            if(!$data['personal']){
-                header('location:'.URL_ROOT.'/pages/antigen?not-user');
+            if (!$data['personal']) {
+                header('location:' . URL_ROOT . '/pages/antigen?not-user');
             }
-
-
         }
 
         //This is the code to check whether user click submit button
-        if(isset($_POST["add-patient-submit"])){
-            
+        if (isset($_POST["add-patient-submit"])) {
+
             // $hospital_id = (int)explode(" - ", $_POST["add-patient-hospital-name"]);
             $hospital_id = $center->get_hospital_id();
-            
-            $antigen_detail = ["id"=>NULL,
-            "health_id"=>$_POST["add-patient-health-id"],
-            "hospital_id"=> $hospital_id, 
-             "date"=> $_POST["add-patient-antigen-date"],
-             "status" => "pending",
-             "place"=> $_POST["add-patient-antigen-place"]];
 
-             $new_antigen = $this->record_factory->get_record('antigen_tests', $antigen_detail);
-             // not checking health id exists since we already in a existing health id and the field is auto filled
-            
-                if($center->add_record($new_antigen)){
-                    header('location:'.URL_ROOT.'/pages/antigen?success');      
-                } 
-                else{
-                    die("Something went wrong");
-                }
-            
+            $antigen_detail = [
+                "id" => NULL,
+                "health_id" => $_POST["add-patient-health-id"],
+                "hospital_id" => $hospital_id,
+                "date" => $_POST["add-patient-antigen-date"],
+                "status" => "pending",
+                "place" => $_POST["add-patient-antigen-place"]
+            ];
+
+            $new_antigen = $this->record_factory->get_record('antigen_tests', $antigen_detail);
+            // not checking health id exists since we already in a existing health id and the field is auto filled
+
+            if ($center->add_record($new_antigen)) {
+                header('location:' . URL_ROOT . '/pages/antigen?success');
+            } else {
+                die("Something went wrong");
+            }
         }
 
 
         // // This is the code to check whether user click update button
-        if(isset($_POST["update-patient-submit"])){
-            
+        if (isset($_POST["update-patient-submit"])) {
+
             $hospital_id = $center->get_hospital_id();
-            $antigen_detail = ["id"=>$_POST['final-id'],
-            "health_id"=>$_POST["final-htid"],
-            "hospital_id"=> $hospital_id, 
-             "date"=> $_POST["final-date"],
-             "status" => $_POST['final-status'],
-             "place"=> $_POST["final-place"]];  
-             
-            
-             $new_antigen = $this->record_factory->get_record('antigen_tests', $antigen_detail);
-             if($center->update_record($new_antigen)){
+            $antigen_detail = [
+                "id" => $_POST['final-id'],
+                "health_id" => $_POST["final-htid"],
+                "hospital_id" => $hospital_id,
+                "date" => $_POST["final-date"],
+                "status" => $_POST['final-status'],
+                "place" => $_POST["final-place"]
+            ];
+
+
+            $new_antigen = $this->record_factory->get_record('antigen_tests', $antigen_detail);
+            if ($center->update_record($new_antigen)) {
 
 
 
                 $antigen_id = (string)$new_antigen->get_id();
-                header('location:'.URL_ROOT.'/pages/antigen?updated='.$antigen_detail['health_id']."-".$antigen_id);
-             }else{
+                header('location:' . URL_ROOT . '/pages/antigen?updated=' . $antigen_detail['health_id'] . "-" . $antigen_id);
+            } else {
                 die("Something went wrong");
             }
-            
         }
 
         // //after updatting
-        if(isset($_GET['updated'])){
-            $health_id = explode("-",$_GET['updated'])[0];
-            $antigen_id = (int)explode("-",$_GET['updated'])[1];
+        if (isset($_GET['updated'])) {
+            $health_id = explode("-", $_GET['updated'])[0];
+            $antigen_id = (int)explode("-", $_GET['updated'])[1];
 
             $citizen = $center->get_citizen($health_id);
 
-            if($citizen != NULL){
-                
-                $data['personal'] =   ['health_id'=> $citizen->get_id(), 'name'=> $citizen->get_name(), 'dob'=> $citizen->get_dob()];    //array list of users
+            if ($citizen != NULL) {
+
+                $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob()];    //array list of users
             }
             $updated_record = NULL;
             $search_records = $center->load_details_by_id($health_id);
-            if($search_records != NULL)
-            { foreach ($search_records as $result) {
-                array_push($data["antigen_tests"],$center->to_array($result));
-                if($result->get_id() == $antigen_id){
-                    $updated_record = $result;
+            if ($search_records != NULL) {
+                foreach ($search_records as $result) {
+                    array_push($data["antigen_tests"], $center->to_array($result));
+                    if ($result->get_id() == $antigen_id) {
+                        $updated_record = $result;
+                    }
                 }
-              }
             }
-            
+
             $data['hospital_id'] = $center->get_hospital_id();
-            
-                $email = $citizen->get_email();
-                $id = $citizen->get_id();
-                $name = $citizen->get_name();
-    
-                if($email){
-                    $subject = "Antigen Test result by ".$_SESSION['hospitalname'] ;
-                    $content = "Patient ID: ".$id."\n"."Patient name: ".$name."\n"."Tested Date:".$updated_record->get_date()."\n"."Antigen ID: ".$updated_record->get_id()."\n"."Test Result: ".$updated_record->get_status();
-                    $data['notification'] = [$email,$subject,$content];
-                }
-        
+
+            $email = $citizen->get_email();
+            $id = $citizen->get_id();
+            $name = $citizen->get_name();
+
+            if ($email) {
+                $subject = "Antigen Test result by " . $_SESSION['hospitalname'];
+                $content = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "Antigen ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
+                $data['notification'] = [$email, $subject, $content];
+            }
         }
-        $_SESSION["is_admin"]?header('location:'.URL_ROOT.'/pages/index'):$this->view('/pages/antigen',$data);
+        $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/antigen', $data);
     }
+
+
+//TODO: different from others -> invalid user id, 
 
     public function covid_deaths()
     {
-        $_SESSION["is_admin"]?header('location:'.URL_ROOT.'/pages/index'):$this->view('/pages/covid_deaths');
+
+        $death_center = $this->center_factory->get_center('covid_deaths');
+        $data = [];
+        if (isset($_POST["death-search-bar-input"]) || isset($_GET['updated'])) {
+            $data['hospital_id'] = $death_center->get_hospital_id();
+            if(isset($_GET['updated'])){
+                $id = $_GET['updated'];
+            }else{
+                $id = $_POST["death-search-bar-input"]; // TO get the search input
+            }
+            
+
+            $citizen = $death_center->get_citizen($id);
+            if ($citizen != NULL) {
+
+                $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob(), 'gender' => $citizen->get_gender()];    //array list of user details
+            }
+            $death_records = $death_center->load_details_by_id($id);
+            if ($death_records != NULL) {
+                $data['death'] =   ['date' => $death_records->get_date(), 'place' => $death_records->get_place(), 'comments' => $death_records->get_comments()];    //array list of user details
+            }
+
+            if(isset($data['personal'])){
+                $this->view('/pages/covid_deaths', $data);
+                return;
+            }
+            $this->view('/pages/covid_deaths', $data);
+        }
+
+        if (isset($_POST["add-death-submit"])) {
+
+            $hospital_id = $death_center->get_hospital_id();
+            $data['hospital_id']=$hospital_id;
+
+            $death_details = [
+                "id" => NULL,
+                "health_id" => $_POST["add-death-health-id"],
+                "hospital_id" => $hospital_id,
+                "date" => $_POST["add-death-date"],
+                "place" => $_POST["add-death-place"],
+                "comments" => $_POST["add-death-comments"]
+            ];
+
+            $is_citizen =$death_center->get_citizen($death_details['health_id']);
+            if($is_citizen && !$death_center->isexist_user_id($death_details['health_id'])){
+                $new_death = $this->record_factory->get_record('covid_deaths', $death_details);
+                
+                if ($death_center->add_record($new_death)) {
+                    header('location:' . URL_ROOT . '/pages/covid_deaths?updated='.$_POST["add-death-health-id"]);
+                } else {
+                    die("Something went wrong");
+                }
+            }else{
+                $data['error']=!$is_citizen?"Invalid UserID":"Overriding an existing record is prohibitted.";
+                $this->view('/pages/covid_deaths',$data);
+                return;
+            }
+        }
+        $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/covid_deaths');
     }
+
 
     public function covid_patients()
     {
-        $_SESSION["is_admin"]?header('location:'.URL_ROOT.'/pages/index'):$this->view('/pages/covid_patients');
+        $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/covid_patients');
     }
 
 
@@ -171,197 +228,194 @@ class Pages extends Controller
         $data['pcr_tests'] = [];
         $data['hospital_id'] = NULL;
         $data['notification'] = [];
-        
+
         $center = $this->center_factory->get_center('pcr_tests');
-        
+
         // code to search a vaccination
 
-        if(isset($_POST["pcr-search"])){
+        if (isset($_POST["pcr-search"])) {
 
             $id = $_POST["pcr-search-bar-input"]; // TO get the search input
             $citizen = $center->get_citizen($id);
-            if($citizen != NULL){
-                
-                $data['personal'] =   ['health_id'=> $citizen->get_id(), 'name'=> $citizen->get_name(), 'dob'=> $citizen->get_dob()];    //array list of users
+            if ($citizen != NULL) {
+
+                $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob()];    //array list of users
             }
-            
+
             $search_records = $center->load_details_by_id($id);
-            if($search_records != NULL)
-            { foreach ($search_records as $result) {
-                array_push($data["pcr_tests"],$center->to_array($result));
-              }
+            if ($search_records != NULL) {
+                foreach ($search_records as $result) {
+                    array_push($data["pcr_tests"], $center->to_array($result));
+                }
             }
-            
+
             $data['hospital_id'] = $center->get_hospital_id();
-            
 
-            if(!$data['personal']){
-                header('location:'.URL_ROOT.'/pages/pcr?not-user');
+
+            if (!$data['personal']) {
+                header('location:' . URL_ROOT . '/pages/pcr?not-user');
             }
-
-
         }
 
         // This is the code to check whether user click submit button
-        if(isset($_POST["add-patient-submit"])){
-            
+        if (isset($_POST["add-patient-submit"])) {
+
             // $hospital_id = (int)explode(" - ", $_POST["add-patient-hospital-name"]);
             $hospital_id = $center->get_hospital_id();
-            
-            $pcr_detail = ["id"=>NULL,
-            "health_id"=>$_POST["add-patient-health-id"],
-            "hospital_id"=> $hospital_id, 
-             "date"=> $_POST["add-patient-pcr-date"],
-             "status" => "pending",
-             "place"=> $_POST["add-patient-pcr-place"]];
 
-             $new_pcr = $this->record_factory->get_record('pcr_tests', $pcr_detail);
-             // not checking health id exists since we already in a existing health id and the field is auto filled
-            
-                if($center->add_record($new_pcr)){
-                    header('location:'.URL_ROOT.'/pages/pcr?success');      
-                } 
-                else{
-                    die("Something went wrong");
-                }
-            
+            $pcr_detail = [
+                "id" => NULL,
+                "health_id" => $_POST["add-patient-health-id"],
+                "hospital_id" => $hospital_id,
+                "date" => $_POST["add-patient-pcr-date"],
+                "status" => "pending",
+                "place" => $_POST["add-patient-pcr-place"]
+            ];
+
+            $new_pcr = $this->record_factory->get_record('pcr_tests', $pcr_detail);
+            // not checking health id exists since we already in a existing health id and the field is auto filled
+
+            if ($center->add_record($new_pcr)) {
+                header('location:' . URL_ROOT . '/pages/pcr?success');
+            } else {
+                die("Something went wrong");
+            }
         }
 
 
         // This is the code to check whether user click update button
-        if(isset($_POST["update-patient-submit"])){
-            
+        if (isset($_POST["update-patient-submit"])) {
+
             $hospital_id = $center->get_hospital_id();
-            $pcr_detail = ["id"=>$_POST['final-id'],
-            "health_id"=>$_POST["final-htid"],
-            "hospital_id"=> $hospital_id, 
-             "date"=> $_POST["final-date"],
-             "status" => $_POST['final-status'],
-             "place"=> $_POST["final-place"]];  
-             
-            
-             $new_pcr = $this->record_factory->get_record('pcr_tests', $pcr_detail);
-             if($center->update_record($new_pcr)){
+            $pcr_detail = [
+                "id" => $_POST['final-id'],
+                "health_id" => $_POST["final-htid"],
+                "hospital_id" => $hospital_id,
+                "date" => $_POST["final-date"],
+                "status" => $_POST['final-status'],
+                "place" => $_POST["final-place"]
+            ];
+
+
+            $new_pcr = $this->record_factory->get_record('pcr_tests', $pcr_detail);
+            if ($center->update_record($new_pcr)) {
 
 
 
                 $pcr_id = (string)$new_pcr->get_id();
-                header('location:'.URL_ROOT.'/pages/pcr?updated='.$pcr_detail['health_id']."-".$pcr_id);
-             }else{
+                header('location:' . URL_ROOT . '/pages/pcr?updated=' . $pcr_detail['health_id'] . "-" . $pcr_id);
+            } else {
                 die("Something went wrong");
             }
-            
         }
 
         //after updatting
-        if(isset($_GET['updated'])){
-            $health_id = explode("-",$_GET['updated'])[0];
-            $pcr_id = (int)explode("-",$_GET['updated'])[1];
+        if (isset($_GET['updated'])) {
+            $health_id = explode("-", $_GET['updated'])[0];
+            $pcr_id = (int)explode("-", $_GET['updated'])[1];
 
             $citizen = $center->get_citizen($health_id);
 
-            if($citizen != NULL){
-                
-                $data['personal'] =   ['health_id'=> $citizen->get_id(), 'name'=> $citizen->get_name(), 'dob'=> $citizen->get_dob()];    //array list of users
+            if ($citizen != NULL) {
+
+                $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob()];    //array list of users
             }
             $updated_record = NULL;
             $search_records = $center->load_details_by_id($health_id);
-            if($search_records != NULL)
-            { foreach ($search_records as $result) {
-                array_push($data["pcr_tests"],$center->to_array($result));
-                if($result->get_id() == $pcr_id){
-                    $updated_record = $result;
+            if ($search_records != NULL) {
+                foreach ($search_records as $result) {
+                    array_push($data["pcr_tests"], $center->to_array($result));
+                    if ($result->get_id() == $pcr_id) {
+                        $updated_record = $result;
+                    }
                 }
-              }
             }
-            
+
             $data['hospital_id'] = $center->get_hospital_id();
-            
-                $email = $citizen->get_email();
-                $id = $citizen->get_id();
-                $name = $citizen->get_name();
-    
-                if($email){
-                    $subject = "PCR Test result by ".$_SESSION['hospitalname'] ;
-                    $content = "Patient ID: ".$id."\n"."Patient name: ".$name."\n"."Tested Date:".$updated_record->get_date()."\n"."PCR ID: ".$updated_record->get_id()."\n"."Test Result: ".$updated_record->get_status();
-                    $data['notification'] = [$email,$subject,$content];
-                }
-        
+
+            $email = $citizen->get_email();
+            $id = $citizen->get_id();
+            $name = $citizen->get_name();
+
+            if ($email) {
+                $subject = "PCR Test result by " . $_SESSION['hospitalname'];
+                $content = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "PCR ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
+                $data['notification'] = [$email, $subject, $content];
+            }
         }
 
 
 
-        $_SESSION["is_admin"]?header('location:'.URL_ROOT.'/pages/index'):$this->view('/pages/pcr',$data);
+        $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/pcr', $data);
     }
 
-    public function vaccination(){
+    public function vaccination()
+    {
 
 
         $data['personal'] = [];
         $data['vaccinations'] = [];
         $data['hospital_id'] = NULL;
-        
+
         $center = $this->center_factory->get_center('vaccinations');
-        
+
         // code to search a vaccination
 
-        if(isset($_POST["vaccine-search"])){
+        if (isset($_POST["vaccine-search"])) {
 
             $id = $_POST["vaccine-search-bar-input"]; // TO get the search input
             $citzen = $center->get_citizen($id);
-            if($citzen != NULL){
-                
-                $data['personal'] =   ['health_id'=> $citzen->get_id(), 'name'=> $citzen->get_name(), 'dob'=> $citzen->get_dob()];    //array list of users
+            if ($citzen != NULL) {
+
+                $data['personal'] =   ['health_id' => $citzen->get_id(), 'name' => $citzen->get_name(), 'dob' => $citzen->get_dob()];    //array list of users
             }
-            
+
             $search_records = $center->load_details_by_id($id);
-            if($search_records != NULL)
-            { foreach ($search_records as $result) {
-                array_push($data["vaccinations"],$center->to_array($result));
-              }
+            if ($search_records != NULL) {
+                foreach ($search_records as $result) {
+                    array_push($data["vaccinations"], $center->to_array($result));
+                }
             }
-            
+
             $data['hospital_id'] = $center->get_hospital_id();
-            
 
-            if(!$data['personal']){
-                header('location:'.URL_ROOT.'/pages/vaccination?not-user');
+
+            if (!$data['personal']) {
+                header('location:' . URL_ROOT . '/pages/vaccination?not-user');
             }
-
-
         }
 
 
         // This is the code to check whether user click submit button
-        if(isset($_POST["add-patient-submit"])){
-            
+        if (isset($_POST["add-patient-submit"])) {
+
             // $hospital_id = (int)explode(" - ", $_POST["add-patient-hospital-name"]);
             $hospital_id = $center->get_hospital_id();
-            
 
-            $vaccine_detail = ["id"=>NULL,"health_id"=>$_POST["add-patient-health-id"],
-             "date"=> $_POST["add-patient-vaccinated-date"],
-             "dose" => $_POST["add-patient-dose"],
-             "vaccine_name"=> $_POST["add-patient-vaccination-name"],  
-             "hospital_id"=> $hospital_id, 
-             "vaccinated_place"=> $_POST["add-patient-vaccinated-place"] ,  
-             "comments" => $_POST["add-patient-comment"]];
 
-             $new_vaccine = $this->record_factory->get_record('vaccinations', $vaccine_detail);
-             // not checking health id exists since we already in a existing health id and the field is auto filled
-            
-                if($center->add_record($new_vaccine)){
-                    header('location:'.URL_ROOT.'/pages/vaccination?success'); 
-                } 
-                else{
-                    die("Something went wrong");
-                }
-            
+            $vaccine_detail = [
+                "id" => NULL, "health_id" => $_POST["add-patient-health-id"],
+                "date" => $_POST["add-patient-vaccinated-date"],
+                "dose" => $_POST["add-patient-dose"],
+                "vaccine_name" => $_POST["add-patient-vaccination-name"],
+                "hospital_id" => $hospital_id,
+                "vaccinated_place" => $_POST["add-patient-vaccinated-place"],
+                "comments" => $_POST["add-patient-comment"]
+            ];
+
+            $new_vaccine = $this->record_factory->get_record('vaccinations', $vaccine_detail);
+            // not checking health id exists since we already in a existing health id and the field is auto filled
+
+            if ($center->add_record($new_vaccine)) {
+                header('location:' . URL_ROOT . '/pages/vaccination?success');
+            } else {
+                die("Something went wrong");
+            }
         }
 
-        $_SESSION["is_admin"]?header('location:'.URL_ROOT.'/pages/index'):$this->view('/pages/vaccination', $data);
+        $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/vaccination', $data);
     }
-
+//TODO: why only admin ????
     //to change or view user details
     public function settings()
     {
@@ -369,29 +423,29 @@ class Pages extends Controller
         //Check whether users array is updated
         if (isset($_POST["users"])) {
             // if yes, update database
-            $this->admin_model->update_user_details($_POST["users"]);
+            $this->user_handler->update_user_details($_POST["users"]);
         } //Check whether passwords array is updated
         else if (isset($_POST['password-changed'])) {
             // if yes, take the errors
-            $errors = $this->admin_model->update_password_details($_POST["passwords"]);
+            $errors = $this->user_handler->update_password_details($_POST["passwords"]);
         }
         //Retrieve details from the database
-        $records = $this->admin_model->load_user_details();
+        $records = $this->user_handler->load_loggedin_user();
 
         if (strlen($errors) !== 0) {
             $records['errors'] = $errors;
         }
         //Retrieved data will be shown in the settings page
-        $_SESSION["is_admin"]?$this->view('/pages/admin_settings', $records):header('location:'.URL_ROOT.'/pages/index');
+        $_SESSION["is_admin"] ? $this->view('/pages/admin_settings', $records) : header('location:' . URL_ROOT . '/pages/index');
     }
 
     public function data_management()
     {
         $records = [];
         $rows = [
-            "antigen_tests" => ["HealthID", "Test status","place"],
+            "antigen_tests" => ["HealthID", "Test status", "place"],
             "covid_deaths" => ["HealthID", "Place", "Comments"],
-            "pcr_tests" => ["HealthID", "Test Status","Place"],
+            "pcr_tests" => ["HealthID", "Test Status", "Place"],
             "vaccinations" => ["HealthID", "Dose", "Name of Vaccine", "Conducted Place", "Comments"]
         ];
 
@@ -408,17 +462,17 @@ class Pages extends Controller
             $results_set = $center->give_all_records();
 
             foreach ($results_set as $result) {
-                array_push($records,$center->to_array($result));
+                array_push($records, $center->to_array($result));
             }
 
             $records["type"] = $rows[$type];
             array_push($records, $type);
-            
+
             $this->view('/pages/data_management', $records);
             return;
         }
 
-        $_SESSION["is_admin"]?$this->view('/pages/data_management'):header('location:'.URL_ROOT.'/pages/index');
+        $_SESSION["is_admin"] ? $this->view('/pages/data_management') : header('location:' . URL_ROOT . '/pages/index');
     }
 
     public function data_delete()
@@ -434,16 +488,16 @@ class Pages extends Controller
 
     public function user_management()
     {
-        $hos_id = $_SESSION['hospital_id'] ;  //relevent hospital id
+        $hos_id = $_SESSION['hospital_id'];  //relevent hospital id
         $data = $this->user_handler->find_All_Users($hos_id);      //array list of users
-        
+
         //add new deo
         if (isset($_POST['nw_deo_submit'])) {
 
-            
-            
-            $deo = new User(NULL,$_POST['deo_username'],$_POST['password'],$hos_id,$_POST['deo_email'],0);
-          
+
+
+            $deo = new User(NULL, $_POST['deo_username'], $_POST['password'], $hos_id, $_POST['deo_email'], 0);
+
             //checking whether an existing email
             if ($this->user_handler->email_exist($deo->get_user_email())) {
 
@@ -472,31 +526,14 @@ class Pages extends Controller
 
 
 
-        $_SESSION["is_admin"]?$this->view('/pages/user_management',$data):header('location:'.URL_ROOT.'/pages/index');
+        $_SESSION["is_admin"] ? $this->view('/pages/user_management', $data) : header('location:' . URL_ROOT . '/pages/index');
     }
 
     public function logout()
-    {   
+    {
         $this->user_handler->logout();
         header('location:' . URL_ROOT . '/users/login');
     }
 
-    private function send_email($reciver,$subject,$content){
-        ini_set('display_errors',1);
-        error_reporting(E_ALL);
-        
-        $from = "squ4doption@gmail.com";
-        $to = $reciver;
-        $subject = $subject;
-        $txt = $content;
-        $headers = "From: ".$from ;
-        
-        
-        if(mail($to,$subject,$txt,$headers)){
-            echo "Email sent";
-        }else{
-            echo "Sorry";
-        }
-    }
 
 }
