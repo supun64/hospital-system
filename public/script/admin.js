@@ -1,8 +1,10 @@
 //for displaying the division for the particular option
 var sub_division = document.querySelector('.sub-division');
 var side_bar = document.querySelector('.dashboard-sidebar-container');
-var main_overlay = document.querySelector(".sub-division-main");
+
 var toggle_button = document.querySelector('.dashboard-toggle-icon');
+
+var user_credentials = document.querySelector(".dashboard-user-credentials");
 
 //for minimizing the side banner
 toggle_button.onclick = function(){
@@ -18,8 +20,11 @@ toggle_button.onclick = function(){
     
     if (class_Name.includes("side-minimized")) {
         side_bar.className = "dashboard-sidebar-container";
+        user_credentials.className = "dashboard-user-credentials";
     } else {
         side_bar.className = "dashboard-sidebar-container side-minimized";
+        user_credentials.className = "dashboard-user-credentials dashboard-user-credentials-shrink";
+
     }
     
 };

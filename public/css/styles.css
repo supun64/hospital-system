@@ -153,14 +153,39 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 .dashboard-user-credentials {
-  float: left;
   padding: 0;
-  width: 50%;
-  font-size: 8px;
-  font-weight: bold;
-  line-height: 28px;
-  color: white;
+  width: 80%;
+  font-size: 12px;
+  font-weight: 600;
+
+
+  line-height: 20px;
+  letter-spacing: 2px;
+
+  color: rgb(0, 0, 0);
+
+  transition: all .2s ease-in-out;
 }
+
+.dashboard-user-credentials-shrink{
+  font-size: 0px;
+  line-height: 5px;
+
+  transition: all .2s ease-in-out;
+}
+
+.dashboard-account-details {
+  border-bottom: 2px solid white;
+  display: flex;
+  flex-direction: row;
+
+  height: auto;
+}
+
+.dashboard-credential-label{
+  padding: 6px 0;
+}
+
 .dashboard-icon,
 .dashboard-toggle-icon {
   margin: 0;
@@ -183,6 +208,8 @@ body {
   width: 20%;
   min-width: 60px;
   box-sizing: border-box;
+
+  transition: all .2s ease-in-out;
 }
 
 .dashboard-side-bar {
@@ -198,9 +225,12 @@ body {
   background-color: #0d6dfdd0;
   backdrop-filter: blur(2px);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
 .side-minimized {
   width: 60px;
+
+  transition: all .2s ease-in-out;
 }
 
 .dashboard-side-bar li {
@@ -219,13 +249,10 @@ body {
   line-height: 35px;
   font-size: 15px;
   font-weight: bold;
+
+  letter-spacing: 6px;
 }
-.dashboard-side-bar li:nth-child(1) {
-  border-bottom: 3px solid white;
-  display: flex;
-  flex-direction: row;
-  font-size: 8px;
-}
+
 .dashboard-side-bar li a {
   text-decoration: none;
   width: 100%;
@@ -298,6 +325,8 @@ body {
   right:0;
   height:100%;
   width:79%;
+
+  transition: all .2s ease-in-out;
   
 }
 
@@ -335,6 +364,8 @@ body {
 }
 .division-maximized{
   width: 95%;
+
+  transition: all .2s ease-in-out;
 }
 .data-edit-button{
   font-size: 20px;
