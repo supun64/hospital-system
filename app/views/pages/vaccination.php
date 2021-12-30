@@ -1,6 +1,6 @@
 <?php require_once APP_ROOT . "/views/pages/user_dashboard.php" ?>
 <div class='sub-division sub-division-user'>
-    <main class="sub-division-main">
+    
         <?php
         if (isset($_GET['not-user'])) { ?>
             <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert">
@@ -17,6 +17,8 @@
             </div>
         <?php } ?>
         <section class="main-info">
+
+        <main class="sub-division-main">
 
 
             <!-- covid-shrunk-search class should add after the search -->
@@ -180,6 +182,7 @@
 
 
                 </div>
+                </main>
 
                 <!-- This is the UI modal for add new vaccinated person -->
                 <div class="modal fade" id="add-new-vaccination" tabindex="-1" aria-labelledby="vac-forum" aria-hidden="true">
@@ -243,7 +246,7 @@
 
         </section>
 
-    </main>
+
 
 
 
