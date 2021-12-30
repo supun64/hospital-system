@@ -144,6 +144,9 @@ class Pages extends Controller
         $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/antigen', $data);
     }
 
+
+//TODO: different from others -> invalid user id, 
+
     public function covid_deaths()
     {
 
@@ -407,7 +410,7 @@ class Pages extends Controller
 
         $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/vaccination', $data);
     }
-
+//TODO: why only admin ????
     //to change or view user details
     public function settings()
     {
@@ -527,22 +530,5 @@ class Pages extends Controller
         header('location:' . URL_ROOT . '/users/login');
     }
 
-    private function send_email($reciver, $subject, $content)
-    {
-        ini_set('display_errors', 1);
-        error_reporting(E_ALL);
 
-        $from = "squ4doption@gmail.com";
-        $to = $reciver;
-        $subject = $subject;
-        $txt = $content;
-        $headers = "From: " . $from;
-
-
-        if (mail($to, $subject, $txt, $headers)) {
-            echo "Email sent";
-        } else {
-            echo "Sorry";
-        }
-    }
 }

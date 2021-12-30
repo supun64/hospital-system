@@ -1,8 +1,5 @@
-<?php require APP_ROOT . '/views/includes/header.php';  ?>
-
-
-
-<body>
+<?php require_once APP_ROOT."/views/pages/user_dashboard.php"?>
+<div class= 'sub-division'>
 <?php 
 if(isset($_GET['not-user'])){?>
     <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert" >
@@ -246,6 +243,15 @@ if(isset($_GET['success'])){?>
     </section>
 
 
-    <script src="<?php echo URL_ROOT; ?>/public/script/vaccine.js"></script>
 
-</body>
+</div>
+
+<script src="<?php echo URL_ROOT; ?>/public/script/vaccine.js"></script>
+<script src="<?=URL_ROOT?>./public/script/admin.js"></script>
+<?php require_once APP_ROOT."/views/includes/footer.php"?>
+
+
+
+
+
+
