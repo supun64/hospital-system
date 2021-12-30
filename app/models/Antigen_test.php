@@ -41,10 +41,6 @@
             return $this->hospital_id;
         }
 
-        public function get_place() {
-            return $this->place;
-        }
-    
         public function set_id(int $id) {
             $this->id = $id;
         }

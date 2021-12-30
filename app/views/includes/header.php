@@ -23,4 +23,8 @@
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
     </head>
 
+    <!-- Google graph -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
 
