@@ -139,7 +139,8 @@ if(isset($_GET['duplicate'])){?>
 
 <?php
 
-if(isset($_GET['success'])){
+
+if($data['notification']!=[]){
     ini_set('display_errors',1);
     error_reporting(E_ALL);
     
@@ -150,6 +151,6 @@ if(isset($_GET['success'])){
     $headers = "From: ".$from ;
     
     mail($to,$subject,$txt,$headers);
-    }
+}
 
-?> 
+?>

@@ -493,7 +493,7 @@ class Pages extends Controller
         if (isset($_POST['nw_deo_submit'])) {
 
 
-
+            
             $deo = new User(NULL, $_POST['deo_username'], $_POST['password'], $hos_id, $_POST['deo_email'], 0);
 
             //checking whether an existing email
@@ -509,19 +509,11 @@ class Pages extends Controller
                     $email = $deo->get_user_email();
                     $subject = "Data Entry Operator Registration";
                     $content =  "Please use your email address to login to our system.\nHospital ID: ".$_SESSION['hospital_id']."\nHospital Name: ".$_SESSION['hospitalname']."\nTemporary Password: ".$_POST['password'];
-                  
-                    ini_set('display_errors',1);
-                    error_reporting(E_ALL);
-                    
-                    $from = "squ4doption@gmail.com";
-                    $to = $email;
-                    $subject = $subject;
-                    $txt = $content;
-                    $headers = "From: ".$from ;
-                    
-                    mail($to,$subject,$txt,$headers);
+                    $data['notification'] = [$email, $subject, $content];
 
-                    header('location:' . URL_ROOT . '/pages/user_management');
+                    //header('location:' . URL_ROOT . '/pages/user_management');
+                    $data['users'] = $this->user_handler->find_All_Users($hos_id);      //array list of users
+                    $this->view('/pages/user_management', $data);
                     
                 } else {
                     die('Something went wrong');
