@@ -1,5 +1,5 @@
 <?php require_once APP_ROOT . "/views/pages/user_dashboard.php" ?>
-<div class='sub-division sub-division-user'>
+<div class='sub-division'>
 
         <?php $cur_hos = $_SESSION['hospital_id']; ?>
         <input type="text" id="cur-hos" hidden value="<?php echo $cur_hos ?>">

@@ -180,14 +180,11 @@ body {
   top: 0;
   left: 0;
   height: 100%;
-  width: 18%;
+  width: 20%;
   min-width: 60px;
   box-sizing: border-box;
 }
 
-.admin{
-  width:20%;
-}
 .dashboard-side-bar {
   margin: 0;
   width: 100%;
@@ -959,6 +956,8 @@ body {
 /* General css for dash board */
 .sub-division-main{
   margin-top: 10px;
+
+  width: 100%;
 
   min-height: 100%;
 

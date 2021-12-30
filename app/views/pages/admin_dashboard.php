@@ -5,7 +5,7 @@ background-repeat: repeat;
 background-attachment: fixed;">
     
 <div class="dashboard-container" >
-    <div class="dashboard-sidebar-container admin">
+    <div class="dashboard-sidebar-container">
       <div class="dashboard-banner">
           <span class="dashboard-toggle-icon"><i class='bx bx-menu'></i></span>
           <span class="dashboard-text">Dashboard</span>

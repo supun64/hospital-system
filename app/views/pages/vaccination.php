@@ -1,5 +1,5 @@
 <?php require_once APP_ROOT . "/views/pages/user_dashboard.php" ?>
-<div class='sub-division sub-division-user'>
+<div class='sub-division'>
     
         <?php
         if (isset($_GET['not-user'])) { ?>

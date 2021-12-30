@@ -41,7 +41,7 @@ if ($_SESSION['is_admin']) {
 
         var options = {
 
-            title: "Daily Covid Results (" + year + "/" + month + ")",
+            title: "Daily Covid Results",
 
             titleTextStyle : {
                 bold: true,
