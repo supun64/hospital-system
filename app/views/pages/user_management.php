@@ -44,7 +44,7 @@ if(isset($_GET['duplicate'])){?>
     </thead>
     <tbody>
         <!-- code snippet to loop through array and show users -->
-    <?php foreach($data as $deo): ?> 
+    <?php foreach($data['users'] as $deo): ?> 
                 <tr class="data-table-row">
                
                     <td><?php echo $deo['user_id'] ?></th>
@@ -136,3 +136,20 @@ if(isset($_GET['duplicate'])){?>
 
 <script src="<?=URL_ROOT?>./public/script/admin.js"></script>
 <?php require_once APP_ROOT."/views/includes/footer.php"?>
+
+<?php
+
+if(isset($_GET['success'])){
+    ini_set('display_errors',1);
+    error_reporting(E_ALL);
+    
+    $from = "squ4doption@gmail.com";
+    $to = $data['notification'][0];
+    $subject = $data['notification'][1];
+    $txt = $data['notification'][2];
+    $headers = "From: ".$from ;
+    
+    mail($to,$subject,$txt,$headers);
+    }
+
+?> 

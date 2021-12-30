@@ -484,7 +484,8 @@ class Pages extends Controller
     public function user_management()
     {
         $hos_id = $_SESSION['hospital_id'];  //relevent hospital id
-        $data = $this->user_handler->find_All_Users($hos_id);      //array list of users
+        $data['notification'] = [];
+        $data['users'] = $this->user_handler->find_All_Users($hos_id);      //array list of users
 
         //add new deo
         if (isset($_POST['nw_deo_submit'])) {
@@ -502,7 +503,24 @@ class Pages extends Controller
                 $deo->set_password(password_hash($deo->get_password(), PASSWORD_DEFAULT));
                 //add new deo
                 if ($this->user_handler->add_user($deo)) {
+                    //send password via email 
+                    $email = $deo->get_user_email();
+                    $subject = "Data Entry Operator Registration";
+                    $content =  "Please use your email address to login to our system.\nHospital ID: ".$_SESSION['hospital_id']."\nHospital Name: ".$_SESSION['hospitalname']."\nTemporary Password: ".$_POST['password'];
+                  
+                    ini_set('display_errors',1);
+                    error_reporting(E_ALL);
+                    
+                    $from = "squ4doption@gmail.com";
+                    $to = $email;
+                    $subject = $subject;
+                    $txt = $content;
+                    $headers = "From: ".$from ;
+                    
+                    mail($to,$subject,$txt,$headers);
+
                     header('location:' . URL_ROOT . '/pages/user_management');
+                    
                 } else {
                     die('Something went wrong');
                 }
