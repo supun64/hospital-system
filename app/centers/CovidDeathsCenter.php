@@ -1,6 +1,7 @@
 <?php
 class CovidDeathsCenter extends COVID_Department
 {
+    private $observer;
 
     public function __construct()
     {
@@ -20,6 +21,7 @@ class CovidDeathsCenter extends COVID_Department
         $result = $this->db->insert("covid_deaths", $data);
 
         if ($result) {
+            $this->observer->increment_count();
             return true;
         } else {
             return false;
@@ -91,4 +93,20 @@ class CovidDeathsCenter extends COVID_Department
         $covid_death = $this->factory->get_record("covid_deaths", $result_set);
         return $covid_death;
     }
+
+    public function set_observer($observer){
+        if($this->observer == NULL){
+            $this->observer = $observer;
+        }
+    }
+
+    public function unset_observer(){
+        if($this->observer != NULL){
+            $this->observer = NUll;
+        }
+    }
+
+
+
+
 }

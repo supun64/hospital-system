@@ -10,6 +10,7 @@ class Pages extends Controller
         $this->record_factory = Factory::getFactory("RecordFactory");
         $this->center_factory = Factory::getFactory("CentersFactory");
         $this->user_handler = $this->model('UserHandler');
+        $this->chart_loader = $this->model('ChartLoader');
 
         //if someone tries to access the pages without logging in, they will be redirected to the users/index page
         if (!$this->user_handler->is_logged_in())
@@ -19,7 +20,10 @@ class Pages extends Controller
     public function index()
     {
        
-        $this->view('/pages/home');
+        $data['monthly_result'] = $this->chart_loader->load_monthly_result();
+
+
+        $this->view('/pages/home',$data);
     }
 
 
@@ -31,7 +35,7 @@ class Pages extends Controller
         $data['notification'] = [];
 
         $center = $this->center_factory->get_center('antigen_tests');
-
+        $center->set_observer(new AntigenObserver());
         // code to search a vaccination
 
         if (isset($_POST["antigen-search"])) {
@@ -153,6 +157,7 @@ class Pages extends Controller
     {
 
         $death_center = $this->center_factory->get_center('covid_deaths');
+        $death_center->set_observer(new CovidDeathObserver());
         $data = [];
         if (isset($_POST["death-search-bar-input"]) || isset($_GET['updated'])) {
             $data['hospital_id'] = $death_center->get_hospital_id();
@@ -229,7 +234,7 @@ class Pages extends Controller
         $data['notification'] = [];
 
         $center = $this->center_factory->get_center('pcr_tests');
-
+        $center->set_observer(new PcrObserver());
         // code to search a vaccination
 
         if (isset($_POST["pcr-search"])) {
@@ -336,7 +341,7 @@ class Pages extends Controller
             $id = $citizen->get_id();
             $name = $citizen->get_name();
 
-            if ($email) {
+            if ($email && $updated_record) {
                 $subject = "PCR Test result by " . $_SESSION['hospitalname'];
                 $content = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "PCR ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
                 $data['notification'] = [$email, $subject, $content];
@@ -434,8 +439,8 @@ class Pages extends Controller
         if (strlen($errors) !== 0) {
             $records['errors'] = $errors;
         }
-        //Retrieved data will be shown in the settings page
-        $_SESSION["is_admin"] ? $this->view('/pages/admin_settings', $records) : header('location:' . URL_ROOT . '/pages/index');
+       
+         $this->view('/pages/settings', $records) ;
     }
 
     public function data_management()
@@ -516,7 +521,7 @@ class Pages extends Controller
                     //header('location:' . URL_ROOT . '/pages/user_management');
                     $data['users'] = $this->user_handler->find_All_Users($hos_id);      //array list of users
                     $this->view('/pages/user_management', $data);
-                    
+                
                 } else {
                     die('Something went wrong');
                 }
