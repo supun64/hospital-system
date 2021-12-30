@@ -1,4 +1,11 @@
-<?php require_once APP_ROOT . "/views/pages/admin_dashboard.php" ?>
+<?php 
+if($_SESSION['is_admin']){
+    require_once APP_ROOT . "/views/pages/admin_dashboard.php" ;
+}else{
+    require_once APP_ROOT . "/views/pages/user_dashboard.php" ;
+}
+
+?>
 
 <!-- This is the code of the line chart -->
 <script type="text/javascript">

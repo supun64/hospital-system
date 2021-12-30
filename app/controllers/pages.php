@@ -18,13 +18,10 @@ class Pages extends Controller
 
     public function index()
     {
-        $_SESSION["is_admin"] ? $this->view('/pages/admin_home') : $this->view('/pages/user_dashboard');
+       
+        $this->view('/pages/home');
     }
 
-    public function home()
-    {
-        $_SESSION["is_admin"]?header('location:'.URL_ROOT.'/pages/index'):$this->view('/pages/home');
-    }
 
     public function antigen()
     {
