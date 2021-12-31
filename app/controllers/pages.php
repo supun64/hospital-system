@@ -21,7 +21,8 @@ class Pages extends Controller
     public function index()
     {
 
-        $data['monthly_result'] = $this->chart_loader->load_monthly_result();
+        $data['monthly_result'] = $this->chart_loader->load_last_thirty();
+        $data['total'] = $this->chart_loader->load_total();
 
 
         $this->view('/pages/home', $data);

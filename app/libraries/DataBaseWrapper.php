@@ -121,19 +121,24 @@
 
         //for ChartLoader
 
-        public function give_monthly_result(){
-            $cur = date("Y-m-");
-            $sql = "SELECT * FROM report WHERE date LIKE '$cur%'";
+        public function load_range($table,$key,$range){
+
+            $sql = "SELECT * FROM $table ORDER BY $key DESC LIMIT $range";
             $this->db->sql_execute($sql);
             $result = $this->db->result_set();
             return $result;
         }
 
+        public function count_rows($table,$column){
+            $sql = "SELECT SUM($column) FROM $table";
+            $this->db->sql_execute($sql);
+            $result = $this->db->result_set();
+            return $result[0];
+
+        }
 
 
-
-
-
+        //other
 
         public function register($hos_id){
             $sql = "UPDATE hospitals SET is_registered = 1 WHERE hospital_id = $hos_id";
