@@ -284,7 +284,7 @@
                     </form>
                 </div>
             </div>
-            <<<<<<< HEAD </section>
+         </section>
 </div>
 
 <script>
