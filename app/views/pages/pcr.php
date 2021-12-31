@@ -278,23 +278,3 @@
 <script src="<?php echo URL_ROOT; ?>/public/script/pcr.js"></script>
 
 <?php require_once APP_ROOT . "/views/includes/footer.php" ?>
-
-
-
-
-<?php
-
-if (isset($_GET['updated']) && $data['notification'] != []) {
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
-
-    $from = "squ4doption@gmail.com";
-    $to = $data['notification'][0];
-    $subject = $data['notification'][1];
-    $txt = $data['notification'][2];
-    $headers = "From: " . $from;
-
-    mail($to, $subject, $txt, $headers);
-}
-
-?>

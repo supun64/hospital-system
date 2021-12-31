@@ -161,18 +161,3 @@
 
 <script src="<?=URL_ROOT?>./public/script/admin.js"></script>
 <?php require_once APP_ROOT."/views/includes/footer.php"?>
-
-<?php
-    if($data['notification']!=[]){
-        ini_set('display_errors',1);
-        error_reporting(E_ALL);
-        
-        $from = "squ4doption@gmail.com";
-        $to = $data['notification'][0];
-        $subject = $data['notification'][1];
-        $txt = $data['notification'][2];
-        $headers = "From: ".$from ;
-        
-        mail($to,$subject,$txt,$headers);
-    }
-?>
