@@ -52,6 +52,7 @@ class RecordFactory
             case 'vaccinations':
                 return new Vaccination(
                     $records['id'],
+                    $records['batch_num'],
                     $records['health_id'],
                     $records['date'],
                     $records['dose'],

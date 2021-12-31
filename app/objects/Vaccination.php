@@ -2,6 +2,7 @@
     class Vaccination {
 
         private  $id;
+        private $batch_num;
         private  $health_id;
         private  $date;
         private  $dose;
@@ -10,8 +11,9 @@
         private  $vaccinated_place;
         private  $comments;
     
-        public function __construct( $id,  $health_id,  $date,  $dose,  $vaccine_name,  $hospital_id,  $vaccinated_place,  $comments) {
+        public function __construct( $id, $batch_num,  $health_id,  $date,  $dose,  $vaccine_name,  $hospital_id,  $vaccinated_place,  $comments) {
             $this->id = $id;
+            $this->batch_num = $batch_num;
             $this->health_id = $health_id;
             $this->date = $date;
             $this->dose = $dose;
@@ -23,6 +25,10 @@
     
         public function get_id() {
             return $this->id;
+        }
+
+        public function get_batch_num() {
+            return $this->batch_num;
         }
     
         public function get_health_id() {
@@ -55,6 +61,10 @@
     
         public function set_id( $id) {
             $this->id = $id;
+        }
+
+        public function set_batch( $batch_num) {
+            $this->batch_num = $batch_num;
         }
     
         public function set_health_id( $health_id) {

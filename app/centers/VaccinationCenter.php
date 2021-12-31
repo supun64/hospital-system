@@ -9,7 +9,8 @@ class VaccinationCenter extends COVID_Department{
 
     public  function add_record($record_obj){
 
-        $data = ["health_id"=>$record_obj->get_health_id(),
+        $data = ["batch_num" => $record_obj->get_batch_num(),
+                "health_id"=>$record_obj->get_health_id(),
                 "date"=>$record_obj->get_date(),
                 "dose"=>$record_obj->get_dose(),
                 "vaccine_name"=>$record_obj->get_vaccine_name(),
@@ -57,6 +58,7 @@ class VaccinationCenter extends COVID_Department{
 
     public function to_array($record_obj){
         return ["id"=>$record_obj->get_id(),
+                "batch_num"=>$record_obj->get_batch_num(),
                 "health_id"=>$record_obj->get_health_id(),
                 "date"=>$record_obj->get_date(),
                 "dose"=>$record_obj->get_dose(),
