@@ -22,13 +22,10 @@ if ($_SESSION['is_admin']) {
 
         data.addRows([
 
-
-            <?php $count = 1; ?>
             <?php foreach ($data['monthly_result'] as $monthly_res) {
                 $date = explode('-', $monthly_res['date'])[2];
                 echo "['" . $monthly_res['date'] . "'," . $monthly_res['addmit'] . "," . $monthly_res['death'] . "],";
 
-                $count++;
             }
             ?>
 
@@ -41,7 +38,7 @@ if ($_SESSION['is_admin']) {
 
         var options = {
 
-            title: "Daily Covid Results",
+            title: "Daily Covid Results - Past 30 Days",
 
             titleTextStyle : {
                 bold: true,
@@ -93,9 +90,9 @@ if ($_SESSION['is_admin']) {
 
         var data = google.visualization.arrayToDataTable([
             ['Case Name', 'Count'],
-            ['Recovered', 20],
-            ['Active Cases', 11],
-            ['Deaths', 2]
+            ['Recovered', <?php echo $data['total']['recover'] ?>],
+            ['Active Cases', <?php echo $data['total']['new'] ?>],
+            ['Deaths', <?php echo $data['total']['death'] ?>]
         ]);
 
         var options = {
@@ -149,38 +146,12 @@ if ($_SESSION['is_admin']) {
       function drawColChart() {
         var data = google.visualization.arrayToDataTable([
           ['Date', 'PCR positive', 'Antigen Positive'],
-          ['2021-12-01', 1170, 460],
-          ['2021-12-02', 660, 1120],
-          ['2021-12-03', 1000, 400],
-          ['2021-12-04', 1170, 460],
-          ['2021-12-05', 660, 1120],
-          ['2021-12-06', 1000, 400],
-          ['2021-12-07', 1170, 460],
-          ['2021-12-08', 1170, 460],
-          ['2021-12-09', 660, 1120],
-          ['2021-12-10', 1000, 400],
-          ['2021-12-11', 1170, 460],
-          ['2021-12-12', 1000, 400],
-          ['2021-12-13', 1170, 460],
-          ['2021-12-14', 660, 1120],
-          ['2021-12-15', 1030, 540],
-          ['2021-12-16', 1000, 400],
-          ['2021-12-17', 1170, 460],
-          ['2021-12-18', 660, 1120],
-          ['2021-12-19', 1000, 400],
-          ['2021-12-20', 1170, 460],
-          ['2021-12-21', 660, 1120],
-          ['2021-12-22', 1000, 400],
-          ['2021-12-23', 1170, 460],
-          ['2021-12-24', 660, 1120],
-          ['2021-12-25', 1000, 400],
-          ['2021-12-26', 1170, 460],
-          ['2021-12-27', 660, 1120],
-          ['2021-12-28', 1170, 460],
-          ['2021-12-29', 660, 1120],
-          ['2021-12-30', 1000, 400],
-          ['2021-12-31', 1170, 460]
-          
+
+        <?php foreach ($data['monthly_result'] as $monthly_res) {             
+                echo "['" . $monthly_res['date'] . "'," . $monthly_res['pcr'] . "," . $monthly_res['antigen'] . "],";
+
+            }
+            ?>
         ]);
 
         var options = {
@@ -260,7 +231,12 @@ if ($_SESSION['is_admin']) {
                 </div>
 
             </header>
-
+            
+            <?php 
+                    $today = $data['monthly_result'][sizeof($data['monthly_result'])-1];
+                    //var_dump($today);
+                    
+            ?>
             <section calss="containter">
 
                 <!-- Row - 1 Daily update and daily stats -->
@@ -275,7 +251,7 @@ if ($_SESSION['is_admin']) {
                                 COVID STATICTICS
                             </span>
                             <span class="home-stat-subtitle">
-                                Last 24 hours
+                             Today : <?php echo $today['date']; ?>
                             </span>
 
                         </header>
@@ -290,7 +266,7 @@ if ($_SESSION['is_admin']) {
 
                             <div class="col">
                                 <span class="home-stat-labal">New Cases <br>
-                                    <h3 class="text-primary">400</h3>
+                                    <h3 class="text-primary"><?php echo $today['addmit']; ?></h3>
                                 </span>
 
                             </div>
@@ -306,7 +282,7 @@ if ($_SESSION['is_admin']) {
 
                             <div class="col">
                                 <span class="home-stat-labal">Deaths <br>
-                                    <h3 class="text-danger">69</h3>
+                                    <h3 class="text-danger"><?php echo $today['death']; ?></h3>
                                 </span>
 
                             </div>
@@ -322,7 +298,7 @@ if ($_SESSION['is_admin']) {
 
                             <div class="col">
                                 <span class="home-stat-labal">Recovered <br>
-                                    <h3 class="text-success">96</h3>
+                                    <h3 class="text-success"><?php echo $today['discharge']; ?></h3>
                                 </span>
 
                             </div>
@@ -332,7 +308,6 @@ if ($_SESSION['is_admin']) {
                     </div>
 
                 </div>
-
                 <!-- Row - 2 Pie chart and total stats -->
 
                 <div class="row home-daily-chart">
@@ -361,7 +336,7 @@ if ($_SESSION['is_admin']) {
 
                             <div class="col">
                                 <span class="home-stat-labal">Total Cases <br>
-                                    <h3 class="text-primary">400</h3>
+                                    <h3 class="text-primary"><?php echo $data['total']['new']; ?></h3>
                                 </span>
 
                             </div>
@@ -377,7 +352,7 @@ if ($_SESSION['is_admin']) {
 
                             <div class="col">
                                 <span class="home-stat-labal">Deaths<br>
-                                    <h3 class="text-danger">69</h3>
+                                    <h3 class="text-danger"><?php echo $data['total']['death']; ?></h3>
                                 </span>
 
                             </div>
@@ -393,7 +368,7 @@ if ($_SESSION['is_admin']) {
 
                             <div class="col">
                                 <span class="home-stat-labal">Recovered <br>
-                                    <h3 class="text-success">96</h3>
+                                    <h3 class="text-success"><?php echo $data['total']['recover']; ?></h3>
                                 </span>
 
                             </div>

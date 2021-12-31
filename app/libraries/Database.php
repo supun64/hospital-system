@@ -43,6 +43,7 @@ class Database{
         }
     }
 
+
     //return an array of the result
     function result_set(){
         return mysqli_fetch_all($this->result, MYSQLI_ASSOC);
