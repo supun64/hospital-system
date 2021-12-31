@@ -50,7 +50,7 @@ public function __construct()
             $to = $_POST['email'];
             $subject = "Hospital Verification Code";
             $txt = $_POST['ran-1'];
-
+            $txt = nl2br($txt);
             $this->mail->send_email($to,$subject,$txt);
             
         }

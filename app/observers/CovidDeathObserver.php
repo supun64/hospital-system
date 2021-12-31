@@ -1,6 +1,7 @@
-<?php  
+<?php
 
-class CovidDeathObserver implements ReportObserver{
+class CovidDeathObserver implements ReportObserver
+{
 
     private $db;
 
@@ -9,8 +10,8 @@ class CovidDeathObserver implements ReportObserver{
         $this->db = Database::get_instance();
     }
 
-    public function increment_count()
+    public function increment_count($status)
     {
-        $this->db->increment('report','death');
+        $this->db->increment('report', 'death');
     }
 }

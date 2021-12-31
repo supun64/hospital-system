@@ -1,4 +1,4 @@
-<?php  
+<?php
 
 require_once 'libraries/Controller.php';
 require_once 'libraries/Core.php';
@@ -33,6 +33,7 @@ require_once 'observers/ReportObserver.php';
 require_once 'observers/PcrObserver.php';
 require_once 'observers/AntigenObserver.php';
 require_once 'observers/CovidDeathObserver.php';
+require_once 'observers/CovidPatientObserver.php';
 
 
 

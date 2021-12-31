@@ -146,7 +146,9 @@ class Pages extends Controller
             if ($email && $updated_record) {
                 $subject = "Antigen Test result by " . $_SESSION['hospitalname'];
                 $content = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "Antigen ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
-                $this->mail->send_email($email, $subject, $content);
+                $content = nl2br($content);
+                $this->mail->send_email($email,$subject,$content);
+
             }
         }
         $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/antigen', $data);
@@ -242,8 +244,10 @@ class Pages extends Controller
         $data['final_record'] = [];
 
         $center = $this->center_factory->get_center('covid_patients');
+        $center->set_observer(new CovidPatientObserver());
+        $center->set_observer(new CovidDeathObserver());
         $covid_death_center = $this->center_factory->get_center('covid_deaths');
-
+        $covid_death_center->set_observer(new CovidDeathObserver());
         // code to search 
         if (isset($_POST["patient-search"])) {
 
@@ -650,11 +654,16 @@ class Pages extends Controller
                     $email = $deo->get_user_email();
                     $subject = "Data Entry Operator Registration";
                     $content =  "Please use your email address to login to our system.\nHospital ID: " . $_SESSION['hospital_id'] . "\nHospital Name: " . $_SESSION['hospitalname'] . "\nTemporary Password: " . $_POST['password'];
+<<<<<<< HEAD
                     $this->mail->send_email($email, $subject, $content);
+=======
+                    $content = nl2br($content);
+                    $this->mail->send_email($email,$subject,$content);
+>>>>>>> 216e6dd7c96e72b6434c68e2de3acb009e85707a
 
-                    //header('location:' . URL_ROOT . '/pages/user_management');
-                    $data['users'] = $this->user_handler->find_All_Users($hos_id);      //array list of users
-                    $this->view('/pages/user_management', $data);
+                    header('location:' . URL_ROOT . '/pages/user_management');
+                    //$data['users'] = $this->user_handler->find_All_Users($hos_id);      //array list of users
+                    //$this->view('/pages/user_management', $data);
                 } else {
                     die('Something went wrong');
                 }

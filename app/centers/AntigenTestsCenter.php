@@ -34,9 +34,10 @@
             $params = ["status"=>$status , "id"=>$id, "place"=>$place];
 
             $result = $this->db->update("antigen_tests","id",$params);
+            $previous_status = $this->db->findById("pcr_tests","id",$id)[0]['status'];
 
-            if($result && $status=='positive'){
-                $this->observer->increment_count();
+            if($result && ($previous_status !== $status)){
+                $this->notifyObserver($status);
             }
             return $result;
         }
@@ -90,8 +91,9 @@
             }
         }
 
+        private function notifyObserver($status){
+            $this->observer->increment_count($status);
+        }
 
 
     }
-    
-?>
