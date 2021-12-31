@@ -8,7 +8,7 @@
 
         public function __construct()
         {
-            $this->db = new DataBaseWrapper();
+            $this->db = Database::get_instance();
             $this->hospital_id = $_SESSION['hospital_id'];
             $this->factory = Factory::getFactory("RecordFactory");
             $this->citizen_factory = Factory::getFactory("CitizenFactory");

@@ -7,7 +7,7 @@ class RegistrationHandler{
 
     public function __construct()
     {
-        $this->db = new DataBaseWrapper();
+        $this->db = Database::get_instance();
     }
     
     public function get_all_hospitals(){
@@ -63,12 +63,13 @@ class RegistrationHandler{
        // }
 
         public function register($id){
-               $result =  $this->db->register($id);
-               if($result){
-                   return true;
-               }else{
-                   return false;
-               }
+            $param_list = ["is_registered"=>1 , "hospital_id"=> $id];
+            $result =  $this->db->update("hospitals","hospital_id",$param_list);
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
         }
 
 

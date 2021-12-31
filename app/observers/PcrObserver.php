@@ -6,7 +6,7 @@ class PcrObserver implements ReportObserver{
 
     public function __construct()
     {
-        $this->db = new DataBaseWrapper();
+        $this->db = Database::get_instance();
     }
 
     public function increment_count()
