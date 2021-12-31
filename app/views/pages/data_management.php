@@ -109,6 +109,10 @@
 
                                                 <form method="post"  action="<?=URL_ROOT;?>/pages/data_management?record_type=<?= $data[count($data)-1]?>">
                                                     <div class="form-floating mb-3">
+                                                        <input type="text" class="form-control" id="floatingInput" placeholder="Health ID"name="newrecord[batch_num]" value="<?=$record['batch_num']?>">
+                                                        <label for="floatingInput">Batch Number</label>
+                                                    </div>
+                                                    <div class="form-floating mb-3">
                                                         <input type="text" class="form-control" id="floatingInput" placeholder="Health ID"name="newrecord[health_id]" value="<?=$record['health_id']?>" disabled>
                                                         <label for="floatingInput">Health ID</label>
                                                     </div>
