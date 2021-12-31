@@ -1,8 +1,8 @@
-<?php 
-if($_SESSION['is_admin']){
-    require_once APP_ROOT . "/views/pages/admin_dashboard.php" ;
-}else{
-    require_once APP_ROOT . "/views/pages/user_dashboard.php" ;
+<?php
+if ($_SESSION['is_admin']) {
+    require_once APP_ROOT . "/views/pages/admin_dashboard.php";
+} else {
+    require_once APP_ROOT . "/views/pages/user_dashboard.php";
 }
 
 ?>
@@ -16,42 +16,56 @@ if($_SESSION['is_admin']){
 
     function drawCurveTypes() {
         var data = new google.visualization.DataTable();
-        data.addColumn('number', 'X')
+        data.addColumn('string', 'X')
         data.addColumn('number', 'Covid Cases');
         data.addColumn('number', 'Covid Deaths');
 
-        data.addRows([                                              
-   
+        data.addRows([
 
-            <?php $count =1;?>
-            <?php foreach($data['monthly_result'] as $monthly_res){
-                $date = explode('-',$monthly_res['date'])[2];
-            echo "[".$date.",".$monthly_res['addmit'].",".$monthly_res['death']."],";
-            
-            $count++;
+            <?php foreach ($data['monthly_result'] as $monthly_res) {
+                $date = explode('-', $monthly_res['date'])[2];
+                echo "['" . $monthly_res['date'] . "'," . $monthly_res['addmit'] . "," . $monthly_res['death'] . "],";
+
             }
             ?>
 
         ]);
         const d = new Date();
         var year = d.getFullYear();
-        var month = d.toLocaleString('default', { month: 'long' });
+        var month = d.toLocaleString('default', {
+            month: 'long'
+        });
 
         var options = {
- 
-            'title': "Daily Covid results (" + year +"/" + month +")",               
-            'width': 800,
+
+            title: "Daily Covid Results - Past 30 Days",
+
+            titleTextStyle : {
+                bold: true,
+                color: "black",
+                
+                fontSize: 14,
+
+            },
+
+            'width': 700,
             'height': 500,
-            backgroundColor: {fill:'transparent'},
+
+            'chartArea': {
+                'width': '75%',
+                'height': '70%'
+            },
+            'legend': {
+                'position': 'bottom'
+            },
+            backgroundColor: {
+                fill: 'transparent'
+            },
+
+            pointSize: 5,
 
             hAxis: {
-                title: 'Day',
-                format: '0',
-
-                viewWindow: {
-                    min: 1,
-                    max: 31
-                }
+                title: 'Date',
             },
             vAxis: {
                 title: '',
@@ -59,17 +73,114 @@ if($_SESSION['is_admin']){
                     min: 0
                 },
                 format: '0'
-            },
-            series: {
-                1: {
-                    curveType: 'function'
-                }
             }
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         chart.draw(data, options);
     }
+
+    // This is the function to draw pie chart
+    google.charts.setOnLoadCallback(drawPieChart);
+
+
+    function drawPieChart() {
+
+
+
+        var data = google.visualization.arrayToDataTable([
+            ['Case Name', 'Count'],
+            ['Recovered', <?php echo $data['total']['recover'] ?>],
+            ['Active Cases', <?php echo $data['total']['new'] ?>],
+            ['Deaths', <?php echo $data['total']['death'] ?>]
+        ]);
+
+        var options = {
+            'width': 700,
+            'height': 500,
+
+            'chartArea': {
+                'width': '75%',
+                'height': '70%'
+            },
+            'legend': {
+                'position': 'bottom'
+            },
+            backgroundColor: {
+                fill: 'transparent'
+            },
+            
+            title: 'Total Covid Results',
+
+            titleTextStyle : {
+                bold: true,
+                color: "black",
+                
+                fontSize: 14,
+
+            },
+
+            slices: {
+                1: {
+                    color: "#0d6efd"
+                },
+                0: {
+                    color: "#20c997"
+                },
+                2: {
+                    color: "#dc3545"
+                }
+            }
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+    }
+
+
+    // This is the code to draw the column chart
+    google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawColChart);
+
+      function drawColChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Date', 'PCR positive', 'Antigen Positive'],
+
+        <?php foreach ($data['monthly_result'] as $monthly_res) {             
+                echo "['" . $monthly_res['date'] . "'," . $monthly_res['pcr'] . "," . $monthly_res['antigen'] . "],";
+
+            }
+            ?>
+        ]);
+
+        var options = {
+          
+            title: 'Daily PCR/Antigen Test positive',
+
+            titleTextStyle : {
+                bold: true,
+                color: "black",
+                
+                fontSize: 14,
+
+            },
+          
+
+          backgroundColor: {
+                fill: 'transparent'
+            },
+
+            height: 500,
+            chartArea: {
+                backgroundColor: 'transparent'
+            }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
 </script>
 
 </head>
@@ -120,9 +231,163 @@ if($_SESSION['is_admin']){
                 </div>
 
             </header>
+            
+            <?php 
+                    $today = $data['monthly_result'][sizeof($data['monthly_result'])-1];
+                    //var_dump($today);
+                    
+            ?>
+            <section calss="containter">
 
-            <section calss="daily-chart">
-                <div id="chart_div" class="home-graph"></div>
+                <!-- Row - 1 Daily update and daily stats -->
+                <div class="row home-daily-chart">
+                    <div id="chart_div" class="home-graph col"></div>
+
+                    <!-- Last 24 hours update -->
+                    <div class="col-3 home-status">
+
+                        <header class="row home-stat-header">
+                            <span class="home-stat-title">
+                                COVID STATICTICS
+                            </span>
+                            <span class="home-stat-subtitle">
+                             Today : <?php echo $today['date']; ?>
+                            </span>
+
+                        </header>
+
+                        <!-- Code for new covid cases stat -->
+                        <div class="home-cases-stat row">
+
+                            <div class="col-4">
+                                <img src="<?php echo URL_ROOT; ?>/public/images/new-cases.gif" class="home-stat-icon" alt="new cases">
+
+                            </div>
+
+                            <div class="col">
+                                <span class="home-stat-labal">New Cases <br>
+                                    <h3 class="text-primary"><?php echo $today['addmit']; ?></h3>
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <!-- Code for new covid deaths stats -->
+                        <div class="home-cases-stat row">
+
+                            <div class="col-4">
+                                <img src="<?php echo URL_ROOT; ?>/public/images/new-deaths.gif" class="home-stat-icon" alt="new cases">
+
+                            </div>
+
+                            <div class="col">
+                                <span class="home-stat-labal">Deaths <br>
+                                    <h3 class="text-danger"><?php echo $today['death']; ?></h3>
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <!-- Code for new covid recoveries stats -->
+                        <div class="home-cases-stat row">
+
+                            <div class="col-4">
+                                <img src="<?php echo URL_ROOT; ?>/public/images/recovered.gif" class="home-stat-icon" alt="new cases">
+
+                            </div>
+
+                            <div class="col">
+                                <span class="home-stat-labal">Recovered <br>
+                                    <h3 class="text-success"><?php echo $today['discharge']; ?></h3>
+                                </span>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <!-- Row - 2 Pie chart and total stats -->
+
+                <div class="row home-daily-chart">
+                    <div id="piechart" class="home-graph col"></div>
+
+                    <!-- Last 24 hours update -->
+                    <div class="col-3 home-status">
+
+                        <header class="row home-stat-header">
+                            <span class="home-stat-title">
+                                COVID STATICTICS
+                            </span>
+                            <span class="home-stat-subtitle">
+                                Overall - Sri Lanka
+                            </span>
+
+                        </header>
+
+                        <!-- Code for new covid cases stat -->
+                        <div class="home-cases-stat row">
+
+                            <div class="col-4">
+                                <img src="<?php echo URL_ROOT; ?>/public/images/new-cases.gif" class="home-stat-icon" alt="new cases">
+
+                            </div>
+
+                            <div class="col">
+                                <span class="home-stat-labal">Total Cases <br>
+                                    <h3 class="text-primary"><?php echo $data['total']['new']; ?></h3>
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <!-- Code for new covid deaths stats -->
+                        <div class="home-cases-stat row">
+
+                            <div class="col-4">
+                                <img src="<?php echo URL_ROOT; ?>/public/images/new-deaths.gif" class="home-stat-icon" alt="new cases">
+
+                            </div>
+
+                            <div class="col">
+                                <span class="home-stat-labal">Deaths<br>
+                                    <h3 class="text-danger"><?php echo $data['total']['death']; ?></h3>
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <!-- Code for new covid recoveries stats -->
+                        <div class="home-cases-stat row">
+
+                            <div class="col-4">
+                                <img src="<?php echo URL_ROOT; ?>/public/images/recovered.gif" class="home-stat-icon" alt="new cases">
+
+                            </div>
+
+                            <div class="col">
+                                <span class="home-stat-labal">Recovered <br>
+                                    <h3 class="text-success"><?php echo $data['total']['recover']; ?></h3>
+                                </span>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <!-- Row - 3 Draw column chart -->
+
+                <div class="row home-daily-chart">
+                    <div id="columnchart_material" class="home-graph col"></div>
+
+                </div>
+
+
+
             </section>
 
 

@@ -150,14 +150,39 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 .dashboard-user-credentials {
-  float: left;
   padding: 0;
-  width: 50%;
-  font-size: 8px;
-  font-weight: bold;
-  line-height: 28px;
-  color: white;
+  width: 80%;
+  font-size: 12px;
+  font-weight: 600;
+
+
+  line-height: 20px;
+  letter-spacing: 2px;
+
+  color: rgb(0, 0, 0);
+
+  transition: all .2s ease-in-out;
 }
+
+.dashboard-user-credentials-shrink{
+  font-size: 0px;
+  line-height: 5px;
+
+  transition: all .2s ease-in-out;
+}
+
+.dashboard-account-details {
+  border-bottom: 2px solid white;
+  display: flex;
+  flex-direction: row;
+
+  height: auto;
+}
+
+.dashboard-credential-label{
+  padding: 6px 0;
+}
+
 .dashboard-icon,
 .dashboard-toggle-icon {
   margin: 0;
@@ -177,14 +202,13 @@ body {
   top: 0;
   left: 0;
   height: 100%;
-  width: 18%;
+  width: 20%;
   min-width: 60px;
   box-sizing: border-box;
+
+  transition: all .2s ease-in-out;
 }
 
-.admin {
-  width: 20%;
-}
 .dashboard-side-bar {
   margin: 0;
   width: 100%;
@@ -198,9 +222,12 @@ body {
   background-color: #0d6dfdd0;
   backdrop-filter: blur(2px);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
 .side-minimized {
   width: 60px;
+
+  transition: all .2s ease-in-out;
 }
 
 .dashboard-side-bar li {
@@ -219,13 +246,10 @@ body {
   line-height: 35px;
   font-size: 15px;
   font-weight: bold;
+
+  letter-spacing: 6px;
 }
-.dashboard-side-bar li:nth-child(1) {
-  border-bottom: 3px solid white;
-  display: flex;
-  flex-direction: row;
-  font-size: 8px;
-}
+
 .dashboard-side-bar li a {
   text-decoration: none;
   width: 100%;
@@ -269,11 +293,17 @@ body {
   margin-right: 25px;
 }
 
-.dashboard-side-bar li:nth-child(8) {
+/* .dashboard-side-bar li:nth-child(8) {
   margin-bottom: 120px;
+} */
+
+.dashboard-side-bar li:last-child{
+  position: absolute;
+  bottom: 53px;
 }
 
-.admin-settings {
+
+.admin-settings{
   margin-bottom: 280px;
 }
 @media screen and (max-width: 1200px) {
@@ -288,10 +318,13 @@ body {
 .sub-division {
   padding-right: 15px;
   margin: 0;
-  float: right;
-  right: 0;
-  height: 100%;
-  width: 79%;
+  float:right;
+  right:0;
+  height:100%;
+  width:79%;
+
+  transition: all .2s ease-in-out;
+  
 }
 
 .sub-division-user {
@@ -327,6 +360,8 @@ body {
 }
 .division-maximized {
   width: 95%;
+
+  transition: all .2s ease-in-out;
 }
 .data-edit-button {
   font-size: 20px;
@@ -817,8 +852,7 @@ body {
   border-radius: 10px;
 }
 
-.home-header-title {
-  margin-top: 30px;
+.home-header-title{
 
   padding: 10px;
   padding-bottom: 50px;
@@ -842,8 +876,13 @@ body {
 }
 
 /* Charts */
-.home-graph {
-  width: fit-content;
+
+.home-daily-chart{
+  margin: 0;
+}
+
+.home-graph{
+  width: 70%;
   padding: 10px;
 
   margin-top: 30px;
@@ -855,6 +894,62 @@ body {
 
   backdrop-filter: blur(1px);
 }
+
+.home-status{
+  height: 521px;
+
+  padding: 10px;
+
+  margin-left: 20px;
+  margin-top: 30px;
+
+  border-radius: 10px;
+  background-color: #ddf2fcc7;
+
+  border: 1px solid black;
+
+  backdrop-filter: blur(1px);
+
+
+}
+
+.home-stat-header{
+  margin-bottom: 50px;
+}
+
+.home-stat-title{
+  font-size: 14pt;
+  font-weight: bold;
+
+  letter-spacing: 3px;
+}
+
+.home-stat-subtitle{
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.home-cases-stat{
+  margin: 70px 0;
+}
+
+.home-stat-icon{
+  width: 70px;
+  height: auto;
+}
+
+.home-stat-labal{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12pt;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+
+
+
+
+
 
 /* 
 -
@@ -875,6 +970,8 @@ body {
 /* General css for dash board */
 .sub-division-main {
   margin-top: 10px;
+
+  width: 100%;
 
   min-height: 100%;
 

@@ -56,14 +56,13 @@
                                         </button>
                                     </td>
                                     <td>
-                                        <form action="<?=URL_ROOT; ?>/pages/data_delete?record_type=<?= $data[count($data)-1]?>" method = 'POST'>
-                                                <input type="hidden" name="id" value="<?=$record['id']?>">
-                                                <input  class="data-delete" type="image" src="<?= URL_ROOT?>/public/images/trash.png" alt="Submit">
-                                        </form>
+                                        <button class='btn btn-light' data-bs-toggle="modal" data-bs-target="#delmodalfor<?php echo $data[count($data)-1].$record['id']?>"> 
+                                            <i class='bx bxs-trash data-edit-button'></i>
+                                        </button>
                                     </td>
-                                
-                            </tr>
-                            <!-- Modal -->
+                            </tr>            
+
+                            <!-- Modal for updating-->
                             <?php if($data[count($data)-1] ==='antigen_tests' || $data[count($data)-1] ==='pcr_tests'):?>
                                 <div class="modal fade" id="modalfor<?php echo $data[count($data)-1].$record['id']?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
@@ -110,6 +109,10 @@
 
                                                 <form method="post"  action="<?=URL_ROOT;?>/pages/data_management?record_type=<?= $data[count($data)-1]?>">
                                                     <div class="form-floating mb-3">
+                                                        <input type="text" class="form-control" id="floatingInput" placeholder="Health ID"name="newrecord[batch_num]" value="<?=$record['batch_num']?>">
+                                                        <label for="floatingInput">Batch Number</label>
+                                                    </div>
+                                                    <div class="form-floating mb-3">
                                                         <input type="text" class="form-control" id="floatingInput" placeholder="Health ID"name="newrecord[health_id]" value="<?=$record['health_id']?>" disabled>
                                                         <label for="floatingInput">Health ID</label>
                                                     </div>
@@ -135,6 +138,7 @@
                                                         <button type="submit" class="btn btn-primary">Save changes</button>
                                                     </div>
                                                 </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -168,11 +172,42 @@
                                                         <button type="submit" class="btn btn-primary">Save changes</button>
                                                     </div>
                                                 </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             <?php endif;?>
-                            <?php endif;?>
+
+                            <!--Modal for deleting-->
+                            <div class="modal fade" id="delmodalfor<?php echo $data[count($data)-1].$record['id']?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body container">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <h3><i class='bx bxs-alarm-exclamation' style='color:#ff0a0a'></i></h3>
+                                                    </div>
+                                                    <div class="col-11">
+                                                        <h5>Are you sure you want to delete this record ??</h5>
+                                                    </div>
+                                                </div>
+                                            <form action="<?=URL_ROOT; ?>/pages/data_delete?record_type=<?= $data[count($data)-1]?>" method = 'POST'>
+                                                <input type="hidden" name="id" value="<?=$record['id']?>">
+
+                                                <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-danger">Confirm</button>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php endif;?>    
                         <?php endforeach;?>
                     </tbody>
                 </table>

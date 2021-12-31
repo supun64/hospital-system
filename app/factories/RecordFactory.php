@@ -5,7 +5,7 @@ class RecordFactory
 
     public function __construct()
     {
-        $this->db = new DataBaseWrapper();
+        $this->db = Database::get_instance();
     }
 
     public function get_record($recordType, $records)
@@ -52,6 +52,7 @@ class RecordFactory
             case 'vaccinations':
                 return new Vaccination(
                     $records['id'],
+                    $records['batch_num'],
                     $records['health_id'],
                     $records['date'],
                     $records['dose'],

@@ -3,7 +3,9 @@
 require_once 'libraries/Controller.php';
 require_once 'libraries/Core.php';
 require_once 'libraries/Database.php';
-require_once 'libraries/DatabaseWrapper.php';
+require_once 'libraries/class.phpmailer.php';
+require_once 'libraries/class.smtp.php';
+require_once 'libraries/MailerWrapper.php';
 require_once 'config/config.php';
 
 require_once 'objects/Citizen.php';

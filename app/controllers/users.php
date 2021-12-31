@@ -8,6 +8,7 @@ public function __construct()
  
     $this->reg_handler = $this->model('RegistrationHandler');
     $this->user_handler= $this->model('UserHandler');
+    $this->mail = new MailerWrapper();
 }
 
     public function index(){
@@ -46,21 +47,11 @@ public function __construct()
         //email verification
         if(isset($_POST['ver-submit'])){
 
-            ini_set('display_errors',1);
-            error_reporting(E_ALL);
-            
-            $from = "squ4doption@gmail.com";
             $to = $_POST['email'];
             $subject = "Hospital Verification Code";
             $txt = $_POST['ran-1'];
-            $headers = "From: ".$from ;
-            
-            
-            if(mail($to,$subject,$txt,$headers)){
-                echo "Email sent";
-            }else{
-                echo "Sorry";
-            }
+
+            $this->mail->send_email($to,$subject,$txt);
             
         }
 
