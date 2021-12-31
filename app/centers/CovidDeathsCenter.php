@@ -45,6 +45,7 @@ class CovidDeathsCenter extends COVID_Department
 
     public  function delete_record($id)
     {
+        
         return $this->db->delete("covid_deaths", "id", $id);
     }
 

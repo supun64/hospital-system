@@ -36,10 +36,11 @@ class PcrTestsCenter extends COVID_Department
         $id = $record->get_id();
 
         $params = ["status" => $status, "id" => $id, "place" => $place];
+        $previous_status = $this->db->findById("pcr_tests","id",$id)[0]['status'];
 
         $result = $this->db->update("pcr_tests", "id", $params);
 
-        if ($result) {
+        if ($result && ($previous_status !== $status)) {
             $this->notifyObserver($status);
         }
         return $result;
