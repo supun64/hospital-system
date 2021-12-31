@@ -6,7 +6,7 @@
         
         public function __construct()
         {
-            $this->db = new DataBaseWrapper();
+            $this->db = Database::get_instance();
             $this->hos_handler = new RegistrationHandler();
         }
 
@@ -93,7 +93,6 @@
 
         //save the log-in info in a session(only if the login stat are correct)
         public function log_in($useremail,$password){
-            $password = $this->db->safe($password);
             $loggedin_user = $this->findByMail($useremail);
             if($loggedin_user && password_verify($password,$loggedin_user["password"]) && $loggedin_user['hospital_id']==$_SESSION['hospital_id']){
                 session_regenerate_id();

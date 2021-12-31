@@ -459,6 +459,7 @@ class Pages extends Controller
             if ($email && $updated_record) {
                 $subject = "PCR Test result by " . $_SESSION['hospitalname'];
                 $content = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "PCR ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
+                $content = nl2br($content);
                 $this->mail->send_email($email,$subject,$content);
             }
         }
