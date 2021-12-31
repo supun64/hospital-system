@@ -35,8 +35,8 @@
 
             $result = $this->db->update("antigen_tests","id",$params);
 
-            if($result && $status=='positive'){
-                $this->observer->increment_count();
+            if($result){
+                $this->notifyObserver($status);
             }
             return $result;
         }
@@ -90,8 +90,9 @@
             }
         }
 
+        private function notifyObserver($status){
+            $this->observer->increment_count($status);
+        }
 
 
     }
-    
-?>

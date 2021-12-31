@@ -1,26 +1,26 @@
 <?php require_once APP_ROOT . "/views/pages/user_dashboard.php" ?>
 <div class='sub-division'>
-    
-        <?php $cur_hos = $_SESSION['hospital_id']; ?>
-        <input type="text" id="cur-hos" hidden value="<?php echo $cur_hos ?>">
 
-        <?php
-        if (isset($_GET['not-user'])) { ?>
-            <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert">
-                <div class="deo-manage-error-text"> Wrong Health ID !!</div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php } ?>
+    <?php $cur_hos = $_SESSION['hospital_id']; ?>
+    <input type="text" id="cur-hos" hidden value="<?php echo $cur_hos ?>">
 
-        <?php
-        if (isset($_GET['success'])) { ?>
-            <div class="alert alert-success alert-dismissible fade show deo-manage-error-box" role="alert">
-                <div class="deo-manage-error-text"> Record successfully added</div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php } ?>
+    <?php
+    if (isset($_GET['not-user'])) { ?>
+        <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert">
+            <div class="deo-manage-error-text"> Wrong Health ID !!</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php } ?>
 
-        <section class="main-info">
+    <?php
+    if (isset($_GET['success'])) { ?>
+        <div class="alert alert-success alert-dismissible fade show deo-manage-error-box" role="alert">
+            <div class="deo-manage-error-text"> Record successfully added</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php } ?>
+
+    <section class="main-info">
 
         <main class="sub-division-main">
 
@@ -170,7 +170,7 @@
                     </div>
                 <?php } ?>
 
-    </main>
+        </main>
 
 
 
@@ -251,8 +251,8 @@
                             <input type="checkbox" class="toggle-input" id="togBtn">
                             <div class="slider round">
                                 <!--ADDED HTML -->
-                                <span class="on toggle-font">Possitive</span>
-                                <span class="off toggle-font">Negetive</span>
+                                <span class="on toggle-font">Positive</span>
+                                <span class="off toggle-font">Negative</span>
                                 <!--END-->
                             </div>
                         </label>
