@@ -224,9 +224,10 @@ class Pages extends Controller
         $data['personal'] = [];
         $data['patient_history'] = [];
         $data['hospital_id'] = NULL;
-        $data['notification'] = [];
+        $data['final_record'] = [];
 
         $center = $this->center_factory->get_center('covid_patients');
+        $covid_death_center = $this->center_factory->get_center('covid_deaths');
 
         // code to search 
         if (isset($_POST["patient-search"])) {
@@ -242,9 +243,10 @@ class Pages extends Controller
                 foreach ($admission_records as $result) {
                     array_push($data["patient_history"], $center->to_array($result));
                 }
+                $data['final_record'] = ['status' => end($admission_records)->get_status(), 'hospital_id' => end($admission_records)->get_hospital_id()];
+            } else {
+                $data['final_record'] = ['status' => "", 'hospital_id' => ""];
             }
-
-            //$data['hospital_id'] = $center->get_hospital_id();
 
             if (!$data['personal']) {
                 header('location:' . URL_ROOT . '/pages/covid_patients?not-user');
@@ -254,7 +256,6 @@ class Pages extends Controller
         // This is the code to check whether user click submit button
         if (isset($_POST["add-patient-submit"])) {
 
-            // $hospital_id = (int)explode(" - ", $_POST["add-patient-hospital-name"]);
             $hospital_id = $center->get_hospital_id();
 
             $patient_detail = [
@@ -262,8 +263,8 @@ class Pages extends Controller
                 "health_id" => $_POST["add-patient-health-id"],
                 "hospital_id" => $hospital_id,
                 "admission_date" => $_POST["add-patient-admission-date"],
-                "discharge_date" => NULL,
-                "status" => "admitted",
+                "discharge_date" => "",
+                "status" =>  "Admitted",
                 "conditions" => $_POST["add-patient-conditions"]
             ];
 
@@ -277,63 +278,61 @@ class Pages extends Controller
             }
         }
 
-
         // This is the code to check whether user click update button
-        /*  if (isset($_POST["update-patient-submit"])) {
+        if (isset($_POST["update-patient-submit"])) {
+            $id = $_POST["final-health-id"];
+            if ($id) {
+                $citizen = $center->get_citizen($id);
+                if ($citizen != NULL) {
+                    $last_record = $center->load_last_record($id);
+                    $last_record["status"] = $_POST["final-status"];
+                    $last_record["discharge_date"] = $_POST["final-discharge-date"];
+                    $hospital_id = $center->get_hospital_id();
+                    $new_patient = $this->record_factory->get_record('covid_patient', $last_record);
 
-            $hospital_id = $center->get_hospital_id();
-            $patient_detail = [
-                "admission_id" => $_POST['final-admission-id'],
-                "health_id" => $_POST["final-health-id"],
-                "hospital_id" => $hospital_id,
-                "admission_date" => $_POST["final-admission-date"],
-                "status" => $_POST['final-status'],
-                "conditions" => $_POST["final-conditions"]
-            ];
+                    if ($_POST["final-status"] == "Died") {
+                        $death_details = [
+                            "id" => NULL,
+                            "health_id" => $_POST["final-health-id"],
+                            "hospital_id" => $hospital_id,
+                            "date" => $_POST["final-discharge-date"],
+                            "place" => $_SESSION["hospitalname"],
+                            "comments" => "Died at the hospital - " . $_SESSION["hospitalname"]
+                        ];
+                        $new_death = $this->record_factory->get_record('covid_deaths', $death_details);
+                        $result1 = $covid_death_center->add_record($new_death);
+                    }
+                    $data['final_record'] = ['status' => $_POST["final-status"], 'hospital_id' => $last_record["hospital_id"]];
 
-            $new_patient = $this->record_factory->get_record('covid_patient', $patient_detail);
-            if ($center->update_record($new_patient)) {
-                $admission_id = (string)$new_patient->get_id();
-                header('location:' . URL_ROOT . '/pages/covid_patients?updated=' . $patient_detail['health_id'] . "-" . $admission_id);
-            } else {
-                die("Something went wrong");
-            }
-        } */
-
-        /* //after updatting
-        if (isset($_GET['updated'])) {
-            $health_id = explode("-", $_GET['updated'])[0];
-            $pcr_id = (int)explode("-", $_GET['updated'])[1];
-
-            $citizen = $center->get_citizen($health_id);
-
-            if ($citizen != NULL) {
-
-                $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob()];    //array list of users
-            }
-            $updated_record = NULL;
-            $search_records = $center->load_details_by_id($health_id);
-            if ($search_records != NULL) {
-                foreach ($search_records as $result) {
-                    array_push($data["pcr_tests"], $center->to_array($result));
-                    if ($result->get_id() == $pcr_id) {
-                        $updated_record = $result;
+                    $result2 = $center->update_record($new_patient);
+                    if ($result1 || $result2) {
+                        $health_id = (string)$new_patient->get_health_id();
+                        header('location:' . URL_ROOT . '/pages/covid_patients?updated=' . $health_id);
+                    } else {
+                        die("Something went wrong");
                     }
                 }
             }
+        }
 
-            $data['hospital_id'] = $center->get_hospital_id();
-
-            $email = $citizen->get_email();
-            $id = $citizen->get_id();
-            $name = $citizen->get_name();
-
-            if ($email) {
-                $subject = "PCR Test result by " . $_SESSION['hospitalname'];
-                $content = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "PCR ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
-                $data['notification'] = [$email, $subject, $content];
+        if (isset($_GET["updated"])) {
+            $health_id = $_GET["updated"];
+            $citizen = $center->get_citizen($health_id);
+            if ($citizen != NULL) {
+                $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob(), 'gender' => $citizen->get_gender()];    //array list of users
             }
-        } */
+
+            $admission_records = $center->load_details_by_id($health_id);
+            if ($admission_records != NULL) {
+                foreach ($admission_records as $result) {
+                    array_push($data["patient_history"], $center->to_array($result));
+                }
+                $data['final_record'] = ['status' => end($admission_records)->get_status(), 'hospital_id' => end($admission_records)->get_hospital_id()];
+            } else {
+                $data['final_record'] = ['status' => "", 'hospital_id' => ""];
+            }
+            $data['hospital_id'] = $center->get_hospital_id();
+        }
 
         $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/covid_patients', $data);
     }
@@ -426,7 +425,7 @@ class Pages extends Controller
             }
         }
 
-        //after updatting
+        //after updating
         if (isset($_GET['updated'])) {
             $health_id = explode("-", $_GET['updated'])[0];
             $pcr_id = (int)explode("-", $_GET['updated'])[1];

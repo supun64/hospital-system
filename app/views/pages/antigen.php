@@ -254,8 +254,8 @@
                                             <input type="checkbox" class="toggle-input" id="antigen-togBtn">
                                             <div class="slider round">
                                                 <!--ADDED HTML -->
-                                                <span class="on toggle-font">Possitive</span>
-                                                <span class="off toggle-font">Negetive</span>
+                                                <span class="on toggle-font">Positive</span>
+                                                <span class="off toggle-font">Negative</span>
                                                 <!--END-->
                                             </div>
                                         </label>

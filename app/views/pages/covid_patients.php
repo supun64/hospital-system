@@ -1,9 +1,8 @@
-<?php require APP_ROOT . '/views/includes/header.php';  ?>
+<?php require_once APP_ROOT . "/views/pages/user_dashboard.php" ?>
+<div class='sub-division'>
+    <?php $cur_hos = $_SESSION['hospital_id']; ?>
+    <input type="text" id="cur-hos" hidden value="<?php echo $cur_hos ?>">
 
-<?php $cur_hos = $_SESSION['hospital_id']; ?>
-<input type="text" id="cur-hos" hidden value="<?php echo $cur_hos ?>">
-
-<body>
     <?php
     if (isset($_GET['not-user'])) { ?>
         <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert">
@@ -35,9 +34,7 @@
                 <input type="text" class="covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter health ID here" name="patient-search-bar-input" required>
 
                 <input type="submit" class="btn btn-primary" id="covid-search-btn" name="patient-search" value="Search">
-
             </form>
-            <button class="btn btn-primary" id="covid_death-add" data-bs-toggle="modal" data-bs-target="#add-new-patient">Add New Patient +</button>
         </div>
 
         <!-- This is what should display after search -->
@@ -45,7 +42,8 @@
 
             <!-- Add admination-fade-in-pre-state to add the animation -->
             <div class="covid-search-result" id="covid-search-result-section">
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#view-history">View History</button>
+                <button class="btn btn-primary" id="patient-admission-button" data-bs-toggle="modal" data-bs-target="#add-new-patient">Patient Admission</button>
+                <button type="button" class="btn btn-primary" id="add-button" data-bs-toggle="modal" data-bs-target="#update-status">Update Status</button>
 
                 <!-- This is the division to display if the search result available -->
                 <div class="covid-details">
@@ -113,12 +111,25 @@
                                 </th>
 
                                 <td class="covid-detail-data">
-                                    <?php echo $data['personal']['dob'] ?>
+                                    <?php
+                                    $birth_year = (int)explode(" - ", $data['personal']['dob'])[0];
+                                    $curr_year = (int)date("Y");
+                                    echo ($curr_year - $birth_year); ?>
                                 </td>
                             </tr>
                         </table>
                     </div>
 
+
+                    <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        Button with data-target
+                    </button>
+
+                    <div class="collapse" id="collapseExample">
+
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+
+                    </div> -->
                     <?php if ($data['patient_history']) { ?>
 
                         <div class="covid-previous-details">
@@ -128,16 +139,17 @@
                                 <div class="covid-th covid-td">Hospital Name</div>
                                 <div class="covid-th covid-td">Admission Date</div>
                                 <div class="covid-th covid-td">Discharge Date</div>
+                                <div class="covid-th covid-td">Status</div>
                                 <div class="covid-th covid-td">Conditions</div>
                             </div>
 
-
                             <?php
+                            $count = 0;
                             $patient_history = $data["patient_history"];
                             foreach ($patient_history as $admission) :
                             ?>
-
-                                <div class="pcr-rw">
+                                <?php $count++; ?>
+                                <div class="patient-rw">
                                     <div class="covid-tr" data-bs-toggle="modal" data-bs-target="#patient-result">
                                         <div class="covid-td">
                                             <?php echo $admission["admission_id"] ?>
@@ -156,19 +168,18 @@
                                         </div>
 
                                         <div class="covid-td">
+                                            <?php echo $admission["status"] ?>
+                                        </div>
+
+                                        <div class="covid-td">
                                             <?php echo $admission["conditions"] ?>
                                         </div>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
-
                             <!-- TODO: add covid-bottom-tr class to the end of the table -->
-
                         </div>
-
-
                     <?php } else { ?>
-
                         <!-- This is the division to display if the search result not available -->
                         <div class="covid-details covid-no-result-div">
 
@@ -178,25 +189,21 @@
                             <p class="covid-no-result-message">
                                 No search results found
                             </p>
-
                         </div>
-
-
                     <?php } ?>
                 </div>
             <?php } ?>
-
             </div>
 
             <!-- This is the UI modal for add new vaccinated person -->
-            <div class="modal fade" id="add-new-patient" tabindex="-1" aria-labelledby="vac-forum" aria-hidden="true">
+            <div class="modal fade" id="add-new-patient" tabindex="-1" aria-labelledby="patient-form" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
 
                     <form class="modal-content" method="POST" action="<?php echo URL_ROOT; ?>/pages/covid_patients">
                         <div class="modal-header covid-modal-header">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
-                            <h5 class="modal-title covid-modal-title" id="vac-forum">COVID 19 Patient Admission Form</h5>
+                            <h5 class="modal-title covid-modal-title" id="patient-form">COVID 19 Patient Admission Form</h5>
 
                         </div>
                         <div class="modal-body">
@@ -230,73 +237,72 @@
                 </div>
             </div>
 
-
-            <!-- This is the model for updating details of the patient -->
-            <div class="modal fade" id="patient-result" tabindex="-1" aria-labelledby="patient-form" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-md">
+            <!-- Modal -->
+            <div class="modal fade" id="update-status" tabindex="-1" role="dialog" aria-labelledby="update-form" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
 
                     <form class="modal-content" method="POST" action="<?php echo URL_ROOT; ?>/pages/covid_patients">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Update the status of the patient</h5>
 
-                        <div class="modal-header test-toggle-modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body test-toggle-modal-body">
-
-                            <div class="col-md-8 covid-input">
-                                <label for="togBtn" class="form-label label test-toggle-label">Patient Status</label>
-                                </label>
-
-                                <!-- backend purposes only -->
-                                <input type="text" name="final-id" id="hidden-id" hidden>
-                                <input type="text" name="final-hospital-id" id="hidden-hospital-id" hidden>
-                                <input type="text" name="final-health-id" id="hidden-health-id" hidden value="<?php echo $data['personal']['health_id'] ?>">
-                                <input type="text" name="final-admission-date" id="hidden-admission-date" hidden>
-                                <input type="text" name="final-conditions" id="hidden-conditions" hidden>
-                                <input type="text" name="final-status" id="hidden-status" hidden>
-
-
-                                <!-- This is the code to toggle button -->
-                                <div class="form-control test-toggle-input">
-                                    <label class="switch">
-                                        <input type="checkbox" class="toggle-input" id="togBtn">
-                                        <div class="slider round">
-                                            <!--ADDED HTML -->
-                                            <span class="on toggle-font">Discharged</span>
-                                            <span class="off toggle-font">Died</span>
-                                            <!--END-->
-                                        </div>
-                                    </label>
-                                </div>
+                            <div class="modal-header test-toggle-modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                         </div>
-                        <div class="modal-footer test-toggle-footer">
-                            <button type="submit" class="btn btn-primary pcr-toggle-submit-btn" name="update-patient-submit" id="update-btn">Update</button>
+
+                        <!-- backend purposes only -->
+                        <input type="text" name="final-health-id" id="hidden-health-tid" hidden value="<?php echo $data['personal']['health_id'] ?>">
+                        <input type="text" name="final-hospital-id" id="hidden-hospital-id" hidden>
+                        <input type="text" name="final-discharge-date" id="hidden-discharge-date" hidden>
+                        <input type="text" name="final-status" id="hidden-status" hidden>
+
+                        <!-- This is the code to radio buttons -->
+                        <div class="col-md-8 covid-input">
+                            <div class="modal-body">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="default-radio" id="discharged" value="Discharged">
+                                    <label class="form-check-label" for="discharged">
+                                        Discharged
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="default-radio" id="died" value="Died">
+                                    <label class=" form-check-label" for="died">
+                                        Died
+                                    </label>
+                                </div>
+
+                                <h4 id="error" style="color:red"> </h4>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                            <button type="submit" class="btn btn-primary" id="update" onclick="checkButton()" name="update-patient-submit">Save changes</button>
                         </div>
                     </form>
                 </div>
             </div>
+
     </section>
+</div>
 
+<script>
+    <?php if (($data['final_record']['status'] != "Admitted") || ($data['final_record']['hospital_id'] != $_SESSION["hospital_id"])) { ?>
+        document.getElementById("add-button").disabled = true;
+    <?php } ?>
+    <?php if (($data['final_record']['status'] == "Admitted")) { ?>
+        document.getElementById("patient-admission-button").disabled = true;
+    <?php } ?>
+    <?php if (($data['final_record']['status'] == "Died")) { ?>
+        document.getElementById("patient-admission-button").disabled = true;
+        document.getElementById("add-button").disabled = true;
+    <?php } ?>
+</script>
 
-    <script src="<?php echo URL_ROOT; ?>/public/script/test.js"></script>
-    <script src="<?php echo URL_ROOT; ?>/public/script/pcr.js"></script>
+<script src="<?= URL_ROOT ?>./public/script/admin.js"></script>
+<script src="<?php echo URL_ROOT; ?>/public/script/test.js"></script>
+<script src="<?php echo URL_ROOT; ?>/public/script/covid_patients.js"></script>
 
-</body>
-
-
-<?php
-
-if (isset($_GET['updated']) && $data['notification'] != []) {
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
-
-    $from = "squ4doption@gmail.com";
-    $to = $data['notification'][0];
-    $subject = $data['notification'][1];
-    $txt = $data['notification'][2];
-    $headers = "From: " . $from;
-
-    mail($to, $subject, $txt, $headers);
-}
-
-?>
+<?php require_once APP_ROOT . "/views/includes/footer.php" ?>

@@ -14,6 +14,7 @@ class CovidPatientCenter extends COVID_Department
             "health_id" => $record->get_health_id(),
             "admission_date" => $record->get_admission_date(),
             "hospital_id" => $record->get_hospital_id(),
+            "status" => $record->get_status(),
             "conditions" => $record->get_conditions(),
             "discharge_date" => $record->get_discharge_date()
         ]; //"hospital_name" => $this->get_hospital_name_by_id($record->get_hospital_id()),
@@ -34,6 +35,7 @@ class CovidPatientCenter extends COVID_Department
         $conditions = $record->get_conditions();
         $discharge_date = $record->get_discharge_date();
         $admission_id = $record->get_admission_id();
+        $status = $record->get_status();
 
         $params = [
             "health_id" => $health_id,
@@ -41,6 +43,7 @@ class CovidPatientCenter extends COVID_Department
             "admission_date" => $admission_date,
             "discharge_date" => $discharge_date,
             "admission_id" => $admission_id,
+            "status" => $status
         ];
 
         return $this->db->update("patients", "admission_id", $params);
@@ -74,7 +77,8 @@ class CovidPatientCenter extends COVID_Department
             "hospital_id" => $record_obj->get_hospital_id(),
             "hospital_name" => $this->get_hospital_name_by_id($record_obj->get_hospital_id()),
             "conditions" => $record_obj->get_conditions(),
-            "discharge_date" => $record_obj->get_discharge_date()
+            "discharge_date" => $record_obj->get_discharge_date(),
+            "status" => $record_obj->get_status()
         ];
     }
 
@@ -89,9 +93,15 @@ class CovidPatientCenter extends COVID_Department
         return $records;
     }
 
+    public function load_last_record($admission_id)
+    {
+        $records = $this->db->findById('patients', 'health_id', $admission_id);
+        return end($records);
+    }
+
     public function get_hospital_name_by_id($hospital_id)
     {
-        $result = $this->db->findById('hospitals', 'hospital_id', $hospital_id);
-        return $result[0];
+        $result = $this->db->findById('hospitals', 'hospital_id', $hospital_id)[0];
+        return $result["name"];
     }
 }

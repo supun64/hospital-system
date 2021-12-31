@@ -21,7 +21,7 @@ class CovidDeathsCenter extends COVID_Department
         $result = $this->db->insert("covid_deaths", $data);
 
         if ($result) {
-            $this->observer->increment_count();
+            //$this->observer->increment_count();
             return true;
         } else {
             return false;

@@ -101,7 +101,7 @@
                         </div>
 
                         <?php if ($data['pcr_tests']) { ?>
-                            <!-- These are the vaccination details -->
+                            <!-- These are the pcr details -->
 
                             <div class="covid-previous-details">
 
@@ -227,7 +227,6 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body test-toggle-modal-body">
-
                                 <div class="col-md-8 covid-input">
                                     <label for="togBtn" class="form-label label test-toggle-label">PCR Test result</label>
                                     </label>
@@ -247,8 +246,8 @@
                                             <input type="checkbox" class="toggle-input" id="togBtn">
                                             <div class="slider round">
                                                 <!--ADDED HTML -->
-                                                <span class="on toggle-font">Possitive</span>
-                                                <span class="off toggle-font">Negetive</span>
+                                                <span class="on toggle-font">Positive</span>
+                                                <span class="off toggle-font">Negative</span>
                                                 <!--END-->
                                             </div>
                                         </label>

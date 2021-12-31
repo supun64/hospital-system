@@ -68,6 +68,7 @@ class RecordFactory
                     $records['health_id'],
                     $records['admission_date'],
                     $records['discharge_date'],
+                    $records['status'],
                     $records['conditions'],
                     $records['hospital_id']
                 );
