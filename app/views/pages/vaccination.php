@@ -106,6 +106,7 @@
 
                                 <div class="covid-tr covid-top-tr">
                                     <div class="covid-th covid-td">Vaccine ID </div>
+                                    <div class="covid-th covid-td">Batch Number </div>
                                     <div class="covid-th covid-td">Vaccine Name</div>
                                     <div class="covid-th covid-td">Hospital Id</div>
                                     <div class="covid-th covid-td">Date of Vaccination</div>
@@ -126,6 +127,10 @@
                                     <div class="covid-tr <?php if ($vaccine === $vaccinations[sizeof($vaccinations) - 1]) echo 'covid-bottom-tr' ?>">
                                         <div class="covid-td">
                                             <?php echo $vaccine["id"] ?>
+                                        </div>
+
+                                        <div class="covid-td">
+                                            <?php echo $vaccine["batch_num"] ?>
                                         </div>
 
                                         <div class="covid-td"><?php echo $vaccine["vaccine_name"] ?></div>
@@ -202,6 +207,12 @@
                                     <!-- <input type="number" class="form-control covid-input-field" id="inputHealthID" name="add-patient-health-id" min="1" required> -->
                                     <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-health-id" value="<?php echo $data['personal']['health_id']; ?>">
                                 </div>
+
+                                <div class="col-md-8 covid-input">
+                                    <label for="inputBatchNum" class="form-label-primary label-primary covid-input-label">Batch Number</label>
+                                    <input type="text" class="form-control form-control-sm" id="inputBatchNum" name="add-patient-batch-num" required>
+                                </div>
+
 
                                 <div class="col-md-8 covid-input">
                                     <label for="inputVaccineName" class="form-label-primary label-primary covid-input-label">Vaccination Name</label>

@@ -512,7 +512,9 @@ class Pages extends Controller
 
 
             $vaccine_detail = [
-                "id" => NULL, "health_id" => $_POST["add-patient-health-id"],
+                "id" => NULL,
+                "batch_num" => $_POST["add-patient-batch-num"], 
+                "health_id" => $_POST["add-patient-health-id"],
                 "date" => $_POST["add-patient-vaccinated-date"],
                 "dose" => $_POST["add-patient-dose"],
                 "vaccine_name" => $_POST["add-patient-vaccination-name"],
