@@ -146,7 +146,7 @@ class Pages extends Controller
             if ($email && $updated_record) {
                 $subject = "Antigen Test result by " . $_SESSION['hospitalname'];
                 $content = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "Antigen ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
-                $this->mail->send_email($email,$subject,$content);
+                $this->mail->send_email($email, $subject, $content);
             }
         }
         $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/antigen', $data);
@@ -159,6 +159,8 @@ class Pages extends Controller
     {
 
         $death_center = $this->center_factory->get_center('covid_deaths');
+        $patient_center = $this->center_factory->get_center('covid_patients');
+
         $death_center->set_observer(new CovidDeathObserver());
         $data = [];
         if (isset($_POST["death-search-bar-input"]) || isset($_GET['updated'])) {
@@ -202,9 +204,20 @@ class Pages extends Controller
                 "place" => $_POST["add-death-place"],
                 "comments" => $_POST["add-death-comments"]
             ];
+            $health_id = $death_details['health_id'];
+            $is_citizen = $death_center->get_citizen($health_id);
 
-            $is_citizen = $death_center->get_citizen($death_details['health_id']);
-            if ($is_citizen && !$death_center->isexist_user_id($death_details['health_id'])) {
+            if ($is_citizen && !$death_center->isexist_user_id($health_id)) {
+                if ($patient_center->isexist_user_id($health_id) &&  $patient_center->load_last_record($health_id)["status"] == "Admitted") {
+                    $last_record = $patient_center->load_last_record($health_id);
+                    $last_record["status"] = "Died";
+                    $last_record["discharge_date"] = $_POST["add-death-date"];
+                    $new_patient = $this->record_factory->get_record('covid_patient', $last_record);
+                    if ($patient_center->update_record($new_patient)) {
+                    } else {
+                        die("Something went wrong :(");
+                    }
+                }
                 $new_death = $this->record_factory->get_record('covid_deaths', $death_details);
 
                 if ($death_center->add_record($new_death)) {
@@ -213,7 +226,7 @@ class Pages extends Controller
                     die("Something went wrong");
                 }
             } else {
-                $data['error'] = !$is_citizen ? "Invalid UserID" : "Overriding an existing record is prohibitted.";
+                $data['error'] = !$is_citizen ? "Invalid UserID" : "Overriding an existing record is prohibited.";
                 $this->view('/pages/covid_deaths', $data);
                 return;
             }
@@ -301,11 +314,14 @@ class Pages extends Controller
                             "place" => $_SESSION["hospitalname"],
                             "comments" => "Died at the hospital - " . $_SESSION["hospitalname"]
                         ];
-                        $new_death = $this->record_factory->get_record('covid_deaths', $death_details);
-                        $result1 = $covid_death_center->add_record($new_death);
+
+                        $is_citizen = $covid_death_center->get_citizen($id);
+                        if ($is_citizen && !$covid_death_center->isexist_user_id($id)) {
+                            $new_death = $this->record_factory->get_record('covid_deaths', $death_details);
+                            $result1 = $covid_death_center->add_record($new_death);
+                        }
                     }
                     $data['final_record'] = ['status' => $_POST["final-status"], 'hospital_id' => $last_record["hospital_id"]];
-
                     $result2 = $center->update_record($new_patient);
                     if ($result1 || $result2) {
                         $health_id = (string)$new_patient->get_health_id();
@@ -338,6 +354,7 @@ class Pages extends Controller
 
         $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/covid_patients', $data);
     }
+
 
 
     public function pcr()
@@ -459,7 +476,7 @@ class Pages extends Controller
                 $subject = "PCR Test result by " . $_SESSION['hospitalname'];
                 $content = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "PCR ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
                 $content = nl2br($content);
-                $this->mail->send_email($email,$subject,$content);
+                $this->mail->send_email($email, $subject, $content);
             }
         }
 
@@ -514,7 +531,7 @@ class Pages extends Controller
 
             $vaccine_detail = [
                 "id" => NULL,
-                "batch_num" => $_POST["add-patient-batch-num"], 
+                "batch_num" => $_POST["add-patient-batch-num"],
                 "health_id" => $_POST["add-patient-health-id"],
                 "date" => $_POST["add-patient-vaccinated-date"],
                 "dose" => $_POST["add-patient-dose"],
@@ -567,7 +584,7 @@ class Pages extends Controller
             "antigen_tests" => ["HealthID", "Test status", "place"],
             "covid_deaths" => ["HealthID", "Place", "Comments"],
             "pcr_tests" => ["HealthID", "Test Status", "Place"],
-            "vaccinations" => ["Batch Number","HealthID", "Dose", "Name of Vaccine", "Conducted Place", "Comments"]
+            "vaccinations" => ["Batch Number", "HealthID", "Dose", "Name of Vaccine", "Conducted Place", "Comments"]
         ];
 
         if (isset($_POST['newrecord'])) {
@@ -633,7 +650,7 @@ class Pages extends Controller
                     $email = $deo->get_user_email();
                     $subject = "Data Entry Operator Registration";
                     $content =  "Please use your email address to login to our system.\nHospital ID: " . $_SESSION['hospital_id'] . "\nHospital Name: " . $_SESSION['hospitalname'] . "\nTemporary Password: " . $_POST['password'];
-                    $this->mail->send_email($email,$subject,$content);
+                    $this->mail->send_email($email, $subject, $content);
 
                     //header('location:' . URL_ROOT . '/pages/user_management');
                     $data['users'] = $this->user_handler->find_All_Users($hos_id);      //array list of users
