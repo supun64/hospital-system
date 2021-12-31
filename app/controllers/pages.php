@@ -143,7 +143,7 @@ class Pages extends Controller
             $id = $citizen->get_id();
             $name = $citizen->get_name();
 
-            if ($email) {
+            if ($email && $updated_record) {
                 $subject = "Antigen Test result by " . $_SESSION['hospitalname'];
                 $content = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "Antigen ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
                 $this->mail->send_email($email,$subject,$content);
