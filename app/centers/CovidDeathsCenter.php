@@ -21,7 +21,7 @@ class CovidDeathsCenter extends COVID_Department
         $result = $this->db->insert("covid_deaths", $data);
 
         if ($result) {
-            //$this->observer->increment_count();
+            $this->notifyObserver("died");
             return true;
         } else {
             return false;
@@ -68,8 +68,9 @@ class CovidDeathsCenter extends COVID_Department
         return $result_set;
     }
 
-    public function isexist_user_id($health_id){
-        return $this->db->find('covid_deaths','health_id',$health_id)?true:false;
+    public function isexist_user_id($health_id)
+    {
+        return $this->db->find('covid_deaths', 'health_id', $health_id) ? true : false;
     }
     public function to_array($record_obj)
     {
@@ -94,19 +95,22 @@ class CovidDeathsCenter extends COVID_Department
         return $covid_death;
     }
 
-    public function set_observer($observer){
-        if($this->observer == NULL){
+    public function set_observer($observer)
+    {
+        if ($this->observer == NULL) {
             $this->observer = $observer;
         }
     }
 
-    public function unset_observer(){
-        if($this->observer != NULL){
+    public function unset_observer()
+    {
+        if ($this->observer != NULL) {
             $this->observer = NUll;
         }
     }
 
-
-
-
+    private function notifyObserver($status)
+    {
+        $this->observer->increment_count($status);
+    }
 }

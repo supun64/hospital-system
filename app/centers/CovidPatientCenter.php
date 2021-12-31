@@ -2,6 +2,8 @@
 class CovidPatientCenter extends COVID_Department
 {
 
+    private $observers = [];
+
     public function __construct()
     {
         parent::__construct();
@@ -20,8 +22,9 @@ class CovidPatientCenter extends COVID_Department
         ]; //"hospital_name" => $this->get_hospital_name_by_id($record->get_hospital_id()),
 
         $result = $this->db->insert("patients", $data);
-
+        $status = $record->get_status();
         if ($result) {
+            $this->notifyObserver($status);
             return true;
         } else {
             return false;
@@ -46,7 +49,11 @@ class CovidPatientCenter extends COVID_Department
             "status" => $status
         ];
 
-        return $this->db->update("patients", "admission_id", $params);
+        $result = $this->db->update("patients", "admission_id", $params);
+        if ($result) {
+            $this->notifyObserver($status);
+        }
+        return $result;
     }
 
     public  function delete_record($admission_id)
@@ -103,5 +110,24 @@ class CovidPatientCenter extends COVID_Department
     {
         $result = $this->db->findById('hospitals', 'hospital_id', $hospital_id)[0];
         return $result["name"];
+    }
+
+    public function set_observer($observer)
+    {
+        array_push($this->observers, $observer);
+    }
+
+    public function unset_observer($observer)
+    {
+        unset($this->observers, $observer);
+    }
+
+
+
+    private function notifyObserver($status)
+    {
+        foreach ($this->observers as $observer) {
+            $observer->increment_count($status);
+        }
     }
 }

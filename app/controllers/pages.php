@@ -146,7 +146,7 @@ class Pages extends Controller
             if ($email && $updated_record) {
                 $subject = "Antigen Test result by " . $_SESSION['hospitalname'];
                 $content = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "Antigen ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
-                $this->mail->send_email($email,$subject,$content);
+                $this->mail->send_email($email, $subject, $content);
             }
         }
         $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/antigen', $data);
@@ -229,8 +229,10 @@ class Pages extends Controller
         $data['final_record'] = [];
 
         $center = $this->center_factory->get_center('covid_patients');
+        $center->set_observer(new CovidPatientObserver());
+        $center->set_observer(new CovidDeathObserver());
         $covid_death_center = $this->center_factory->get_center('covid_deaths');
-
+        $covid_death_center->set_observer(new CovidDeathObserver());
         // code to search 
         if (isset($_POST["patient-search"])) {
 
@@ -459,7 +461,7 @@ class Pages extends Controller
                 $subject = "PCR Test result by " . $_SESSION['hospitalname'];
                 $content = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "PCR ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
                 $content = nl2br($content);
-                $this->mail->send_email($email,$subject,$content);
+                $this->mail->send_email($email, $subject, $content);
             }
         }
 
@@ -514,7 +516,7 @@ class Pages extends Controller
 
             $vaccine_detail = [
                 "id" => NULL,
-                "batch_num" => $_POST["add-patient-batch-num"], 
+                "batch_num" => $_POST["add-patient-batch-num"],
                 "health_id" => $_POST["add-patient-health-id"],
                 "date" => $_POST["add-patient-vaccinated-date"],
                 "dose" => $_POST["add-patient-dose"],
@@ -567,7 +569,7 @@ class Pages extends Controller
             "antigen_tests" => ["HealthID", "Test status", "place"],
             "covid_deaths" => ["HealthID", "Place", "Comments"],
             "pcr_tests" => ["HealthID", "Test Status", "Place"],
-            "vaccinations" => ["Batch Number","HealthID", "Dose", "Name of Vaccine", "Conducted Place", "Comments"]
+            "vaccinations" => ["Batch Number", "HealthID", "Dose", "Name of Vaccine", "Conducted Place", "Comments"]
         ];
 
         if (isset($_POST['newrecord'])) {
@@ -633,7 +635,7 @@ class Pages extends Controller
                     $email = $deo->get_user_email();
                     $subject = "Data Entry Operator Registration";
                     $content =  "Please use your email address to login to our system.\nHospital ID: " . $_SESSION['hospital_id'] . "\nHospital Name: " . $_SESSION['hospitalname'] . "\nTemporary Password: " . $_POST['password'];
-                    $this->mail->send_email($email,$subject,$content);
+                    $this->mail->send_email($email, $subject, $content);
 
                     //header('location:' . URL_ROOT . '/pages/user_management');
                     $data['users'] = $this->user_handler->find_All_Users($hos_id);      //array list of users

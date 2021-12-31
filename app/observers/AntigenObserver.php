@@ -1,6 +1,7 @@
-<?php  
+<?php
 
-class AntigenObserver implements ReportObserver{
+class AntigenObserver implements ReportObserver
+{
 
     private $db;
 
@@ -9,8 +10,10 @@ class AntigenObserver implements ReportObserver{
         $this->db = Database::get_instance();
     }
 
-    public function increment_count()
+    public function increment_count($status)
     {
-        $this->db->increment('report','antigen');
+        if ($status == "positive") {
+            $this->db->increment('report', 'antigen');
+        }
     }
 }

@@ -1,6 +1,7 @@
-<?php  
+<?php
 
-class PcrObserver implements ReportObserver{
+class PcrObserver implements ReportObserver
+{
 
     private $db;
 
@@ -9,8 +10,10 @@ class PcrObserver implements ReportObserver{
         $this->db = Database::get_instance();
     }
 
-    public function increment_count()
+    public function increment_count($status)
     {
-        $this->db->increment('report','pcr');
+        if ($status == "positive") {
+            $this->db->increment('report', 'pcr');
+        }
     }
 }
