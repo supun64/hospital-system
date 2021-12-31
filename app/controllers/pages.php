@@ -146,6 +146,7 @@ class Pages extends Controller
             if ($email && $updated_record) {
                 $subject = "Antigen Test result by " . $_SESSION['hospitalname'];
                 $content = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "Antigen ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
+                $content = nl2br($content);
                 $this->mail->send_email($email,$subject,$content);
             }
         }
@@ -634,11 +635,12 @@ class Pages extends Controller
                     $email = $deo->get_user_email();
                     $subject = "Data Entry Operator Registration";
                     $content =  "Please use your email address to login to our system.\nHospital ID: " . $_SESSION['hospital_id'] . "\nHospital Name: " . $_SESSION['hospitalname'] . "\nTemporary Password: " . $_POST['password'];
+                    $content = nl2br($content);
                     $this->mail->send_email($email,$subject,$content);
 
-                    //header('location:' . URL_ROOT . '/pages/user_management');
-                    $data['users'] = $this->user_handler->find_All_Users($hos_id);      //array list of users
-                    $this->view('/pages/user_management', $data);
+                    header('location:' . URL_ROOT . '/pages/user_management');
+                    //$data['users'] = $this->user_handler->find_All_Users($hos_id);      //array list of users
+                    //$this->view('/pages/user_management', $data);
                 } else {
                     die('Something went wrong');
                 }
