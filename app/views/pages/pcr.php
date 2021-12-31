@@ -103,7 +103,7 @@
                         </div>
 
                         <?php if ($data['pcr_tests']) { ?>
-                            <!-- These are the pcr details -->
+                            <!-- These are the vaccination details -->
 
                             <div class="covid-previous-details">
 
@@ -221,60 +221,60 @@
 </div>
 
 
-<<<<<<< HEAD <div class="modal-header test-toggle-modal-header">
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body test-toggle-modal-body">
-        <div class="col-md-8 covid-input">
-            <label for="togBtn" class="form-label label test-toggle-label">PCR Test result</label>
-            </label>
+<!-- This is the model for updating result of pcr -->
+<div class="modal fade" id="pcr-result" tabindex="-1" aria-labelledby="vac-forum" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
 
-            <!-- backend purposes only -->
-            <input type="text" name="final-id" id="hidden-id" hidden>
-            <input type="text" name="final-hid" id="hidden-hid" hidden>
-            <input type="text" name="final-htid" id="hidden-htid" hidden value="<?php echo $data['personal']['health_id'] ?>">
-            <input type="text" name="final-date" id="hidden-date" hidden>
-            <input type="text" name="final-place" id="hidden-place" hidden>
-            <input type="text" name="final-status" id="hidden-status" hidden>
+        <form class="modal-content" method="POST" action="<?php echo URL_ROOT; ?>/pages/pcr">
 
-
-            <!-- This is the code to toggle button -->
-            <div class="form-control test-toggle-input">
-                <label class="switch">
-                    <input type="checkbox" class="toggle-input" id="togBtn">
-                    <div class="slider round">
-                        <!--ADDED HTML -->
-                        <span class="on toggle-font">Positive</span>
-                        <span class="off toggle-font">Negative</span>
-                        <!--END-->
-                    </div>
-                </label>
+            <div class="modal-header test-toggle-modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        </div>
+            <div class="modal-body test-toggle-modal-body">
+
+                <div class="col-md-8 covid-input">
+                    <label for="togBtn" class="form-label label test-toggle-label">PCR Test result</label>
+                    </label>
+
+                    <!-- backend purposes only -->
+                    <input type="text" name="final-id" id="hidden-id" hidden>
+                    <input type="text" name="final-hid" id="hidden-hid" hidden>
+                    <input type="text" name="final-htid" id="hidden-htid" hidden value="<?php echo $data['personal']['health_id'] ?>">
+                    <input type="text" name="final-date" id="hidden-date" hidden>
+                    <input type="text" name="final-place" id="hidden-place" hidden>
+                    <input type="text" name="final-status" id="hidden-status" hidden>
+
+
+                    <!-- This is the code to toggle button -->
+                    <div class="form-control test-toggle-input">
+                        <label class="switch">
+                            <input type="checkbox" class="toggle-input" id="togBtn">
+                            <div class="slider round">
+                                <!--ADDED HTML -->
+                                <span class="on toggle-font">Positive</span>
+                                <span class="off toggle-font">Negative</span>
+                                <!--END-->
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer test-toggle-footer">
+                <button type="submit" class="btn btn-primary pcr-toggle-submit-btn" name="update-patient-submit" id="update-btn">Update</button>
+            </div>
+        </form>
     </div>
-    <div class="modal-footer test-toggle-footer">
-        <button type="submit" class="btn btn-primary pcr-toggle-submit-btn" name="update-patient-submit" id="update-btn">Update</button>
-    </div>
-    </label>
-    </div>
-    </div>
-    </div>
-    <div class="modal-footer test-toggle-footer">
-        <button type="submit" class="btn btn-primary pcr-toggle-submit-btn" name="update-patient-submit" id="update-btn">Update</button>
-    </div>
-    </form>
-    </div>
-    </div>
-    </section>
+</div>
+</section>
 
 
 
 
 
-    </div>
+</div>
 
-    <script src="<?= URL_ROOT ?>./public/script/admin.js"></script>
-    <script src="<?php echo URL_ROOT; ?>/public/script/test.js"></script>
-    <script src="<?php echo URL_ROOT; ?>/public/script/pcr.js"></script>
+<script src="<?= URL_ROOT ?>./public/script/admin.js"></script>
+<script src="<?php echo URL_ROOT; ?>/public/script/test.js"></script>
+<script src="<?php echo URL_ROOT; ?>/public/script/pcr.js"></script>
 
-    <?php require_once APP_ROOT . "/views/includes/footer.php" ?>
+<?php require_once APP_ROOT . "/views/includes/footer.php" ?>
