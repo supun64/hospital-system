@@ -47,7 +47,7 @@
 
                 <!-- Add addmination-fade-in-pre-state to add the animation -->
                 <div class="covid-search-result" id="covid-search-result-section">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-pcr">Add new PCR +</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-pcr" id="add-new">Add new PCR +</button>
 
                     <!-- This is the division to display if the search result available -->
 
@@ -160,7 +160,7 @@
                                     <img class="covid-sad-face-img" src="<?php echo URL_ROOT; ?>/public/images/sad-face.png" alt="">
                                 </div>
                                 <p class="covid-no-result-message">
-                                    No search results found
+                                    No PCR tests done yet! :(
                                 </p>
 
                             </div>
@@ -264,14 +264,14 @@
             </div>
         </form>
     </div>
+    </section>
 </div>
-</section>
 
-
-
-
-
-</div>
+<script>
+    <?php if (($data['personal']['is_alive'] == 0)) { ?>
+        document.getElementById("add-new").disabled = true;
+    <?php } ?>
+</script>
 
 <script src="<?= URL_ROOT ?>./public/script/admin.js"></script>
 <script src="<?php echo URL_ROOT; ?>/public/script/test.js"></script>

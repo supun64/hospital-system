@@ -10,8 +10,9 @@ class Citizen{
     private $district;
     private $con_num;
     private $email;
+    private $is_alive;
 
-    public function __construct($id, $name, $dob,$gender,$province,$district,$con_num,$email)
+    public function __construct($id, $name, $dob,$gender,$province,$district,$con_num,$email,$is_alive)
     {
         $this->id = $id;
         $this->name = $name;
@@ -21,6 +22,7 @@ class Citizen{
         $this->district = $district;
         $this->con_num  = $con_num;
         $this->email = $email;
+        $this->is_alive = $is_alive;
     }
 
     public function get_id(){
@@ -44,7 +46,7 @@ class Citizen{
     }
 
     public function get_district(){
-        return $this->ditrict;
+        return $this->district;
     }
 
     public function con_num(){
@@ -53,6 +55,14 @@ class Citizen{
 
     public function get_email(){
         return $this->email;
+    }
+
+    public function get_is_alive(){
+        return $this->is_alive;
+    }
+
+    public function set_is_alive($is_alive){
+        $this->is_alive = !$is_alive;
     }
 }
 

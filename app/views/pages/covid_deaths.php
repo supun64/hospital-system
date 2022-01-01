@@ -142,7 +142,7 @@
                     <img class="covid-sad-face-img" src="<?php echo URL_ROOT; ?>/public/images/sad-face.png" alt="">
                 </div>
                 <p class="covid-no-result-message">
-                    No search results found
+                    No death record found :(
                 </p>
             </div>
 
