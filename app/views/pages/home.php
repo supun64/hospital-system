@@ -25,7 +25,6 @@ if ($_SESSION['is_admin']) {
             <?php foreach ($data['monthly_result'] as $monthly_res) {
                 $date = explode('-', $monthly_res['date'])[2];
                 echo "['" . $monthly_res['date'] . "'," . $monthly_res['addmit'] . "," . $monthly_res['death'] . "],";
-
             }
             ?>
 
@@ -40,10 +39,10 @@ if ($_SESSION['is_admin']) {
 
             title: "Daily Covid Results - Past 30 Days",
 
-            titleTextStyle : {
+            titleTextStyle: {
                 bold: true,
                 color: "black",
-                
+
                 fontSize: 14,
 
             },
@@ -109,13 +108,13 @@ if ($_SESSION['is_admin']) {
             backgroundColor: {
                 fill: 'transparent'
             },
-            
+
             title: 'Total Covid Results',
 
-            titleTextStyle : {
+            titleTextStyle: {
                 bold: true,
                 color: "black",
-                
+
                 fontSize: 14,
 
             },
@@ -140,34 +139,35 @@ if ($_SESSION['is_admin']) {
 
 
     // This is the code to draw the column chart
-    google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawColChart);
+    google.charts.load('current', {
+        'packages': ['bar']
+    });
+    google.charts.setOnLoadCallback(drawColChart);
 
-      function drawColChart() {
+    function drawColChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Date', 'PCR positive', 'Antigen Positive'],
+            ['Date', 'PCR positive', 'Antigen Positive'],
 
-        <?php foreach ($data['monthly_result'] as $monthly_res) {             
+            <?php foreach ($data['monthly_result'] as $monthly_res) {
                 echo "['" . $monthly_res['date'] . "'," . $monthly_res['pcr'] . "," . $monthly_res['antigen'] . "],";
-
             }
             ?>
         ]);
 
         var options = {
-          
+
             title: 'Daily PCR/Antigen Test positive',
 
-            titleTextStyle : {
+            titleTextStyle: {
                 bold: true,
                 color: "black",
-                
+
                 fontSize: 14,
 
             },
-          
 
-          backgroundColor: {
+
+            backgroundColor: {
                 fill: 'transparent'
             },
 
@@ -180,7 +180,7 @@ if ($_SESSION['is_admin']) {
         var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
         chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
+    }
 </script>
 
 </head>
@@ -188,6 +188,7 @@ if ($_SESSION['is_admin']) {
 <body>
 
     <div class='sub-division'>
+        <!-- echo date_default_timezone_get;  -->
 
         <main class="sub-division-main">
             <header class="home-header">
@@ -231,11 +232,11 @@ if ($_SESSION['is_admin']) {
                 </div>
 
             </header>
-            
-            <?php 
-                    $today = $data['monthly_result'][sizeof($data['monthly_result'])-1];
-                    //var_dump($today);
-                    
+
+            <?php
+            $today = $data['monthly_result'][sizeof($data['monthly_result']) - 1];
+            //var_dump($today);
+
             ?>
             <section calss="containter">
 
@@ -251,7 +252,7 @@ if ($_SESSION['is_admin']) {
                                 COVID STATICTICS
                             </span>
                             <span class="home-stat-subtitle">
-                             Today : <?php echo $today['date']; ?>
+                                Today : <?php echo $today['date']; ?>
                             </span>
 
                         </header>
