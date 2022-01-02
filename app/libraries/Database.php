@@ -100,7 +100,7 @@ class Database{
         }
 
         public function delete($table,$primary_key,$id) {
-            if (is_int($id) || $this->db->safe($id)) {
+            if (is_int($id) || $this->safe($id)) {
                 return $this->sql_execute('DELETE FROM `'.$table.'`WHERE '.$primary_key.' = '.$id);
             } else {
                 die("You have been hacked:)");
@@ -158,7 +158,7 @@ class Database{
         //for observers
         public function increment($table,$field){
             $today = date("Y-m-d");
-            
+
             $sql = "";
             if($this->date_exist($today)){
                 $sql = "UPDATE $table SET $field=$field+1 WHERE date='$today'";

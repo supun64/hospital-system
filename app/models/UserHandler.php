@@ -57,32 +57,29 @@
 
         public function update_user_details($param_list){
             $data = [];
-            if ($this->db->safe($param_list['name']) && $this->db->safe($param_list['email'])) {
-                $data['user_name'] = $param_list['name'];
-                $data['user_email'] = $param_list['email'];
-                $data['user_id'] = $_SESSION['userID'];
-                
-                return $this->db->update('users','user_id',$data);
-            } else {
-                die("You have been hacked:))");
-            }
+            $data['user_name'] = $param_list['name'];
+            $data['user_email'] = $param_list['email'];
+            $data['user_id'] = $_SESSION['userID'];
+            if($this->db->update('users','user_id',$data)){
+                $_SESSION['username'] = $data['user_name'];
+                return true;
+            }else{
+                return false;
+            }    
         }
 
         public function update_password_details($param_list){
             $errors = "";
             $data = [];
-            if ($this->db->safe($param_list['old_password']) && $this->db->safe($param_list['new_password']) && $this->db->safe($param_list['confirm_password'])) {
-                $password = $this->db->findById("users",'user_id',$_SESSION['userID'])[0]["password"];
-                if (password_verify($param_list['old_password'], $password)) {
-                    $data['password'] = password_hash($param_list['new_password'], PASSWORD_DEFAULT);
-                    $data['user_id'] = $_SESSION['userID'];
-                    $this->db->update('users','user_id',$data);
-                } else {
-                    $errors = "Your current password is incorrect.";
-                }
+        
+            $password = $this->db->findById("users",'user_id',$_SESSION['userID'])[0]["password"];
+            if (password_verify($param_list['old_password'], $password)) {
+                $data['password'] = password_hash($param_list['new_password'], PASSWORD_DEFAULT);
+                $data['user_id'] = $_SESSION['userID'];
             } else {
-                die("You have been hacked:))");
+                $errors = "Your current password is incorrect.";
             }
+
             return $errors;
         }
 
@@ -122,6 +119,9 @@
             unset($_SESSION["is_admin"]);
             unset($_SESSION['userID']);
             unset($_SESSION["password"]);
+            unset($_SESSION['logged_out']);
+            unset($_SESSION['username']);
+            unset($_SESSION["useremail"]);
             session_destroy();
         }
     }
