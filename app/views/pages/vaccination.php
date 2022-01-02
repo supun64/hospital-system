@@ -1,22 +1,22 @@
 <?php require_once APP_ROOT . "/views/pages/user_dashboard.php" ?>
 <div class='sub-division'>
-    
-        <?php
-        if (isset($_GET['not-user'])) { ?>
-            <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert">
-                <div class="deo-manage-error-text"> Wrong Health ID !!</div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php } ?>
 
-        <?php
-        if (isset($_GET['success'])) { ?>
-            <div class="alert alert-success alert-dismissible fade show deo-manage-error-box" role="alert">
-                <div class="deo-manage-error-text"> Record successfully added</div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php } ?>
-        <section class="main-info">
+    <?php
+    if (isset($_GET['not-user'])) { ?>
+        <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert">
+            <div class="deo-manage-error-text"> Wrong Health ID !!</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php } ?>
+
+    <?php
+    if (isset($_GET['success'])) { ?>
+        <div class="alert alert-success alert-dismissible fade show deo-manage-error-box" role="alert">
+            <div class="deo-manage-error-text"> Record successfully added</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php } ?>
+    <section class="main-info">
 
         <main class="sub-division-main">
 
@@ -42,13 +42,9 @@
             <?php if ($data["personal"]) { ?>
                 <!-- Add addmination-fade-in-pre-state to add the animation -->
                 <div class="covid-search-result" id="covid-search-result-section">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-vaccination">Add new vaccination +</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-vaccination" id="add-new">Add new vaccination +</button>
 
                     <!-- This is the division to display if the search result available -->
-
-
-
-
                     <div class="covid-details">
 
                         <div class="covid-patient-detail">
@@ -174,7 +170,7 @@
                                     <img class="covid-sad-face-img" src="<?php echo URL_ROOT; ?>/public/images/sad-face.png" alt="">
                                 </div>
                                 <p class="covid-no-result-message">
-                                    No search results found
+                                    No vaccination history found! :(
                                 </p>
 
                             </div>
@@ -187,81 +183,81 @@
 
 
                 </div>
-                </main>
+        </main>
 
-                <!-- This is the UI modal for add new vaccinated person -->
-                <div class="modal fade" id="add-new-vaccination" tabindex="-1" aria-labelledby="vac-forum" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <!-- This is the UI modal for add new vaccinated person -->
+        <div class="modal fade" id="add-new-vaccination" tabindex="-1" aria-labelledby="vac-forum" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
 
-                        <form class="modal-content" method="POST" action="<?php echo URL_ROOT; ?>/pages/vaccination">
-                            <div class="modal-header covid-modal-header">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <form class="modal-content" method="POST" action="<?php echo URL_ROOT; ?>/pages/vaccination">
+                    <div class="modal-header covid-modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
-                                <h5 class="modal-title covid-modal-title" id="vac-forum">Vaccination Forum</h5>
+                        <h5 class="modal-title covid-modal-title" id="vac-forum">Vaccination Forum</h5>
 
-                            </div>
-                            <div class="modal-body">
-
-                                <div class="col-md-8 covid-input">
-                                    <label for="inputHealthID" class="form-label-primary label-primary covid-input-label">Patient's Health ID</label>
-                                    <!-- <input type="number" class="form-control covid-input-field" id="inputHealthID" name="add-patient-health-id" min="1" required> -->
-                                    <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-health-id" value="<?php echo $data['personal']['health_id']; ?>">
-                                </div>
-
-                                <div class="col-md-8 covid-input">
-                                    <label for="inputBatchNum" class="form-label-primary label-primary covid-input-label">Batch Number</label>
-                                    <input type="text" class="form-control form-control-sm" id="inputBatchNum" name="add-patient-batch-num" required>
-                                </div>
-
-
-                                <div class="col-md-8 covid-input">
-                                    <label for="inputVaccineName" class="form-label-primary label-primary covid-input-label">Vaccination Name</label>
-                                    <input type="text" class="form-control covid-input-field" id="inputVaccineName" name="add-patient-vaccination-name" required>
-                                </div>
-
-                                <div class="col-md-6 covid-input">
-                                    <label for="inputDate" class="form-label-primary covid-input-label">Vaccinated Date</label>
-                                    <input type="date" value="<?php echo date('d-m-Y'); ?>" class="form-control covid-input-field" id="inputDate" name="add-patient-vaccinated-date" required>
-                                </div>
-
-                                <div class="col-md-8 covid-input">
-                                    <label for="inputHospital" class="form-label-primary covid-input-label">Conducted Hospital</label>
-                                    <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-hospital" value="<?php echo $data['hospital_id']; ?>">
-
-                                </div>
-
-
-                                <div class="col-md-8 covid-input">
-                                    <label for="inputVaccinePlace" class="form-label-primary label-primary covid-input-label">Vaccinated Place</label>
-                                    <input type="text" class="form-control covid-input-field" id="inputVaccinePlace" name="add-patient-vaccinated-place" placeholder="(Optional)">
-                                </div>
-
-                                <div class="col-md-3 covid-input">
-                                    <label for="inputDose" class="form-label-primary covid-input-label">Dosage</label>
-
-                                    <input type="text" readonly class="form-control form-control-sm" id="inputDose" name="add-patient-dose" value="<?php echo $last_dose + 1 ?>">
-                                </div>
-
-                                <div class="col-md-8 covid-input">
-                                    <label for="inputComments" class="form-label-primary label-primary covid-input-label"> <span class="covid-form-comment">Comments</span></label>
-                                    <textarea class="form-control covid-input-field covid-textarea" id="inputComments" rows="4" placeholder="(Optional)" name="add-patient-comment"></textarea>
-                                </div>
-
-                            </div>
-                            <div class="modal-footer covid-modal-footer">
-                                <button type="submit" class="btn btn-primary covid-submit-btn" name="add-patient-submit">Submit</button>
-                            </div>
-                        </form>
                     </div>
-                </div>
+                    <div class="modal-body">
 
-        </section>
+                        <div class="col-md-8 covid-input">
+                            <label for="inputHealthID" class="form-label-primary label-primary covid-input-label">Patient's Health ID</label>
+                            <!-- <input type="number" class="form-control covid-input-field" id="inputHealthID" name="add-patient-health-id" min="1" required> -->
+                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-health-id" value="<?php echo $data['personal']['health_id']; ?>">
+                        </div>
+
+                        <div class="col-md-8 covid-input">
+                            <label for="inputBatchNum" class="form-label-primary label-primary covid-input-label">Batch Number</label>
+                            <input type="text" class="form-control form-control-sm" id="inputBatchNum" name="add-patient-batch-num" required>
+                        </div>
 
 
+                        <div class="col-md-8 covid-input">
+                            <label for="inputVaccineName" class="form-label-primary label-primary covid-input-label">Vaccination Name</label>
+                            <input type="text" class="form-control covid-input-field" id="inputVaccineName" name="add-patient-vaccination-name" required>
+                        </div>
+
+                        <div class="col-md-6 covid-input">
+                            <label for="inputDate" class="form-label-primary covid-input-label">Vaccinated Date</label>
+                            <input type="date" value="<?php echo date('d-m-Y'); ?>" class="form-control covid-input-field" id="inputDate" name="add-patient-vaccinated-date" required>
+                        </div>
+
+                        <div class="col-md-8 covid-input">
+                            <label for="inputHospital" class="form-label-primary covid-input-label">Conducted Hospital</label>
+                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-hospital" value="<?php echo $data['hospital_id']; ?>">
+
+                        </div>
 
 
+                        <div class="col-md-8 covid-input">
+                            <label for="inputVaccinePlace" class="form-label-primary label-primary covid-input-label">Vaccinated Place</label>
+                            <input type="text" class="form-control covid-input-field" id="inputVaccinePlace" name="add-patient-vaccinated-place" placeholder="(Optional)">
+                        </div>
 
+                        <div class="col-md-3 covid-input">
+                            <label for="inputDose" class="form-label-primary covid-input-label">Dosage</label>
+
+                            <input type="text" readonly class="form-control form-control-sm" id="inputDose" name="add-patient-dose" value="<?php echo $last_dose + 1 ?>">
+                        </div>
+
+                        <div class="col-md-8 covid-input">
+                            <label for="inputComments" class="form-label-primary label-primary covid-input-label"> <span class="covid-form-comment">Comments</span></label>
+                            <textarea class="form-control covid-input-field covid-textarea" id="inputComments" rows="4" placeholder="(Optional)" name="add-patient-comment"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer covid-modal-footer">
+                        <button type="submit" class="btn btn-primary covid-submit-btn" name="add-patient-submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
 </div>
+
+<script>
+    <?php if (($data['personal']['is_alive'] == 0)) { ?>
+        document.getElementById("add-new").disabled = true;
+    <?php } ?>
+</script>
 
 <script src="<?php echo URL_ROOT; ?>/public/script/vaccine.js"></script>
 <script src="<?= URL_ROOT ?>./public/script/admin.js"></script>

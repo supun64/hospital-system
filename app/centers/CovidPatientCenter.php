@@ -100,10 +100,14 @@ class CovidPatientCenter extends COVID_Department
         return $records;
     }
 
-    public function load_last_record($admission_id)
+    public function load_last_record($health_id)
     {
-        $records = $this->db->findById('patients', 'health_id', $admission_id);
+        $records = $this->db->findById('patients', 'health_id', $health_id);
         return end($records);
+    }
+
+    public function isexist_user_id($health_id){
+        return $this->db->find('patients','health_id',$health_id)?true:false;
     }
 
     public function get_hospital_name_by_id($hospital_id)

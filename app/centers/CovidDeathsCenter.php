@@ -45,7 +45,7 @@ class CovidDeathsCenter extends COVID_Department
 
     public  function delete_record($id)
     {
-        
+        //$this->update_citizen_liveliness($id);
         return $this->db->delete("covid_deaths", "id", $id);
     }
 
@@ -73,6 +73,7 @@ class CovidDeathsCenter extends COVID_Department
     {
         return $this->db->find('covid_deaths', 'health_id', $health_id) ? true : false;
     }
+    
     public function to_array($record_obj)
     {
         return [
