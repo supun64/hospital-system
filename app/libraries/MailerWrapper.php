@@ -10,8 +10,8 @@
         }
 
         private function authenticate_server(){
-            $this->mail->isSMTP();                                            //Send using SMTP
-            $this->mail->Host       = 'smtp.gmail.com';                       //Set the SMTP server to send through
+            $this->mail->isMail();                                            //Send using SMTP
+            $this->mail->Host       = 'localhost';                            //Set the SMTP server to send through
             $this->mail->SMTPAuth   = true;
             $this->mail->SMTPSecure = 'tls';                                  //Enable implicit TLS encryption
             $this->mail->Port       = 587;
