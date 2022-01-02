@@ -20,7 +20,6 @@ class Pages extends Controller
 
     public function index()
     {
-
         $data['monthly_result'] = $this->chart_loader->load_last_thirty();
         $data['total'] = $this->chart_loader->load_total();
 
@@ -540,7 +539,7 @@ class Pages extends Controller
 
         $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/vaccination', $data);
     }
-    //TODO: why only admin ????
+
     //to change or view user details
     public function settings()
     {
@@ -574,6 +573,17 @@ class Pages extends Controller
             "vaccinations" => ["Batch Number", "HealthID", "Dose", "Name of Vaccine", "Conducted Place", "Comments"]
         ];
 
+        if(isset($_POST['delete_submitted'])){
+            $type = $_GET['record_type'];
+            $center = $this->center_factory->get_center($type);
+            
+            if ($center->delete_record($_POST['id'])) {
+                header('location:' . URL_ROOT . "/pages/data_management?record_type=$type");  
+            } else {
+                die('Something went wrong');
+            }
+        }
+
         if (isset($_POST['newrecord'])) {
             $type = $_GET['record_type'];
             $record = $this->record_factory->get_record($type, $_POST['newrecord']);
@@ -598,17 +608,6 @@ class Pages extends Controller
         }
 
         $_SESSION["is_admin"] ? $this->view('/pages/data_management') : header('location:' . URL_ROOT . '/pages/index');
-    }
-
-    public function data_delete()
-    {
-        $type = $_GET['record_type'];
-        $center = $this->center_factory->get_center($type);
-        if ($center->delete_record($_POST['id'])) {
-            header('location:' . URL_ROOT . "/pages/data_management?record_type=$type");
-        } else {
-            die('Something went wrong');
-        }
     }
 
     public function user_management()
@@ -667,6 +666,6 @@ class Pages extends Controller
     public function logout()
     {
         $this->user_handler->logout();
-        header('location:' . URL_ROOT . '/users/login');
+        header('location:' . URL_ROOT . '/users/login'); 
     }
 }
