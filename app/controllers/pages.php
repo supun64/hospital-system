@@ -65,7 +65,6 @@ class Pages extends Controller
         //This is the code to check whether user click submit button
         if (isset($_POST["add-patient-submit"])) {
 
-            // $hospital_id = (int)explode(" - ", $_POST["add-patient-hospital-name"]);
             $hospital_id = $center->get_hospital_id();
 
             $antigen_detail = [
@@ -621,7 +620,7 @@ class Pages extends Controller
 
         $_SESSION["is_admin"] ? $this->view('/pages/data_management') : header('location:' . URL_ROOT . '/pages/index');
     }
-    //TODO: transaction -----------------???? when deleting ------in COVID Death center
+
     public function user_management()
     {
         $hos_id = $_SESSION['hospital_id'];  //relevent hospital id
@@ -630,8 +629,6 @@ class Pages extends Controller
 
         //add new deo
         if (isset($_POST['nw_deo_submit'])) {
-
-
 
             $deo = new User(NULL, $_POST['deo_username'], $_POST['password'], $hos_id, $_POST['deo_email'], 0);
 
@@ -652,8 +649,9 @@ class Pages extends Controller
                     $data['content'] = nl2br($data['content']);
                     $data['notification'] = $this->mail;
 
+                    $data['users'] = $this->user_handler->find_All_Users($hos_id);
 
-                    header('location:' . URL_ROOT . '/pages/user_management');
+                    $this->view('/pages/user_management', $data);
                 } else {
                     die('Something went wrong');
                 }
