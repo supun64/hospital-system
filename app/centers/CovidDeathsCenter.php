@@ -10,16 +10,16 @@ class CovidDeathsCenter extends COVID_Department
 
     public  function add_record($record)
     {
-        $data_1 = [
-            "health_id" => $record[0]->get_health_id(),
-            "hospital_id" => $record[0]->get_hospital_id(),
-            "date" => $record[0]->get_date(),
-            "place" => $record[0]->get_place(),
-            "comments" => $record[0]->get_comments(),
+        $data = [
+            "health_id" => $record->get_health_id(),
+            "hospital_id" => $record->get_hospital_id(),
+            "date" => $record->get_date(),
+            "place" => $record->get_place(),
+            "comments" => $record->get_comments(),
         ];
 
-        $data_2 = 
-        //$result = $this->db->insert("covid_deaths", $data);
+
+        $result = $this->db->insert("covid_deaths", $data);
         //$result = $this->db->transaction(["add","update"],["table"=>"covid_deaths","fields"=>$data],["table"=>"covid_deaths","fields"]);
 
         if ($result) {
@@ -47,13 +47,12 @@ class CovidDeathsCenter extends COVID_Department
 
     public  function delete_record($id)
     {
-        $health_id = $this->db->findById("covid_deaths","id",$id)[0]['health_id'];
-        if($this->db->delete("covid_deaths", "id", $id)){
-            $param_list = ["is_alive"=>1,"health_id"=>$health_id];
-            $this->db->update("citizens","health_id",$param_list);
+        $health_id = $this->db->findById("covid_deaths", "id", $id)[0]['health_id'];
+        if ($this->db->delete("covid_deaths", "id", $id)) {
+            $param_list = ["is_alive" => 1, "health_id" => $health_id];
+            $this->db->update("citizens", "health_id", $param_list);
             return true;
-        }
-        else
+        } else
             false;
     }
 
@@ -81,7 +80,7 @@ class CovidDeathsCenter extends COVID_Department
     {
         return $this->db->find('covid_deaths', 'health_id', $health_id) ? true : false;
     }
-    
+
     public function to_array($record_obj)
     {
         return [

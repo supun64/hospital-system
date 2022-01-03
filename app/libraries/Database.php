@@ -212,7 +212,7 @@ class Database
 
 
     //transation for more than 1 sql execution
-    public function transcation($methods, $param_list_1, $param_list_2)
+    public function transaction($methods, $param_list_1, $param_list_2)
     {
 
         // Turn autocommit off
@@ -237,11 +237,13 @@ class Database
 
     private function func_switch($method, $param_list)
     {
+
         switch ($method) {
             case "add":
                 $this->insert($param_list['table'], $param_list['fields']);
                 break;
             case "update":
+
                 $this->update($param_list['table'], $param_list['primary_key'], $param_list['fields']);
                 break;
             case "delete":
