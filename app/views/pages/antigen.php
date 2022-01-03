@@ -141,12 +141,8 @@
                                                 </div>
 
                                                 <div class="covid-td">
-                                                    <?php echo $antigen["place"] ?>
+                                                    <?php echo $antigen["place"] == "undefined" ? "" : $antigen["place"]; ?>
                                                 </div>
-
-
-
-
 
                                             </div>
                                         </div>
@@ -155,7 +151,6 @@
                                     <!-- TODO: add covid-bottom-tr class to the end of the table -->
 
                                 </div>
-
 
                             <?php } else { ?>
 
@@ -175,9 +170,6 @@
                             <?php } ?>
                         </div>
                     <?php } ?>
-
-
-
 
                     </div>
 
@@ -280,10 +272,10 @@
 </div>
 
 <!--email-->
-<?php 
-    if(isset($data['notification']) && isset($_GET['updated'])){
-        $data['notification']->send_email($data['email'], $data['subject'], $data['content']);
-    }
+<?php
+if (isset($data['notification']) && isset($_GET['updated'])) {
+    $data['notification']->send_email($data['email'], $data['subject'], $data['content']);
+}
 ?>
 
 <script>

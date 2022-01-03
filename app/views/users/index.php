@@ -12,7 +12,7 @@
           <div class="index-form-container">
 
             <h3 class="font-weight-bold py-3">
-              HOSPITAL DATA MANAGEMENT SYSTEM
+              COVID DETAILS HANDLING <br>SYSTEM
             </h3>
 
             <form action="<?php echo URL_ROOT; ?>/users/index" method="POST">

@@ -196,7 +196,7 @@ if ($_SESSION['is_admin']) {
                     <img src="<?php echo URL_ROOT; ?>/public/images/SquadOption-logo.png" class="squadoption-logo">
 
                     <h1 class="text-primary home-title">CoviDet</h1>
-                    <h4 class="home-subtitle">Hospital Data Management System</h4>
+                    <h4 class="home-subtitle">Covid Details Handeling System</h4>
                 </div>
                 <div id="carouselExampleDark" class="carousel carousel-dark slide home-carousel" data-bs-ride="carousel">
                     <div class="carousel-indicators">

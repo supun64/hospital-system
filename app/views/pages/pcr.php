@@ -140,7 +140,7 @@
                                             </div>
 
                                             <div class="covid-td">
-                                                <?php echo $pcr["place"] ?>
+                                                <?php echo $pcr["place"] == "undefined" ? "" : $pcr["place"]; ?>
                                             </div>
                                         </div>
                                     </div>
@@ -268,10 +268,10 @@
 </div>
 
 <!--email-->
-<?php 
-    if(isset($data['notification']) && isset($_GET['updated'])){
-        $data['notification']->send_email($data['email'], $data['subject'], $data['content']);
-    }
+<?php
+if (isset($data['notification']) && isset($_GET['updated'])) {
+    $data['notification']->send_email($data['email'], $data['subject'], $data['content']);
+}
 ?>
 <script>
     <?php if (($data['personal']['is_alive'] == 0)) { ?>

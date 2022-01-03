@@ -4,6 +4,8 @@ document.getElementById('Hospital').addEventListener('change', function() {
     //in case of  user selecting more than one time -> both buttons disabled first then enable one
     document.getElementById('reg_btn').disabled = true;
     document.getElementById('login_btn').disabled = true;
+    document.querySelector('#reg_btn').className = "index-btn1";
+    document.querySelector('#login_btn').className = "index-btn1";
 
     //console.log('You selected: ', x);
 
