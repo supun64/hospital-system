@@ -9,8 +9,10 @@ document.getElementById('Hospital').addEventListener('change', function() {
 
     if (x == 0) {
       document.getElementById('reg_btn').disabled = false;
+      document.querySelector('#reg_btn').className = "index-btn1 index-hover";
     } else {
       document.getElementById('login_btn').disabled = false;
+      document.querySelector('#login_btn').className = "index-btn1 index-hover";
     }
 
   });
