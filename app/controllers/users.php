@@ -52,7 +52,6 @@ public function __construct()
             $txt = $_POST['ran-1'];
             $txt = nl2br($txt);
             $this->mail->send_email($to,$subject,$txt);
-            
         }
 
         //if register submitted
