@@ -100,8 +100,6 @@ class Database
         }
         $sql = rtrim($sql, ',');
         $sql .= ')';
-
-        return $this->sql_execute($sql);
     }
 
     public function delete($table, $primary_key, $id)
@@ -168,7 +166,6 @@ class Database
     public function increment($table, $field)
     {
         $today = date("Y-m-d");
-
         $sql = "";
         if ($this->date_exist($today)) {
             $sql = "UPDATE $table SET $field=$field+1 WHERE date='$today'";

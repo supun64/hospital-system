@@ -98,31 +98,35 @@ public function __construct()
 
 
     public function login(){
-        $data = [];
-        if($_SERVER['REQUEST_METHOD'] == "POST"){
-            $is_confirmed = $this->user_handler->log_in(trim($_POST["useremail"]),trim($_POST["password"]));
-            if(!$is_confirmed){ //either entered wrong password or password mismatch
-                $data["user_email"] = trim($_POST["useremail"]);
-                $data["password"] = trim($_POST["password"]);
-                $data["errors"] = "Email or Password is wrong. Please check again.";
-                $this->view('/users/login',$data);
-            }else{
-                header('location:'.URL_ROOT.'/pages/index');
+        if(!$this->user_handler->is_logged_in()){
+            $data = [];
+            if($_SERVER['REQUEST_METHOD'] == "POST"){
+                $is_confirmed = $this->user_handler->log_in(trim($_POST["useremail"]),trim($_POST["password"]));
+                if(!$is_confirmed){ //either entered wrong password or password mismatch
+                    $data["user_email"] = trim($_POST["useremail"]);
+                    $data["password"] = trim($_POST["password"]);
+                    $data["errors"] = "Email or Password is wrong. Please check again.";
+                    $this->view('/users/login',$data);
+                }else{
+                    header('location:'.URL_ROOT.'/pages/index');
+                }
             }
-        }
 
-        if(isset($_GET["hospital-id"]) && !empty($_GET["hospital-id"])){
+            if(isset($_GET["hospital-id"]) && !empty($_GET["hospital-id"])){
 
-        
-            $hospital_id = $_GET["hospital-id"];
-            $data = $this->reg_handler->get_hospital($hospital_id);
-            //if not registered hospital try to access using url with paramas
-            if(!$data['is_registered'] || $data == NULL){ header('location:'.URL_ROOT.'/users/index');}
-            $_SESSION['hospital_id'] = $hospital_id;
-            $_SESSION['hospitalname'] = $data['name'];
-        
-        }else{header('location:'.URL_ROOT.'/users/index');}  //no permission without correct url
-        $this->view('/users/login',$data);
+            
+                $hospital_id = $_GET["hospital-id"];
+                $data = $this->reg_handler->get_hospital($hospital_id);
+                //if not registered hospital try to access using url with paramas
+                if(!$data['is_registered'] || $data == NULL){ header('location:'.URL_ROOT.'/users/index');}
+                $_SESSION['hospital_id'] = $hospital_id;
+                $_SESSION['hospitalname'] = $data['name'];
+            
+            }else{header('location:'.URL_ROOT.'/users/index');}  //no permission without correct url
+            $this->view('/users/login',$data);
+        }else{
+            header('location:'.URL_ROOT.'/pages/index');
+        }  
     }
 
     public function logout()

@@ -1,27 +1,27 @@
 <?php require_once APP_ROOT . "/views/pages/user_dashboard.php" ?>
 <div class='sub-division'>
 
-        <?php $cur_hos = $_SESSION['hospital_id']; ?>
-        <input type="text" id="cur-hos" hidden value="<?php echo $cur_hos ?>">
+    <?php $cur_hos = $_SESSION['hospital_id']; ?>
+    <input type="text" id="cur-hos" hidden value="<?php echo $cur_hos ?>">
 
-        <body>
-            <?php
-            if (isset($_GET['not-user'])) { ?>
-                <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert">
-                    <div class="deo-manage-error-text"> Wrong Health ID !!</div>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            <?php } ?>
+    <body>
+        <?php
+        if (isset($_GET['not-user'])) { ?>
+            <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert">
+                <div class="deo-manage-error-text"> Wrong Health ID !!</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php } ?>
 
-            <?php
-            if (isset($_GET['success'])) { ?>
-                <div class="alert alert-success alert-dismissible fade show deo-manage-error-box" role="alert">
-                    <div class="deo-manage-error-text"> Record successfully added</div>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            <?php } ?>
+        <?php
+        if (isset($_GET['success'])) { ?>
+            <div class="alert alert-success alert-dismissible fade show deo-manage-error-box" role="alert">
+                <div class="deo-manage-error-text"> Record successfully added</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php } ?>
 
-            <section class="main-info">
+        <section class="main-info">
 
             <main class="sub-division-main">
 
@@ -48,7 +48,7 @@
 
                     <!-- Add addmination-fade-in-pre-state to add the animation -->
                     <div class="covid-search-result" id="covid-search-result-section">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-antigen">Add new Antigen +</button>
+                        <button class="btn btn-primary" id="add-new" data-bs-toggle="modal" data-bs-target="#add-new-antigen">Add new Antigen +</button>
 
                         <!-- This is the division to display if the search result available -->
 
@@ -166,7 +166,7 @@
                                         <img class="covid-sad-face-img" src="<?php echo URL_ROOT; ?>/public/images/sad-face.png" alt="">
                                     </div>
                                     <p class="covid-no-result-message">
-                                        No search results found
+                                        Sorry! No antigen :(
                                     </p>
 
                                 </div>
@@ -181,107 +181,109 @@
 
                     </div>
 
-    </main>
+            </main>
 
-    <!-- This is the UI modal for add new vaccinated person -->
-    <div class="modal fade" id="add-new-antigen" tabindex="-1" aria-labelledby="vac-forum" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <!-- This is the UI modal for add new vaccinated person -->
+            <div class="modal fade" id="add-new-antigen" tabindex="-1" aria-labelledby="vac-forum" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
 
-            <form class="modal-content" method="POST" action="<?php echo URL_ROOT; ?>/pages/antigen">
-                <div class="modal-header covid-modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <form class="modal-content" method="POST" action="<?php echo URL_ROOT; ?>/pages/antigen">
+                        <div class="modal-header covid-modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
-                    <h5 class="modal-title covid-modal-title" id="antigen-forum">Antigen Test Forum</h5>
-
-                </div>
-                <div class="modal-body">
-
-                    <div class="col-md-8 covid-input">
-                        <label for="inputHealthID" class="form-label-primary label-primary covid-input-label">Patient's Health ID</label>
-                        <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-health-id" value="<?php echo $data['personal']['health_id'] ?>">
-                    </div>
-
-                    <div class="col-md-6 covid-input">
-                        <label for="inputDate" class="form-label-primary covid-input-label">Tested Date</label>
-                        <input type="date" value="<?php echo date('d-m-Y'); ?>" class="form-control covid-input-field" id="inputDate" name="add-patient-antigen-date" required>
-                    </div>
-
-                    <div class="col-md-8 covid-input">
-                        <label for="inputHospital" class="form-label-primary covid-input-label">Conducted Hospital</label>
-                        <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-hospital" value="<?php echo $data['hospital_id'] ?>">
-
-                    </div>
-
-                    <div class="col-md-8 covid-input">
-                        <label for="inputAntigenPlace" class="form-label-primary label-primary covid-input-label">Conducted Place</label>
-                        <input type="text" class="form-control covid-input-field" id="inputAntigenPlace" name="add-patient-antigen-place" placeholder="(Optional)">
-                    </div>
-
-
-                </div>
-                <div class="modal-footer covid-modal-footer">
-                    <button type="submit" class="btn btn-primary covid-submit-btn" name="add-patient-submit">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-
-    <!-- This is the model for updating result of Antigen -->
-    <div class="modal fade" id="antigen-result" tabindex="-1" aria-labelledby="antigen-forum" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-md">
-
-            <form class="modal-content" method="POST" action="<?php echo URL_ROOT; ?>/pages/antigen">
-
-                <div class="modal-header test-toggle-modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body test-toggle-modal-body">
-
-                    <div class="col-md-8 covid-input">
-                        <label for="togBtn" class="form-label label test-toggle-label">Antigen Test result</label>
-                        </label>
-
-                        <!-- backend purposes only -->
-                        <input type="text" name="final-id" id="hidden-antigen-id" hidden>
-                        <input type="text" name="final-hid" id="hidden-antigen-hid" hidden>
-                        <input type="text" name="final-htid" id="hidden-antigen-htid" hidden value="<?php echo $data['personal']['health_id'] ?>">
-                        <input type="text" name="final-date" id="hidden-antigen-date" hidden>
-                        <input type="text" name="final-place" id="hidden-antigen-place" hidden>
-                        <input type="text" name="final-status" id="hidden-antigen-status" hidden>
-
-
-                        <!-- This is the code to toggle button -->
-                        <div class="form-control test-toggle-input">
-                            <label class="switch">
-                                <input type="checkbox" class="toggle-input" id="antigen-togBtn">
-                                <div class="slider round">
-                                    <!--ADDED HTML -->
-                                    <span class="on toggle-font">Possitive</span>
-                                    <span class="off toggle-font">Negetive</span>
-                                    <!--END-->
-                                </div>
-                            </label>
+                            <h5 class="modal-title covid-modal-title" id="antigen-forum">Antigen Test Forum</h5>
 
                         </div>
+                        <div class="modal-body">
+
+                            <div class="col-md-8 covid-input">
+                                <label for="inputHealthID" class="form-label-primary label-primary covid-input-label">Patient's Health ID</label>
+                                <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-health-id" value="<?php echo $data['personal']['health_id'] ?>">
+                            </div>
+
+                            <div class="col-md-6 covid-input">
+                                <label for="inputDate" class="form-label-primary covid-input-label">Tested Date</label>
+                                <input type="date" value="<?php echo date('d-m-Y'); ?>" class="form-control covid-input-field" id="inputDate" name="add-patient-antigen-date" required>
+                            </div>
+
+                            <div class="col-md-8 covid-input">
+                                <label for="inputHospital" class="form-label-primary covid-input-label">Conducted Hospital</label>
+                                <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-hospital" value="<?php echo $data['hospital_id'] ?>">
+
+                            </div>
+
+                            <div class="col-md-8 covid-input">
+                                <label for="inputAntigenPlace" class="form-label-primary label-primary covid-input-label">Conducted Place</label>
+                                <input type="text" class="form-control covid-input-field" id="inputAntigenPlace" name="add-patient-antigen-place" placeholder="(Optional)">
+                            </div>
 
 
-                    </div>
-
+                        </div>
+                        <div class="modal-footer covid-modal-footer">
+                            <button type="submit" class="btn btn-primary covid-submit-btn" name="add-patient-submit">Submit</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-footer test-toggle-footer">
-                    <button type="submit" class="btn btn-primary antigen-toggle-submit-btn" name="update-patient-submit" id="antigen-update-btn">Update</button>
+            </div>
+
+
+            <!-- This is the model for updating result of Antigen -->
+            <div class="modal fade" id="antigen-result" tabindex="-1" aria-labelledby="antigen-forum" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-md">
+
+                    <form class="modal-content" method="POST" action="<?php echo URL_ROOT; ?>/pages/antigen">
+
+                        <div class="modal-header test-toggle-modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body test-toggle-modal-body">
+
+                            <div class="col-md-8 covid-input">
+                                <label for="togBtn" class="form-label label test-toggle-label">Antigen Test result</label>
+                                </label>
+
+                                <!-- backend purposes only -->
+                                <input type="text" name="final-id" id="hidden-antigen-id" hidden>
+                                <input type="text" name="final-hid" id="hidden-antigen-hid" hidden>
+                                <input type="text" name="final-htid" id="hidden-antigen-htid" hidden value="<?php echo $data['personal']['health_id'] ?>">
+                                <input type="text" name="final-date" id="hidden-antigen-date" hidden>
+                                <input type="text" name="final-place" id="hidden-antigen-place" hidden>
+                                <input type="text" name="final-status" id="hidden-antigen-status" hidden>
+
+
+                                <!-- This is the code to toggle button -->
+                                <div class="form-control test-toggle-input">
+                                    <label class="switch">
+                                        <input type="checkbox" class="toggle-input" id="antigen-togBtn">
+                                        <div class="slider round">
+                                            <!--ADDED HTML -->
+                                            <span class="on toggle-font">Possitive</span>
+                                            <span class="off toggle-font">Negetive</span>
+                                            <!--END-->
+                                        </div>
+                                    </label>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <div class="modal-footer test-toggle-footer">
+                            <button type="submit" class="btn btn-primary antigen-toggle-submit-btn" name="update-patient-submit" id="antigen-update-btn">Update</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-    </div>
+            </div>
 
-    </section>
-
-
-
-
+        </section>
 </div>
+
+<script>
+    <?php if (($data['personal']['is_alive'] == 0)) { ?>
+        document.getElementById("add-new").disabled = true;
+    <?php } ?>
+</script>
 
 <script src="<?= URL_ROOT ?>./public/script/admin.js"></script>
 <script src="<?php echo URL_ROOT; ?>/public/script/test.js"></script>

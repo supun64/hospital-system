@@ -196,11 +196,11 @@
                                                 <h5>Are you sure you want to delete this record ??</h5>
                                             </div>
                                         </div>
-                                        <form action="<?= URL_ROOT; ?>/pages/data_delete?record_type=<?= $data[count($data) - 1] ?>" method='POST'>
+                                        <form action="<?= URL_ROOT; ?>/pages/data_management?record_type=<?= $data[count($data) - 1] ?>" method='POST'>
                                             <input type="hidden" name="id" value="<?= $record['id'] ?>">
 
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-danger">Confirm</button>
+                                                <button type="submit" name = 'delete_submitted' class="btn btn-danger">Confirm</button>
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                             </div>
                                         </form>
