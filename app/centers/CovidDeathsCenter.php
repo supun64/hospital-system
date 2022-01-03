@@ -48,9 +48,12 @@ class CovidDeathsCenter extends COVID_Department
     public  function delete_record($id)
     {
         $health_id = $this->db->findById("covid_deaths", "id", $id)[0]['health_id'];
-        if ($this->db->delete("covid_deaths", "id", $id)) {
-            $param_list = ["is_alive" => 1, "health_id" => $health_id];
-            $this->db->update("citizens", "health_id", $param_list);
+        $param_list = ["is_alive" => 1, "health_id" => $health_id];
+        if ($this->db->transaction(
+            ["delete", "update"],
+            ["table" => "covid_deaths", "primary_key" => "id", "id" => $id],
+            ["table" => "citizens", "primary_key" => "health_id", "fields" => $param_list]
+        )) {
             return true;
         } else
             false;
