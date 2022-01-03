@@ -1,13 +1,21 @@
-<?php 
-if($_SESSION['is_admin']){
-    require_once APP_ROOT . "/views/pages/admin_dashboard.php" ;
-}else{
-    require_once APP_ROOT . "/views/pages/user_dashboard.php" ;
+<?php
+if ($_SESSION['is_admin']) {
+    require_once APP_ROOT . "/views/pages/admin_dashboard.php";
+} else {
+    require_once APP_ROOT . "/views/pages/user_dashboard.php";
 }
 
 ?>
 <div class='sub-division'>
     <!--put the content here-->
+
+    <?php
+    if (isset($_GET['first'])) { ?>
+        <div class="alert alert-info" role="alert">
+            🎉 Welcome to CoviDet !! Please change your temporary password
+        </div>
+    <?php } ?>
+
 
     <div class="settings-heading data-heading">
         <h1>Settings</h1>

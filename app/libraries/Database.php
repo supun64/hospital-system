@@ -100,6 +100,7 @@ class Database
         }
         $sql = rtrim($sql, ',');
         $sql .= ')';
+        return $this->sql_execute($sql);
     }
 
     public function delete($table, $primary_key, $id)
