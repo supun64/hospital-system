@@ -5,7 +5,7 @@
     <id>UMLObject</id>
     <coordinates>
       <x>70</x>
-      <y>0</y>
+      <y>10</y>
       <w>520</w>
       <h>1480</h>
     </coordinates>
@@ -18,8 +18,8 @@ valign=top</panel_attributes>
     <coordinates>
       <x>590</x>
       <y>0</y>
-      <w>600</w>
-      <h>1480</h>
+      <w>640</w>
+      <h>1490</h>
     </coordinates>
     <panel_attributes>System
 valign=top</panel_attributes>
@@ -29,7 +29,7 @@ valign=top</panel_attributes>
     <id>UMLSpecialState</id>
     <coordinates>
       <x>300</x>
-      <y>50</y>
+      <y>60</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -40,7 +40,7 @@ valign=top</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>310</x>
-      <y>80</y>
+      <y>90</y>
       <w>30</w>
       <h>100</h>
     </coordinates>
@@ -51,7 +51,7 @@ valign=top</panel_attributes>
     <id>UMLState</id>
     <coordinates>
       <x>130</x>
-      <y>160</y>
+      <y>170</y>
       <w>280</w>
       <h>40</h>
     </coordinates>
@@ -60,23 +60,10 @@ bg=red</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLState</id>
-    <coordinates>
-      <x>690</x>
-      <y>250</y>
-      <w>300</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>Display search results
-provide search again option
-bg=red</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
       <x>400</x>
-      <y>170</y>
+      <y>180</y>
       <w>300</w>
       <h>30</h>
     </coordinates>
@@ -87,20 +74,20 @@ bg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>320</x>
-      <y>530</y>
+      <y>510</y>
       <w>400</w>
-      <h>70</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 </panel_attributes>
-    <additional_attributes>380.0;50.0;10.0;50.0;10.0;10.0</additional_attributes>
+    <additional_attributes>380.0;80.0;10.0;80.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLState</id>
     <coordinates>
       <x>700</x>
-      <y>560</y>
-      <w>320</w>
+      <y>570</y>
+      <w>300</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>Validate the authority to update the test results
@@ -111,7 +98,7 @@ bg=red</panel_attributes>
     <id>UMLSpecialState</id>
     <coordinates>
       <x>810</x>
-      <y>680</y>
+      <y>690</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -123,7 +110,7 @@ type=decision</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>820</x>
-      <y>590</y>
+      <y>600</y>
       <w>80</w>
       <h>110</h>
     </coordinates>
@@ -134,20 +121,20 @@ is valid?</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>300</x>
-      <y>690</y>
-      <w>780</w>
-      <h>780</h>
+      <x>840</x>
+      <y>700</y>
+      <w>320</w>
+      <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m2=No</panel_attributes>
-    <additional_attributes>10.0;760.0;760.0;760.0;760.0;10.0;550.0;10.0</additional_attributes>
+    <additional_attributes>300.0;190.0;300.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>320</x>
-      <y>710</y>
+      <y>720</y>
       <w>550</w>
       <h>90</h>
     </coordinates>
@@ -159,11 +146,11 @@ m2=Yes</panel_attributes>
     <id>UMLState</id>
     <coordinates>
       <x>220</x>
-      <y>780</y>
+      <y>790</y>
       <w>200</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>Enter new test results
+    <panel_attributes>Change status
 bg=red</panel_attributes>
     <additional_attributes/>
   </element>
@@ -171,7 +158,7 @@ bg=red</panel_attributes>
     <id>UMLState</id>
     <coordinates>
       <x>720</x>
-      <y>780</y>
+      <y>790</y>
       <w>240</w>
       <h>40</h>
     </coordinates>
@@ -183,7 +170,7 @@ bg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>410</x>
-      <y>790</y>
+      <y>800</y>
       <w>330</w>
       <h>30</h>
     </coordinates>
@@ -194,7 +181,7 @@ bg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>280</x>
-      <y>1220</y>
+      <y>1230</y>
       <w>700</w>
       <h>220</h>
     </coordinates>
@@ -205,7 +192,7 @@ bg=red</panel_attributes>
     <id>UMLState</id>
     <coordinates>
       <x>680</x>
-      <y>160</y>
+      <y>170</y>
       <w>320</w>
       <h>40</h>
     </coordinates>
@@ -217,11 +204,11 @@ bg=red</panel_attributes>
     <id>UMLState</id>
     <coordinates>
       <x>230</x>
-      <y>260</y>
+      <y>270</y>
       <w>170</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>Enter search details
+    <panel_attributes>Enter citizen id
 bg=red</panel_attributes>
     <additional_attributes/>
   </element>
@@ -230,17 +217,18 @@ bg=red</panel_attributes>
     <coordinates>
       <x>390</x>
       <y>270</y>
-      <w>320</w>
-      <h>30</h>
+      <w>430</w>
+      <h>40</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>300.0;10.0;10.0;10.0</additional_attributes>
+    <panel_attributes>lt=&lt;-
+is valid ?</panel_attributes>
+    <additional_attributes>410.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>310</x>
-      <y>190</y>
+      <y>200</y>
       <w>550</w>
       <h>90</h>
     </coordinates>
@@ -250,45 +238,8 @@ bg=red</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>310</x>
-      <y>360</y>
-      <w>40</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>bg=green
-type=decision</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>340</x>
-      <y>290</y>
-      <w>520</w>
-      <h>110</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-search result available?</panel_attributes>
-    <additional_attributes>10.0;90.0;500.0;90.0;500.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>130</x>
-      <y>310</y>
-      <w>200</w>
-      <h>100</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-m2=No
-Want to Search again?</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;70.0;180.0;70.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLSpecialState</id>
-    <coordinates>
       <x>120</x>
-      <y>280</y>
+      <y>290</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -300,7 +251,7 @@ type=decision</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>130</x>
-      <y>180</y>
+      <y>190</y>
       <w>570</w>
       <h>120</h>
     </coordinates>
@@ -312,7 +263,7 @@ m2=Yes</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>70</x>
-      <y>290</y>
+      <y>300</y>
       <w>210</w>
       <h>1180</h>
     </coordinates>
@@ -324,7 +275,7 @@ m2=No</panel_attributes>
     <id>UMLState</id>
     <coordinates>
       <x>240</x>
-      <y>500</y>
+      <y>480</y>
       <w>190</w>
       <h>40</h>
     </coordinates>
@@ -333,22 +284,10 @@ bg=red</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>320</x>
-      <y>390</y>
-      <w>50</w>
-      <h>130</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-m2=Yes</panel_attributes>
-    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLState</id>
     <coordinates>
       <x>720</x>
-      <y>880</y>
+      <y>890</y>
       <w>240</w>
       <h>40</h>
     </coordinates>
@@ -360,7 +299,7 @@ bg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>830</x>
-      <y>810</y>
+      <y>820</y>
       <w>30</w>
       <h>90</h>
     </coordinates>
@@ -371,7 +310,7 @@ bg=red</panel_attributes>
     <id>UMLSpecialState</id>
     <coordinates>
       <x>820</x>
-      <y>1030</y>
+      <y>1040</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -383,7 +322,7 @@ type=decision</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>830</x>
-      <y>910</y>
+      <y>920</y>
       <w>140</w>
       <h>140</h>
     </coordinates>
@@ -395,7 +334,7 @@ Is result Positive?</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>850</x>
-      <y>1040</y>
+      <y>1050</y>
       <w>130</w>
       <h>170</h>
     </coordinates>
@@ -407,7 +346,7 @@ m2=Yes</panel_attributes>
     <id>UMLState</id>
     <coordinates>
       <x>870</x>
-      <y>1190</y>
+      <y>1200</y>
       <w>160</w>
       <h>40</h>
     </coordinates>
@@ -420,7 +359,7 @@ bg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>260</x>
-      <y>1040</y>
+      <y>1050</y>
       <w>580</w>
       <h>400</h>
     </coordinates>
@@ -432,11 +371,181 @@ m2=No</panel_attributes>
     <id>UMLSpecialState</id>
     <coordinates>
       <x>260</x>
-      <y>1420</y>
+      <y>1430</y>
       <w>50</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>type=final</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>800</x>
+      <y>270</y>
+      <w>40</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>bg=green
+type=decision</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>810</x>
+      <y>300</y>
+      <w>50</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m2=No</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>830</x>
+      <y>280</y>
+      <w>290</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m2=Yes
+m1=has pcr record history?</panel_attributes>
+    <additional_attributes>270.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>730</x>
+      <y>380</y>
+      <w>210</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Display Error message and
+provide search again option
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>130</x>
+      <y>320</y>
+      <w>620</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+want to search again?</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0;600.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>1100</x>
+      <y>270</y>
+      <w>40</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>bg=green
+type=decision</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>980</x>
+      <y>300</y>
+      <w>180</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m2=Yes</panel_attributes>
+    <additional_attributes>10.0;180.0;10.0;120.0;140.0;120.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1130</x>
+      <y>280</y>
+      <w>80</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m2=No</panel_attributes>
+    <additional_attributes>60.0;290.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>1020</x>
+      <y>570</y>
+      <w>210</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Display No Pcr histroy 
+message with personal details
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>880</x>
+      <y>480</y>
+      <w>230</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Display record history with
+personal details 
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>490</y>
+      <w>480</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;460.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>1020</x>
+      <y>890</y>
+      <w>170</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Disable ability to change
+status
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>290</x>
+      <y>920</y>
+      <w>870</w>
+      <h>540</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;520.0;850.0;520.0;850.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>290</x>
+      <y>600</y>
+      <w>930</w>
+      <h>890</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;870.0;910.0;870.0;910.0;10.0</additional_attributes>
   </element>
 </diagram>

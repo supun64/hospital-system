@@ -209,4 +209,46 @@ class Database
             return false;
         }
     }
+
+
+    //transation for more than 1 sql execution
+    public function transaction($methods, $param_list_1, $param_list_2)
+    {
+
+        // Turn autocommit off
+        mysqli_autocommit($this->conn, FALSE);
+
+        // Insert some values
+        $this->func_switch($methods[0], $param_list_1);
+        $this->func_switch($methods[1], $param_list_2);
+
+        // Commit transaction
+        if (!mysqli_commit($this->conn)) {
+            echo "Commit transaction failed";
+            return false;
+        }
+
+        mysqli_autocommit($this->conn, TRUE);
+        return true;
+    }
+    //if update->
+    //if add ->
+    //if del->
+
+    private function func_switch($method, $param_list)
+    {
+
+        switch ($method) {
+            case "add":
+                $this->insert($param_list['table'], $param_list['fields']);
+                break;
+            case "update":
+
+                $this->update($param_list['table'], $param_list['primary_key'], $param_list['fields']);
+                break;
+            case "delete":
+                $this->delete($param_list['table'], $param_list['primary_key'], $param_list['id']);
+                break;
+        }
+    }
 }

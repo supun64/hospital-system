@@ -65,7 +65,6 @@ class Pages extends Controller
         //This is the code to check whether user click submit button
         if (isset($_POST["add-patient-submit"])) {
 
-            // $hospital_id = (int)explode(" - ", $_POST["add-patient-hospital-name"]);
             $hospital_id = $center->get_hospital_id();
 
             $antigen_detail = [
@@ -145,7 +144,7 @@ class Pages extends Controller
             if ($data['email'] && $updated_record) {
                 $data['subject'] = "Antigen Test result by " . $_SESSION['hospitalname'];
                 $data['content'] = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "Antigen ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
-                $data['content']  = nl2br( $data['content']);
+                $data['content']  = nl2br($data['content']);
                 $data['notification'] = $this->mail;
             }
         }
@@ -153,7 +152,6 @@ class Pages extends Controller
     }
 
 
-    //TODO: different from others -> invalid user id, 
 
     public function covid_deaths()
     {
@@ -218,8 +216,12 @@ class Pages extends Controller
                     }
                 }
                 $new_death = $this->record_factory->get_record('covid_deaths', $death_details);
+
+
+                // TODO: Add transaction  ----------> 
+
                 if ($death_center->add_record($new_death) && $citizen->get_is_alive()) {
-                    $death_center->update_citizen_liveliness($health_id);
+
                     header('location:' . URL_ROOT . '/pages/covid_deaths?updated=' . $_POST["add-death-health-id"]);
                 } else {
                     die("Something went wrong");
@@ -242,7 +244,6 @@ class Pages extends Controller
 
         $center = $this->center_factory->get_center('covid_patients');
         $center->set_observer(new CovidPatientObserver());
-        $center->set_observer(new CovidDeathObserver());
         $covid_death_center = $this->center_factory->get_center('covid_deaths');
         $covid_death_center->set_observer(new CovidDeathObserver());
         // code to search 
@@ -320,10 +321,10 @@ class Pages extends Controller
                         if ($is_citizen && !$covid_death_center->isexist_user_id($id) && $citizen->get_is_alive()) {
                             $new_death = $this->record_factory->get_record('covid_deaths', $death_details);
                             $result1 = $covid_death_center->add_record($new_death);
-                            $covid_death_center->update_citizen_liveliness($id);
                         }
                     }
                     $data['final_record'] = ['status' => $_POST["final-status"], 'hospital_id' => $last_record["hospital_id"]];
+
                     $result2 = $center->update_record($new_patient);
                     if ($result1 || $result2) {
                         $health_id = (string)$new_patient->get_health_id();
@@ -629,8 +630,6 @@ class Pages extends Controller
         //add new deo
         if (isset($_POST['nw_deo_submit'])) {
 
-
-
             $deo = new User(NULL, $_POST['deo_username'], $_POST['password'], $hos_id, $_POST['deo_email'], 0);
 
             //checking whether an existing email
@@ -650,7 +649,10 @@ class Pages extends Controller
                     $data['content'] = nl2br($data['content']);
                     $data['notification'] = $this->mail;
 
-                    header('location:' . URL_ROOT . '/pages/user_management');
+
+                    $data['users'] = $this->user_handler->find_All_Users($hos_id);
+
+                    $this->view('/pages/user_management', $data);
                 } else {
                     die('Something went wrong');
                 }

@@ -1,6 +1,7 @@
-<?php  
+<?php
 
-class RegistrationHandler{
+class RegistrationHandler
+{
 
 
     private $db;
@@ -9,17 +10,19 @@ class RegistrationHandler{
     {
         $this->db = Database::get_instance();
     }
-    
-    public function get_all_hospitals(){
-    
+
+    public function get_all_hospitals()
+    {
+
         $result_set =  $this->db->find_All('hospitals');
         return $result_set;
     }
 
-    public function get_hospital($id){
+    public function get_hospital($id)
+    {
 
 
-       $result = $this->db->findById('hospitals','hospital_id',(int)$id);
+        $result = $this->db->findById('hospitals', 'hospital_id', (int)$id);
         return $result[0];
     }
 
@@ -28,50 +31,62 @@ class RegistrationHandler{
     public function email_exist($email)
     {
 
-        $result = $this->db->find("users","user_email",$email);
-        if($result){return true;}
+        $result = $this->db->find("users", "user_email", $email);
+        if ($result) {
+            return true;
+        }
         return false;
     }
 
     // TODO: do this using sql Transactions 
 
-        //function to add new admin
-       // public function add_admin($admin)
-       // {
-            // $username = $this->db->safe($admin['username']);
-            // $email = $this->db->safe($admin['email']);
-            // $password = $this->db->safe($admin['password']);
-            // $hos_id = (int)$admin['hospital_id'];
-            // $is_admin = 1;
-    
-            // $sql = "INSERT INTO users (user_name, user_email, password, hospital_id, is_admin) VALUES ('$username','$email','$password',$hos_id,$is_admin)";
-            // $result_1 = $this->db->sql_execute($sql);
+    //function to add new admin
+    // public function add_admin($admin)
+    // {
+    // $username = $this->db->safe($admin['username']);
+    // $email = $this->db->safe($admin['email']);
+    // $password = $this->db->safe($admin['password']);
+    // $hos_id = (int)$admin['hospital_id'];
+    // $is_admin = 1;
 
-            // if($result_1){
-            //     $sql = "UPDATE hospitals SET is_registered = 1 WHERE hospital_id = $hos_id";
-            //     $result_2 = $this->db->sql_execute($sql);
+    // $sql = "INSERT INTO users (user_name, user_email, password, hospital_id, is_admin) VALUES ('$username','$email','$password',$hos_id,$is_admin)";
+    // $result_1 = $this->db->sql_execute($sql);
 
-            //     if($result_2){
-            //         return true;
-            //     }else{
-            //         $sql = "DELETE FROM users WHERE user_email='$email'";
-            //         return false;
-            //     }
-            // }else{
-            //     return false;
-            // }
-       // }
+    // if($result_1){
+    //     $sql = "UPDATE hospitals SET is_registered = 1 WHERE hospital_id = $hos_id";
+    //     $result_2 = $this->db->sql_execute($sql);
 
-        public function register($id){
-            $param_list = ["is_registered"=>1 , "hospital_id"=> $id];
-            $result =  $this->db->update("hospitals","hospital_id",$param_list);
-            if($result){
-                return true;
-            }else{
-                return false;
-            }
+    //     if($result_2){
+    //         return true;
+    //     }else{
+    //         $sql = "DELETE FROM users WHERE user_email='$email'";
+    //         return false;
+    //     }
+    // }else{
+    //     return false;
+    // }
+    // }
+
+    public function register($id, $admin)
+    {
+        $param_list_2 = [
+            'user_name' => $admin->get_user_name(),
+            'user_email' => $admin->get_user_email(),
+            'password' => $admin->get_password(),
+            'hospital_id' => $admin->get_hospital_id(),
+            'is_admin' => $admin->get_is_admin()
+        ];
+        $param_list_1 = ["is_registered" => 1, "hospital_id" => $id];
+        //$result =  $this->db->update("hospitals", "hospital_id", $param_list_1);
+        $result = $this->db->transaction(
+            ["update", "add"],
+            ["table" => "hospitals", "primary_key" => "hospital_id", "fields" => $param_list_1],
+            ["table" => "users", "fields" => $param_list_2]
+        );
+        if ($result) {
+            return true;
+        } else {
+            return false;
         }
-
-
-
+    }
 }

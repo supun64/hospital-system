@@ -16,6 +16,13 @@ if ($_SESSION['is_admin']) {
         </div>
     <?php } ?>
 
+    <?php
+    if (isset($data['errors']) && $data['errors'] == "") { ?>
+        <div class="alert alert-success alert-dismissible fade show deo-manage-error-box" role="alert">
+            <div class="deo-manage-error-text"> Updated Successfully !!</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php } ?>
 
     <div class="settings-heading data-heading">
         <h1>Settings</h1>

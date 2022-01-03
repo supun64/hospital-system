@@ -57,12 +57,12 @@ class Users extends Controller
             $subject = "Hospital Verification Code";
             $txt = $_POST['ran-1'];
             $txt = nl2br($txt);
-            $this->mail->send_email($to,$subject,$txt);
-
+            $this->mail->send_email($to, $subject, $txt);
         }
 
         //if register submitted
         if (isset($_POST['reg-submit'])) {
+
 
             $ver_code = $_POST['verify-code'];
             $act_code = $_POST['ran-2'];
@@ -74,19 +74,20 @@ class Users extends Controller
                 //checking whether an existing email
                 if ($this->reg_handler->email_exist($admin->get_user_email())) {
                     header('location:' . URL_ROOT . '/users/register/hospital-id=' . $admin->get_hospital_id() . '?duplicate');  //redirect with error message  
-                    //header('location:'.URL_ROOT.'/users/index/6'); 
+
                 } else {
+
                     //     //hash the password
                     $admin->set_password(password_hash($admin->get_password(), PASSWORD_DEFAULT));
-                    // //add new admin
-                    $result1 = $this->user_handler->add_user($admin);
-                    $result2 = $this->reg_handler->register($admin->get_hospital_id());
-                    if ($result1 && $result2) {
+
+                    //registration process
+                    $result = $this->reg_handler->register($admin->get_hospital_id(), $admin);
+
+                    if ($result) {
                         header('location:' . URL_ROOT . '/users/login?hospital-id=' . $admin->get_hospital_id());
                     } else {
                         die('Something went wrong');
                     }
-                    //header('location:'.URL_ROOT.'/users/login');
                 }
             } else {
                 header('location:' . URL_ROOT . '/users/register/hospital-id=' . $admin->get_hospital_id() . '?fail');  //redirect with error message  TODO: error mesaage

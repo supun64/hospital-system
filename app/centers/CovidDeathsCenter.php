@@ -10,7 +10,7 @@ class CovidDeathsCenter extends COVID_Department
 
     public  function add_record($record)
     {
-        $data = [
+        $param_list_1 = [
             "health_id" => $record->get_health_id(),
             "hospital_id" => $record->get_hospital_id(),
             "date" => $record->get_date(),
@@ -18,7 +18,13 @@ class CovidDeathsCenter extends COVID_Department
             "comments" => $record->get_comments(),
         ];
 
-        $result = $this->db->insert("covid_deaths", $data);
+        $param_list_2 = ["is_alive" => 0, "health_id" => $record->get_health_id()];
+
+        $result = $this->db->transaction(
+            ["add", "update"],
+            ["table" => "covid_deaths", "fields" => $param_list_1],
+            ["table" => "citizens", "primary_key" => "health_id", "fields" => $param_list_2]
+        );
 
         if ($result) {
             $this->notifyObserver("died");
@@ -45,13 +51,15 @@ class CovidDeathsCenter extends COVID_Department
 
     public  function delete_record($id)
     {
-        $health_id = $this->db->findById("covid_deaths","id",$id)[0]['health_id'];
-        if($this->db->delete("covid_deaths", "id", $id)){
-            $param_list = ["is_alive"=>1,"health_id"=>$health_id];
-            $this->db->update("citizens","health_id",$param_list);
+        $health_id = $this->db->findById("covid_deaths", "id", $id)[0]['health_id'];
+        $param_list = ["is_alive" => 1, "health_id" => $health_id];
+        if ($this->db->transaction(
+            ["delete", "update"],
+            ["table" => "covid_deaths", "primary_key" => "id", "id" => $id],
+            ["table" => "citizens", "primary_key" => "health_id", "fields" => $param_list]
+        )) {
             return true;
-        }
-        else
+        } else
             false;
     }
 
@@ -79,7 +87,7 @@ class CovidDeathsCenter extends COVID_Department
     {
         return $this->db->find('covid_deaths', 'health_id', $health_id) ? true : false;
     }
-    
+
     public function to_array($record_obj)
     {
         return [
