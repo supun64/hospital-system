@@ -2,7 +2,7 @@
 class CovidPatientCenter extends COVID_Department
 {
 
-    private $observers = [];
+    private $observer;
 
     public function __construct()
     {
@@ -106,8 +106,9 @@ class CovidPatientCenter extends COVID_Department
         return end($records);
     }
 
-    public function isexist_user_id($health_id){
-        return $this->db->find('patients','health_id',$health_id)?true:false;
+    public function isexist_user_id($health_id)
+    {
+        return $this->db->find('patients', 'health_id', $health_id) ? true : false;
     }
 
     public function get_hospital_name_by_id($hospital_id)
@@ -118,20 +119,16 @@ class CovidPatientCenter extends COVID_Department
 
     public function set_observer($observer)
     {
-        array_push($this->observers, $observer);
+        $this->observer = $observer;
     }
 
     public function unset_observer($observer)
     {
-        unset($this->observers, $observer);
+        $this->observer = NULL;
     }
-
-
 
     private function notifyObserver($status)
     {
-        foreach ($this->observers as $observer) {
-            $observer->increment_count($status);
-        }
+        $this->observer->increment_count($status);
     }
 }

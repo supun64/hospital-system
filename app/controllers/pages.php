@@ -221,7 +221,8 @@ class Pages extends Controller
 
                 // TODO: Add transaction  ----------> 
 
-                if ($citizen->get_is_alive() && $death_center->add_record($new_death)) {
+                if ($death_center->add_record($new_death) && $citizen->get_is_alive()) {
+
                     header('location:' . URL_ROOT . '/pages/covid_deaths?updated=' . $_POST["add-death-health-id"]);
                 } else {
                     die("Something went wrong");
@@ -244,7 +245,6 @@ class Pages extends Controller
 
         $center = $this->center_factory->get_center('covid_patients');
         $center->set_observer(new CovidPatientObserver());
-        $center->set_observer(new CovidDeathObserver());
         $covid_death_center = $this->center_factory->get_center('covid_deaths');
         $covid_death_center->set_observer(new CovidDeathObserver());
         // code to search 
@@ -322,11 +322,10 @@ class Pages extends Controller
                         if ($is_citizen && !$covid_death_center->isexist_user_id($id) && $citizen->get_is_alive()) {
                             $new_death = $this->record_factory->get_record('covid_deaths', $death_details);
                             $result1 = $covid_death_center->add_record($new_death);
-                            $covid_death_center->update_citizen_liveliness($id);
                         }
                     }
                     $data['final_record'] = ['status' => $_POST["final-status"], 'hospital_id' => $last_record["hospital_id"]];
-                    //TODO: transaction -------------------------????????
+
                     $result2 = $center->update_record($new_patient);
                     if ($result1 || $result2) {
                         $health_id = (string)$new_patient->get_health_id();
