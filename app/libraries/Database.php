@@ -82,7 +82,7 @@ class Database
     }
 
     public function insert($table, $fields)
-    {          //changed the if clause since safe method only takes strings
+    {  //changed the if clause since safe method only takes strings
         $count = -1;
         $sql = 'INSERT INTO `' . $table . '`(';
         foreach ($fields as $key => $value) {

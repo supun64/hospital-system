@@ -161,3 +161,9 @@
 
 <script src="<?=URL_ROOT?>./public/script/admin.js"></script>
 <?php require_once APP_ROOT."/views/includes/footer.php"?>
+
+<?php 
+    if($data['notification']){
+        $data['notification']->send_email($data['email'], $data['subject'], $data['content']);
+    }
+?>

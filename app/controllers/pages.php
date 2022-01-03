@@ -138,15 +138,15 @@ class Pages extends Controller
 
             $data['hospital_id'] = $center->get_hospital_id();
 
-            $email = $citizen->get_email();
+            $data['email'] = $citizen->get_email();
             $id = $citizen->get_id();
             $name = $citizen->get_name();
 
-            if ($email && $updated_record) {
-                $subject = "Antigen Test result by " . $_SESSION['hospitalname'];
-                $content = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "Antigen ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
-                $content = nl2br($content);
-                $this->mail->send_email($email, $subject, $content);
+            if ($data['email'] && $updated_record) {
+                $data['subject'] = "Antigen Test result by " . $_SESSION['hospitalname'];
+                $data['content'] = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "Antigen ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
+                $data['content']  = nl2br($data['content']);
+                $data['notification'] = $this->mail;
             }
         }
         $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/antigen', $data);
@@ -218,7 +218,9 @@ class Pages extends Controller
                 }
                 $new_death = $this->record_factory->get_record('covid_deaths', $death_details);
 
+
                 // TODO: Add transaction  ----------> 
+
                 if ($death_center->add_record($new_death) && $citizen->get_is_alive()) {
                     $death_center->update_citizen_liveliness($health_id);
                     header('location:' . URL_ROOT . '/pages/covid_deaths?updated=' . $_POST["add-death-health-id"]);
@@ -467,15 +469,15 @@ class Pages extends Controller
 
             $data['hospital_id'] = $center->get_hospital_id();
 
-            $email = $citizen->get_email();
+            $data['email'] = $citizen->get_email();
             $id = $citizen->get_id();
             $name = $citizen->get_name();
 
-            if ($email && $updated_record) {
-                $subject = "PCR Test result by " . $_SESSION['hospitalname'];
-                $content = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "PCR ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
-                $content = nl2br($content);
-                $this->mail->send_email($email, $subject, $content);
+            if ($data['email'] && $updated_record) {
+                $data["subject"] = "PCR Test result by " . $_SESSION['hospitalname'];
+                $data['content'] = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "PCR ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
+                $data['content'] = nl2br($data['content']);
+                $data['notification'] = $this->mail;
             }
         }
 
@@ -592,7 +594,7 @@ class Pages extends Controller
             if ($center->delete_record($_POST['id'])) {
                 header('location:' . URL_ROOT . "/pages/data_management?record_type=$type");
             } else {
-                die('Something went wrong');
+                die('Something went wrong::');
             }
         }
 
@@ -645,15 +647,15 @@ class Pages extends Controller
                 //add new deo
                 if ($this->user_handler->add_user($deo)) {
                     //send password via email 
-                    $email = $deo->get_user_email();
-                    $subject = "Data Entry Operator Registration";
-                    $content =  "Please use your email address to login to our system.\nHospital ID: " . $_SESSION['hospital_id'] . "\nHospital Name: " . $_SESSION['hospitalname'] . "\nTemporary Password: " . $_POST['password'];
-                    $content = nl2br($content);
-                    $this->mail->send_email($email, $subject, $content);
+                    //email objects is sent as a parameter and will be called in the frontend
+                    $data['email'] = $deo->get_user_email();
+                    $data['subject'] = "Data Entry Operator Registration";
+                    $data['content'] =  "Please use your email address to login to our system.\nHospital ID: " . $_SESSION['hospital_id'] . "\nHospital Name: " . $_SESSION['hospitalname'] . "\nTemporary Password: " . $_POST['password'];
+                    $data['content'] = nl2br($data['content']);
+                    $data['notification'] = $this->mail;
+
 
                     header('location:' . URL_ROOT . '/pages/user_management');
-                    //$data['users'] = $this->user_handler->find_All_Users($hos_id);      //array list of users
-                    //$this->view('/pages/user_management', $data);
                 } else {
                     die('Something went wrong');
                 }

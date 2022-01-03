@@ -57,7 +57,8 @@ class Users extends Controller
             $subject = "Hospital Verification Code";
             $txt = $_POST['ran-1'];
             $txt = nl2br($txt);
-            $this->mail->send_email($to, $subject, $txt);
+            $this->mail->send_email($to,$subject,$txt);
+
         }
 
         //if register submitted
