@@ -45,8 +45,14 @@ class CovidDeathsCenter extends COVID_Department
 
     public  function delete_record($id)
     {
-        //$this->update_citizen_liveliness($id);
-        return $this->db->delete("covid_deaths", "id", $id);
+        $health_id = $this->db->findById("covid_deaths","id",$id)[0]['health_id'];
+        if($this->db->delete("covid_deaths", "id", $id)){
+            $param_list = ["is_alive"=>1,"health_id"=>$health_id];
+            $this->db->update("citizens","health_id",$param_list);
+            return true;
+        }
+        else
+            false;
     }
 
     public  function give_all_records()
