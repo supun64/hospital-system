@@ -153,7 +153,6 @@ class Pages extends Controller
     }
 
 
-    //TODO: different from others -> invalid user id, 
 
     public function covid_deaths()
     {
@@ -219,6 +218,7 @@ class Pages extends Controller
                 }
                 $new_death = $this->record_factory->get_record('covid_deaths', $death_details);
 
+                // TODO: Add transaction  ----------> 
                 if ($death_center->add_record($new_death) && $citizen->get_is_alive()) {
                     $death_center->update_citizen_liveliness($health_id);
                     header('location:' . URL_ROOT . '/pages/covid_deaths?updated=' . $_POST["add-death-health-id"]);
@@ -325,6 +325,7 @@ class Pages extends Controller
                         }
                     }
                     $data['final_record'] = ['status' => $_POST["final-status"], 'hospital_id' => $last_record["hospital_id"]];
+                    //TODO: transaction -------------------------????????
                     $result2 = $center->update_record($new_patient);
                     if ($result1 || $result2) {
                         $health_id = (string)$new_patient->get_health_id();
@@ -620,7 +621,7 @@ class Pages extends Controller
 
         $_SESSION["is_admin"] ? $this->view('/pages/data_management') : header('location:' . URL_ROOT . '/pages/index');
     }
-
+    //TODO: transaction -----------------???? when deleting ------in COVID Death center
     public function user_management()
     {
         $hos_id = $_SESSION['hospital_id'];  //relevent hospital id

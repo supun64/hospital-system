@@ -77,7 +77,7 @@ class Users extends Controller
                 } else {
                     //     //hash the password
                     $admin->set_password(password_hash($admin->get_password(), PASSWORD_DEFAULT));
-                    // //add new admin
+                    // //add new admin TODO: transaction ------------??????????????
                     $result1 = $this->user_handler->add_user($admin);
                     $result2 = $this->reg_handler->register($admin->get_hospital_id());
                     if ($result1 && $result2) {

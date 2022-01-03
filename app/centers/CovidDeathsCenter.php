@@ -10,15 +10,17 @@ class CovidDeathsCenter extends COVID_Department
 
     public  function add_record($record)
     {
-        $data = [
-            "health_id" => $record->get_health_id(),
-            "hospital_id" => $record->get_hospital_id(),
-            "date" => $record->get_date(),
-            "place" => $record->get_place(),
-            "comments" => $record->get_comments(),
+        $data_1 = [
+            "health_id" => $record[0]->get_health_id(),
+            "hospital_id" => $record[0]->get_hospital_id(),
+            "date" => $record[0]->get_date(),
+            "place" => $record[0]->get_place(),
+            "comments" => $record[0]->get_comments(),
         ];
 
-        $result = $this->db->insert("covid_deaths", $data);
+        $data_2 = 
+        //$result = $this->db->insert("covid_deaths", $data);
+        //$result = $this->db->transaction(["add","update"],["table"=>"covid_deaths","fields"=>$data],["table"=>"covid_deaths","fields"]);
 
         if ($result) {
             $this->notifyObserver("died");
