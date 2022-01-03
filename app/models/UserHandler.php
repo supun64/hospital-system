@@ -98,7 +98,21 @@
                 $_SESSION["password"] = $loggedin_user["password"];
                 $_SESSION["userID"] = $loggedin_user["user_id"];
                 $_SESSION['username'] = $loggedin_user['user_name'];
-                return true;
+
+                //take first_time
+                //if 0 -> havent logged in yet 
+                    // update the field to 1, return as a first logged in user
+                //if 1-> return as a not first time logger
+
+                if($loggedin_user["first_time"] == 0){
+                    $param_list = ["first_time"=>1 , "user_id"=> $loggedin_user['user_id']];
+                    $this->db->update("users","user_id",$param_list); //didn't check whether corrrectly updated
+                    return ["first_time"=>true];
+                }else{
+                    return ["first_time" => false];
+                }
+
+                //return true;
             }else{
                 return false;
             }
@@ -125,4 +139,3 @@
             session_destroy();
         }
     }
-?>

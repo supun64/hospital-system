@@ -123,7 +123,7 @@ class Pages extends Controller
 
             if ($citizen != NULL) {
 
-                $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob()];    //array list of users
+                $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob(), 'is_alive' => $citizen->get_is_alive()];    //array list of users
             }
             $updated_record = NULL;
             $search_records = $center->load_details_by_id($health_id);
@@ -450,7 +450,7 @@ class Pages extends Controller
 
             if ($citizen != NULL) {
 
-                $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob()];    //array list of users
+                $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob(), 'is_alive' => $citizen->get_is_alive()];    //array list of users
             }
             $updated_record = NULL;
             $search_records = $center->load_details_by_id($health_id);
@@ -583,12 +583,12 @@ class Pages extends Controller
             "vaccinations" => ["Batch Number", "HealthID", "Dose", "Name of Vaccine", "Conducted Place", "Comments"]
         ];
 
-        if(isset($_POST['delete_submitted'])){
+        if (isset($_POST['delete_submitted'])) {
             $type = $_GET['record_type'];
             $center = $this->center_factory->get_center($type);
-            
+
             if ($center->delete_record($_POST['id'])) {
-                header('location:' . URL_ROOT . "/pages/data_management?record_type=$type");  
+                header('location:' . URL_ROOT . "/pages/data_management?record_type=$type");
             } else {
                 die('Something went wrong::');
             }
@@ -676,6 +676,6 @@ class Pages extends Controller
     public function logout()
     {
         $this->user_handler->logout();
-        header('location:' . URL_ROOT . '/users/login'); 
+        header('location:' . URL_ROOT . '/users/login');
     }
 }
