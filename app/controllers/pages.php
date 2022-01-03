@@ -650,7 +650,6 @@ class Pages extends Controller
                     $data['content'] = nl2br($data['content']);
                     $data['notification'] = $this->mail;
 
-
                     header('location:' . URL_ROOT . '/pages/user_management');
                 } else {
                     die('Something went wrong');

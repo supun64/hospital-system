@@ -76,6 +76,8 @@
             if (password_verify($param_list['old_password'], $password)) {
                 $data['password'] = password_hash($param_list['new_password'], PASSWORD_DEFAULT);
                 $data['user_id'] = $_SESSION['userID'];
+
+                $this->db->update('users', 'user_id', $data);
             } else {
                 $errors = "Your current password is incorrect.";
             }
