@@ -221,8 +221,7 @@ class Pages extends Controller
 
                 // TODO: Add transaction  ----------> 
 
-                if ($death_center->add_record($new_death) && $citizen->get_is_alive()) {
-                    $death_center->update_citizen_liveliness($health_id);
+                if ($citizen->get_is_alive() && $death_center->add_record($new_death)) {
                     header('location:' . URL_ROOT . '/pages/covid_deaths?updated=' . $_POST["add-death-health-id"]);
                 } else {
                     die("Something went wrong");

@@ -30,10 +30,6 @@ abstract class COVID_Department
         return $this->citizen_factory->get_product($id);
     }
 
-    public function update_citizen_liveliness($id)
-    {
-        return $this->citizen_factory->update_liveliness($id);
-    }
 
     public function get_hospital_id()
     {
