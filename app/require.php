@@ -30,6 +30,7 @@ require_once 'centers/VaccinationCenter.php';
 require_once 'centers/CovidPatientCenter.php';
 
 require_once 'observers/ReportObserver.php';
+require_once 'observers/ReportObservable.php';
 require_once 'observers/PcrObserver.php';
 require_once 'observers/AntigenObserver.php';
 require_once 'observers/CovidDeathObserver.php';

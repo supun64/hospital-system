@@ -1,5 +1,5 @@
 <?php
-class PcrTestsCenter extends COVID_Department
+class PcrTestsCenter extends COVID_Department implements ReportObservable
 {
 
 
@@ -36,7 +36,7 @@ class PcrTestsCenter extends COVID_Department
         $id = $record->get_id();
 
         $params = ["status" => $status, "id" => $id, "place" => $place];
-        $previous_status = $this->db->findById("pcr_tests","id",$id)[0]['status'];
+        $previous_status = $this->db->findById("pcr_tests", "id", $id)[0]['status'];
 
         $result = $this->db->update("pcr_tests", "id", $params);
 
@@ -102,7 +102,7 @@ class PcrTestsCenter extends COVID_Department
         }
     }
 
-    private function notifyObserver($status)
+    public function notifyObserver($status)
     {
         $this->observer->increment_count($status);
     }

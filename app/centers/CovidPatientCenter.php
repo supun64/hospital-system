@@ -1,5 +1,5 @@
 <?php
-class CovidPatientCenter extends COVID_Department
+class CovidPatientCenter extends COVID_Department implements ReportObservable
 {
 
     private $observer;
@@ -122,12 +122,12 @@ class CovidPatientCenter extends COVID_Department
         $this->observer = $observer;
     }
 
-    public function unset_observer($observer)
+    public function unset_observer()
     {
         $this->observer = NULL;
     }
 
-    private function notifyObserver($status)
+    public function notifyObserver($status)
     {
         $this->observer->increment_count($status);
     }
