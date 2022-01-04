@@ -22,6 +22,8 @@ require_once 'factories/CitizenFactory.php';
 require_once 'factories/RecordFactory.php';
 require_once 'factories/CentersFactory.php';
 
+require_once 'observers/ReportObservable.php';
+
 require_once 'centers/COVID_Department.php';
 require_once 'centers/PcrTestsCenter.php';
 require_once 'centers/CovidDeathsCenter.php';
@@ -30,7 +32,6 @@ require_once 'centers/VaccinationCenter.php';
 require_once 'centers/CovidPatientCenter.php';
 
 require_once 'observers/ReportObserver.php';
-require_once 'observers/ReportObservable.php';
 require_once 'observers/PcrObserver.php';
 require_once 'observers/AntigenObserver.php';
 require_once 'observers/CovidDeathObserver.php';
