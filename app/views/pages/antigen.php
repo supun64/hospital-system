@@ -1,4 +1,8 @@
 <?php require_once APP_ROOT . "/views/pages/user_dashboard.php" ?>
+<?php
+// start output buffering at the top of our script with this simple command
+ob_start();
+?>
 <div class='sub-division'>
 
     <?php $cur_hos = $_SESSION['hospital_id']; ?>
@@ -271,12 +275,7 @@
         </section>
 </div>
 
-<!--email-->
-<?php
-if (isset($data['notification']) && isset($_GET['updated'])) {
-    $data['notification']->send_email($data['email'], $data['subject'], $data['content']);
-}
-?>
+
 
 <script>
     <?php if (($data['personal']['is_alive'] == 0)) { ?>
@@ -288,3 +287,13 @@ if (isset($data['notification']) && isset($_GET['updated'])) {
 <script src="<?php echo URL_ROOT; ?>/public/script/test.js"></script>
 <script src="<?php echo URL_ROOT; ?>/public/script/antigen.js"></script>
 <?php require_once APP_ROOT . "/views/includes/footer.php" ?>
+<?php
+// end output buffering and send our HTML to the browser as a whole
+ob_end_flush();
+?>
+<!--email-->
+<?php
+if (isset($data['notification']) && isset($_GET['updated'])) {
+    $data['notification']->send_email($data['email'], $data['subject'], $data['content']);
+}
+?>
