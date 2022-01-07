@@ -616,7 +616,7 @@ class Pages extends Controller
         }
 
         if (isset($_POST['newrecord'])) {
-            $record = $this->record_factory->get_record($type, $_POST['newrecord']);
+            $record = $this->record_factory->get_record($type, $_POST['newrecord']);    
             $center->update_record($record);
         }
         if (isset($_GET['record_type']) && $_GET['record_type']) {
