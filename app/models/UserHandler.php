@@ -119,6 +119,7 @@ class UserHandler
             $_SESSION["password"] = $loggedin_user["password"];
             $_SESSION["userID"] = $loggedin_user["user_id"];
             $_SESSION['username'] = $loggedin_user['user_name'];
+            $_SESSION['login_time_stamp'] = time();
 
             //take first_time
             //if 0 -> havent logged in yet 
@@ -143,7 +144,9 @@ class UserHandler
     public function is_logged_in()
     {
         if (empty($_SESSION["useremail"])) return false;
-        else {
+        elseif(isset($_SESSION['login_time_stamp']) && time() - $_SESSION['login_time_stamp'] > 1800){
+            $this->logout();
+        }else {
             $user = $this->findByMail($_SESSION["useremail"]);
             return !empty($user) && ($user["password"] === $_SESSION['password']);
         }
@@ -152,6 +155,7 @@ class UserHandler
     //logout---> unset the session fields
     public function logout()
     {
+        unset($_SESSION['login_time_stamp']);
         unset($_SESSION['userID']);
         unset($_SESSION["is_admin"]);
         unset($_SESSION['userID']);
