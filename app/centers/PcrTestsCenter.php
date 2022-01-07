@@ -41,6 +41,10 @@ class PcrTestsCenter extends COVID_Department implements ReportObservable
         $result = $this->db->update("pcr_tests", "id", $params);
 
         if ($result && ($previous_status !== $status)) {
+
+            if ($status === "negative" && $previous_status !== "pending") {
+                $this->notifyObserver("to_negative");
+            }
             $this->notifyObserver($status);
         }
         return $result;
@@ -48,7 +52,12 @@ class PcrTestsCenter extends COVID_Department implements ReportObservable
 
     public  function delete_record($id)
     {
-        return $this->db->delete("pcr_tests", "id", $id);
+        $status = $this->db->findById("pcr_tests", "id", $id)[0]['status'];
+        $result = $this->db->delete("pcr_tests", "id", $id);
+        if ($result && $status === "positive") {
+            $this->notifyObserver("removed");
+        }
+        return $result;
     }
 
 
@@ -104,6 +113,6 @@ class PcrTestsCenter extends COVID_Department implements ReportObservable
 
     public function notifyObserver($status)
     {
-        $this->observer->increment_count($status);
+        $this->observer->update_count($status);
     }
 }
