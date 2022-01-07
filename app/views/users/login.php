@@ -12,11 +12,11 @@
 
         <!--changes the classname of form controls if an error occurs and the previous values are printed as email and password-->
         <div class="form-floating mb-2"> 
-            <input type="email" class="form-control <?=!empty($error)?"is-invalid":""?>" id="floatingInput" value ="<?=$useremail?>" placeholder="name@exampl;4e.com" name="useremail" required>
+            <input type="email" class="form-control <?=!empty($error)?"is-invalid":""?>" id="floatingInput" value ="<?=$useremail?>" placeholder="name@example.com" name="useremail" required minlength="8" >
             <label for="floatingInput">Email address</label>
         </div>
         <div class="form-floating mb-2">
-            <input type="password" class="form-control <?=!empty($error)?"is-invalid":""?>" id="floatingPassword"  value ="<?=$password?>" placeholder="Password" name="password"required>
+            <input type="password" class="form-control <?=!empty($error)?"is-invalid":""?>" id="floatingPassword"  value ="<?=$password?>" placeholder="Password" name="password"required minlength="8" >
             <label for="floatingPassword">Password</label>
         </div>
         <small id="login-errors" class="form-text"> 

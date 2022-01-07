@@ -46,7 +46,7 @@ if(isset($_GET['fail'])){?>
         <div class="row">
             <div class="col-sm-4">
                 <label for="district" class="col-form-label-sm">District</label>
-                <input type="text" readonly class="form-control form-control-sm" id="district" value="<?php echo $data['district']; ?>">
+                <input type="text" readonly class="form-control form-control-sm" id="district" value="<?php echo $data['district']; ?>" >
             </div>
             <div class="col-sm-4">
                 <label for="contact-number" class="col-form-label-sm">Contact Number</label>
@@ -90,11 +90,11 @@ if(isset($_GET['fail'])){?>
         <div class="row">
             <div class="col-sm-4">
                 <label for="admin-password" class="col-form-label-sm">Password</label>
-                <input type="password" class="form-control form-control-sm" id="admin-password" placeholder="Password" required name="admin-pwd">
+                <input type="password" class="form-control form-control-sm" id="admin-password" placeholder="Password" required  minlength="8" name="admin-pwd">
             </div>
             <div class="col-sm-4">
                 <label for="admin-confirm-password" class="col-form-label-sm">Confirm Password</label>
-                <input type="password" class="form-control form-control-sm" id="admin-confirm-password" placeholder="Confirm password" required>
+                <input type="password" class="form-control form-control-sm" id="admin-confirm-password" placeholder="Confirm password" required minlength="8">
             </div>
 
             <div class="col-sm-4">
