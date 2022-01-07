@@ -7,6 +7,7 @@ require_once 'libraries/class.phpmailer.php';
 require_once 'libraries/class.smtp.php';
 require_once 'libraries/MailerWrapper.php';
 require_once 'config/config.php';
+require_once 'helper/session.php';
 
 require_once 'objects/Citizen.php';
 require_once 'objects/Covid_Death.php';
