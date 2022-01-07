@@ -10,8 +10,12 @@ class CovidDeathObserver implements ReportObserver
         $this->db = Database::get_instance();
     }
 
-    public function increment_count($status)
+    public function update_count($status)
     {
-        $this->db->increment('report', 'death');
+        if($status === "Died"){
+            $this->db->increment('report', 'death');
+        }elseif($status === "removed"){
+            $this->db->decrement('report', 'death');
+        }
     }
 }

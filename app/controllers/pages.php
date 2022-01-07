@@ -209,7 +209,7 @@ class Pages extends Controller
                     $last_record = $patient_center->load_last_record($health_id);
                     $last_record["status"] = "Died";
                     $last_record["discharge_date"] = $_POST["add-death-date"];
-                    $new_patient = $this->record_factory->get_record('covid_patient', $last_record);
+                    $new_patient = $this->record_factory->get_record('covid_patients', $last_record);
                     if ($patient_center->update_record($new_patient)) {
                     } else {
                         die("Something went wrong :(");
@@ -285,7 +285,7 @@ class Pages extends Controller
                 "conditions" => $_POST["add-patient-conditions"]
             ];
 
-            $new_patient = $this->record_factory->get_record('covid_patient', $patient_detail);
+            $new_patient = $this->record_factory->get_record('covid_patients', $patient_detail);
             // not checking health id exists since we already in a existing health id and the field is auto filled
 
             if ($center->add_record($new_patient)) {
@@ -305,7 +305,7 @@ class Pages extends Controller
                     $last_record["status"] = $_POST["final-status"];
                     $last_record["discharge_date"] = $_POST["final-discharge-date"];
                     $hospital_id = $center->get_hospital_id();
-                    $new_patient = $this->record_factory->get_record('covid_patient', $last_record);
+                    $new_patient = $this->record_factory->get_record('covid_patients', $last_record);
 
                     if ($_POST["final-status"] == "Died") {
                         $death_details = [
@@ -581,13 +581,33 @@ class Pages extends Controller
             "antigen_tests" => ["HealthID", "Test status", "place"],
             "covid_deaths" => ["HealthID", "Place", "Comments"],
             "pcr_tests" => ["HealthID", "Test Status", "Place"],
-            "vaccinations" => ["Batch Number", "HealthID", "Dose", "Name of Vaccine", "Conducted Place", "Comments"]
+            "vaccinations" => ["Batch Number", "HealthID", "Dose", "Name of Vaccine", "Conducted Place", "Comments"],
+            "covid_patients"=> ["HealthID","Admission date","Discharge date","Hospital name","Conditions","status"]
         ];
 
-        if (isset($_POST['delete_submitted'])) {
-            $type = $_GET['record_type'];
-            $center = $this->center_factory->get_center($type);
+        $type = $_GET['record_type'];
+        $center = $this->center_factory->get_center($type);
 
+        //set the observer accordingly
+        switch($type){
+            case "pcr_tests":
+                $center->set_observer(new PcrObserver());
+                break;
+
+            case "antigen_tests":
+                $center->set_observer(new AntigenObserver());
+                break;
+
+            case "covid_deaths":
+                $center->set_observer(new CovidDeathObserver());
+                break;
+
+            case "covid_patients":
+                $center->set_observer(new CovidPatientObserver());
+                break;
+        }
+
+        if (isset($_POST['delete_submitted'])) {
             if ($center->delete_record($_POST['id'])) {
                 header('location:' . URL_ROOT . "/pages/data_management?record_type=$type");
             } else {
@@ -596,15 +616,10 @@ class Pages extends Controller
         }
 
         if (isset($_POST['newrecord'])) {
-            $type = $_GET['record_type'];
-            $record = $this->record_factory->get_record($type, $_POST['newrecord']);
-            $center = $this->center_factory->get_center($type);
+            $record = $this->record_factory->get_record($type, $_POST['newrecord']);    
             $center->update_record($record);
         }
         if (isset($_GET['record_type']) && $_GET['record_type']) {
-
-            $type = $_GET['record_type'];
-            $center = $this->center_factory->get_center($type);
             $results_set = $center->give_all_records();
 
             foreach ($results_set as $result) {
