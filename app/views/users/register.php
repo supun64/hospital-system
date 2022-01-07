@@ -19,6 +19,8 @@ if(isset($_GET['fail'])){?>
     </div>
 <?php } ?>
 
+<div class="overlay"></div>
+
 
 <div class="register-container">
   
