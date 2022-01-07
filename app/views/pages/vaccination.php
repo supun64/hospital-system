@@ -27,8 +27,8 @@
                     <img class="covid-logo" src="<?php echo URL_ROOT; ?>/public/images/vaccine-logo.png" alt="covid-19 vaccine">
                     <h1 class="text-primary">Vaccination</h1>
                 </div>
-
-                <form class="form mb-3 covid-search-div" method="POST" action="<?php echo URL_ROOT; ?>/pages/vaccination">
+                <iframe name="content" style="display:none;"></iframe>
+                <form class="form mb-3 covid-search-div" target="content" method="POST" action="<?php echo URL_ROOT; ?>/pages/vaccination">
 
                     <input type="text" class="covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter health ID here" name="vaccine-search-bar-input" required>
 
