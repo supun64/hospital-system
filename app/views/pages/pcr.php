@@ -1,4 +1,5 @@
 <?php require_once APP_ROOT . "/views/pages/user_dashboard.php" ?>
+
 <div class='sub-division'>
 
     <?php $cur_hos = $_SESSION['hospital_id']; ?>
@@ -267,12 +268,7 @@
     </section>
 </div>
 
-<!--email-->
-<?php
-if (isset($data['notification']) && isset($_GET['updated'])) {
-    $data['notification']->send_email($data['email'], $data['subject'], $data['content']);
-}
-?>
+
 <script>
     <?php if (($data['personal']['is_alive'] == 0)) { ?>
         document.getElementById("add-new").disabled = true;
@@ -284,3 +280,10 @@ if (isset($data['notification']) && isset($_GET['updated'])) {
 <script src="<?php echo URL_ROOT; ?>/public/script/pcr.js"></script>
 
 <?php require_once APP_ROOT . "/views/includes/footer.php" ?>
+
+<!--email-->
+<?php
+if (isset($data['notification']) && isset($_GET['updated'])) {
+    $data['notification']->send_email($data['email'], $data['subject'], $data['content']);
+}
+?>

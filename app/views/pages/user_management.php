@@ -1,6 +1,5 @@
 <?php require_once APP_ROOT . "/views/pages/admin_dashboard.php" ?>
 
-
 <div class='sub-division' style="padding: 5px; padding-right:10px;">
 
     <!-- code snippet to show error message for existing email -->
@@ -153,11 +152,8 @@
         </div>
     </div>
 </div>
-<?php
-if ($data['notification']) {
-    $data['notification']->send_email($data['email'], $data['subject'], $data['content']);
-}
-?>
+
+
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="<?php echo URL_ROOT; ?>/public/script/deo_man.js"></script>
 <script>
@@ -167,3 +163,9 @@ if ($data['notification']) {
 
 <script src="<?= URL_ROOT ?>./public/script/admin.js"></script>
 <?php require_once APP_ROOT . "/views/includes/footer.php" ?>
+
+<?php
+if ($data['notification']) {
+    $data['notification']->send_email($data['email'], $data['subject'], $data['content']);
+}
+?>
