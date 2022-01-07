@@ -1,6 +1,6 @@
 <?php  require APP_ROOT.'/views/includes/header.php';  ?>
 
-<body style="background-image: url('<?php echo URL_ROOT; ?>/public/images/dashboard-background.jpg') ;"> 
+<body style="background-image: url('<?php echo URL_ROOT; ?>/public/images/registration-background.jpg') ;"> 
 <!-- code snippet to show error message for existing email -->
 <?php 
 if(isset($_GET['duplicate'])){?>

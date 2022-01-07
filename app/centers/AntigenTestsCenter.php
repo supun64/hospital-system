@@ -37,11 +37,14 @@ class AntigenTestsCenter extends COVID_Department implements ReportObservable
 
 
         $params = ["status" => $status, "id" => $id, "place" => $place];
-
+        $previous_status = $this->db->findById("antigen_tests", "id", $id)[0];
         $result = $this->db->update("antigen_tests", "id", $params);
-        $previous_status = $this->db->findById("pcr_tests", "id", $id)[0]['status'];
 
         if ($result && ($previous_status !== $status)) {
+
+            if ($status === "negative" && $previous_status !== "pending") {
+                $this->notifyObserver("to_negative");
+            }
             $this->notifyObserver($status);
         }
         return $result;
@@ -49,7 +52,12 @@ class AntigenTestsCenter extends COVID_Department implements ReportObservable
 
     public  function delete_record($id)
     {
-        return $this->db->delete("antigen_tests", "id", $id);
+        $status = $this->db->findById("antigen_tests", "id", $id)[0]['status'];
+        $result = $this->db->delete("antigen_tests", "id", $id);
+        if ($result && $status === "positive") {
+            $this->notifyObserver("removed");
+        }
+        return $result;
     }
 
     public  function give_all_records()
@@ -106,6 +114,6 @@ class AntigenTestsCenter extends COVID_Department implements ReportObservable
 
     public function notifyObserver($status)
     {
-        $this->observer->increment_count($status);
+        $this->observer->update_count($status);
     }
 }

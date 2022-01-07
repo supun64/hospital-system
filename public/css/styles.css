@@ -25,7 +25,7 @@ body {
 
 /* use to put an overlay */
 .overlay{
-  background-color: rgba(255, 255, 255, 0.116);
+  background-color: rgba(0, 0, 0, 0.151);
   backdrop-filter: blur(3px);
 
   height: 100vh;
@@ -492,10 +492,11 @@ body {
 .register-wrapper {
   height: auto;
   width: 40%;
-  background-color: rgba(182, 220, 255, 0.801);
+  background-color: rgba(253, 254, 255, 0.801);
+  backdrop-filter: blur(8px);
   color: rgb(0, 0, 0);
 
-  border: #0d6efd solid 1px;
+  border: #00000036 solid 1px;
 
   position: absolute;
   top: 10%;
