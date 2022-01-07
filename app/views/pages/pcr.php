@@ -1,8 +1,5 @@
 <?php require_once APP_ROOT . "/views/pages/user_dashboard.php" ?>
-<?php
-// start output buffering at the top of our script with this simple command
-ob_start();
-?>
+
 <div class='sub-division'>
 
     <?php $cur_hos = $_SESSION['hospital_id']; ?>
@@ -283,10 +280,7 @@ ob_start();
 <script src="<?php echo URL_ROOT; ?>/public/script/pcr.js"></script>
 
 <?php require_once APP_ROOT . "/views/includes/footer.php" ?>
-<?php
-// end output buffering and send our HTML to the browser as a whole
-ob_end_flush();
-?>
+
 <!--email-->
 <?php
 if (isset($data['notification']) && isset($_GET['updated'])) {

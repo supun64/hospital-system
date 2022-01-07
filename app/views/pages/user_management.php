@@ -1,10 +1,5 @@
 <?php require_once APP_ROOT . "/views/pages/admin_dashboard.php" ?>
 
-
-<?php
-// start output buffering at the top of our script with this simple command
-ob_start();
-?>
 <div class='sub-division' style="padding: 5px; padding-right:10px;">
 
     <!-- code snippet to show error message for existing email -->
@@ -168,10 +163,7 @@ ob_start();
 
 <script src="<?= URL_ROOT ?>./public/script/admin.js"></script>
 <?php require_once APP_ROOT . "/views/includes/footer.php" ?>
-<?php
-// end output buffering and send our HTML to the browser as a whole
-ob_end_flush();
-?>
+
 <?php
 if ($data['notification']) {
     $data['notification']->send_email($data['email'], $data['subject'], $data['content']);
