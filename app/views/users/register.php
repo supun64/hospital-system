@@ -28,7 +28,7 @@ if(isset($_GET['fail'])){?>
     <div class="register-wrapper">
 
         <h3 style="margin: 5px;">Registration Form</h3>
-        <hr style="color: black;">
+        <hr style="color: black; height: 2px;">
         
         <iframe name="content" style="display:none;"></iframe>
         <form action="<?php echo URL_ROOT; ?>/users/register" method="POST" target="content">       
