@@ -22,7 +22,7 @@
 
 
             <!-- covid-shrunk-search class should add after the search -->
-            <div class="covid-search" id="covid-main-search-engine">
+            <div class="covid-search covid-shrunk-search" id="covid-main-search-engine">
                 <div class="covid-title">
                     <img class="covid-logo" src="<?php echo URL_ROOT; ?>/public/images/vaccine-logo.png" alt="covid-19 vaccine">
                     <h1 class="text-primary">Vaccination</h1>
@@ -36,23 +36,13 @@
                     <input type="submit" class="btn btn-primary" id="covid-search-btn" name="vaccine-search" value="Search">
 
                 </form>
-                <script>
-                    const vaccineMainSearchEngine = document.querySelector("#covid-main-search-engine");
-                    //const vaccineSearchResult = document.querySelector("#covid-search-result-section");
 
-                    const vaccineSearchBtn = document.querySelector("#covid-search-btn");
-                    const vaccineSearchBar = document.querySelector("#covid-search-bar-input");
-
-                    <?php if ($data['loaded'] && $_SESSION['vac_count'] >= 1) { ?>
-                        vaccineMainSearchEngine.classList.add("covid-shrunk-search");
-                    <?php } ?>
-                </script>
             </div>
 
             <!-- This is what should display after search -->
             <?php if ($data["personal"]) { ?>
                 <!-- Add animation-fade-in-pre-state to add the animation -->
-                <div class="covid-search-result animation-fade-in-pre-state" id="covid-search-result-section">
+                <div class="covid-search-result" id="covid-search-result-section">
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-vaccination" id="add-new">Add new vaccination +</button>
 
                     <!-- This is the division to display if the search result available -->
@@ -122,14 +112,12 @@
                                     <div class="covid-th covid-td">Comments</div>
                                 </div>
 
-
                                 <?php
 
                                 $vaccinations = $data["vaccinations"];
 
                                 foreach ($vaccinations as $vaccine) :
                                 ?>
-
 
                                     <div class="covid-tr <?php if ($vaccine === $vaccinations[sizeof($vaccinations) - 1]) echo 'covid-bottom-tr' ?>">
                                         <div class="covid-td">
@@ -156,9 +144,6 @@
                                     <?php $last_dose = $vaccine["dose"];    ?>
                                 <?php endforeach; ?>
 
-
-
-
                             </div>
 
                             <!-- <div class="covid-last-btn">
@@ -167,12 +152,7 @@
 
                     </div> -->
 
-
-
-
-
                         <?php } else { ?>
-
 
                             <!-- This is the division to display if the search result not available -->
                             <div class="covid-details covid-no-result-div">
@@ -191,16 +171,8 @@
                     </div>
                 <?php } ?>
 
-
-
                 </div>
-                <script>
-                    const vaccineSearchResult = document.querySelector("#covid-search-result-section");
-                    <?php if ($data['loaded']) { ?>
-                        vaccineSearchResult.classList.remove("animation-fade-in-pre-state");
-                        vaccineSearchResult.classList.add("animation-fade-in");
-                    <?php } ?>
-                </script>
+
         </main>
 
         <!-- This is the UI modal for add new vaccinated person -->

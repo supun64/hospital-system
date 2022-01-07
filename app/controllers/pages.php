@@ -555,8 +555,6 @@ class Pages extends Controller
             }
         }
 
-        var_dump($_SESSION['vac_count']);
-
         $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/vaccination', $data);
     }
 
