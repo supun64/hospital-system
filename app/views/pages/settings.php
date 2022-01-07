@@ -71,8 +71,13 @@ if ($_SESSION['is_admin']) {
                                 <input type="text" class="form-control" id="hospitalname" value="<?= $data['hospital_name'] ?>" disabled="" />
                             </div>
                         </div>
-
-
+                        <?php if (isset($data['error1'])) : ?>
+                            <div class="row mb-4">
+                                <div class="alert alert-danger" role="alert">
+                                    <?= $data["error1"] ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                         <button class='settings-info-element btn btn-primary' type="submit">Save Changes</button>
                     </form>
                 </div>
@@ -124,10 +129,10 @@ if ($_SESSION['is_admin']) {
                                 </ul>
                             </div>
                         </div>
-                        <?php if (isset($data['errors'])) : ?>
+                        <?php if (isset($data['error2'])) : ?>
                             <div class="row mb-4">
                                 <div class="alert alert-danger" role="alert">
-                                    <?= $data["errors"] ?>
+                                    <?= $data["error2"] ?>
                                 </div>
                             </div>
                         <?php endif; ?>
