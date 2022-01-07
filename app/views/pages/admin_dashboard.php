@@ -70,6 +70,7 @@ background-attachment: fixed;">
                                 <a class="data-select-li btn btn-outline-primary" href="<?= URL_ROOT; ?>/pages/data_management?record_type=antigen_tests">Antigen</a>
                                 <a class="data-select-li btn btn-outline-primary" href="<?= URL_ROOT; ?>/pages/data_management?record_type=covid_deaths">COVID deaths</a>
                                 <a class="data-select-li btn btn-outline-primary" href="<?= URL_ROOT; ?>/pages/data_management?record_type=pcr_tests">PCR tests</a>
+                                <a class="data-select-li btn btn-outline-primary" href="<?= URL_ROOT; ?>/pages/data_management?record_type=covid_patients">COVID patients</a>
                             </nav>
                         </div>
 

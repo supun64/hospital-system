@@ -125,7 +125,7 @@
 
                         <div class="col-md-6">
                             <label for="password" class="form-label">Temporary Password</label>
-                            <input type="password" class="form-control" name="password" id="pwd" required>
+                            <input type="password" class="form-control" name="password" id="pwd" required minlength="8">
                             <div class="invalid-feedback">
                                 This Field can't be empty
                             </div>
@@ -133,7 +133,7 @@
 
                         <div class="col-md-6">
                             <label for="confirm_password" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" name="confirm_password" id="cpwd" required>
+                            <input type="password" class="form-control" name="confirm_password" id="cpwd" required minlength="8">
                             <div class="invalid-feedback">
                                 This Field can't be empty
                             </div>

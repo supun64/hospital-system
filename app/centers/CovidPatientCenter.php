@@ -19,7 +19,7 @@ class CovidPatientCenter extends COVID_Department implements ReportObservable
             "status" => $record->get_status(),
             "conditions" => $record->get_conditions(),
             "discharge_date" => $record->get_discharge_date()
-        ]; //"hospital_name" => $this->get_hospital_name_by_id($record->get_hospital_id()),
+        ]; 
 
         $result = $this->db->insert("patients", $data);
         $status = $record->get_status();
@@ -63,13 +63,13 @@ class CovidPatientCenter extends COVID_Department implements ReportObservable
 
     public  function give_all_records()
     {
-        $result_set = $this->db->findByHosID_nd_Date("patients", $this->hospital_id);
+        $result_set = $this->db->findByHosID_nd_ADDate("patients", $this->hospital_id);
 
         $records = [];
 
         foreach ($result_set as $result) {
-            $covid_patients = $this->factory->get_record("patients", $result);
-            array_push($records, $covid_patients);
+            $covid_patient = $this->factory->get_record("covid_patients", $result);
+            array_push($records, $covid_patient);
         }
 
         return $records;
@@ -81,10 +81,10 @@ class CovidPatientCenter extends COVID_Department implements ReportObservable
             "admission_id" => $record_obj->get_admission_id(),
             "health_id" => $record_obj->get_health_id(),
             "admission_date" => $record_obj->get_admission_date(),
+            "discharge_date" => $record_obj->get_discharge_date(),
             "hospital_id" => $record_obj->get_hospital_id(),
             "hospital_name" => $this->get_hospital_name_by_id($record_obj->get_hospital_id()),
             "conditions" => $record_obj->get_conditions(),
-            "discharge_date" => $record_obj->get_discharge_date(),
             "status" => $record_obj->get_status()
         ];
     }
@@ -94,7 +94,7 @@ class CovidPatientCenter extends COVID_Department implements ReportObservable
         $records = [];
         $result_set = $this->db->findById('patients', 'health_id', $admission_id);
         foreach ($result_set as $result) {
-            $admission = $this->factory->get_record('covid_patient', $result);
+            $admission = $this->factory->get_record('covid_patients', $result);
             array_push($records, $admission);
         }
         return $records;
@@ -129,6 +129,6 @@ class CovidPatientCenter extends COVID_Department implements ReportObservable
 
     public function notifyObserver($status)
     {
-        $this->observer->increment_count($status);
+        $this->observer->update_count($status);
     }
 }

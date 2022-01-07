@@ -152,6 +152,17 @@ class Database
         }
     }
 
+    public function findByHosID_nd_ADDate($table, $hospital_id)
+    {
+        if (is_int($hospital_id) || $this->safe($hospital_id)) {
+            $sql = "SELECT * FROM `" . $table . "` WHERE hospital_id = $hospital_id and admission_date = CURDATE() or discharge_date = CURDATE() ";
+            $this->sql_execute($sql);
+            return $this->result_set();
+        } else {
+            die("Something went wrong");
+        }
+    }
+
     public function findByHosID_nd_UserID($table, $hospital_id, $user_id)
     {
         if (is_int($hospital_id) || $this->safe($hospital_id)) {
@@ -169,9 +180,20 @@ class Database
         $today = date("Y-m-d");
         $sql = "";
         if ($this->date_exist($today)) {
-            $sql = "UPDATE $table SET $field=$field+1 WHERE date='$today'";
+            $sql = "UPDATE $table SET $field=$field + 1 WHERE date='$today'";
         } else {
             $sql = "INSERT INTO $table (date,$field) VALUES ('$today',1)";
+        }
+        $output = $this->sql_execute($sql);
+        return $output;
+    }
+
+    public function decrement($table, $field)
+    {
+        $today = date("Y-m-d");
+        $sql = "";
+        if ($this->date_exist($today)) {
+            $sql = "UPDATE $table SET $field=$field - 1 WHERE date='$today'";
         }
         $output = $this->sql_execute($sql);
         return $output;
