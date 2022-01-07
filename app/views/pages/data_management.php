@@ -15,6 +15,7 @@
                 <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=antigen_tests">Antigen</a></li>
                 <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=covid_deaths">COVID deaths</a></li>
                 <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=pcr_tests">PCR tests</a></li>
+                <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=covid_patients">Covid patients</a></li>
             </ul>
         </div>
         <form class="data-select-box">
@@ -24,6 +25,7 @@
         </form>
     </div>
     <div>
+        <?php $counter = 1;?>
         <?php if (isset($data['type']) && count($data) > 2) : ?>
             <table class="data-table table  table-hover table-responsive" id="deo-table">
                 <tbody>
@@ -40,7 +42,7 @@
                             <?php if (gettype($record) != "string") : ?>
                                 <?php foreach ($record as $key => $value) : ?>
 
-                                    <?php if ($key === "hospital_id" || $key === "id" || $key === "date") : ?>
+                                    <?php if ($key === "hospital_id" || $key === "id" || $key === "admission_id" || $key === "date") : ?>
                                         <?php continue; ?>
 
                                     <?php else : ?>
@@ -51,12 +53,12 @@
                                 <?php endforeach; ?>
 
                                 <td class="data-edit">
-                                    <button class='btn btn-light' data-bs-toggle="modal" data-bs-target="#modalfor<?php echo $data[count($data) - 1] . $record['id'] ?>">
+                                    <button class='btn btn-light' data-bs-toggle="modal" data-bs-target="#modalfor<?php echo $data[count($data) - 1] . $counter ?>">
                                         <i class='data-edit-button bx bxs-edit' style="color: black"></i>
                                     </button>
                                 </td>
                                 <td>
-                                    <button class='btn btn-light' data-bs-toggle="modal" data-bs-target="#delmodalfor<?php echo $data[count($data) - 1] . $record['id'] ?>">
+                                    <button class='btn btn-light' data-bs-toggle="modal" data-bs-target="#delmodalfor<?php echo $data[count($data) - 1] . $counter ?>">
                                         <i class='bx bxs-trash data-edit-button'></i>
                                     </button>
                                 </td>
@@ -64,7 +66,7 @@
 
                         <!-- Modal for updating-->
                         <?php if ($data[count($data) - 1] === 'antigen_tests' || $data[count($data) - 1] === 'pcr_tests') : ?>
-                            <div class="modal fade" id="modalfor<?php echo $data[count($data) - 1] . $record['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="modalfor<?php echo $data[count($data) - 1] . $counter ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -99,7 +101,7 @@
                             </div>
                         <?php endif; ?>
                         <?php if ($data[count($data) - 1] === 'vaccinations') : ?>
-                            <div class="modal fade" id="modalfor<?php echo $data[count($data) - 1] . $record['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="modalfor<?php echo $data[count($data) - 1] . $counter ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -144,8 +146,50 @@
                                 </div>
                             </div>
                         <?php endif; ?>
+                        <?php if ($data[count($data) - 1] === 'covid_patients') : ?>
+                            <div class="modal fade" id="modalfor<?php echo $data[count($data) - 1] . $counter ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <form method="post" action="<?= URL_ROOT; ?>/pages/data_management?record_type=<?= $data[count($data) - 1] ?>">
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="floatingInput" placeholder="Health ID" name="newrecord[health_id]" value="<?= $record['health_id'] ?>" readonly>
+                                                    <label for="floatingInput">Health ID</label>
+                                                </div>
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="floatingPassword" placeholder="Dose" name="newrecord[admission_date]" value="<?= $record['admission_date'] ?>">
+                                                    <label for="floatingPassword">Admission date</label>
+                                                </div>
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="floatingPassword" placeholder="Name of Vaccine" name="newrecord[discharge_date]" value="<?= $record['discharge_date'] ?>">
+                                                    <label for="floatingPassword">Discharge date</label>
+                                                </div>
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="floatingPassword" placeholder="Conducted Place" name="newrecord[conditions]" value="<?= $record['conditions'] ?>">
+                                                    <label for="floatingPassword">Conditions</label>
+                                                </div>
+                                                <div class="form-floating mb-3">
+                                                    <input type="textarea" class="form-control" id="floatingPassword" placeholder="Comments" name="newrecord[status]" value="<?= $record['status'] ?>" style="height: 100px" readonly>
+                                                    <label for="floatingPassword">Status</label>
+                                                </div>
+                                                <input type="hidden" name="newrecord[admission_id]" value="<?= $record['admission_id'] ?>">
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                         <?php if ($data[count($data) - 1] === 'covid_deaths') : ?>
-                            <div class="modal fade" id="modalfor<?php echo $data[count($data) - 1] . $record['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="modalfor<?php echo $data[count($data) - 1] . $counter ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -180,7 +224,7 @@
                         <?php endif; ?>
 
                         <!--Modal for deleting-->
-                        <div class="modal fade" id="delmodalfor<?php echo $data[count($data) - 1] . $record['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="delmodalfor<?php echo $data[count($data) - 1] . $counter ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -197,7 +241,7 @@
                                             </div>
                                         </div>
                                         <form action="<?= URL_ROOT; ?>/pages/data_management?record_type=<?= $data[count($data) - 1] ?>" method='POST'>
-                                            <input type="hidden" name="id" value="<?= $record['id'] ?>">
+                                            <input type="hidden" name="id" value="<?= isset($record['id'])?$record['id']:$record['admission_id'] ?>">
 
                                             <div class="modal-footer">
                                                 <button type="submit" name = 'delete_submitted' class="btn btn-danger">Confirm</button>
@@ -209,6 +253,7 @@
                             </div>
                         </div>
                     <?php endif; ?>
+                    <?php $counter++ ;?>
                 <?php endforeach; ?>
                 </tbody>
             </table>

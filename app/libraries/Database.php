@@ -152,6 +152,17 @@ class Database
         }
     }
 
+    public function findByHosID_nd_ADDate($table, $hospital_id)
+    {
+        if (is_int($hospital_id) || $this->safe($hospital_id)) {
+            $sql = "SELECT * FROM `" . $table . "` WHERE hospital_id = $hospital_id and admission_date = CURDATE() or discharge_date = CURDATE() ";
+            $this->sql_execute($sql);
+            return $this->result_set();
+        } else {
+            die("Something went wrong");
+        }
+    }
+
     public function findByHosID_nd_UserID($table, $hospital_id, $user_id)
     {
         if (is_int($hospital_id) || $this->safe($hospital_id)) {

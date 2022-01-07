@@ -63,7 +63,7 @@ class RecordFactory
                 );
                 break;
 
-            case 'covid_patient':
+            case 'covid_patients':
                 return new CovidPatient(
                     $records['admission_id'],
                     $records['health_id'],
