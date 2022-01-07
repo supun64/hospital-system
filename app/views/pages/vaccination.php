@@ -22,7 +22,7 @@
 
 
             <!-- covid-shrunk-search class should add after the search -->
-            <div class="covid-search covid-shrunk-search" id="covid-main-search-engine">
+            <div class="covid-search" id="covid-main-search-engine">
                 <div class="covid-title">
                     <img class="covid-logo" src="<?php echo URL_ROOT; ?>/public/images/vaccine-logo.png" alt="covid-19 vaccine">
                     <h1 class="text-primary">Vaccination</h1>
@@ -40,8 +40,8 @@
 
             <!-- This is what should display after search -->
             <?php if ($data["personal"]) { ?>
-                <!-- Add addmination-fade-in-pre-state to add the animation -->
-                <div class="covid-search-result" id="covid-search-result-section">
+                <!-- Add animation-fade-in-pre-state to add the animation -->
+                <div class="covid-search-result animation-pre-state" id="covid-search-result-section">
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-vaccination" id="add-new">Add new vaccination +</button>
 
                     <!-- This is the division to display if the search result available -->

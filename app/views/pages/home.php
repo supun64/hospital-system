@@ -207,7 +207,7 @@ if ($_SESSION['is_admin']) {
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="<?php echo URL_ROOT; ?>/public/images/washing-hands.gif" class="d-block w-100 home-carousel-img" alt="hand wash">
+                            <img src="<?php echo URL_ROOT; ?>/public/images/washing-hands-1.gif" class="d-block w-100 home-carousel-img" alt="hand wash">
                         </div>
                         <div class="carousel-item carousel-item-centered">
                             <div class="d-flex justify-content-center">
@@ -218,7 +218,7 @@ if ($_SESSION['is_admin']) {
                             <img src="<?php echo URL_ROOT; ?>/public/images/use-mask.gif" class="d-block w-100 home-carousel-img" alt="use mask">
                         </div>
                         <div class="carousel-item">
-                            <img src="<?php echo URL_ROOT; ?>/public/images/get-vaccinated.gif" class="d-block w-100 home-carousel-img" alt="get vaccinated">
+                            <img src="<?php echo URL_ROOT; ?>/public/images/get-vaccinated-1.gif" class="d-block w-100 home-carousel-img" alt="get vaccinated">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">

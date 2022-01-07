@@ -15,7 +15,8 @@ background-attachment: fixed;">
                 <div class="dashboard-account-details">
                     <div class="dashboard-icon"><i class='bx bx-user-circle' style='color:#000000'></i></div>
                     <div class="dashboard-user-credentials">
-                        <div class="hospital-name dashboard-credential-label"><?= strtoupper($_SESSION['hospitalname']) ?></div>
+                        <div class="hospital-name dashboard-credential-label"
+                        style="font-size: 13.5pt;"><?= strtoupper($_SESSION['hospitalname']) ?></div>
                         <div class="user-name dashboard-credential-label"><?= strtoupper($_SESSION['username']) ?></div>
                     </div>
                 </div>
