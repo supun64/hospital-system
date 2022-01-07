@@ -8,10 +8,12 @@
  <?php function show_form_signin($useremail,$password,$error)
 { ?>
     
-    <form method="POST" action="<?php echo URL_ROOT; ?>/users/login?hospital-id=<?=$_GET["hospital-id"]?>">
+    <form method="POST" class="login-user-details" action="<?php echo URL_ROOT; ?>/users/login?hospital-id=<?=$_GET["hospital-id"]?>">
+
+        <h3 class="login-title">Login</h3>
 
         <!--changes the classname of form controls if an error occurs and the previous values are printed as email and password-->
-        <div class="form-floating mb-2"> 
+        <div class="form-floating mb-3"> 
             <input type="email" class="form-control <?=!empty($error)?"is-invalid":""?>" id="floatingInput" value ="<?=$useremail?>" placeholder="name@example.com" name="useremail" required>
             <label for="floatingInput">Email address</label>
         </div>
@@ -23,7 +25,7 @@
             <?=$error?>
         </small>
 
-        <button class="w-100 btn btn-lg btn-outline-primary login-btn-signup" type="submit">Sign in</button>
+        <button class="w-100 btn btn-lg btn-outline-primary login-btn-signup" type="submit">Login</button>
         <p class="mt-5 mb-0 text-muted"> Squ4dOption &trade;</p>
     </form>
 
@@ -35,11 +37,11 @@
     <main class="login-main">
 
         <!-- This display in exept small screens -->
-        <div class="card login-card mb-0 container px-0 d-sm-block d-none" style="max-width: 540px;">
-            <div class="row g-0">
+        <div class="card login-card mb-0 container px-0 d-sm-block d-none" style="max-width: 1000px; height: 500px;">
+            <div class="row g-0" style="height: 100%;">
 
                 <div class="col-sm-6">
-                    <div class="card-body">
+                    <div class="card-body" style="height: 100%;">
                         <?php $error = isset($data['errors'])?$data['errors']:""?>
                         <?php $useremail = isset($data['user_email'])?$data['user_email']:""?>
                         <?php $password = isset($data['password'])?$data['password']:""?>

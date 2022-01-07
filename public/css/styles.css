@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
 /* General Styles------------------------------------ */
 
 * {
@@ -529,8 +531,8 @@ body {
 .login-body {
   background: linear-gradient(
     90deg,
-    rgba(71, 41, 240, 1) 0%,
-    rgba(71, 41, 240, 1) 50%,
+    #0d63fd 0%,
+    #0d63fd 50%,
     rgba(255, 255, 255, 1) 50%
   );
 
@@ -541,28 +543,59 @@ body {
   height: 100%;
   width: 100%;
 
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
 
 .login-card {
   border-width: 0;
+
+  box-shadow: 2px 2px 22px;
+
+  border-radius: 25px;
 }
 
 .login-main {
   margin: auto;
 }
 
+.login-user-details{
+  height: 100%;
+  padding: 20px;
+  padding-top: 40px;
+}
+
+.login-title{
+  margin-bottom: 30px;
+  text-align: left;
+
+  font-family: 'Righteous', cursive;
+
+  color: #0d63fd;;
+
+  letter-spacing: 10px;
+
+  font-size: 25pt;
+}
+
+
+
 /* this is used to change the bodybackground color in spesific resolution */
 @media (max-width: 576px) {
   .login-body {
-    background: rgba(71, 41, 240, 1);
+    background: #0d63fd;
+  }
+
+  .login-user-details{
+    padding: 5px 2px;
   }
 }
 
 .login-btn-signup {
-  color: rgba(71, 41, 240, 1);
-  border-color: rgba(71, 41, 240, 1);
+  color: #0d63fd;
+  border-color: #0d63fd;
+
+  margin-top: 18%;
 
   letter-spacing: 5px;
 
@@ -570,8 +603,8 @@ body {
 }
 
 .login-btn-signup:hover {
-  background-color: rgba(71, 41, 240, 1);
-  border-color: rgb(47, 26, 161);
+  background-color: #0d63fd;
+  border-color: #103780;
 
   letter-spacing: 8px;
 }
