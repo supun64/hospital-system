@@ -1,6 +1,6 @@
 <?php  require APP_ROOT.'/views/includes/header.php';  ?>
 
-<body style="background-image: linear-gradient(to right,#324ca8,#9dcfe3) ;"> 
+<body style="background-image: url('<?php echo URL_ROOT; ?>/public/images/dashboard-background.jpg') ;"> 
 <!-- code snippet to show error message for existing email -->
 <?php 
 if(isset($_GET['duplicate'])){?>
@@ -19,6 +19,7 @@ if(isset($_GET['fail'])){?>
     </div>
 <?php } ?>
 
+<div class="overlay"></div>
 
 
 <div class="register-container">
@@ -27,7 +28,7 @@ if(isset($_GET['fail'])){?>
     <div class="register-wrapper">
 
         <h3 style="margin: 5px;">Registration Form</h3>
-        <hr style="color: black;">
+        <hr style="color: black; height: 2px;">
         
         <iframe name="content" style="display:none;"></iframe>
         <form action="<?php echo URL_ROOT; ?>/users/register" method="POST" target="content">       
