@@ -54,30 +54,4 @@ for (let i = 0; i < selected.length; i++) {
   dropDownWithSearch(i);
 }
 
-// Search Transition-------------------------------------------------------------
 
-// This is the variables used for search transisions
-const vaccineMainSearchEngine = document.querySelector("#covid-main-search-engine");
-const vaccineSearchResult = document.querySelector("#covid-search-result-section");
-
-const vaccineSearchBtn = document.querySelector("#covid-search-btn");
-const vaccineSearchBar = document.querySelector("#covid-search-bar-input");
-
-// Event listner for search btn click
-vaccineSearchBtn.addEventListener("click", function () {
-  if (vaccineSearchBar.value.length != 0) {
-    // Transition for search engine
-    if (!vaccineMainSearchEngine.classList.contains("covid-shrunk-search")) {
-      vaccineMainSearchEngine.classList.add("covid-shrunk-search");
-    }
-
-    // fade in animation for the search results
-    if (vaccineSearchResult.classList.contains("animation-fade-in-pre-state")) {
-      vaccineSearchResult.classList.remove("animation-fade-in-pre-state");
-    }
-
-    if (!vaccineSearchResult.classList.contains("animation-fade-in")) {
-      vaccineSearchResult.classList.add("animation-fade-in");
-    }
-  }
-});

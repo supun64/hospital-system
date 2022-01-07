@@ -1,6 +1,10 @@
 <?php require_once APP_ROOT . "/views/pages/user_dashboard.php" ?>
 <div class='sub-division'>
 
+
+
+
+
     <?php
     if (isset($_GET['not-user'])) { ?>
         <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert">
@@ -27,8 +31,9 @@
                     <img class="covid-logo" src="<?php echo URL_ROOT; ?>/public/images/vaccine-logo.png" alt="covid-19 vaccine">
                     <h1 class="text-primary">Vaccination</h1>
                 </div>
-                <iframe name="content" style="display:none;"></iframe>
-                <form class="form mb-3 covid-search-div" target="content" method="POST" action="<?php echo URL_ROOT; ?>/pages/vaccination">
+
+                
+                <form class="form mb-3 covid-search-div" method="POST" action="<?php echo URL_ROOT; ?>/pages/vaccination">
 
                     <input type="text" class="covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter health ID here" name="vaccine-search-bar-input" required>
 
@@ -41,7 +46,7 @@
             <!-- This is what should display after search -->
             <?php if ($data["personal"]) { ?>
                 <!-- Add animation-fade-in-pre-state to add the animation -->
-                <div class="covid-search-result animation-pre-state" id="covid-search-result-section">
+                <div class="covid-search-result animation-fade-in-pre-state" id="covid-search-result-section">
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-vaccination" id="add-new">Add new vaccination +</button>
 
                     <!-- This is the division to display if the search result available -->
@@ -258,6 +263,47 @@
         document.getElementById("add-new").disabled = true;
     <?php } ?>
 </script>
+
+<script>
+        // Search Transition-------------------------------------------------------------
+
+        // This is the variables used for search transisions
+        const vaccineMainSearchEngine = document.querySelector("#covid-main-search-engine");
+        const vaccineSearchResult = document.querySelector("#covid-search-result-section");
+
+        const vaccineSearchBtn = document.querySelector("#covid-search-btn");
+        const vaccineSearchBar = document.querySelector("#covid-search-bar-input");
+
+        // Event listner for search btn click
+
+        console.log(count);
+
+        <?php if ($data['loaded']) { ?>
+
+        
+            vaccineSearchBtn.addEventListener("click", function() {
+                if (vaccineSearchBar.value.length != 0) {
+                    // Transition for search engine
+                    if (!vaccineMainSearchEngine.classList.contains("covid-shrunk-search")) {
+                        vaccineMainSearchEngine.classList.add("covid-shrunk-search");
+                    }
+
+                    // fade in animation for the search results
+                    if (vaccineSearchResult.classList.contains("animation-fade-in-pre-state")) {
+                        vaccineSearchResult.classList.remove("animation-fade-in-pre-state");
+                    }
+
+                    if (!vaccineSearchResult.classList.contains("animation-fade-in")) {
+                        vaccineSearchResult.classList.add("animation-fade-in");
+                    }
+
+                    count += 1;
+                }
+            });
+
+        <?php } ?>
+        
+    </script>
 
 <script src="<?php echo URL_ROOT; ?>/public/script/vaccine.js"></script>
 <script src="<?= URL_ROOT ?>./public/script/admin.js"></script>

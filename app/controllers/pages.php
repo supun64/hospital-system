@@ -215,10 +215,7 @@ class Pages extends Controller
                         die("Something went wrong :(");
                     }
                 }
-                $new_death = $this->record_factory->get_record('covid_deaths', $death_details);
-
-
-                // TODO: Add transaction  ----------> 
+                $new_death = $this->record_factory->get_record('covid_deaths', $death_details); 
 
                 if ($death_center->add_record($new_death) && $citizen->get_is_alive()) {
 
@@ -491,6 +488,8 @@ class Pages extends Controller
         $data['vaccinations'] = [];
         $data['hospital_id'] = NULL;
 
+        $data['loaded'] = false;
+
         $center = $this->center_factory->get_center('vaccinations');
 
         // code to search a vaccination
@@ -516,6 +515,10 @@ class Pages extends Controller
             if (!$data['personal']) {
                 header('location:' . URL_ROOT . '/pages/vaccination?not-user');
             }
+            
+            $data['loaded'] = true;
+
+
         }
 
 
