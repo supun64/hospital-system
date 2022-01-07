@@ -180,9 +180,20 @@ class Database
         $today = date("Y-m-d");
         $sql = "";
         if ($this->date_exist($today)) {
-            $sql = "UPDATE $table SET $field=$field+1 WHERE date='$today'";
+            $sql = "UPDATE $table SET $field=$field + 1 WHERE date='$today'";
         } else {
             $sql = "INSERT INTO $table (date,$field) VALUES ('$today',1)";
+        }
+        $output = $this->sql_execute($sql);
+        return $output;
+    }
+
+    public function decrement($table, $field)
+    {
+        $today = date("Y-m-d");
+        $sql = "";
+        if ($this->date_exist($today)) {
+            $sql = "UPDATE $table SET $field=$field - 1 WHERE date='$today'";
         }
         $output = $this->sql_execute($sql);
         return $output;

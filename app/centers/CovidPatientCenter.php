@@ -129,6 +129,6 @@ class CovidPatientCenter extends COVID_Department implements ReportObservable
 
     public function notifyObserver($status)
     {
-        $this->observer->increment_count($status);
+        $this->observer->update_count($status);
     }
 }

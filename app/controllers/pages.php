@@ -554,21 +554,26 @@ class Pages extends Controller
     //to change or view user details
     public function settings()
     {
-        $errors = "";
+        $error1 = "";
+        $error2 = "";
         //Check whether users array is updated
         if (isset($_POST["users"])) {
             // if yes, update database
-            $this->user_handler->update_user_details($_POST["users"]);
+            $error1 = $this->user_handler->update_user_details($_POST["users"]);
         } //Check whether passwords array is updated
         else if (isset($_POST['password-changed'])) {
             // if yes, take the errors
-            $errors = $this->user_handler->update_password_details($_POST["passwords"]);
+            $error2 = $this->user_handler->update_password_details($_POST["passwords"]);
         }
         //Retrieve details from the database
         $records = $this->user_handler->load_loggedin_user();
 
-        if (strlen($errors) !== 0) {
-            $records['errors'] = $errors;
+        if (strlen($error1) !== 0) {
+            $records['error1'] = $error1;
+        }
+
+        if (strlen($error2) !== 0) {
+            $records['error2'] = $error2;
         }
 
         $this->view('/pages/settings', $records);
@@ -616,7 +621,7 @@ class Pages extends Controller
         }
 
         if (isset($_POST['newrecord'])) {
-            $record = $this->record_factory->get_record($type, $_POST['newrecord']);
+            $record = $this->record_factory->get_record($type, $_POST['newrecord']);    
             $center->update_record($record);
         }
         if (isset($_GET['record_type']) && $_GET['record_type']) {

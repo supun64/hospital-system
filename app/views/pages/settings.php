@@ -73,11 +73,17 @@ if ($_SESSION['is_admin']) {
                                     <input type="text" class="form-control" id="hospitalname" value="<?= $data['hospital_name'] ?>" disabled="" />
                                 </div>
                             </div>
-
-
-                            <button class='settings-info-element btn btn-primary' type="submit">Save Changes</button>
-                        </form>
-                    </div>
+                        </div>
+                        <?php if (isset($data['error1'])) : ?>
+                            <div class="row mb-4">
+                                <div class="alert alert-danger" role="alert">
+                                    <?= $data["error1"] ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                        <button class='settings-info-element btn btn-primary' type="submit">Save Changes</button>
+                    </form>
+                </div>
 
                     <!-- Info area -->
 
@@ -94,6 +100,13 @@ if ($_SESSION['is_admin']) {
                                 <label for="username">User ID</label>
                                 <input type="text" class="form-control" id="username" value="<?= $data['user_id'] ?>" disabled="" />
                             </div>
+<<<<<<< HEAD
+                        </div>
+                        <?php if (isset($data['error2'])) : ?>
+                            <div class="row mb-4">
+                                <div class="alert alert-danger" role="alert">
+                                    <?= $data["error2"] ?>
+=======
                             <hr class="my-4" />
                             <div class="row mb-4">
                                 <div class="col-md-6">
@@ -124,6 +137,7 @@ if ($_SESSION['is_admin']) {
                                         <li>At least one number</li>
                                         <li>Can’t be the same as a previous password</li>
                                     </ul>
+>>>>>>> 1d0a702e034ed5728c542b71676ef44cef2a02cd
                                 </div>
                             </div>
                             <?php if (isset($data['errors'])) : ?>

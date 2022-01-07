@@ -10,7 +10,7 @@ class AntigenObserver implements ReportObserver
         $this->db = Database::get_instance();
     }
 
-    public function increment_count($status)
+    public function update_count($status)
     {
         if ($status == "positive") {
             $this->db->increment('report', 'antigen');

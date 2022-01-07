@@ -70,32 +70,36 @@ class UserHandler
 
     public function update_user_details($param_list)
     {
+        $errors = "";
         $data = [];
         $data['user_name'] = $param_list['name'];
         $data['user_email'] = $param_list['email'];
         $data['user_id'] = $_SESSION['userID'];
-        if ($this->db->update('users', 'user_id', $data)) {
+        $email_users = $this->db->find("users", "user_email",  $param_list['email']);
+        if ($email_users == NULL || (count($email_users)==1 && ($email_users[0]["user_id"] == $_SESSION['userID']))) {
+            $this->db->update('users', 'user_id', $data);
             $_SESSION['username'] = $data['user_name'];
-            return true;
+            $_SESSION['user_email'] = $data['user_email'];
         } else {
-            return false;
+            $errors = "An account with this email address already exists.";
         }
+        return $errors;
     }
 
-        public function update_password_details($param_list){
-            $errors = "";
-            $data = [];
-        
-            $password = $this->db->findById("users",'user_id',$_SESSION['userID'])[0]["password"];
-            if (password_verify($param_list['old_password'], $password)) {
-                $data['password'] = password_hash($param_list['new_password'], PASSWORD_DEFAULT);
-                $data['user_id'] = $_SESSION['userID'];
+    public function update_password_details($param_list)
+    {
+        $errors = "";
+        $data = [];
+        $password = $this->db->findById("users", 'user_id', $_SESSION['userID'])[0]["password"];
+        if (password_verify($param_list['old_password'], $password)) {
+            $data['password'] = password_hash($param_list['new_password'], PASSWORD_DEFAULT);
+            $data['user_id'] = $_SESSION['userID'];
 
-                $this->db->update('users', 'user_id', $data);
-            } else {
-                $errors = "Your current password is incorrect.";
-            }
-            return $errors;
+            $this->db->update('users', 'user_id', $data);
+        } else {
+            $errors = "Your current password is incorrect.";
+        }
+        return $errors;
     }
 
     private function findByMail($email)

@@ -27,7 +27,7 @@ class CovidDeathsCenter extends COVID_Department implements ReportObservable
         );
 
         if ($result) {
-            $this->notifyObserver("died");
+            $this->notifyObserver("Died");
             return true;
         } else {
             return false;
@@ -58,6 +58,7 @@ class CovidDeathsCenter extends COVID_Department implements ReportObservable
             ["table" => "covid_deaths", "primary_key" => "id", "id" => $id],
             ["table" => "citizens", "primary_key" => "health_id", "fields" => $param_list]
         )) {
+            $this->notifyObserver("removed");
             return true;
         } else
             false;
@@ -127,6 +128,6 @@ class CovidDeathsCenter extends COVID_Department implements ReportObservable
 
     public function notifyObserver($status)
     {
-        $this->observer->increment_count($status);
+        $this->observer->update_count($status);
     }
 }
