@@ -1,6 +1,6 @@
 <?php  require APP_ROOT.'/views/includes/header.php';  ?>
 
-<body style="background-image: linear-gradient(to right,#324ca8,#9dcfe3) ;"> 
+<body style="background-image: url('<?php echo URL_ROOT; ?>/public/images/dashboard-background.jpg') ;"> 
 <!-- code snippet to show error message for existing email -->
 <?php 
 if(isset($_GET['duplicate'])){?>
@@ -18,7 +18,6 @@ if(isset($_GET['fail'])){?>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 <?php } ?>
-
 
 
 <div class="register-container">

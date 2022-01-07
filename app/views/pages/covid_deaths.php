@@ -12,154 +12,161 @@
 
     <section class="main-info">
 
-        <!-- covid-shrunk-search class should add after the search -->
-        <div class="covid-search covid-shrunk-search" id="covid-main-search-engine">
-            <div class="covid-title">
-                <img class="covid-logo" src="<?php echo URL_ROOT; ?>/public/images/death.jpg" alt="covid-19 covid">
-                <h1 class="text-primary">Deaths</h1>
+        <main class="sub-division-main">
+
+            <!-- covid-shrunk-search class should add after the search -->
+            <div class="covid-search covid-shrunk-search death-covid-search-div" id="covid-main-search-engine">
+                <div class="covid-title">
+                    <img class="covid-logo" src="<?php echo URL_ROOT; ?>/public/images/death.png" alt="covid-19 covid">
+                    <h1 class="text-primary">Deaths</h1>
+                </div>
+
+                <form class="form mb-3 covid-search-div death-covid-search-div" method="POST" action="<?php echo URL_ROOT; ?>/pages/covid_deaths">
+                    <input type="text" class="covid-search-bar death-covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter health ID here" name="death-search-bar-input" value="<?= isset($_POST['death-search-bar-input']) ? $_POST['death-search-bar-input'] : "" ?>" required>
+                    <input type="submit" class="btn btn-primary" id="covid-search-btn" name="death-search" value="Search">
+
+                    <input type="button" class="btn btn-primary death-add-new-btn" id="add-button" data-bs-toggle="modal" data-bs-target="#add-new-death" value="Add a Death +">
+                    
+                </form>
+                
+                
+
             </div>
+            <?php if (isset($data["death"])) : ?>
+                <!-- Add addmination-fade-in-pre-state to add the animation -->
+                <div class="covid-search-result" id="covid-search-result-section">
+                    <!-- This is what should display after search -->
 
-            <form class="form mb-3 covid-search-div" method="POST" action="<?php echo URL_ROOT; ?>/pages/covid_deaths">
-                <input type="text" class="covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter health ID here" name="death-search-bar-input" value="<?= isset($_POST['death-search-bar-input']) ? $_POST['death-search-bar-input'] : "" ?>" required>
-                <input type="submit" class="btn btn-primary" id="covid-search-btn" name="death-search" value="Search">
-            </form>
+                    <!-- This is the division to display if the search result available -->
+                    <div class="covid-details">
 
-            <button class="btn btn-primary" id="add-button" data-bs-toggle="modal" data-bs-target="#add-new-death">Add a Death +</button>
+                        <div class="covid-patient-detail">
+                            <table id="death-table">
+                                <tr>
+                                    <th class="covid-detail-title">
+                                        Health ID
+                                    </th>
+                                    <th>
+                                        :
+                                    </th>
 
-        </div>
-        <?php if (isset($data["death"])) : ?>
-            <!-- Add addmination-fade-in-pre-state to add the animation -->
-            <div class="covid-search-result" id="covid-search-result-section">
-                <!-- This is what should display after search -->
+                                    <td class="covid-detail-data">
+                                        <?php echo $data['personal']['health_id'] ?>
+                                    </td>
+                                </tr>
 
-                <!-- This is the division to display if the search result available -->
-                <div class="covid-details">
+                                <tr>
+                                    <th class="covid-detail-title">
+                                        Name
+                                    </th>
+                                    <th>
+                                        :
+                                    </th>
 
-                    <div class="covid-patient-detail">
-                        <table id="death-table">
-                            <tr>
-                                <th class="covid-detail-title">
-                                    Health ID
-                                </th>
-                                <th>
-                                    :
-                                </th>
+                                    <td class="covid-detail-data">
+                                        <?php echo $data['personal']['name'] ?>
+                                    </td>
+                                </tr>
 
-                                <td class="covid-detail-data">
-                                    <?php echo $data['personal']['health_id'] ?>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <th class="covid-detail-title">
+                                        Gender
+                                    </th>
+                                    <th>
+                                        :
+                                    </th>
 
-                            <tr>
-                                <th class="covid-detail-title">
-                                    Name
-                                </th>
-                                <th>
-                                    :
-                                </th>
+                                    <td class="covid-detail-data">
+                                        <?php echo $data['personal']['gender'] ?>
+                                    </td>
+                                </tr>
 
-                                <td class="covid-detail-data">
-                                    <?php echo $data['personal']['name'] ?>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <th class="covid-detail-title">
+                                        Date of Birth
+                                    </th>
+                                    <th>
+                                        :
+                                    </th>
 
-                            <tr>
-                                <th class="covid-detail-title">
-                                    Gender
-                                </th>
-                                <th>
-                                    :
-                                </th>
+                                    <td class="covid-detail-data">
+                                        <?php echo $data['personal']['dob'] ?>
+                                    </td>
+                                </tr>
 
-                                <td class="covid-detail-data">
-                                    <?php echo $data['personal']['gender'] ?>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <th class="covid-detail-title">
+                                        Deceased Date
+                                    </th>
+                                    <th>
+                                        :
+                                    </th>
 
-                            <tr>
-                                <th class="covid-detail-title">
-                                    Date of Birth
-                                </th>
-                                <th>
-                                    :
-                                </th>
+                                    <td class="covid-detail-data">
+                                        <?php echo $data['death']['date'] ?>
+                                    </td>
+                                </tr>
 
-                                <td class="covid-detail-data">
-                                    <?php echo $data['personal']['dob'] ?>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <th class="covid-detail-title">
+                                        Place Died
+                                    </th>
+                                    <th>
+                                        :
+                                    </th>
 
-                            <tr>
-                                <th class="covid-detail-title">
-                                    Deceased Date
-                                </th>
-                                <th>
-                                    :
-                                </th>
+                                    <td class="covid-detail-data">
+                                        <?php echo $data['death']['place'] ?>
+                                    </td>
+                                </tr>
 
-                                <td class="covid-detail-data">
-                                    <?php echo $data['death']['date'] ?>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <th class="covid-detail-title">
+                                        Comments
+                                    </th>
+                                    <th>
+                                        :
+                                    </th>
 
-                            <tr>
-                                <th class="covid-detail-title">
-                                    Place Died
-                                </th>
-                                <th>
-                                    :
-                                </th>
-
-                                <td class="covid-detail-data">
-                                    <?php echo $data['death']['place'] ?>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <th class="covid-detail-title">
-                                    Comments
-                                </th>
-                                <th>
-                                    :
-                                </th>
-
-                                <td class="covid-detail-data">
-                                    <?php echo $data['death']['comments'] ?>
-                                </td>
-                            </tr>
-                        </table>
+                                    <td class="covid-detail-data">
+                                        <?php echo $data['death']['comments'] ?>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <?php
+            <?php
 
-        elseif (isset($data["personal"])) : ?>
+            elseif (isset($data["personal"])) : ?>
 
-            <!-- This is the division to display if the search result not available -->
-            <div class="covid-details covid-no-result-div covid-search-result">
+                <!-- This is the division to display if the search result not available -->
+                <div class="covid-details covid-no-result-div covid-search-result">
 
-                <div class="covid-sad-face image-centered">
-                    <img class="covid-sad-face-img" src="<?php echo URL_ROOT; ?>/public/images/sad-face.png" alt="">
+                    <div class="covid-sad-face image-centered">
+                        <img class="covid-sad-face-img" src="<?php echo URL_ROOT; ?>/public/images/sad-face.png" alt="">
+                    </div>
+                    <p class="covid-no-result-message">
+                        No death record found :(
+                    </p>
                 </div>
-                <p class="covid-no-result-message">
-                    No death record found :(
-                </p>
-            </div>
 
-        <?php elseif (isset($data["hospital_id"])) : ?>
-            <!-- This is the division to display if the search result not available -->
-            <div class="covid-details covid-no-result-div covid-search-result">
+            <?php elseif (isset($data["hospital_id"])) : ?>
+                <!-- This is the division to display if the search result not available -->
+                <div class="covid-details covid-no-result-div covid-search-result">
 
-                <div class="covid-sad-face image-centered">
-                    <img class="covid-sad-face-img" src="<?php echo URL_ROOT; ?>/public/images/sad-face.png" alt="">
+                    <div class="covid-sad-face image-centered">
+                        <img class="covid-sad-face-img" src="<?php echo URL_ROOT; ?>/public/images/sad-face.png" alt="">
+                    </div>
+                    <p class="covid-no-result-message">
+                        <?php if (isset($data['error'])) {
+                            echo $data['error'];
+                        } ?>
+                    </p>
                 </div>
-                <p class="covid-no-result-message">
-                    <?php if (isset($data['error'])) {
-                        echo $data['error'];
-                    } ?>
-                </p>
-            </div>
-        <?php endif ?>
+            <?php endif ?>
+
+        </main>
 
 
         <!-- This is the UI modal for add new vaccinated person -->

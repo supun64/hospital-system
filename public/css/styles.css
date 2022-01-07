@@ -329,6 +329,8 @@ body {
   height:100%;
   width:79%;
 
+  margin: 5px;
+
   transition: all .2s ease-in-out;
   
 }
@@ -346,7 +348,7 @@ body {
 }
 /*data management division styles---------------*/
 .data-heading {
-  border-bottom: black 1px solid;
+  border-bottom: black 2px solid;
 }
 .data-search-bar {
   padding-top: 2%;
@@ -386,8 +388,7 @@ body {
 
 /*Settings sub division*/
 .settings-heading {
-  position: fixed;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0);
   width: 100%;
 }
 .settings-body {
@@ -413,6 +414,10 @@ body {
 }
 .settings-info {
   border: grey solid 1px;
+
+  background-color: rgba(131, 209, 240, 0.671);
+  backdrop-filter: 10px;
+
   border-radius: 10px;
   padding: 35px;
   margin: 50px;
@@ -420,6 +425,23 @@ body {
 .settings-info-element {
   margin: 15px 0 15px 0;
 }
+
+
+.settings-sub-div-title{
+  background-color: #0d6dfd88 !important;
+  color: #000000 !important;
+
+  border: #0058d4c4 solid 1px !important;
+
+  font-weight: 600;
+
+}
+
+.settings-sub-div-title-section{
+  border-bottom-color: #0058d4c4 !important;
+}
+
+
 #same-password,
 #matching-passwords {
   color: red;
@@ -793,6 +815,22 @@ body {
   border-radius: 5px;
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
+}
+
+/* Styles for covid deaths */
+.death-covid-search-div{
+  min-width: 55%;
+}
+
+.death-covid-search-bar{
+  width: 63% !important;
+}
+
+.death-covid-search-div{
+  text-align: center !important;
+}
+.death-add-new-btn{
+  margin-left: 1%;
 }
 
 /* test Styles ---------------------------------------- */
