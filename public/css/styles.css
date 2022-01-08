@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
 
 /* General Styles------------------------------------ */
 
@@ -26,7 +26,7 @@ body {
 }
 
 /* use to put an overlay */
-.overlay{
+.overlay {
   background-color: rgba(0, 0, 0, 0.151);
   backdrop-filter: blur(3px);
 
@@ -133,7 +133,7 @@ body {
   transition-duration: 0.2s;
 }*/
 
-.index-hover:hover{
+.index-hover:hover {
   background: white;
   border: 1px solid #0d6dfd;
   color: #0d6dfd;
@@ -173,20 +173,19 @@ body {
   font-size: 12px;
   font-weight: 600;
 
-
   line-height: 20px;
   letter-spacing: 2px;
 
   color: rgb(0, 0, 0);
 
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
-.dashboard-user-credentials-shrink{
+.dashboard-user-credentials-shrink {
   font-size: 0px;
   line-height: 5px;
 
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .dashboard-account-details {
@@ -197,7 +196,7 @@ body {
   height: auto;
 }
 
-.dashboard-credential-label{
+.dashboard-credential-label {
   padding: 6px 0;
 }
 
@@ -224,7 +223,7 @@ body {
   min-width: 60px;
   box-sizing: border-box;
 
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .dashboard-side-bar {
@@ -240,12 +239,11 @@ body {
   background-color: #0d6dfdd0;
   backdrop-filter: blur(2px);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
 }
 .side-minimized {
   width: 60px;
 
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .dashboard-side-bar li {
@@ -315,13 +313,12 @@ body {
   margin-bottom: 120px;
 } */
 
-.dashboard-side-bar li:last-child{
+.dashboard-side-bar li:last-child {
   position: absolute;
   bottom: 53px;
 }
 
-
-.admin-settings{
+.admin-settings {
   margin-bottom: 280px;
 }
 @media screen and (max-width: 1200px) {
@@ -333,7 +330,7 @@ body {
   }
 }
 
-.dashboard-search-health-id{
+.dashboard-search-health-id {
   position: fixed;
   right: 0;
   top: 50vh;
@@ -344,37 +341,46 @@ body {
 
   z-index: 10;
 
-  height: 60px;
+  height: 30%;
   width: 30px;
 
-  border-top-left-radius: 60px;
-  border-bottom-left-radius: 60px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 
   border: rgb(20, 57, 126) solid 1px;
   border-right: none;
 
   outline: none;
 
+  background-color: rgba(0, 119, 255, 0.5);
 
-  background-color: rgb(0, 119, 255);
+  opacity: 70%;
 
   outline: none !important;
 }
 
-
- .dashboard-search-health-id:hover{
-  
+.dashboard-search-health-id:hover {
   outline: none;
-
-  background-color: rgb(255, 255, 255);
+  opacity: 100%;
+  background-color: rgba(0, 119, 255, 0.87);
 }
 
-.dashboard-health-id-div{
-  height: 59px;
+.dashboard-search-health-id-post .dashboard-health-id-icon {
+  transform: rotate(180deg);
+}
+
+.dashboard-search-health-id-post {
+  position: absolute;
+  top: 50vh;
+  left: -30px;
+}
+
+.dashboard-health-id-div {
+  height: 100%;
   width: 30px;
 
-  border-top-left-radius: 60px;
-  border-bottom-left-radius: 60px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 
   display: flex;
   flex-direction: column;
@@ -382,38 +388,76 @@ body {
   justify-content: center;
 
   align-items: center;
-  
 
-
-}
-
-.dashboard-health-id-div:hover{
   filter: brightness(0);
   -webkit-filter: brightness(0);
 }
 
-.dashboard-health-id-icon{
-  height: 23px;
-  width: 23px;
+.dashboard-health-id-div span {
+  transform: rotate(-90deg);
+  width: 150px;
+  font-weight: 500;
+}
+.dashboard-health-id-icon {
+  position: relative;
+  bottom: -55px;
+  height: 20px;
+  width: 20px;
 
   float: right;
+}
 
-  
+.dashboard-offcanvas {
+  background-color: rgb(255, 255, 255);
+  backdrop-filter: blur(10px);
+}
+
+.dashboard-dropdown-arrow {
+  content: "";
+  background: url("../images/arrow-down.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  right: 5px;
+  top: 6px;
+
+  z-index: -1;
+}
+
+.dashboard-dropdown {
+  width: 100%;
+}
+
+.dashboard-dropdown-btn {
+  text-align: left;
+  background: transparent;
+}
+
+.dashboard-dropdown-btn:hover {
+  background: transparent;
+}
+
+.dashboard-dropdown-btn:focus {
+  background: transparent;
 }
 
 /*sub divisions styles--------------------------*/
 .sub-division {
   padding-right: 15px;
   margin: 0;
-  float:right;
-  right:0;
-  height:100%;
-  width:79%;
+  float: right;
+  right: 0;
+  height: 100%;
+  width: 79%;
 
   margin: 5px;
 
-  transition: all .2s ease-in-out;
-  
+  padding-right: 30px;
+
+  transition: all 0.2s ease-in-out;
 }
 
 .sub-division-user {
@@ -450,7 +494,7 @@ body {
 .division-maximized {
   width: 95%;
 
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 .data-edit-button {
   font-size: 20px;
@@ -507,21 +551,18 @@ body {
   margin: 15px 0 15px 0;
 }
 
-
-.settings-sub-div-title{
+.settings-sub-div-title {
   background-color: #0d6dfd88 !important;
   color: #000000 !important;
 
   border: #0058d4c4 solid 1px !important;
 
   font-weight: 600;
-
 }
 
-.settings-sub-div-title-section{
+.settings-sub-div-title-section {
   border-bottom-color: #0058d4c4 !important;
 }
-
 
 #same-password,
 #matching-passwords {
@@ -628,26 +669,24 @@ body {
   margin: auto;
 }
 
-.login-user-details{
+.login-user-details {
   height: 100%;
   padding: 20px;
   padding-top: 40px;
 }
 
-.login-title{
+.login-title {
   margin-bottom: 30px;
   text-align: left;
 
-  font-family: 'Righteous', cursive;
+  font-family: "Righteous", cursive;
 
-  color: #0d63fd;;
+  color: #0d63fd;
 
   letter-spacing: 10px;
 
   font-size: 25pt;
 }
-
-
 
 /* this is used to change the bodybackground color in spesific resolution */
 @media (max-width: 576px) {
@@ -655,7 +694,7 @@ body {
     background: #0d63fd;
   }
 
-  .login-user-details{
+  .login-user-details {
     padding: 5px 2px;
   }
 }
@@ -935,18 +974,18 @@ body {
 }
 
 /* Styles for covid deaths */
-.death-covid-search-div{
+.death-covid-search-div {
   min-width: 55%;
 }
 
-.death-covid-search-bar{
+.death-covid-search-bar {
   width: 63% !important;
 }
 
-.death-covid-search-div{
+.death-covid-search-div {
   text-align: center !important;
 }
-.death-add-new-btn{
+.death-add-new-btn {
   margin-left: 1%;
 }
 
@@ -1013,8 +1052,7 @@ body {
   border-radius: 10px;
 }
 
-.home-header-title{
-
+.home-header-title {
   padding: 10px;
   padding-bottom: 50px;
 
@@ -1038,11 +1076,11 @@ body {
 
 /* Charts */
 
-.home-daily-chart{
+.home-daily-chart {
   margin: 0;
 }
 
-.home-graph{
+.home-graph {
   width: 70%;
   padding: 10px;
 
@@ -1056,7 +1094,7 @@ body {
   backdrop-filter: blur(1px);
 }
 
-.home-status{
+.home-status {
   height: 521px;
 
   padding: 10px;
@@ -1070,47 +1108,39 @@ body {
   border: 1px solid black;
 
   backdrop-filter: blur(1px);
-
-
 }
 
-.home-stat-header{
+.home-stat-header {
   margin-bottom: 50px;
 }
 
-.home-stat-title{
+.home-stat-title {
   font-size: 14pt;
   font-weight: bold;
 
   letter-spacing: 3px;
 }
 
-.home-stat-subtitle{
+.home-stat-subtitle {
   font-size: 14px;
   font-weight: 600;
 }
 
-.home-cases-stat{
+.home-cases-stat {
   margin: 70px 0;
 }
 
-.home-stat-icon{
+.home-stat-icon {
   width: 70px;
   height: auto;
 }
 
-.home-stat-labal{
+.home-stat-labal {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12pt;
   font-weight: bold;
   letter-spacing: 3px;
 }
-
-
-
-
-
-
 
 /* 
 -
