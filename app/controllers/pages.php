@@ -745,12 +745,4 @@ class Pages extends Controller
             return;
         }
     }
-
-
-
-
-    public function __destruct()
-    {
-        unset($_SESSION['vac_count']);
-    }
 }
