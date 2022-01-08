@@ -13,6 +13,7 @@ class Pages extends Controller
         $this->chart_loader = $this->model('ChartLoader');
         $this->mail = new MailerWrapper();
 
+
         //if someone tries to access the pages without logging in, they will be redirected to the users/index page
         if (!$this->user_handler->is_logged_in())
             header('location:' . URL_ROOT . '/users/index');
@@ -215,7 +216,7 @@ class Pages extends Controller
                         die("Something went wrong :(");
                     }
                 }
-                $new_death = $this->record_factory->get_record('covid_deaths', $death_details); 
+                $new_death = $this->record_factory->get_record('covid_deaths', $death_details);
 
                 if ($death_center->add_record($new_death) && $citizen->get_is_alive()) {
 
@@ -483,6 +484,9 @@ class Pages extends Controller
     public function vaccination()
     {
 
+        if (!isset($_SESSION['vac_count'])) {
+            $_SESSION['vac_count'] = 1;
+        }
 
         $data['personal'] = [];
         $data['vaccinations'] = [];
@@ -490,11 +494,13 @@ class Pages extends Controller
 
         $data['loaded'] = false;
 
+
         $center = $this->center_factory->get_center('vaccinations');
 
         // code to search a vaccination
 
         if (isset($_POST["vaccine-search"])) {
+
 
             $id = $_POST["vaccine-search-bar-input"]; // TO get the search input
             $citizen = $center->get_citizen($id);
@@ -515,10 +521,8 @@ class Pages extends Controller
             if (!$data['personal']) {
                 header('location:' . URL_ROOT . '/pages/vaccination?not-user');
             }
-            
+
             $data['loaded'] = true;
-
-
         }
 
 
@@ -590,14 +594,14 @@ class Pages extends Controller
             "covid_deaths" => ["HealthID", "Place", "Comments"],
             "pcr_tests" => ["HealthID", "Test Status", "Place"],
             "vaccinations" => ["Batch Number", "HealthID", "Dose", "Name of Vaccine", "Conducted Place", "Comments"],
-            "covid_patients"=> ["HealthID","Admission date","Discharge date","Hospital name","Conditions","status"]
+            "covid_patients" => ["HealthID", "Admission date", "Discharge date", "Hospital name", "Conditions", "status"]
         ];
 
         $type = $_GET['record_type'];
         $center = $this->center_factory->get_center($type);
 
         //set the observer accordingly
-        switch($type){
+        switch ($type) {
             case "pcr_tests":
                 $center->set_observer(new PcrObserver());
                 break;
@@ -624,7 +628,7 @@ class Pages extends Controller
         }
 
         if (isset($_POST['newrecord'])) {
-            $record = $this->record_factory->get_record($type, $_POST['newrecord']);    
+            $record = $this->record_factory->get_record($type, $_POST['newrecord']);
             $center->update_record($record);
         }
         if (isset($_GET['record_type']) && $_GET['record_type']) {
@@ -701,5 +705,10 @@ class Pages extends Controller
     {
         $this->user_handler->logout();
         header('location:' . URL_ROOT . '/users/login');
+    }
+
+    public function __destruct()
+    {
+        unset($_SESSION['vac_count']);
     }
 }

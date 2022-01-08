@@ -110,41 +110,40 @@
                         <div class="col-md-6">
                             <label for="deo_fname" class="form-label">Username</label>
                             <input type="text" class="form-control" name="deo_username" required>
-                            <div class="invalid-feedback">
-                                This Field can't be empty
-                            </div>
+                            -->
                         </div>
 
                         <div class="col-md-6">
                             <label for="deo_mail" class="form-label">Email</label>
                             <input type="text" class="form-control" name="deo_email" aria-describedby="inputGroupPrepend" required>
-                            <div class="invalid-feedback">
-                                This Field can't be empty
-                            </div>
+
                         </div>
 
                         <div class="col-md-6">
                             <label for="password" class="form-label">Temporary Password</label>
-                            <input type="password" class="form-control" name="password" id="pwd" required minlength="8">
-                            <div class="invalid-feedback">
-                                This Field can't be empty
-                            </div>
+                            <input type="password" class="form-control" name="password" id="pwd" required minlength="8" onkeypress="valid_input()">
+
+
                         </div>
+
 
                         <div class="col-md-6">
                             <label for="confirm_password" class="form-label">Confirm Password</label>
                             <input type="password" class="form-control" name="confirm_password" id="cpwd" required minlength="8">
-                            <div class="invalid-feedback">
+                            <!-- <div class="invalid-feedback">
                                 This Field can't be empty
-                            </div>
+                            </div> -->
                         </div>
                         <div class="pwd-error-msg invisible">
-                            <p style="color: red;"> passwords do not match</p>
+                            <p style="color: red;">Passowrds do not match</p>
+                        </div>
+                        <div id="len-val-pwd" hidden>
+                            <p style="color: red;"> At least 8 characters required</p>
                         </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="form-close" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" name="nw_deo_submit" onclick="return Validate()">Add DEO</button>
+                    <button type="submit" class="btn btn-primary" name="nw_deo_submit" onclick="return Validate()" id="deo_sub">Add DEO</button>
                 </div>
 
                 </form>
@@ -153,7 +152,15 @@
     </div>
 </div>
 
-
+<script>
+    function valid_input() {
+        if (document.getElementById("pwd").value.length < 7) {
+            document.getElementById("len-val-pwd").hidden = false;
+        } else {
+            document.getElementById("len-val-pwd").hidden = true;
+        }
+    }
+</script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="<?php echo URL_ROOT; ?>/public/script/deo_man.js"></script>
 <script>
