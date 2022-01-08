@@ -73,3 +73,93 @@ background-attachment: fixed;">
 
             </ul>
         </div>
+
+        <!-- This is the button for showing the off canvas -->
+        <button class="dashboard-search-health-id" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+            <div class="dashboard-health-id-div"><img class="dashboard-health-id-icon" src="<?= URL_ROOT ?>/public/images/left-arrow.png" alt="" srcset=""></div>
+        </button>
+
+
+        <!-- This is the code for the off canvas for search for health ID -->
+        <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Search for health ID</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <form class="offcanvas-body">
+
+                <div class="dashboard-health-id-search-type col-md-12 covid-input">
+
+                    <label for="dashboard-search-by" class="form-label-primary label-primary covid-input-label">Search Type</label>
+
+                    <button class="form-control covid-input-field dropdown btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                        Enter value here
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+
+
+                </div>
+
+                <div class="dashboard-health-id-search-input col-md-12 covid-input">
+                    <label for="inputSearchValue" class="form-label-primary label-primary covid-input-label">NIC/Phone/correct value</label>
+                    <input type="text" class="form-control covid-input-field" id="inputSearchValue" name="add-patient-vaccination-name" required>
+
+                </div>
+
+                <div>
+                    <button class="btn btn-outline-primary dashboard-health-id-search">Search</button>
+                </div>
+
+                <div class="covid-patient-detail">
+                    <table>
+                        <tr>
+                            <th class="covid-detail-title">
+                                Health ID
+                            </th>
+                            <th>
+                                :
+                            </th>
+
+
+                            <td class="covid-detail-data">
+                                <?php echo $data['personal']['health_id'] ?>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th class="covid-detail-title">
+                                Name
+                            </th>
+                            <th>
+                                :
+                            </th>
+
+
+                            <td class="covid-detail-data">
+                                <?php echo $data['personal']['name'] ?>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th class="covid-detail-title">
+                                Age
+                            </th>
+                            <th>
+                                :
+                            </th>
+
+
+                            <td class="covid-detail-data">
+                                <?php echo $data['personal']['dob'] ?>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+
+            </form>
+        </div>
