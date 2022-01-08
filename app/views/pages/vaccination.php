@@ -297,7 +297,7 @@
                         vaccineSearchResult.classList.add("animation-fade-in");
                     }
 
-                    count += 1;
+                    
                 }
             });
 
