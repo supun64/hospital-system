@@ -64,6 +64,7 @@ class Database
         return mysqli_real_escape_string($this->conn, $var);
     }
 
+    //update method
     public function update($table, $primary_key, $param_list)
     {
         $sql = ' UPDATE `' . $table . '` SET ';
@@ -81,6 +82,7 @@ class Database
         return $this->sql_execute($sql);
     }
 
+    //insert method
     public function insert($table, $fields)
     {  //changed the if clause since safe method only takes strings
         $count = -1;
@@ -103,6 +105,7 @@ class Database
         return $this->sql_execute($sql);
     }
 
+    //delete method 
     public function delete($table, $primary_key, $id)
     {
         if (is_int($id) || $this->safe($id)) {
@@ -112,6 +115,7 @@ class Database
         }
     }
 
+    //take all data from a table
     public function find_All($table)
     {
         $sql = "SELECT * FROM `" . $table . '`';
@@ -119,6 +123,7 @@ class Database
         return $this->result_set();
     }
 
+    // find data from id
     public function findById($table, $primary_key, $value)
     {
         if (is_int($value) || $this->safe($value)) {
@@ -130,6 +135,7 @@ class Database
         }
     }
 
+    //find data form a given field
     public function find($table, $column, $value)
     {
         if (is_int($value) || $this->safe($value)) {
@@ -141,6 +147,7 @@ class Database
         }
     }
 
+    //find data by hospital id and date
     public function findByHosID_nd_Date($table, $hospital_id)
     {
         if (is_int($hospital_id) || $this->safe($hospital_id)) {
@@ -152,6 +159,7 @@ class Database
         }
     }
 
+    //find data by hospital id and addmission date
     public function findByHosID_nd_ADDate($table, $hospital_id)
     {
         if (is_int($hospital_id) || $this->safe($hospital_id)) {
@@ -163,6 +171,7 @@ class Database
         }
     }
 
+    //find data by hospital id and user id
     public function findByHosID_nd_UserID($table, $hospital_id, $user_id)
     {
         if (is_int($hospital_id) || $this->safe($hospital_id)) {
@@ -174,7 +183,7 @@ class Database
         }
     }
 
-    //for observers
+    //for observers - increment relevent field
     public function increment($table, $field)
     {
         $today = date("Y-m-d");
@@ -188,6 +197,7 @@ class Database
         return $output;
     }
 
+    //for observers - decrement relevent field
     public function decrement($table, $field)
     {
         $today = date("Y-m-d");
@@ -200,8 +210,7 @@ class Database
     }
 
 
-    //for ChartLoader
-
+    //for ChartLoader - load data according to a given range
     public function load_range($table, $key, $range)
     {
 
@@ -211,6 +220,7 @@ class Database
         return $result;
     }
 
+    //for ChartLoader - to count total values (per field)
     public function count_rows($table, $column)
     {
         $sql = "SELECT SUM($column) FROM $table";

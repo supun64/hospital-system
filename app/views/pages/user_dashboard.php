@@ -75,18 +75,21 @@ background-attachment: fixed;">
         </div>
 
         <!-- This is the button for showing the off canvas -->
-        <button class="dashboard-search-health-id" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+        <button class="dashboard-search-health-id" type="button" data-bs-toggle="offcanvas" data-bs-target="#forget-id-canvas" aria-controls="forget-id-canvas">
             <div class="dashboard-health-id-div"><img class="dashboard-health-id-icon" src="<?= URL_ROOT ?>/public/images/left-arrow.png" alt="" srcset=""></div>
         </button>
 
 
         <!-- This is the code for the off canvas for search for health ID -->
-        <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="forget-id-canvas" aria-labelledby="offcanvasWithBothOptionsLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Search for health ID</h5>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" id="forget-id-close-btn" onclick="my_func()"></button>
             </div>
-            <form class="offcanvas-body">
+            <?php
+            $controller = substr($_SERVER['REQUEST_URI'], 16);
+            ?>
+            <form class="offcanvas-body" action="<?= URL_ROOT . $controller ?>" method="POST">
 
                 <div class="dashboard-health-id-search-type col-md-12 covid-input">
 
@@ -95,71 +98,88 @@ background-attachment: fixed;">
                     <button class="form-control covid-input-field dropdown btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
                         Enter value here
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-
-
+                    <select class="dropdown-menu" aria-labelledby="dropdownMenuButton" name="forget-id-type">
+                        <option class="dropdown-item">Contact Number</option>
+                        <option class="dropdown-item">Email</option>
+                        <option class="dropdown-item">NIC</option>
+                    </select>
                 </div>
 
                 <div class="dashboard-health-id-search-input col-md-12 covid-input">
                     <label for="inputSearchValue" class="form-label-primary label-primary covid-input-label">NIC/Phone/correct value</label>
-                    <input type="text" class="form-control covid-input-field" id="inputSearchValue" name="add-patient-vaccination-name" required>
+                    <input type="text" class="form-control covid-input-field" id="inputSearchValue" name="forget-id-value" required>
 
                 </div>
 
                 <div>
-                    <button class="btn btn-outline-primary dashboard-health-id-search">Search</button>
+                    <button type="submit" class="btn btn-outline-primary dashboard-health-id-search" id="forget-id-submit" name="forget-id-submit">Search</button>
                 </div>
 
-                <div class="covid-patient-detail">
-                    <table>
-                        <tr>
-                            <th class="covid-detail-title">
-                                Health ID
-                            </th>
-                            <th>
-                                :
-                            </th>
+                <input type="text" value="<?php echo $_SERVER['REQUEST_URI']; ?>" hidden name="page">
+
+                <script>
+                    // if searched for forget id
+                    <?php if (isset($data['content'])) : ?>
+
+                        const div = document.getElementById("forget-id-canvas");
+                        div.classList.add("show"); //show canvas
+
+                    <?php endif; ?>
+
+                    function my_func() {
+                        document.getElementById("forget-id-content").hidden = true; //hide content
+                    }
+                </script>
+                <?php if (isset($data['content'])) : ?>
+                    <div class="covid-patient-detail" id="forget-id-content">
+
+                        <table>
+                            <?php foreach ($data['content'] as $record) : ?>
+                                <tr>
+                                    <th class="covid-detail-title">
+                                        Health ID
+                                    </th>
+                                    <th>
+                                        :
+                                    </th>
 
 
-                            <td class="covid-detail-data">
-                                <?php echo $data['personal']['health_id'] ?>
-                            </td>
-                        </tr>
+                                    <td class="covid-detail-data">
+                                        <?php echo $record['health_id'] ?>
+                                    </td>
+                                </tr>
 
-                        <tr>
-                            <th class="covid-detail-title">
-                                Name
-                            </th>
-                            <th>
-                                :
-                            </th>
-
-
-                            <td class="covid-detail-data">
-                                <?php echo $data['personal']['name'] ?>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th class="covid-detail-title">
-                                Age
-                            </th>
-                            <th>
-                                :
-                            </th>
+                                <tr>
+                                    <th class="covid-detail-title">
+                                        Name
+                                    </th>
+                                    <th>
+                                        :
+                                    </th>
 
 
-                            <td class="covid-detail-data">
-                                <?php echo $data['personal']['dob'] ?>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                                    <td class="covid-detail-data">
+                                        <?php echo $record['name'] ?>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th class="covid-detail-title">
+                                        Date of Birth
+                                    </th>
+                                    <th>
+                                        :
+                                    </th>
 
 
+                                    <td class="covid-detail-data">
+                                        <?php echo $record['dob'] ?>
+                                    </td>
+                                </tr>
+
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
+                <?php endif; ?>
             </form>
         </div>

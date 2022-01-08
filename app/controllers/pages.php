@@ -9,6 +9,7 @@ class Pages extends Controller
         $this->hospital_loader_model =  $this->model('RegistrationHandler');
         $this->record_factory = Factory::getFactory("RecordFactory");
         $this->center_factory = Factory::getFactory("CentersFactory");
+        $this->citizen_factory = Factory::getFactory("CitizenFactory");
         $this->user_handler = $this->model('UserHandler');
         $this->chart_loader = $this->model('ChartLoader');
         $this->mail = new MailerWrapper();
@@ -21,16 +22,19 @@ class Pages extends Controller
 
     public function index()
     {
+        $this->find_citizen_id();
         $data['monthly_result'] = $this->chart_loader->load_last_thirty();
         $data['total'] = $this->chart_loader->load_total();
 
 
-        $this->view('/pages/home', $data);
+        $this->view('/pages/index', $data);
     }
 
 
     public function antigen()
     {
+        $this->find_citizen_id();
+
         $data['personal'] = [];
         $data['antigen_tests'] = [];
         $data['hospital_id'] = NULL;
@@ -156,6 +160,7 @@ class Pages extends Controller
 
     public function covid_deaths()
     {
+        $this->find_citizen_id();
 
         $death_center = $this->center_factory->get_center('covid_deaths');
         $patient_center = $this->center_factory->get_center('covid_patients');
@@ -235,6 +240,8 @@ class Pages extends Controller
 
     public function covid_patients()
     {
+        $this->find_citizen_id();
+
         $data['personal'] = [];
         $data['patient_history'] = [];
         $data['hospital_id'] = NULL;
@@ -360,6 +367,8 @@ class Pages extends Controller
 
     public function pcr()
     {
+        $this->find_citizen_id();
+
         $data['personal'] = [];
         $data['pcr_tests'] = [];
         $data['hospital_id'] = NULL;
@@ -483,6 +492,7 @@ class Pages extends Controller
 
     public function vaccination()
     {
+        $this->find_citizen_id();
 
         if (!isset($_SESSION['vac_count'])) {
             $_SESSION['vac_count'] = 1;
@@ -561,6 +571,8 @@ class Pages extends Controller
     //to change or view user details
     public function settings()
     {
+        $this->find_citizen_id();
+
         $error1 = "";
         $error2 = "";
         //Check whether users array is updated
@@ -706,6 +718,36 @@ class Pages extends Controller
         $this->user_handler->logout();
         header('location:' . URL_ROOT . '/users/login');
     }
+
+    public function find_citizen_id()
+    {
+        $data['content'] = [];
+        if (isset($_POST['forget-id-value'])) {
+
+            $page = substr($_POST['page'], 16);
+            $type = $_POST['forget-id-type'];
+            switch ($type) {
+                case "Contact Number":
+                    $type = "contact_num";
+                    break;
+                case "Email":
+                    $type = "email";
+                    break;
+                case "NIC":
+                    $type = "nic";
+                    break;
+            }
+            $value = $_POST['forget-id-value'];
+
+            $data['content'] = $this->citizen_factory->get_health_id($type, $value);
+            //find correct id for given data with relevent type
+            !$_SESSION["is_admin"] ? $this->view($page, $data) : header('location:' . URL_ROOT . '/pages/index');
+            return;
+        }
+    }
+
+
+
 
     public function __destruct()
     {

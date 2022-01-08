@@ -40,7 +40,7 @@
             </div>
 
             <!-- This is what should display after search -->
-            <?php if ($data["personal"]) { ?>
+            <?php if (isset($data['personal']) && $data["personal"]) { ?>
                 <!-- Add animation-fade-in-pre-state to add the animation -->
                 <div class="covid-search-result" id="covid-search-result-section">
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-vaccination" id="add-new">Add new vaccination +</button>
@@ -96,7 +96,7 @@
 
                         <?php
                         $last_dose = 0;
-                        if ($data['vaccinations']) { ?>
+                        if (isset($data['vaccinations'])) { ?>
                             <!-- These are the vaccination details -->
 
                             <div class="covid-previous-details">
@@ -244,7 +244,7 @@
 </div>
 
 <script>
-    <?php if (($data['personal']['is_alive'] == 0)) { ?>
+    <?php if (isset($data['personal']) && ($data['personal']['is_alive'] == 0)) { ?>
         document.getElementById("add-new").disabled = true;
     <?php } ?>
 </script>

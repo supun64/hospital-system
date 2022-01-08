@@ -44,7 +44,7 @@
             </div>
 
             <!-- This is what should display after search -->
-            <?php if ($data["personal"]) { ?>
+            <?php if (isset($data['personal']) && $data["personal"]) { ?>
 
                 <!-- Add addmination-fade-in-pre-state to add the animation -->
                 <div class="covid-search-result" id="covid-search-result-section">
@@ -103,7 +103,7 @@
                             </table>
                         </div>
 
-                        <?php if ($data['pcr_tests']) { ?>
+                        <?php if (isset($data['pcr_tests'])) { ?>
                             <!-- These are the vaccination details -->
 
                             <div class="covid-previous-details">
@@ -270,7 +270,7 @@
 
 
 <script>
-    <?php if (($data['personal']['is_alive'] == 0)) { ?>
+    <?php if (isset($data['personal']) && ($data['personal']['is_alive'] == 0)) { ?>
         document.getElementById("add-new").disabled = true;
     <?php } ?>
 </script>
