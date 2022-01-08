@@ -105,16 +105,16 @@ background-attachment: fixed;">
 
 
                     <div class="dashboard-dropdown" style="position: relative;">
-                        <button class="form-control covid-input-field dashboard-dropdown-btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                        <!-- <button class="form-control dashboard-dropdown-btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
                             Enter value here
                         </button>
-                        <div class="dashboard-dropdown-arrow"> </div>
+                        <div class="dashboard-dropdown-arrow"> </div> -->
 
-                        <ul class="dropdown-menu dashboard-dropdown" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
+                        <select class="form-control dashboard-dropdown-btn" aria-labelledby=" dropdownMenuButton" name="forget-id-type">
+                            <option name="forget-id-type"><a class="dropdown-item">Contact Number</a></option>
+                            <option name="forget-id-type"><a class="dropdown-item">Email</a></option>
+                            <option name="forget-id-type"><a class="dropdown-item">NIC</a></option>
+                        </select>
 
 
                     </div>

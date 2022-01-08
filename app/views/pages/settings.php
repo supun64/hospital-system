@@ -57,12 +57,12 @@ if ($_SESSION['is_admin']) {
                             <hr class="my-4" />
                             <div class="settings-info-element form-group">
                                 <label for="fullname">Full Name</label>
-                                <input type="text" class="form-control" id="fullname" required value="<?= $data['user_name'] ?>" name="users[name]" />
+                                <input type="text" class="form-control" id="fullname" required value="<?= isset($data['user_name']) ? $data['user_name'] : ""; ?>" name="users[name]" />
                             </div>
                             <div class=" settings-info-element form-row">
                                 <div class="form-group ">
                                     <label for="email">Email Address</label>
-                                    <input type="email" class="form-control" id="email" required value="<?= $data['user_email'] ?>" name="users[email]" />
+                                    <input type="email" class="form-control" id="email" required value="<?= isset($data['user_email']) ? $data['user_email'] : ""; ?>" name="users[email]" />
                                 </div>
                             </div>
 
@@ -70,7 +70,7 @@ if ($_SESSION['is_admin']) {
                             <div class="settings-info-element form-row">
                                 <div class="form-group col-md-7">
                                     <label for="hospitalname">Hospital Name</label>
-                                    <input type="text" class="form-control" id="hospitalname" value="<?= $data['hospital_name'] ?>" disabled="" />
+                                    <input type="text" class="form-control" id="hospitalname" value="<?= isset($data['hospital_name']) ? $data['hospital_name'] : ""; ?>" disabled="" />
                                 </div>
                             </div>
                             <?php if (isset($data['error1'])) : ?>
@@ -83,6 +83,7 @@ if ($_SESSION['is_admin']) {
                             <button class='settings-info-element btn btn-primary' type="submit">Save Changes</button>
                     </div>
                     </form>
+
                 </div>
 
                 <!-- Info area -->
@@ -97,7 +98,7 @@ if ($_SESSION['is_admin']) {
                         <!-- Can't change th user name -->
                         <div class="settings-info-element form-group">
                             <label for="username">User ID</label>
-                            <input type="text" class="form-control" id="username" value="<?= $data['user_id'] ?>" disabled="" />
+                            <input type="text" class="form-control" id="username" value="<?= isset($data['user_id']) ? $data['user_id'] : ""; ?>" disabled="" />
                         </div>
                         <hr class="my-4" />
                         <div class="row mb-4">
