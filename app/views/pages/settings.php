@@ -17,9 +17,25 @@ if ($_SESSION['is_admin']) {
     <?php } ?>
 
     <?php
-    if (isset($data['errors']) && $data['errors'] == "") { ?>
+    if (isset($_GET['error1'])) { ?>
+        <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert">
+            <div class="deo-manage-error-text"> An account with this email address already exists !!</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php } ?>
+
+    <?php
+    if (isset($_GET['error2'])) { ?>
+        <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert">
+            <div class="deo-manage-error-text"> Your current password is incorrect !!</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php } ?>
+
+    <?php
+    if (isset($_GET['success'])) { ?>
         <div class="alert alert-success alert-dismissible fade show deo-manage-error-box" role="alert">
-            <div class="deo-manage-error-text"> Updated Successfully !!</div>
+            <div class="deo-manage-error-text"> Updated sccessfully</div>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <?php } ?>

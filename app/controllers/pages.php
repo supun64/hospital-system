@@ -573,26 +573,28 @@ class Pages extends Controller
     {
         $this->find_citizen_id();
 
+        //Retrieve details from the database
+        $records = $this->user_handler->load_loggedin_user();
         $error1 = "";
         $error2 = "";
         //Check whether users array is updated
         if (isset($_POST["users"])) {
             // if yes, update database
             $error1 = $this->user_handler->update_user_details($_POST["users"]);
+            if (strlen($error1) !== 0) {
+                header('location:' . URL_ROOT . '/pages/settings?error1');
+            } else {
+                header('location:' . URL_ROOT . '/pages/settings?success');
+            }
         } //Check whether passwords array is updated
         else if (isset($_POST['password-changed'])) {
             // if yes, take the errors
             $error2 = $this->user_handler->update_password_details($_POST["passwords"]);
-        }
-        //Retrieve details from the database
-        $records = $this->user_handler->load_loggedin_user();
-
-        if (strlen($error1) !== 0) {
-            $records['error1'] = $error1;
-        }
-
-        if (strlen($error2) !== 0) {
-            $records['error2'] = $error2;
+            if (strlen($error2) !== 0) {
+                header('location:' . URL_ROOT . '/pages/settings?error2');
+            } else {
+                header('location:' . URL_ROOT . '/pages/settings?success');
+            }
         }
 
         $this->view('/pages/settings', $records);

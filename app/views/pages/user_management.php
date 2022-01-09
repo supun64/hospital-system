@@ -110,7 +110,7 @@
                         <div class="col-md-6">
                             <label for="deo_fname" class="form-label">Username</label>
                             <input type="text" class="form-control" name="deo_username" required>
-                            -->
+                            
                         </div>
 
                         <div class="col-md-6">
