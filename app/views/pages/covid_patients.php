@@ -34,14 +34,14 @@
 
                 <form class="form mb-3 covid-search-div" method="POST" action="<?php echo URL_ROOT; ?>/pages/covid_patients">
 
-                    <input type="text" class="covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter health ID here" name="patient-search-bar-input" required>
+                    <input type="text" class="covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter Health ID here" name="patient-search-bar-input" required>
 
                     <input type="submit" class="btn btn-primary" id="covid-search-btn" name="patient-search" value="Search">
                 </form>
             </div>
 
             <!-- This is what should display after search -->
-            <?php if ($data["personal"]) { ?>
+            <?php if (isset($data["personal"]) && $data['personal'] != []) { ?>
 
                 <!-- Add admination-fade-in-pre-state to add the animation -->
                 <div class="covid-search-result" id="covid-search-result-section">
@@ -52,7 +52,7 @@
                     <div class="covid-details">
 
                         <div class="covid-patient-detail">
-                            <table id="patient-table">
+                            <table class="covid-detail-table" id="patient-table">
                                 <tr>
                                     <th class="covid-detail-title">
                                         Health ID
@@ -153,7 +153,7 @@
                                 ?>
                                     <?php $count++; ?>
                                     <div class="patient-rw">
-                                        <div class="covid-tr" data-bs-toggle="modal" data-bs-target="#patient-result">
+                                        <div class="covid-tr covid-no-select-tr <?php if ($admission === $patient_history[sizeof($patient_history) - 1]) echo 'covid-bottom-tr' ?>" data-bs-toggle="modal" data-bs-target="#patient-result">
                                             <div class="covid-td">
                                                 <?php echo $admission["admission_id"] ?>
                                             </div>
@@ -215,7 +215,7 @@
 
                         <div class="col-md-8 covid-input">
                             <label for="inputHealthID" class="form-label-primary label-primary covid-input-label">Patient's Health ID</label>
-                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-health-id" value="<?php echo $data['personal']['health_id'] ?>">
+                            <input type="text" readonly class="form-control form-control-sm covid-input-field" id="inputHealthID" name="add-patient-health-id" value="<?php echo $data['personal']['health_id'] ?>">
                         </div>
 
                         <div class="col-md-6 covid-input">
@@ -225,12 +225,12 @@
 
                         <div class="col-md-8 covid-input">
                             <label for="inputHospital" class="form-label-primary covid-input-label">Hospital ID</label>
-                            <input type="text" readonly class="form-control form-control-sm" id="inputHospital" name="add-patient-hospital" value="<?= $_SESSION["hospital_id"] ?>">
+                            <input type="text" readonly class="form-control form-control-sm covid-input-field" id="inputHospital" name="add-patient-hospital" value="<?= $_SESSION["hospital_id"] ?>">
                         </div>
 
                         <div class="col-md-8 covid-input">
                             <label for="inputCondition" class="form-label-primary label-primary covid-input-label">Conditions</label>
-                            <input type="text" class="form-control covid-input-field" id="inputCondition" name="add-patient-conditions" placeholder="(Optional)">
+                            <input type="text" class="form-control covid-input-field covid-input-field" id="inputCondition" name="add-patient-conditions" placeholder="(Optional)">
                         </div>
 
 

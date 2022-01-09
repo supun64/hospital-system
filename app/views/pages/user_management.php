@@ -6,7 +6,7 @@
     <?php
     if (isset($_GET['duplicate'])) { ?>
         <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert">
-            <div class="deo-manage-error-text">User email already exist.Restart the process !!</div>
+            <div class="deo-manage-error-text">User email already exist. Restart the process!!!</div>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <?php } ?>
@@ -19,13 +19,13 @@
         <!-- add new data entry operator-->
         <div class="col-md-1">
             <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#deo-manage-nw-deo-form">
-                &plus;Add new
+                &plus;Add New User
             </button>
         </div>
 
         <form class="data-select-box" action="<?php echo URL_ROOT; ?>/pages/user_management" method="POST">
             <div class="input-group mb-3">
-                <input type="text" id="deo-search-bar" class="form-control" placeholder="Search" aria-label="DEO's username" aria-describedby="button-deo-serach">
+                <input type="text" id="deo-search-bar" class="form-control" placeholder="Search DEO ID" aria-label="DEO's username" aria-describedby="button-deo-serach">
                 <!-- <button class="btn btn-outline-primary" type="submit" id="button-deo-search">Search</button> -->
             </div>
         </form>
@@ -35,8 +35,8 @@
     <table class="table table-hover" id="deo-table">
         <thead>
             <tr>
-                <th scope="col">Emp. ID</th>
-                <th scope="col">Username</th>
+                <th scope="col">User ID</th>
+                <th scope="col">User Name</th>
                 <th scope="col">Email</th>
                 <th scope="col"></th>
             </tr>
@@ -69,7 +69,7 @@
                                                 <h3><i class='bx bxs-alarm-exclamation' style='color:#ff0a0a'></i></h3>
                                             </div>
                                             <div class="col-11">
-                                                <h5>Are you sure you want to remove <?= $deo['user_name'] ?> ??</h5>
+                                                <h5>Are you sure you want to remove <?= $deo['user_name'] ?> ?</h5>
                                             </div>
                                         </div>
                                         <form action="<?php echo URL_ROOT; ?>/pages/user_management" method='POST'>
@@ -100,7 +100,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add New DEO</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add New User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -108,9 +108,9 @@
 
                     <form action="<?php echo URL_ROOT; ?>/pages/user_management" class="row g-3 requires-validation" novalidate method="POST">
                         <div class="col-md-6">
-                            <label for="deo_fname" class="form-label">Username</label>
+                            <label for="deo_fname" class="form-label">User Name</label>
                             <input type="text" class="form-control" name="deo_username" required>
-                            
+
                         </div>
 
                         <div class="col-md-6">
@@ -135,15 +135,15 @@
                             </div> -->
                         </div>
                         <div class="pwd-error-msg invisible">
-                            <p style="color: red;">Passowrds do not match</p>
+                            <p style="color: red;">Make sure your passwords match.</p>
                         </div>
                         <div id="len-val-pwd" hidden>
-                            <p style="color: red;"> At least 8 characters required</p>
+                            <p style="color: red;">At least 8 characters required.</p>
                         </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="form-close" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" name="nw_deo_submit" onclick="return Validate()" id="deo_sub">Add DEO</button>
+                    <button type="submit" class="btn btn-primary" name="nw_deo_submit" onclick="return Validate()" id="deo_sub">Add User</button>
                 </div>
 
                 </form>

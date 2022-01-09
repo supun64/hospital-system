@@ -22,7 +22,7 @@
                 </div>
 
                 <form class="form mb-3 covid-search-div death-covid-search-div" method="POST" action="<?php echo URL_ROOT; ?>/pages/covid_deaths">
-                    <input type="text" class="covid-search-bar death-covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter health ID here" name="death-search-bar-input" value="<?= isset($_POST['death-search-bar-input']) ? $_POST['death-search-bar-input'] : "" ?>" required>
+                    <input type="text" class="covid-search-bar death-covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter Health ID here" name="death-search-bar-input" value="<?= isset($_POST['death-search-bar-input']) ? $_POST['death-search-bar-input'] : "" ?>" required>
                     <input type="submit" class="btn btn-primary" id="covid-search-btn" name="death-search" value="Search">
 
                     <input type="button" class="btn btn-primary death-add-new-btn" id="add-button" data-bs-toggle="modal" data-bs-target="#add-new-death" value="Add a Death +">
@@ -40,8 +40,10 @@
                     <!-- This is the division to display if the search result available -->
                     <div class="covid-details">
 
+                    <header class="death-report-title">Death Report</header>
+
                         <div class="covid-patient-detail">
-                            <table id="death-table">
+                            <table class="covid-detail-table" id="death-table">
                                 <tr>
                                     <th class="covid-detail-title">
                                         Health ID
@@ -169,7 +171,7 @@
         </main>
 
 
-        <!-- This is the UI modal for add new vaccinated person -->
+        <!-- This is the UI modal for new death -->
         <div class="modal fade" id="add-new-death" tabindex="-1" aria-labelledby="death-form" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
 
@@ -184,7 +186,7 @@
 
                         <div class="col-md-8 covid-input">
                             <label for="inputHealthID" class="form-label-primary label-primary covid-input-label">Health ID</label>
-                            <input type="text" class="form-control form-control-sm" id="inputHealthID" name="add-death-health-id" value="<?= isset($data["personal"]) ? $data['personal']['health_id'] : "" ?>">
+                            <input type="text" class="form-control form-control-sm covid-input-field" id="inputHealthID" name="add-death-health-id" value="<?= isset($data["personal"]) ? $data['personal']['health_id'] : "" ?>" required>
                         </div>
 
                         <div class=" col-md-6 covid-input">
@@ -194,7 +196,7 @@
 
                         <div class="col-md-8 covid-input">
                             <label for="inputHospital" class="form-label-primary covid-input-label">Hospital ID</label>
-                            <input type="text" readonly class="form-control form-control-sm" id="inputHospital" name="add-death-hospital" value="<?= $_SESSION["hospital_id"] ?>">
+                            <input type="text" readonly class="form-control form-control-sm covid-input-field" id="inputHospital" name="add-death-hospital" value="<?= $_SESSION["hospital_id"] ?>" required>
                         </div>
 
                         <div class="col-md-8 covid-input">

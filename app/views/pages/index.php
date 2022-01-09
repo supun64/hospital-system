@@ -37,7 +37,7 @@ if ($_SESSION['is_admin']) {
 
         var options = {
 
-            title: "Daily Covid Results - Past 30 Days",
+            title: "Daily New Cases in Sri Lanka - Past 30 Days",
 
             titleTextStyle: {
                 bold: true,
@@ -109,7 +109,7 @@ if ($_SESSION['is_admin']) {
                 fill: 'transparent'
             },
 
-            title: 'Total Covid Results',
+            title: 'Summary of Total Cases',
 
             titleTextStyle: {
                 bold: true,
@@ -146,7 +146,7 @@ if ($_SESSION['is_admin']) {
 
     function drawColChart() {
         var data = google.visualization.arrayToDataTable([
-            ['Date', 'PCR positive', 'Antigen Positive'],
+            ['Date', 'PCR tests', 'Antigen tests'],
 
             <?php foreach ($data['monthly_result'] as $monthly_res) {
                 echo "['" . $monthly_res['date'] . "'," . $monthly_res['pcr'] . "," . $monthly_res['antigen'] . "],";
@@ -156,7 +156,7 @@ if ($_SESSION['is_admin']) {
 
         var options = {
 
-            title: 'Daily PCR/Antigen Test positive',
+            title: 'Daily Investigations',
 
             titleTextStyle: {
                 bold: true,
@@ -249,7 +249,7 @@ if ($_SESSION['is_admin']) {
 
                         <header class="row home-stat-header">
                             <span class="home-stat-title">
-                                COVID STATICTICS
+                                DAILY COVID STATISTICS
                             </span>
                             <span class="home-stat-subtitle">
                                 Today : <?php echo $today['date']; ?>
@@ -319,10 +319,10 @@ if ($_SESSION['is_admin']) {
 
                         <header class="row home-stat-header">
                             <span class="home-stat-title">
-                                COVID STATICTICS
+                                TOTAL COVID STATISTICS
                             </span>
                             <span class="home-stat-subtitle">
-                                Overall - Sri Lanka
+                                Sri Lanka
                             </span>
 
                         </header>
@@ -384,24 +384,11 @@ if ($_SESSION['is_admin']) {
 
                 <div class="row home-daily-chart">
                     <div id="columnchart_material" class="home-graph col"></div>
-
                 </div>
-
-
-
             </section>
-
-
         </main>
-
-
-
-
-
     </div>
     </div>
-
 
     <script src="<?= URL_ROOT ?>./public/script/admin.js"></script>
-
     <?php require_once APP_ROOT . "/views/includes/footer.php" ?>

@@ -15,8 +15,7 @@ background-attachment: fixed;">
                 <div class="dashboard-account-details">
                     <div class="dashboard-icon"><i class='bx bx-user-circle' style='color:#000000'></i></div>
                     <div class="dashboard-user-credentials">
-                        <div class="hospital-name dashboard-credential-label"
-                        style="font-size: 13.5pt;"><?= strtoupper($_SESSION['hospitalname']) ?></div>
+                        <div class="hospital-name dashboard-credential-label" style="font-size: 13.5pt;"><?= strtoupper($_SESSION['hospitalname']) ?></div>
                         <div class="user-name dashboard-credential-label"><?= strtoupper($_SESSION['username']) ?></div>
                     </div>
                 </div>
@@ -67,11 +66,11 @@ background-attachment: fixed;">
                         </div>
                         <div class="data-selection">
                             <nav class="data-select-ul nav flex-column">
-                                <a class="data-select-li btn btn-outline-primary" href="<?= URL_ROOT; ?>/pages/data_management?record_type=vaccinations">Vaccination</a>
-                                <a class="data-select-li btn btn-outline-primary" href="<?= URL_ROOT; ?>/pages/data_management?record_type=antigen_tests">Antigen</a>
-                                <a class="data-select-li btn btn-outline-primary" href="<?= URL_ROOT; ?>/pages/data_management?record_type=covid_deaths">COVID deaths</a>
-                                <a class="data-select-li btn btn-outline-primary" href="<?= URL_ROOT; ?>/pages/data_management?record_type=pcr_tests">PCR tests</a>
-                                <a class="data-select-li btn btn-outline-primary" href="<?= URL_ROOT; ?>/pages/data_management?record_type=covid_patients">COVID patients</a>
+                                <a class="data-select-li btn btn-outline-primary" href="<?= URL_ROOT; ?>/pages/data_management?record_type=vaccinations">Vaccinations</a>
+                                <a class="data-select-li btn btn-outline-primary" href="<?= URL_ROOT; ?>/pages/data_management?record_type=pcr_tests">PCR Tests</a>
+                                <a class="data-select-li btn btn-outline-primary" href="<?= URL_ROOT; ?>/pages/data_management?record_type=antigen_tests">Antigen Tests</a>
+                                <a class="data-select-li btn btn-outline-primary" href="<?= URL_ROOT; ?>/pages/data_management?record_type=covid_patients">COVID Patients</a>
+                                <a class="data-select-li btn btn-outline-primary" href="<?= URL_ROOT; ?>/pages/data_management?record_type=covid_deaths">COVID Deaths</a>
                             </nav>
                         </div>
 

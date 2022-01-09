@@ -28,31 +28,31 @@ background-attachment: fixed;">
                 <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Vaccination">
                     <a href="<?= URL_ROOT ?>/pages/vaccination" class="option">
                         <span class="dashboard-link-icon"><img class="dashboard-link-icon-img" src="<?= URL_ROOT ?>/public/images/vaccine_white.png" alt="" srcset=""></span>
-                        <span class="text">Vaccination</span>
+                        <span class="text">Vaccinations</span>
                     </a>
                 </li>
                 <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="PCR Test">
                     <a href="<?= URL_ROOT ?>/pages/pcr" class="option">
                         <span class="dashboard-link-icon"><img class="dashboard-link-icon-img" src="<?= URL_ROOT ?>/public/images/swab_white.png" alt="" srcset=""></span>
-                        <span class="text">PCR Test</span>
+                        <span class="text">PCR Tests</span>
                     </a>
                 </li>
                 <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Antigen Test">
                     <a href="<?= URL_ROOT ?>/pages/antigen" class="option">
                         <span class="dashboard-link-icon"><img class="dashboard-link-icon-img" src="<?= URL_ROOT ?>/public/images/blood_white.png" alt="" srcset=""></span>
-                        <span class="text">Antigen Test</span>
+                        <span class="text">Antigen Tests</span>
                     </a>
                 </li>
                 <li class="dashboard-list">
                     <a href="<?= URL_ROOT ?>/pages/covid_patients" class="option" data-toggle="tooltip" data-placement="right" title="COVID Patient">
                         <span class="dashboard-link-icon"><img class="dashboard-link-icon-img" src="<?= URL_ROOT ?>/public/images/facial-mask_white.png" alt="" srcset=""></span>
-                        <span class="text">COVID Patient</span>
+                        <span class="text">COVID Patients</span>
                     </a>
                 </li>
                 <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="COVID Death">
                     <a href="<?= URL_ROOT ?>/pages/covid_deaths" class="option">
                         <span class="dashboard-link-icon"><img class="dashboard-link-icon-img" src="<?= URL_ROOT ?>/public/images/death_white.png" alt="" srcset=""></span>
-                        <span class="text">COVID Death</span>
+                        <span class="text">COVID Deaths</span>
                     </a>
                 </li>
 
@@ -81,7 +81,7 @@ background-attachment: fixed;">
         $page_arr = explode('?', $controller_arr[3]);
         $page = $page_arr[0];
 
-        if ($page != "index") :
+        if ($page != "index" && $page != "settings") :
         ?>
             <button class="dashboard-search-health-id" type="button" data-bs-toggle="offcanvas" data-bs-target="#forget-id-canvas" aria-controls="#forget-id-canvas">
                 <div class="dashboard-health-id-div">
@@ -92,15 +92,17 @@ background-attachment: fixed;">
         <?php endif; ?>
 
         <!-- This is the code for the off canvas for search for health ID -->
-        <div class="offcanvas offcanvas-end dashboard-offcanvas" data-bs-scroll="true" tabindex="-1" id="forget-id-canvas" aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas offcanvas-end dashboard-offcanvas" data-bs-scroll="true" tabindex="-1" id="forget-id-canvas" aria-labelledby="offcanvasWithBothOptionsLabel" style="background-image: url('<?php echo URL_ROOT; ?>/public/images/dashboard-background.jpg');">
+
+            <div class="dashboard-offcanvas-backdrop"></div>
 
             <!-- This is the button for showing the off canvas -->
             <button class="dashboard-search-health-id dashboard-search-health-id-post" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
                 <div class="dashboard-health-id-div"><span style="transform: rotate(-90deg); width: 150px">Search Health ID</span><img class="dashboard-health-id-icon" src="<?= URL_ROOT ?>/public/images/left-arrow.png" alt="" srcset=""></div>
             </button>
 
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Search for health ID</h5>
+            <div class="offcanvas-header dashboard-offcanvas-header">
+                <h5 class="offcanvas-title dashboard-offcanvas-title" id="offcanvasWithBothOptionsLabel">Search for Health ID</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" id="forget-id-close-btn" onclick="my_func()"></button>
             </div>
             <?php
@@ -117,7 +119,11 @@ background-attachment: fixed;">
 
                     <div class="dashboard-dropdown covid-input-field" style="position: relative;">
 
-                        <select class="form-control dashboard-dropdown-btn covid-input-field" aria-labelledby=" dropdownMenuButton" name="forget-id-type">
+                        <div class="dashboard-dropdown dashboard-dropdown-background">
+                        </div>
+
+                        <select class="form-control dashboard-dropdown-btn covid-input-field" aria-labelledby=" dropdownMenuButton" name="forget-id-type" required>
+                            <option value="" selected disabled hidden>Choose type</option>
                             <option name="forget-id-type"><a class="dropdown-item">Contact Number</a></option>
                             <option name="forget-id-type"><a class="dropdown-item">Email</a></option>
                             <option name="forget-id-type"><a class="dropdown-item">NIC</a></option>
@@ -155,10 +161,10 @@ background-attachment: fixed;">
                         document.getElementById("forget-id-content").hidden = true; //hide content
                     }
                 </script>
-                <?php if (isset($data['forget_id_det'])) : ?>
-                    <div class="covid-patient-detail" id="forget-id-content">
+                <?php if (isset($data['forget_id_det']) && $data['forget_id_det'] != []) : ?>
+                    <div class="covid-patient-detail dashboard-health-id-search-result" id="forget-id-content">
 
-                        <table>
+                        <table class="dashboard-search-health-id-table">
                             <?php foreach ($data['forget_id_det'] as $record) : ?>
                                 <tr>
                                     <th class="covid-detail-title">
@@ -188,7 +194,7 @@ background-attachment: fixed;">
                                     </td>
                                 </tr>
 
-                                <tr>
+                                <tr class="dashboard-last-row">
                                     <th class="covid-detail-title">
                                         Date of Birth
                                     </th>
@@ -205,6 +211,28 @@ background-attachment: fixed;">
                             <?php endforeach; ?>
                         </table>
                     </div>
+
                 <?php endif; ?>
+
+                <?php if (isset($data['forget_id_det']) && $data['forget_id_det'] == []) : ?>
+
+
+
+                    <!-- This is the result show if search result not found -->
+                    <div class="covid-details covid-no-result-div">
+
+                        <div class="covid-sad-face image-centered">
+                            <img class="covid-sad-face-img" src="<?php echo URL_ROOT; ?>/public/images/sad-face.png" alt="">
+                        </div>
+                        <p class="covid-no-result-message">
+                            Health ID Not Found
+                        </p>
+
+                    </div>
+
+                <?php endif; ?>
+
             </form>
+
+
         </div>

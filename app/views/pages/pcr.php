@@ -35,7 +35,7 @@
 
                 <form class="form mb-3 covid-search-div" method="POST" action="<?php echo URL_ROOT; ?>/pages/pcr">
 
-                    <input type="text" class="covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter health ID here" name="pcr-search-bar-input" required>
+                    <input type="text" class="covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter Health ID here" name="pcr-search-bar-input" required>
 
                     <input type="submit" class="btn btn-primary" id="covid-search-btn" name="pcr-search" value="Search">
 
@@ -58,7 +58,7 @@
                     <div class="covid-details">
 
                         <div class="covid-patient-detail">
-                            <table id="pcr-table">
+                            <table class="covid-detail-table" id="pcr-table">
                                 <tr>
                                     <th class="covid-detail-title">
                                         Health ID
@@ -110,7 +110,7 @@
 
                                 <div class="covid-tr covid-top-tr">
                                     <div class="covid-th covid-td">PCR ID </div>
-                                    <div class="covid-th covid-td">Hospital Id</div>
+                                    <div class="covid-th covid-td">Hospital ID</div>
                                     <div class="covid-th covid-td">Date</div>
                                     <div class="covid-th covid-td">Status</div>
                                     <div class="covid-th covid-td">Conducted Place</div>
@@ -123,7 +123,7 @@
                                 ?>
 
                                     <div class="pcr-rw">
-                                        <div class="covid-tr" data-bs-toggle="modal" data-bs-target="#pcr-result">
+                                        <div class="covid-tr <?php if ($pcr === $pcr_tests[sizeof($pcr_tests) - 1]) echo 'covid-bottom-tr' ?>" data-bs-toggle="modal" data-bs-target="#pcr-result">
                                             <div class="covid-td">
                                                 <?php echo $pcr["id"] ?>
                                             </div>

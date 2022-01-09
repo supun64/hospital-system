@@ -36,7 +36,7 @@
 
                     <form class="form mb-3 covid-search-div" method="POST" action="<?php echo URL_ROOT; ?>/pages/antigen">
 
-                        <input type="text" class="covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter health ID here" name="antigen-search-bar-input" required>
+                        <input type="text" class="covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter Health ID here" name="antigen-search-bar-input" required>
 
                         <input type="submit" class="btn btn-primary" id="covid-search-btn" name="antigen-search" value="Search">
 
@@ -59,7 +59,7 @@
                         <div class="covid-details">
 
                             <div class="covid-patient-detail">
-                                <table id="antigen-table">
+                                <table class="covid-detail-table" id="antigen-table">
                                     <tr>
                                         <th class="covid-detail-title">
                                             Health ID
@@ -111,7 +111,7 @@
 
                                     <div class="covid-tr covid-top-tr">
                                         <div class="covid-th covid-td">Antigen ID </div>
-                                        <div class="covid-th covid-td">Hospital Id</div>
+                                        <div class="covid-th covid-td">Hospital ID</div>
                                         <div class="covid-th covid-td">Date</div>
                                         <div class="covid-th covid-td">Status</div>
                                         <div class="covid-th covid-td">Conducted Place</div>
@@ -124,8 +124,8 @@
                                     ?>
 
                                         <div class="antigen-rw">
-                                            <div class="covid-tr" data-bs-toggle="modal" data-bs-target="#antigen-result">
-                                                <div class="covid-td">
+                                            <div class="covid-tr <?php if ($antigen === $antigen_tests[sizeof($antigen_tests) - 1]) echo 'covid-bottom-tr' ?>" data-bs-toggle="modal" data-bs-target="#antigen-result">
+                                                <div class="covid-td ">
                                                     <?php echo $antigen["id"] ?>
                                                 </div>
 
@@ -250,8 +250,8 @@
                                         <input type="checkbox" class="toggle-input" id="antigen-togBtn">
                                         <div class="slider round">
                                             <!--ADDED HTML -->
-                                            <span class="on toggle-font">Possitive</span>
-                                            <span class="off toggle-font">Negetive</span>
+                                            <span class="on toggle-font">Positive</span>
+                                            <span class="off toggle-font">Negative</span>
                                             <!--END-->
                                         </div>
                                     </label>

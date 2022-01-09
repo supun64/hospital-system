@@ -70,7 +70,7 @@ if ($_SESSION['is_admin']) {
                         </ul>
 
                         <form action="<?= URL_ROOT; ?>/pages/settings" method="POST">
-                            <hr class="my-4" />
+                            
                             <div class="settings-info-element form-group">
                                 <label for="fullname">Full Name</label>
                                 <input type="text" class="form-control" id="fullname" required value="<?= isset($data['user_name']) ? $data['user_name'] : ""; ?>" name="users[name]" />
@@ -105,9 +105,9 @@ if ($_SESSION['is_admin']) {
                 <!-- Info area -->
 
                 <div class="settings-info">
-                    <ul class="nav nav-tabs mb-4" id="settings-password-ul" role="tablist">
+                    <ul class="nav nav-tabs settings-sub-div-title-section mb-4" id="settings-password-ul" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="account-tab">Password Information</a>
+                            <a class="nav-link active settings-sub-div-title" id="account-tab">Password Information</a>
                         </li>
                     </ul>
                     <form class='settings-password-form' action="<?= URL_ROOT; ?>/pages/settings" method="POST">
@@ -126,12 +126,12 @@ if ($_SESSION['is_admin']) {
                                 <div class="settings-info-element form-group">
                                     <label for="inputPassword5">New Password</label>
                                     <input type="password" class="form-control" id="new_password" name="passwords[new_password]" required minlength="8" />
-                                    <small id="same-password" class="form-text invisible">"Your new password can not be same as your recent passwords."</small>
+                                    <small id="same-password" class="form-text invisible">Your new password can not be same as your recent passwords.</small>
                                 </div>
                                 <div class="settings-info-element form-group">
                                     <label for="inputPassword6">Confirm Password</label>
                                     <input type="password" class="form-control" id="confirmed_password" name="passwords[confirm_password]" required minlength="8" />
-                                    <small id="matching-passwords" class="form-text invisible">"Please make sure your passwords match."</small>
+                                    <small id="matching-passwords" class="form-text invisible">Make sure your passwords match.</small>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -141,10 +141,10 @@ if ($_SESSION['is_admin']) {
                                     following requirements:
                                 </p>
                                 <ul class="settings-info-element small text-muted pl-4 mb-0">
-                                    <li>Minimum 8 character</li>
-                                    <li>At least one special character</li>
-                                    <li>At least one number</li>
-                                    <li>Can’t be the same as a previous password</li>
+                                    <li>Minimum 8 character.</li>
+                                    <li>At least one special character.</li>
+                                    <li>At least one number.</li>
+                                    <li>Can’t be the same as a previous password.</li>
                                 </ul>
                             </div>
                         </div>
@@ -156,7 +156,7 @@ if ($_SESSION['is_admin']) {
                             </div>
                         <?php endif; ?>
                         <div class="settings-info-element row mb-4">
-                            <div class="col-md-6">
+                            <div class="col-md-6" style="padding-left: 0;">
                                 <button type="submit" name='password-changed' class="btn btn-primary" onclick="return validate_password()">
                                     Update Password
                                 </button>
