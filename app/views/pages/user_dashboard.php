@@ -212,7 +212,9 @@ background-attachment: fixed;">
                         </table>
                     </div>
 
-                <?php else : ?>
+                <?php endif; ?>
+
+                <?php if (isset($data['forget_id_det']) && $data['forget_id_det'] == []) : ?>
 
 
 
