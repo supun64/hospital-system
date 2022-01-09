@@ -117,7 +117,8 @@ background-attachment: fixed;">
 
                     <div class="dashboard-dropdown covid-input-field" style="position: relative;">
 
-                        <select class="form-control dashboard-dropdown-btn covid-input-field" aria-labelledby=" dropdownMenuButton" name="forget-id-type">
+                        <select class="form-control dashboard-dropdown-btn covid-input-field" aria-labelledby=" dropdownMenuButton" name="forget-id-type" required> 
+                            <option value="" selected disabled hidden>Choose type</option>
                             <option name="forget-id-type"><a class="dropdown-item">Contact Number</a></option>
                             <option name="forget-id-type"><a class="dropdown-item">Email</a></option>
                             <option name="forget-id-type"><a class="dropdown-item">NIC</a></option>

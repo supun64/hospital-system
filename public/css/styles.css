@@ -45,6 +45,14 @@ body {
   opacity: 0;
 }
 
+select:invalid{
+  color: gray !important;
+}
+
+option{
+  color: #000000 !important;
+}
+
 /* index page Styles------------------------------------ */
 
 .index-body {
@@ -434,6 +442,8 @@ body {
 .dashboard-dropdown-btn {
   text-align: left;
   background: transparent;
+
+  color: #000000;
 }
 
 .dashboard-dropdown-btn:hover {
