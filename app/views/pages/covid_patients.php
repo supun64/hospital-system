@@ -215,7 +215,7 @@
 
                         <div class="col-md-8 covid-input">
                             <label for="inputHealthID" class="form-label-primary label-primary covid-input-label">Patient's Health ID</label>
-                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-health-id" value="<?php echo $data['personal']['health_id'] ?>">
+                            <input type="text" readonly class="form-control form-control-sm covid-input-field" id="inputHealthID" name="add-patient-health-id" value="<?php echo $data['personal']['health_id'] ?>">
                         </div>
 
                         <div class="col-md-6 covid-input">
@@ -225,12 +225,12 @@
 
                         <div class="col-md-8 covid-input">
                             <label for="inputHospital" class="form-label-primary covid-input-label">Hospital ID</label>
-                            <input type="text" readonly class="form-control form-control-sm" id="inputHospital" name="add-patient-hospital" value="<?= $_SESSION["hospital_id"] ?>">
+                            <input type="text" readonly class="form-control form-control-sm covid-input-field" id="inputHospital" name="add-patient-hospital" value="<?= $_SESSION["hospital_id"] ?>">
                         </div>
 
                         <div class="col-md-8 covid-input">
                             <label for="inputCondition" class="form-label-primary label-primary covid-input-label">Conditions</label>
-                            <input type="text" class="form-control covid-input-field" id="inputCondition" name="add-patient-conditions" placeholder="(Optional)">
+                            <input type="text" class="form-control covid-input-field covid-input-field" id="inputCondition" name="add-patient-conditions" placeholder="(Optional)">
                         </div>
 
 

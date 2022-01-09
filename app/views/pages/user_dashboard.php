@@ -101,8 +101,8 @@ background-attachment: fixed;">
                 <div class="dashboard-health-id-div"><span style="transform: rotate(-90deg); width: 150px">Search Health ID</span><img class="dashboard-health-id-icon" src="<?= URL_ROOT ?>/public/images/left-arrow.png" alt="" srcset=""></div>
             </button>
 
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Search for Health ID</h5>
+            <div class="offcanvas-header dashboard-offcanvas-header">
+                <h5 class="offcanvas-title dashboard-offcanvas-title" id="offcanvasWithBothOptionsLabel">Search for Health ID</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" id="forget-id-close-btn" onclick="my_func()"></button>
             </div>
             <?php

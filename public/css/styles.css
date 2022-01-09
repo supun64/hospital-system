@@ -338,6 +338,8 @@ option {
   }
 }
 
+/* Style for search health ID section */
+
 .dashboard-search-health-id {
   position: fixed;
   right: 0;
@@ -438,6 +440,16 @@ option {
 
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
+}
+
+.dashboard-offcanvas-header{
+  border-bottom: rgba(124, 124, 124, 0.555) solid 1px;
+}
+
+.dashboard-offcanvas-title{
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  letter-spacing: 2px;
 }
 
 .dashboard-dropdown-arrow {
@@ -1069,6 +1081,16 @@ option {
 }
 .death-add-new-btn {
   margin-left: 1%;
+}
+
+.death-report-title{
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 17pt;
+  font-weight: 800;
+
+  letter-spacing: 10px;
 }
 
 /* test Styles ---------------------------------------- */

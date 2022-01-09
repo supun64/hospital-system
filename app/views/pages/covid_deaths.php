@@ -40,6 +40,8 @@
                     <!-- This is the division to display if the search result available -->
                     <div class="covid-details">
 
+                    <header class="death-report-title">Death report</header>
+
                         <div class="covid-patient-detail">
                             <table id="death-table">
                                 <tr>
@@ -169,7 +171,7 @@
         </main>
 
 
-        <!-- This is the UI modal for add new vaccinated person -->
+        <!-- This is the UI modal for new death -->
         <div class="modal fade" id="add-new-death" tabindex="-1" aria-labelledby="death-form" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
 
@@ -184,7 +186,7 @@
 
                         <div class="col-md-8 covid-input">
                             <label for="inputHealthID" class="form-label-primary label-primary covid-input-label">Health ID</label>
-                            <input type="text" class="form-control form-control-sm" id="inputHealthID" name="add-death-health-id" value="<?= isset($data["personal"]) ? $data['personal']['health_id'] : "" ?>">
+                            <input type="text" class="form-control form-control-sm covid-input-field" id="inputHealthID" name="add-death-health-id" value="<?= isset($data["personal"]) ? $data['personal']['health_id'] : "" ?>" required>
                         </div>
 
                         <div class=" col-md-6 covid-input">
@@ -194,7 +196,7 @@
 
                         <div class="col-md-8 covid-input">
                             <label for="inputHospital" class="form-label-primary covid-input-label">Hospital ID</label>
-                            <input type="text" readonly class="form-control form-control-sm" id="inputHospital" name="add-death-hospital" value="<?= $_SESSION["hospital_id"] ?>">
+                            <input type="text" readonly class="form-control form-control-sm covid-input-field" id="inputHospital" name="add-death-hospital" value="<?= $_SESSION["hospital_id"] ?>" required>
                         </div>
 
                         <div class="col-md-8 covid-input">

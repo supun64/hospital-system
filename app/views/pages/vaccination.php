@@ -191,28 +191,28 @@
                         <div class="col-md-8 covid-input">
                             <label for="inputHealthID" class="form-label-primary label-primary covid-input-label">Patient's Health ID</label>
                             <!-- <input type="number" class="form-control covid-input-field" id="inputHealthID" name="add-patient-health-id" min="1" required> -->
-                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-health-id" value="<?php echo $data['personal']['health_id']; ?>">
+                            <input type="text" readonly class="form-control form-control-sm covid-input-field" id="inputHealthID" name="add-patient-health-id" value="<?php echo $data['personal']['health_id']; ?>">
                         </div>
 
                         <div class="col-md-8 covid-input">
                             <label for="inputBatchNum" class="form-label-primary label-primary covid-input-label">Batch Number</label>
-                            <input type="text" class="form-control form-control-sm" id="inputBatchNum" name="add-patient-batch-num" required>
+                            <input type="text" class="form-control form-control-sm covid-input-field" id="inputBatchNum" name="add-patient-batch-num" required>
                         </div>
 
 
                         <div class="col-md-8 covid-input">
                             <label for="inputVaccineName" class="form-label-primary label-primary covid-input-label">Vaccination Name</label>
-                            <input type="text" class="form-control covid-input-field" id="inputVaccineName" name="add-patient-vaccination-name" required>
+                            <input type="text" class="form-control covid-input-field covid-input-field" id="inputVaccineName" name="add-patient-vaccination-name" required>
                         </div>
 
                         <div class="col-md-6 covid-input">
                             <label for="inputDate" class="form-label-primary covid-input-label">Vaccinated Date</label>
-                            <input type="date" value="<?php echo date('d-m-Y'); ?>" class="form-control covid-input-field" id="inputDate" name="add-patient-vaccinated-date" required>
+                            <input type="date" value="<?php echo date('d-m-Y'); ?>" class="form-control covid-input-field covid-input-field" id="inputDate" name="add-patient-vaccinated-date" required>
                         </div>
 
                         <div class="col-md-8 covid-input">
                             <label for="inputHospital" class="form-label-primary covid-input-label">Conducted Hospital</label>
-                            <input type="text" readonly class="form-control form-control-sm" id="inputHealthID" name="add-patient-hospital" value="<?php echo $data['hospital_id']; ?>">
+                            <input type="text" readonly class="form-control form-control-sm covid-input-field" id="inputHealthID" name="add-patient-hospital" value="<?php echo $data['hospital_id']; ?>">
 
                         </div>
 
@@ -223,9 +223,9 @@
                         </div>
 
                         <div class="col-md-3 covid-input">
-                            <label for="inputDose" class="form-label-primary covid-input-label">Dosage</label>
+                            <label for="inputDose" class="form-label-primary covid-input-label">Dosage Number</label>
 
-                            <input type="text" readonly class="form-control form-control-sm" id="inputDose" name="add-patient-dose" value="<?php echo $last_dose + 1 ?>">
+                            <input type="text" readonly class="form-control form-control-sm covid-input-field" id="inputDose" name="add-patient-dose" value="<?php echo $last_dose + 1 ?>">
                         </div>
 
                         <div class="col-md-8 covid-input">
