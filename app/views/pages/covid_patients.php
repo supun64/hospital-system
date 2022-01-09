@@ -41,7 +41,7 @@
             </div>
 
             <!-- This is what should display after search -->
-            <?php if ($data["personal"]) { ?>
+            <?php if (isset($data["personal"]) && $data['personal'] != []) { ?>
 
                 <!-- Add admination-fade-in-pre-state to add the animation -->
                 <div class="covid-search-result" id="covid-search-result-section">
