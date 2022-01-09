@@ -899,6 +899,19 @@ option {
   text-align: left;
 }
 
+.covid-detail-table{
+  width: 40%;
+
+}
+
+.covid-detail-data{
+  padding-left: 5%;
+  width: auto;
+
+  line-height: 20px;
+  
+}
+
 /* customized table css */
 .covid-tr {
   display: flex;
@@ -915,6 +928,11 @@ option {
 .covid-tr:hover {
   background-color: rgb(80, 198, 253);
   cursor: pointer;
+}
+
+.covid-no-select-tr:hover{
+  background-color: rgba(80, 198, 253, 0.459);
+  cursor: default;
 }
 
 .covid-top-tr {

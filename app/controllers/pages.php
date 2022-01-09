@@ -22,7 +22,6 @@ class Pages extends Controller
 
     public function index()
     {
-        $this->find_citizen_id();
         $data['monthly_result'] = $this->chart_loader->load_last_thirty();
         $data['total'] = $this->chart_loader->load_total();
 
@@ -33,7 +32,10 @@ class Pages extends Controller
 
     public function antigen()
     {
-        $this->find_citizen_id();
+        if($_SERVER['REQUEST_URI'] == "/hospital-system/pages/find-citizen-id" && $_POST['forget-id-submit'])
+            $this->find_citizen_id();
+        elseif(isset($_POST['forget-id-submit']))
+            $this->find_citizen_id();
 
         $data['personal'] = [];
         $data['antigen_tests'] = [];
@@ -160,7 +162,10 @@ class Pages extends Controller
 
     public function covid_deaths()
     {
-        $this->find_citizen_id();
+        if($_SERVER['REQUEST_URI'] == "/hospital-system/pages/find-citizen-id" && $_POST['forget-id-submit'])
+            $this->find_citizen_id();
+        elseif(isset($_POST['forget-id-submit']))
+            $this->find_citizen_id();
 
         $death_center = $this->center_factory->get_center('covid_deaths');
         $patient_center = $this->center_factory->get_center('covid_patients');
@@ -240,7 +245,10 @@ class Pages extends Controller
 
     public function covid_patients()
     {
-        $this->find_citizen_id();
+        if($_SERVER['REQUEST_URI'] == "/hospital-system/pages/find-citizen-id" && $_POST['forget-id-submit'])
+            $this->find_citizen_id();
+        elseif(isset($_POST['forget-id-submit']))
+            $this->find_citizen_id();
 
         $data['personal'] = [];
         $data['patient_history'] = [];
@@ -367,7 +375,11 @@ class Pages extends Controller
 
     public function pcr()
     {
-        $this->find_citizen_id();
+        if($_SERVER['REQUEST_URI'] == "/hospital-system/pages/find-citizen-id" && $_POST['forget-id-submit'])
+            $this->find_citizen_id();
+        elseif(isset($_POST['forget-id-submit']))
+            $this->find_citizen_id();
+
 
         $data['personal'] = [];
         $data['pcr_tests'] = [];
@@ -492,11 +504,10 @@ class Pages extends Controller
 
     public function vaccination()
     {
-        $this->find_citizen_id();
-
-        if (!isset($_SESSION['vac_count'])) {
-            $_SESSION['vac_count'] = 1;
-        }
+        if($_SERVER['REQUEST_URI'] == "/hospital-system/pages/find-citizen-id" && $_POST['forget-id-submit'])
+            $this->find_citizen_id();
+        elseif(isset($_POST['forget-id-submit']))
+            $this->find_citizen_id();
 
         $data['personal'] = [];
         $data['vaccinations'] = [];
@@ -571,8 +582,6 @@ class Pages extends Controller
     //to change or view user details
     public function settings()
     {
-        $this->find_citizen_id();
-
         //Retrieve details from the database
         $records = $this->user_handler->load_loggedin_user();
         $error1 = "";
@@ -726,7 +735,6 @@ class Pages extends Controller
         $data['forget_id_det'] = [];
         if (isset($_POST['forget-id-value'])) {
 
-            //$page = substr($_POST['page'], 16);
             $controller_arr = explode('/', filter_var(rtrim($_SERVER['REQUEST_URI'], '/'), FILTER_SANITIZE_URL));
             $page_arr = explode('?', $controller_arr[3]);
             $page = "/" . $controller_arr[2] . "/" . $page_arr[0];
@@ -748,6 +756,12 @@ class Pages extends Controller
             //find correct id for given data with relevent type
             !$_SESSION["is_admin"] ? $this->view($page, $data) : header('location:' . URL_ROOT . '/pages/index');
             return;
+        }else{
+            header('location:' . URL_ROOT . '/pages/error'); 
         }
+    }
+
+    public function error(){
+        $this->view("/pages/error");
     }
 }
