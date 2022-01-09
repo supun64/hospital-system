@@ -76,11 +76,20 @@ background-attachment: fixed;">
 
 
         <!-- This is the button for showing the off canvas -->
-        <button class="dashboard-search-health-id" type="button" data-bs-toggle="offcanvas" data-bs-target="#forget-id-canvas" aria-controls="#forget-id-canvas">
-            <div class="dashboard-health-id-div">
-                <span>Search Health ID</span><img class="dashboard-health-id-icon" src="<?= URL_ROOT ?>/public/images/left-arrow.png" alt="" srcset="">
-            </div>
-        </button>
+        <?php
+        $controller_arr = explode('/', filter_var(rtrim($_SERVER['REQUEST_URI'], '/'), FILTER_SANITIZE_URL));
+        $page_arr = explode('?', $controller_arr[3]);
+        $page = $page_arr[0];
+
+        if ($page != "index") :
+        ?>
+            <button class="dashboard-search-health-id" type="button" data-bs-toggle="offcanvas" data-bs-target="#forget-id-canvas" aria-controls="#forget-id-canvas">
+                <div class="dashboard-health-id-div">
+                    <span>Search Health ID</span><img class="dashboard-health-id-icon" src="<?= URL_ROOT ?>/public/images/left-arrow.png" alt="" srcset="">
+                </div>
+            </button>
+
+        <?php endif; ?>
 
         <!-- This is the code for the off canvas for search for health ID -->
         <div class="offcanvas offcanvas-end dashboard-offcanvas" data-bs-scroll="true" tabindex="-1" id="forget-id-canvas" aria-labelledby="offcanvasWithBothOptionsLabel">
