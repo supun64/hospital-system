@@ -92,7 +92,9 @@ background-attachment: fixed;">
         <?php endif; ?>
 
         <!-- This is the code for the off canvas for search for health ID -->
-        <div class="offcanvas offcanvas-end dashboard-offcanvas" data-bs-scroll="true" tabindex="-1" id="forget-id-canvas" aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas offcanvas-end dashboard-offcanvas" data-bs-scroll="true" tabindex="-1" id="forget-id-canvas" aria-labelledby="offcanvasWithBothOptionsLabel" style="background-image: url('<?php echo URL_ROOT; ?>/public/images/dashboard-background.jpg');">
+
+            <div class="dashboard-offcanvas-backdrop"></div>
 
             <!-- This is the button for showing the off canvas -->
             <button class="dashboard-search-health-id dashboard-search-health-id-post" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
@@ -117,7 +119,10 @@ background-attachment: fixed;">
 
                     <div class="dashboard-dropdown covid-input-field" style="position: relative;">
 
-                        <select class="form-control dashboard-dropdown-btn covid-input-field" aria-labelledby=" dropdownMenuButton" name="forget-id-type" required> 
+                        <div class="dashboard-dropdown dashboard-dropdown-background">
+                        </div>
+
+                        <select class="form-control dashboard-dropdown-btn covid-input-field" aria-labelledby=" dropdownMenuButton" name="forget-id-type" required>
                             <option value="" selected disabled hidden>Choose type</option>
                             <option name="forget-id-type"><a class="dropdown-item">Contact Number</a></option>
                             <option name="forget-id-type"><a class="dropdown-item">Email</a></option>
@@ -156,10 +161,10 @@ background-attachment: fixed;">
                         document.getElementById("forget-id-content").hidden = true; //hide content
                     }
                 </script>
-                <?php if (isset($data['forget_id_det'])) : ?>
-                    <div class="covid-patient-detail" id="forget-id-content">
+                <?php if (isset($data['forget_id_det']) && $data['forget_id_det'] != []) : ?>
+                    <div class="covid-patient-detail dashboard-health-id-search-result" id="forget-id-content">
 
-                        <table>
+                        <table class="dashboard-search-health-id-table">
                             <?php foreach ($data['forget_id_det'] as $record) : ?>
                                 <tr>
                                     <th class="covid-detail-title">
@@ -189,7 +194,7 @@ background-attachment: fixed;">
                                     </td>
                                 </tr>
 
-                                <tr>
+                                <tr class="dashboard-last-row">
                                     <th class="covid-detail-title">
                                         Date of Birth
                                     </th>
@@ -206,6 +211,26 @@ background-attachment: fixed;">
                             <?php endforeach; ?>
                         </table>
                     </div>
+
+                <?php else : ?>
+
+
+
+                    <!-- This is the result show if search result not found -->
+                    <div class="covid-details covid-no-result-div">
+
+                        <div class="covid-sad-face image-centered">
+                            <img class="covid-sad-face-img" src="<?php echo URL_ROOT; ?>/public/images/sad-face.png" alt="">
+                        </div>
+                        <p class="covid-no-result-message">
+                            Health ID Not Found
+                        </p>
+
+                    </div>
+
                 <?php endif; ?>
+
             </form>
+
+
         </div>
