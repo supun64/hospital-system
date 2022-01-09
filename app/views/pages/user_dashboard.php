@@ -104,17 +104,15 @@ background-attachment: fixed;">
                     <label for="dashboard-search-by" class="form-label-primary label-primary covid-input-label">Search Type</label>
 
 
-                    <div class="dashboard-dropdown" style="position: relative;">
-                        <!-- <button class="form-control dashboard-dropdown-btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
-                            Enter value here
-                        </button>
-                        <div class="dashboard-dropdown-arrow"> </div> -->
+                    <div class="dashboard-dropdown covid-input-field" style="position: relative;">
 
-                        <select class="form-control dashboard-dropdown-btn" aria-labelledby=" dropdownMenuButton" name="forget-id-type">
+                        <select class="form-control dashboard-dropdown-btn covid-input-field" aria-labelledby=" dropdownMenuButton" name="forget-id-type">
                             <option name="forget-id-type"><a class="dropdown-item">Contact Number</a></option>
                             <option name="forget-id-type"><a class="dropdown-item">Email</a></option>
                             <option name="forget-id-type"><a class="dropdown-item">NIC</a></option>
                         </select>
+
+                        <div class="dashboard-dropdown-arrow"></div>
 
 
                     </div>
@@ -122,7 +120,7 @@ background-attachment: fixed;">
                 </div>
 
                 <div class="dashboard-health-id-search-input col-md-12 covid-input">
-                    <label for="inputSearchValue" class="form-label-primary label-primary covid-input-label">NIC/Phone/correct value</label>
+                    <label for="inputSearchValue" class="form-label-primary label-primary covid-input-label">Value</label>
                     <input type="text" class="form-control covid-input-field" id="inputSearchValue" name="forget-id-value" required>
 
                 </div>
