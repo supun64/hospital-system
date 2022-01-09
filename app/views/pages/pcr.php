@@ -103,7 +103,7 @@
                             </table>
                         </div>
 
-                        <?php if (isset($data['pcr_tests'])) { ?>
+                        <?php if (isset($data['pcr_tests']) && $data['pcr_tests']) { ?>
                             <!-- These are the vaccination details -->
 
                             <div class="covid-previous-details">
