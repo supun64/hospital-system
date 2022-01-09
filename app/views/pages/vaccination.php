@@ -49,7 +49,7 @@
                     <div class="covid-details">
 
                         <div class="covid-patient-detail">
-                            <table>
+                            <table class="covid-detail-table">
                                 <tr>
                                     <th class="covid-detail-title">
                                         Health ID
@@ -119,7 +119,7 @@
                                 foreach ($vaccinations as $vaccine) :
                                 ?>
 
-                                    <div class="covid-tr <?php if ($vaccine === $vaccinations[sizeof($vaccinations) - 1]) echo 'covid-bottom-tr' ?>">
+                                    <div class="covid-tr covid-no-select-tr <?php if ($vaccine === $vaccinations[sizeof($vaccinations) - 1]) echo 'covid-bottom-tr' ?>">
                                         <div class="covid-td">
                                             <?php echo $vaccine["id"] ?>
                                         </div>

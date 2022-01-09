@@ -40,10 +40,10 @@
                     <!-- This is the division to display if the search result available -->
                     <div class="covid-details">
 
-                    <header class="death-report-title">Death report</header>
+                    <header class="death-report-title">Death Report</header>
 
                         <div class="covid-patient-detail">
-                            <table id="death-table">
+                            <table class="covid-detail-table" id="death-table">
                                 <tr>
                                     <th class="covid-detail-title">
                                         Health ID

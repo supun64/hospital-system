@@ -58,7 +58,7 @@
                     <div class="covid-details">
 
                         <div class="covid-patient-detail">
-                            <table id="pcr-table">
+                            <table class="covid-detail-table" id="pcr-table">
                                 <tr>
                                     <th class="covid-detail-title">
                                         Health ID
