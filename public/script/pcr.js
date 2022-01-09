@@ -1,14 +1,14 @@
 
     tog_btn = document.getElementById("togBtn");
     hdn_btn = document.getElementById("hidden-status");
-    document.getElementById("hidden-status").value = "negative";
+    document.getElementById("hidden-status").value = "Negative";
     hdn_btn = 
 tog_btn.onclick= function(){
     if(tog_btn.checked){
-        document.getElementById("hidden-status").value = "positive";
+        document.getElementById("hidden-status").value = "Positive";
         
     }else{
-        document.getElementById("hidden-status").value = "negative";
+        document.getElementById("hidden-status").value = "Negative";
     }
     console.log(document.getElementById("hidden-status").value);
 }
@@ -34,7 +34,7 @@ document.querySelectorAll('.pcr-rw').forEach(item => {
      document.getElementById('update-btn').disabled = true;  //enable continue button
     }
 
-    if(arr[3] != "pending"){
+    if(arr[3] != "Pending"){
         document.getElementById('togBtn').disabled = true;
         document.getElementById('update-btn').disabled = true;  //enable continue button
     }

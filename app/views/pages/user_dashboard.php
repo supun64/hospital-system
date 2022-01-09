@@ -28,31 +28,31 @@ background-attachment: fixed;">
                 <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Vaccination">
                     <a href="<?= URL_ROOT ?>/pages/vaccination" class="option">
                         <span class="dashboard-link-icon"><img class="dashboard-link-icon-img" src="<?= URL_ROOT ?>/public/images/vaccine_white.png" alt="" srcset=""></span>
-                        <span class="text">Vaccination</span>
+                        <span class="text">Vaccinations</span>
                     </a>
                 </li>
                 <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="PCR Test">
                     <a href="<?= URL_ROOT ?>/pages/pcr" class="option">
                         <span class="dashboard-link-icon"><img class="dashboard-link-icon-img" src="<?= URL_ROOT ?>/public/images/swab_white.png" alt="" srcset=""></span>
-                        <span class="text">PCR Test</span>
+                        <span class="text">PCR Tests</span>
                     </a>
                 </li>
                 <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="Antigen Test">
                     <a href="<?= URL_ROOT ?>/pages/antigen" class="option">
                         <span class="dashboard-link-icon"><img class="dashboard-link-icon-img" src="<?= URL_ROOT ?>/public/images/blood_white.png" alt="" srcset=""></span>
-                        <span class="text">Antigen Test</span>
+                        <span class="text">Antigen Tests</span>
                     </a>
                 </li>
                 <li class="dashboard-list">
                     <a href="<?= URL_ROOT ?>/pages/covid_patients" class="option" data-toggle="tooltip" data-placement="right" title="COVID Patient">
                         <span class="dashboard-link-icon"><img class="dashboard-link-icon-img" src="<?= URL_ROOT ?>/public/images/facial-mask_white.png" alt="" srcset=""></span>
-                        <span class="text">COVID Patient</span>
+                        <span class="text">COVID Patients</span>
                     </a>
                 </li>
                 <li class="dashboard-list" data-toggle="tooltip" data-placement="right" title="COVID Death">
                     <a href="<?= URL_ROOT ?>/pages/covid_deaths" class="option">
                         <span class="dashboard-link-icon"><img class="dashboard-link-icon-img" src="<?= URL_ROOT ?>/public/images/death_white.png" alt="" srcset=""></span>
-                        <span class="text">COVID Death</span>
+                        <span class="text">COVID Deaths</span>
                     </a>
                 </li>
 
@@ -100,7 +100,7 @@ background-attachment: fixed;">
             </button>
 
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Search for health ID</h5>
+                <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Search for Health ID</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" id="forget-id-close-btn" onclick="my_func()"></button>
             </div>
             <?php

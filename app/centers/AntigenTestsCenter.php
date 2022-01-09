@@ -42,7 +42,7 @@ class AntigenTestsCenter extends COVID_Department implements ReportObservable
 
         if ($result && ($previous_status !== $status)) {
 
-            if ($status === "negative" && $previous_status !== "pending") {
+            if ($status === "Negative" && $previous_status !== "Pending") {
                 $this->notifyObserver("to_negative");
             }
             $this->notifyObserver($status);
@@ -54,7 +54,7 @@ class AntigenTestsCenter extends COVID_Department implements ReportObservable
     {
         $status = $this->db->findById("antigen_tests", "id", $id)[0]['status'];
         $result = $this->db->delete("antigen_tests", "id", $id);
-        if ($result && $status === "positive") {
+        if ($result && $status === "Positive") {
             $this->notifyObserver("removed");
         }
         return $result;
