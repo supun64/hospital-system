@@ -81,7 +81,7 @@ background-attachment: fixed;">
         $page_arr = explode('?', $controller_arr[3]);
         $page = $page_arr[0];
 
-        if ($page != "index") :
+        if ($page != "index" && $page != "settings") :
         ?>
             <button class="dashboard-search-health-id" type="button" data-bs-toggle="offcanvas" data-bs-target="#forget-id-canvas" aria-controls="#forget-id-canvas">
                 <div class="dashboard-health-id-div">
