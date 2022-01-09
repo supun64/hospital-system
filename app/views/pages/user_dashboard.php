@@ -76,11 +76,20 @@ background-attachment: fixed;">
 
 
         <!-- This is the button for showing the off canvas -->
-        <button class="dashboard-search-health-id" type="button" data-bs-toggle="offcanvas" data-bs-target="#forget-id-canvas" aria-controls="#forget-id-canvas">
-            <div class="dashboard-health-id-div">
-                <span>Search Health ID</span><img class="dashboard-health-id-icon" src="<?= URL_ROOT ?>/public/images/left-arrow.png" alt="" srcset="">
-            </div>
-        </button>
+        <?php
+        $controller_arr = explode('/', filter_var(rtrim($_SERVER['REQUEST_URI'], '/'), FILTER_SANITIZE_URL));
+        $page_arr = explode('?', $controller_arr[3]);
+        $page = $page_arr[0];
+
+        if ($page != "index") :
+        ?>
+            <button class="dashboard-search-health-id" type="button" data-bs-toggle="offcanvas" data-bs-target="#forget-id-canvas" aria-controls="#forget-id-canvas">
+                <div class="dashboard-health-id-div">
+                    <span>Search Health ID</span><img class="dashboard-health-id-icon" src="<?= URL_ROOT ?>/public/images/left-arrow.png" alt="" srcset="">
+                </div>
+            </button>
+
+        <?php endif; ?>
 
         <!-- This is the code for the off canvas for search for health ID -->
         <div class="offcanvas offcanvas-end dashboard-offcanvas" data-bs-scroll="true" tabindex="-1" id="forget-id-canvas" aria-labelledby="offcanvasWithBothOptionsLabel">
@@ -95,7 +104,9 @@ background-attachment: fixed;">
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" id="forget-id-close-btn" onclick="my_func()"></button>
             </div>
             <?php
-            $controller = substr($_SERVER['REQUEST_URI'], 16);
+            $controller_arr = explode('/', filter_var(rtrim($_SERVER['REQUEST_URI'], '/'), FILTER_SANITIZE_URL));
+            $page_arr = explode('?', $controller_arr[3]);
+            $controller = "/" . $controller_arr[2] . "/" . $page_arr[0];
             ?>
             <form class="offcanvas-body" action="<?= URL_ROOT . $controller ?>" method="POST">
 
@@ -133,7 +144,7 @@ background-attachment: fixed;">
 
                 <script>
                     // if searched for forget id
-                    <?php if (isset($data['content'])) : ?>
+                    <?php if (isset($data['forget_id_det'])) : ?>
 
                         const div = document.getElementById("forget-id-canvas");
                         div.classList.add("show"); //show canvas
@@ -144,11 +155,11 @@ background-attachment: fixed;">
                         document.getElementById("forget-id-content").hidden = true; //hide content
                     }
                 </script>
-                <?php if (isset($data['content'])) : ?>
+                <?php if (isset($data['forget_id_det'])) : ?>
                     <div class="covid-patient-detail" id="forget-id-content">
 
                         <table>
-                            <?php foreach ($data['content'] as $record) : ?>
+                            <?php foreach ($data['forget_id_det'] as $record) : ?>
                                 <tr>
                                     <th class="covid-detail-title">
                                         Health ID

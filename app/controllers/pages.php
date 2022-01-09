@@ -573,26 +573,28 @@ class Pages extends Controller
     {
         $this->find_citizen_id();
 
+        //Retrieve details from the database
+        $records = $this->user_handler->load_loggedin_user();
         $error1 = "";
         $error2 = "";
         //Check whether users array is updated
         if (isset($_POST["users"])) {
             // if yes, update database
             $error1 = $this->user_handler->update_user_details($_POST["users"]);
+            if (strlen($error1) !== 0) {
+                header('location:' . URL_ROOT . '/pages/settings?error1');
+            } else {
+                header('location:' . URL_ROOT . '/pages/settings?success');
+            }
         } //Check whether passwords array is updated
         else if (isset($_POST['password-changed'])) {
             // if yes, take the errors
             $error2 = $this->user_handler->update_password_details($_POST["passwords"]);
-        }
-        //Retrieve details from the database
-        $records = $this->user_handler->load_loggedin_user();
-
-        if (strlen($error1) !== 0) {
-            $records['error1'] = $error1;
-        }
-
-        if (strlen($error2) !== 0) {
-            $records['error2'] = $error2;
+            if (strlen($error2) !== 0) {
+                header('location:' . URL_ROOT . '/pages/settings?error2');
+            } else {
+                header('location:' . URL_ROOT . '/pages/settings?success');
+            }
         }
 
         $this->view('/pages/settings', $records);
@@ -721,10 +723,13 @@ class Pages extends Controller
 
     public function find_citizen_id()
     {
-        $data['content'] = [];
+        $data['forget_id_det'] = [];
         if (isset($_POST['forget-id-value'])) {
 
-            $page = substr($_POST['page'], 16);
+            //$page = substr($_POST['page'], 16);
+            $controller_arr = explode('/', filter_var(rtrim($_SERVER['REQUEST_URI'], '/'), FILTER_SANITIZE_URL));
+            $page_arr = explode('?', $controller_arr[3]);
+            $page = "/" . $controller_arr[2] . "/" . $page_arr[0];
             $type = $_POST['forget-id-type'];
             switch ($type) {
                 case "Contact Number":
@@ -739,7 +744,7 @@ class Pages extends Controller
             }
             $value = $_POST['forget-id-value'];
 
-            $data['content'] = $this->citizen_factory->get_health_id($type, $value);
+            $data['forget_id_det'] = $this->citizen_factory->get_health_id($type, $value);
             //find correct id for given data with relevent type
             !$_SESSION["is_admin"] ? $this->view($page, $data) : header('location:' . URL_ROOT . '/pages/index');
             return;
