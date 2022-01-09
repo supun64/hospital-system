@@ -70,7 +70,7 @@ if ($_SESSION['is_admin']) {
                         </ul>
 
                         <form action="<?= URL_ROOT; ?>/pages/settings" method="POST">
-                            <hr class="my-4" />
+                            
                             <div class="settings-info-element form-group">
                                 <label for="fullname">Full Name</label>
                                 <input type="text" class="form-control" id="fullname" required value="<?= isset($data['user_name']) ? $data['user_name'] : ""; ?>" name="users[name]" />
@@ -105,9 +105,9 @@ if ($_SESSION['is_admin']) {
                 <!-- Info area -->
 
                 <div class="settings-info">
-                    <ul class="nav nav-tabs mb-4" id="settings-password-ul" role="tablist">
+                    <ul class="nav nav-tabs settings-sub-div-title-section mb-4" id="settings-password-ul" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="account-tab">Password Information</a>
+                            <a class="nav-link active settings-sub-div-title" id="account-tab">Password Information</a>
                         </li>
                     </ul>
                     <form class='settings-password-form' action="<?= URL_ROOT; ?>/pages/settings" method="POST">
@@ -156,7 +156,7 @@ if ($_SESSION['is_admin']) {
                             </div>
                         <?php endif; ?>
                         <div class="settings-info-element row mb-4">
-                            <div class="col-md-6">
+                            <div class="col-md-6" style="padding-left: 0;">
                                 <button type="submit" name='password-changed' class="btn btn-primary" onclick="return validate_password()">
                                     Update Password
                                 </button>
