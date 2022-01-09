@@ -126,12 +126,12 @@ if ($_SESSION['is_admin']) {
                                 <div class="settings-info-element form-group">
                                     <label for="inputPassword5">New Password</label>
                                     <input type="password" class="form-control" id="new_password" name="passwords[new_password]" required minlength="8" />
-                                    <small id="same-password" class="form-text invisible">"Your new password can not be same as your recent passwords."</small>
+                                    <small id="same-password" class="form-text invisible">Your new password can not be same as your recent passwords.</small>
                                 </div>
                                 <div class="settings-info-element form-group">
                                     <label for="inputPassword6">Confirm Password</label>
                                     <input type="password" class="form-control" id="confirmed_password" name="passwords[confirm_password]" required minlength="8" />
-                                    <small id="matching-passwords" class="form-text invisible">"Please make sure your passwords match."</small>
+                                    <small id="matching-passwords" class="form-text invisible">Make sure your passwords match.</small>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -141,10 +141,10 @@ if ($_SESSION['is_admin']) {
                                     following requirements:
                                 </p>
                                 <ul class="settings-info-element small text-muted pl-4 mb-0">
-                                    <li>Minimum 8 character</li>
-                                    <li>At least one special character</li>
-                                    <li>At least one number</li>
-                                    <li>Can’t be the same as a previous password</li>
+                                    <li>Minimum 8 character.</li>
+                                    <li>At least one special character.</li>
+                                    <li>At least one number.</li>
+                                    <li>Can’t be the same as a previous password.</li>
                                 </ul>
                             </div>
                         </div>

@@ -11,11 +11,11 @@
             </a>
 
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=vaccinations">Vaccination</a></li>
+                <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=vaccinations">Vaccinations</a></li>
                 <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=antigen_tests">Antigen</a></li>
-                <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=covid_deaths">COVID deaths</a></li>
-                <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=pcr_tests">PCR tests</a></li>
-                <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=covid_patients">Covid patients</a></li>
+                <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=pcr_tests">PCR Tests</a></li>
+                <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=covid_deaths">COVID Deaths</a></li>
+                <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=covid_patients">Covid Patients</a></li>
             </ul>
         </div>
         <form class="data-select-box">
@@ -125,7 +125,7 @@
                                                 </div>
                                                 <div class="form-floating mb-3">
                                                     <input type="text" class="form-control" id="floatingPassword" placeholder="Name of Vaccine" name="newrecord[vaccine_name]" value="<?= $record['vaccine_name'] ?>">
-                                                    <label for="floatingPassword">Name of Vaccine</label>
+                                                    <label for="floatingPassword">Vaccine Name</label>
                                                 </div>
                                                 <div class="form-floating mb-3">
                                                     <input type="text" class="form-control" id="floatingPassword" placeholder="Conducted Place" name="newrecord[vaccinated_place]" value="<?= $record['vaccinated_place'] ?>">
@@ -163,11 +163,11 @@
                                                 </div>
                                                 <div class="form-floating mb-3">
                                                     <input type="text" class="form-control" id="floatingPassword" placeholder="Dose" name="newrecord[admission_date]" value="<?= $record['admission_date'] ?>">
-                                                    <label for="floatingPassword">Admission date</label>
+                                                    <label for="floatingPassword">Admission Date</label>
                                                 </div>
                                                 <div class="form-floating mb-3">
                                                     <input type="text" class="form-control" id="floatingPassword" placeholder="Name of Vaccine" name="newrecord[discharge_date]" value="<?= $record['discharge_date'] ?>">
-                                                    <label for="floatingPassword">Discharge date</label>
+                                                    <label for="floatingPassword">Discharge Date</label>
                                                 </div>
                                                 <div class="form-floating mb-3">
                                                     <input type="text" class="form-control" id="floatingPassword" placeholder="Conducted Place" name="newrecord[conditions]" value="<?= $record['conditions'] ?>">
@@ -180,7 +180,7 @@
                                                 <input type="hidden" name="newrecord[admission_id]" value="<?= $record['admission_id'] ?>">
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    <button type="submit" class="btn btn-primary">Save Changes</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -214,7 +214,7 @@
                                                 <input type="hidden" name="newrecord[id]" value="<?= $record['id'] ?>">
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    <button type="submit" class="btn btn-primary">Save Changes</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -237,14 +237,14 @@
                                                 <h3><i class='bx bxs-alarm-exclamation' style='color:#ff0a0a'></i></h3>
                                             </div>
                                             <div class="col-11">
-                                                <h5>Are you sure you want to delete this record ??</h5>
+                                                <h5>Are you sure you want to delete this record?</h5>
                                             </div>
                                         </div>
                                         <form action="<?= URL_ROOT; ?>/pages/data_management?record_type=<?= $data[count($data) - 1] ?>" method='POST'>
-                                            <input type="hidden" name="id" value="<?= isset($record['id'])?$record['id']:$record['admission_id'] ?>">
+                                            <input type="hidden" name="id" value="<?= isset($record['id']) ? $record['id'] : $record['admission_id'] ?>">
 
                                             <div class="modal-footer">
-                                                <button type="submit" name = 'delete_submitted' class="btn btn-danger">Confirm</button>
+                                                <button type="submit" name='delete_submitted' class="btn btn-danger">Confirm</button>
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                             </div>
                                         </form>
@@ -253,18 +253,18 @@
                             </div>
                         </div>
                     <?php endif; ?>
-                    <?php $counter++ ;?>
+                    <?php $counter++; ?>
                 <?php endforeach; ?>
                 </tbody>
             </table>
         <?php else : ?>
             <?php if (!isset($data['type'])) : ?>
                 <div class="alert alert-danger" role="alert">
-                    <h5>You haven't selected the record type yet..</h5>
+                    <h5>You haven't selected the record type yet.</h5>
                 </div>
             <?php elseif (count($data) < 3) : ?>
                 <div class="alert alert-danger" role="alert">
-                    <h5>No records of <?= implode(' ', explode('_', $_GET['record_type'])) ?> were edited / inserted today..</h5>
+                    <h5>No records of <?= implode(' ', explode('_', $_GET['record_type'])) ?> were updated / inserted today.</h5>
                 </div>
             <?php endif; ?>
         <?php endif; ?>
