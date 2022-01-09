@@ -723,10 +723,13 @@ class Pages extends Controller
 
     public function find_citizen_id()
     {
-        $data['content'] = [];
+        $data['forget_id_det'] = [];
         if (isset($_POST['forget-id-value'])) {
 
-            $page = substr($_POST['page'], 16);
+            //$page = substr($_POST['page'], 16);
+            $controller_arr = explode('/', filter_var(rtrim($_SERVER['REQUEST_URI'], '/'), FILTER_SANITIZE_URL));
+            $page_arr = explode('?', $controller_arr[3]);
+            $page = "/" . $controller_arr[2] . "/" . $page_arr[0];
             $type = $_POST['forget-id-type'];
             switch ($type) {
                 case "Contact Number":
@@ -741,7 +744,7 @@ class Pages extends Controller
             }
             $value = $_POST['forget-id-value'];
 
-            $data['content'] = $this->citizen_factory->get_health_id($type, $value);
+            $data['forget_id_det'] = $this->citizen_factory->get_health_id($type, $value);
             //find correct id for given data with relevent type
             !$_SESSION["is_admin"] ? $this->view($page, $data) : header('location:' . URL_ROOT . '/pages/index');
             return;
