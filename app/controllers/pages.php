@@ -148,7 +148,7 @@ class Pages extends Controller
 
             if ($data['email'] && $updated_record) {
                 $data['subject'] = "Antigen Test result by " . $_SESSION['hospitalname'];
-                $data['content'] = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "Antigen ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
+                $data['content'] = "Health ID : " . $id . "\n" . "Patient name : " . $name . "\n" . "Tested Date : " . $updated_record->get_date() . "\n" . "Antigen ID : " . $updated_record->get_id() . "\n" . "Test Result : " . $updated_record->get_status();
                 $data['content']  = nl2br($data['content']);
                 $data['notification'] = $this->mail;
             }
@@ -479,7 +479,7 @@ class Pages extends Controller
 
             if ($data['email'] && $updated_record) {
                 $data["subject"] = "PCR Test result by " . $_SESSION['hospitalname'];
-                $data['content'] = "Patient ID: " . $id . "\n" . "Patient name: " . $name . "\n" . "Tested Date:" . $updated_record->get_date() . "\n" . "PCR ID: " . $updated_record->get_id() . "\n" . "Test Result: " . $updated_record->get_status();
+                $data['content'] = "Health ID : " . $id . "\n" . "Patient name : " . $name . "\n" . "Tested Date : " . $updated_record->get_date() . "\n" . "PCR ID : " . $updated_record->get_id() . "\n" . "Test Result : " . $updated_record->get_status();
                 $data['content'] = nl2br($data['content']);
                 $data['notification'] = $this->mail;
             }
