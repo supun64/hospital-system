@@ -124,8 +124,8 @@
                                     ?>
 
                                         <div class="antigen-rw">
-                                            <div class="covid-tr" data-bs-toggle="modal" data-bs-target="#antigen-result">
-                                                <div class="covid-td">
+                                            <div class="covid-tr <?php if ($antigen === $antigen_tests[sizeof($antigen_tests) - 1]) echo 'covid-bottom-tr' ?>" data-bs-toggle="modal" data-bs-target="#antigen-result">
+                                                <div class="covid-td ">
                                                     <?php echo $antigen["id"] ?>
                                                 </div>
 

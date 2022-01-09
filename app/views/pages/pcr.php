@@ -123,7 +123,7 @@
                                 ?>
 
                                     <div class="pcr-rw">
-                                        <div class="covid-tr" data-bs-toggle="modal" data-bs-target="#pcr-result">
+                                        <div class="covid-tr <?php if ($pcr === $pcr_tests[sizeof($pcr_tests) - 1]) echo 'covid-bottom-tr' ?>" data-bs-toggle="modal" data-bs-target="#pcr-result">
                                             <div class="covid-td">
                                                 <?php echo $pcr["id"] ?>
                                             </div>

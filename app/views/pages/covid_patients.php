@@ -153,7 +153,7 @@
                                 ?>
                                     <?php $count++; ?>
                                     <div class="patient-rw">
-                                        <div class="covid-tr" data-bs-toggle="modal" data-bs-target="#patient-result">
+                                        <div class="covid-tr <?php if ($admission === $patient_history[sizeof($patient_history) - 1]) echo 'covid-bottom-tr' ?>" data-bs-toggle="modal" data-bs-target="#patient-result">
                                             <div class="covid-td">
                                                 <?php echo $admission["admission_id"] ?>
                                             </div>
