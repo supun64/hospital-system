@@ -12,7 +12,7 @@ class PcrObserver implements ReportObserver
 
     public function update_count($status)
     {
-        if ($status == "positive") {
+        if ($status == "Positive") {
             $this->db->increment('report', 'pcr');
         } elseif ($status == "to_negative") {
             $this->db->decrement('report', 'pcr');

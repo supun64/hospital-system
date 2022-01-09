@@ -22,7 +22,7 @@
                 </div>
 
                 <form class="form mb-3 covid-search-div death-covid-search-div" method="POST" action="<?php echo URL_ROOT; ?>/pages/covid_deaths">
-                    <input type="text" class="covid-search-bar death-covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter health ID here" name="death-search-bar-input" value="<?= isset($_POST['death-search-bar-input']) ? $_POST['death-search-bar-input'] : "" ?>" required>
+                    <input type="text" class="covid-search-bar death-covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter Health ID here" name="death-search-bar-input" value="<?= isset($_POST['death-search-bar-input']) ? $_POST['death-search-bar-input'] : "" ?>" required>
                     <input type="submit" class="btn btn-primary" id="covid-search-btn" name="death-search" value="Search">
 
                     <input type="button" class="btn btn-primary death-add-new-btn" id="add-button" data-bs-toggle="modal" data-bs-target="#add-new-death" value="Add a Death +">

@@ -12,7 +12,7 @@ class AntigenObserver implements ReportObserver
 
     public function update_count($status)
     {
-        if ($status == "positive") {
+        if ($status == "Positive") {
             $this->db->increment('report', 'antigen');
         } elseif ($status == "to_negative") {
             $this->db->decrement('report', 'antigen');

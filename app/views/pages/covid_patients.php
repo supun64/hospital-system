@@ -34,7 +34,7 @@
 
                 <form class="form mb-3 covid-search-div" method="POST" action="<?php echo URL_ROOT; ?>/pages/covid_patients">
 
-                    <input type="text" class="covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter health ID here" name="patient-search-bar-input" required>
+                    <input type="text" class="covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter Health ID here" name="patient-search-bar-input" required>
 
                     <input type="submit" class="btn btn-primary" id="covid-search-btn" name="patient-search" value="Search">
                 </form>

@@ -77,7 +77,7 @@ class Pages extends Controller
                 "health_id" => $_POST["add-patient-health-id"],
                 "hospital_id" => $hospital_id,
                 "date" => $_POST["add-patient-antigen-date"],
-                "status" => "pending",
+                "status" => "Pending",
                 "place" => $_POST["add-patient-antigen-place"]
             ];
 
@@ -412,7 +412,7 @@ class Pages extends Controller
                 "health_id" => $_POST["add-patient-health-id"],
                 "hospital_id" => $hospital_id,
                 "date" => $_POST["add-patient-pcr-date"],
-                "status" => "pending",
+                "status" => "Pending",
                 "place" => $_POST["add-patient-pcr-place"]
             ];
 

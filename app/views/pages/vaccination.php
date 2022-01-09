@@ -31,7 +31,7 @@
 
                 <form class="form mb-3 covid-search-div" method="POST" action="<?php echo URL_ROOT; ?>/pages/vaccination">
 
-                    <input type="text" class="covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter health ID here" name="vaccine-search-bar-input" required>
+                    <input type="text" class="covid-search-bar form-control" id="covid-search-bar-input" placeholder="Enter Health ID here" name="vaccine-search-bar-input" required>
 
                     <input type="submit" class="btn btn-primary" id="covid-search-btn" name="vaccine-search" value="Search">
 
@@ -105,7 +105,7 @@
                                     <div class="covid-th covid-td">Vaccine ID </div>
                                     <div class="covid-th covid-td">Batch Number </div>
                                     <div class="covid-th covid-td">Vaccine Name</div>
-                                    <div class="covid-th covid-td">Hospital Id</div>
+                                    <div class="covid-th covid-td">Hospital ID</div>
                                     <div class="covid-th covid-td">Date of Vaccination</div>
                                     <div class="covid-th covid-td">Dose</div>
                                     <div class="covid-th covid-td">Place of Vaccination</div>

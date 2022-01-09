@@ -1,14 +1,14 @@
 
     tog_btn = document.getElementById("antigen-togBtn");
     hdn_btn = document.getElementById("hidden-antigen-status");
-    document.getElementById("hidden-antigen-status").value = "negative";
+    document.getElementById("hidden-antigen-status").value = "Negative";
     hdn_btn = 
 tog_btn.onclick= function(){
     if(tog_btn.checked){
-        document.getElementById("hidden-antigen-status").value = "positive";
+        document.getElementById("hidden-antigen-status").value = "Positive";
         
     }else{
-        document.getElementById("hidden-antigen-status").value = "negative";
+        document.getElementById("hidden-antigen-status").value = "Negative";
     }
     console.log(document.getElementById("hidden-antigen-status").value);
 }
@@ -34,7 +34,7 @@ document.querySelectorAll('.antigen-rw').forEach(item => {
      document.getElementById('antigen-update-btn').disabled = true;  //enable continue button
     }
 
-    if(arr[3] != "pending"){
+    if(arr[3] != "Pending"){
         document.getElementById('antigen-togBtn').disabled = true;
         document.getElementById('antigen-update-btn').disabled = true;  //enable continue button
     }

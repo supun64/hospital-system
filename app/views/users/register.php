@@ -14,7 +14,7 @@
     <?php
     if (isset($_GET['fail'])) { ?>
         <div class="alert alert-danger alert-dismissible fade show deo-manage-error-box" role="alert">
-            <div class="deo-manage-error-text">Verifycation failed. Restart the process !!</div>
+            <div class="deo-manage-error-text">Verification failed. Restart the process !!</div>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <?php } ?>
@@ -106,10 +106,10 @@
         </div>
         <br>
         <div class="pwd-error-msg invisible">
-            <p style="color: red;"> Passwords do not match</p>
+            <p style="color: red;">Make sure your passwords match.</p>
         </div>
         <div id="len-val-pwd" hidden>
-            <p style="color: red;"> At least 8 characters required</p>
+            <p style="color: red;">At least 8 characters required.</p>
         </div>
 
         <input type="text" name="ran-2" id="ran-id2" hidden>
