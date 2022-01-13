@@ -64,8 +64,33 @@
                                 </td>
                         </tr>
 
-                        <!-- Modal for updating-->
-                        <?php if ($data[count($data) - 1] === 'antigen_tests' || $data[count($data) - 1] === 'pcr_tests') : ?>
+                    <?php endif; ?>
+                    <?php $counter++; ?>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php else : ?>
+            <?php if (!isset($data['type'])) : ?>
+                <div class="alert alert-danger" role="alert">
+                    <h5>You haven't selected the record type yet.</h5>
+                </div>
+            <?php elseif (count($data) < 3) : ?>
+                <div class="alert alert-danger" role="alert">
+                    <h5>No records of <?= implode(' ', explode('_', $_GET['record_type'])) ?> were updated / inserted today.</h5>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
+    </div>
+</div>
+</div>
+
+<!--Modals !>
+<?php $counter = 1;?>
+    <?php foreach ($data as $record) : ?>
+        <?php if (gettype($record) != "string") : ?>
+
+            <!-- Modal for updating-->
+            <?php if ($data[count($data) - 1] === 'antigen_tests' || $data[count($data) - 1] === 'pcr_tests') : ?>
                             <div class="modal fade" id="modalfor<?php echo $data[count($data) - 1] . $counter ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
@@ -222,21 +247,20 @@
                                 </div>
                             </div>
                         <?php endif; ?>
-
-                        <!--Modal for deleting-->
-                        <div class="modal fade" id="delmodalfor<?php echo $data[count($data) - 1] . $counter ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body container">
-                                        <div class="row">
-                                            <div class="col">
-                                                <h3><i class='bx bxs-alarm-exclamation' style='color:#ff0a0a'></i></h3>
-                                            </div>
-                                            <div class="col-11">
+            <!--Modal for deleting-->
+            <div class="modal fade" id="delmodalfor<?php echo $data[count($data) - 1] . $counter ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                    <div class="modal-body container">
+                        <div class="row">
+                            <div class="col">
+                                <h3><i class='bx bxs-alarm-exclamation' style='color:#ff0a0a'></i></h3>
+                             </div>
+                            <div class="col-11">
                                                 <h5>Are you sure you want to delete this record?</h5>
                                             </div>
                                         </div>
@@ -252,27 +276,10 @@
                                 </div>
                             </div>
                         </div>
-                    <?php endif; ?>
-                    <?php $counter++; ?>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php else : ?>
-            <?php if (!isset($data['type'])) : ?>
-                <div class="alert alert-danger" role="alert">
-                    <h5>You haven't selected the record type yet.</h5>
-                </div>
-            <?php elseif (count($data) < 3) : ?>
-                <div class="alert alert-danger" role="alert">
-                    <h5>No records of <?= implode(' ', explode('_', $_GET['record_type'])) ?> were updated / inserted today.</h5>
-                </div>
-            <?php endif; ?>
-        <?php endif; ?>
-    </div>
-</div>
-</div>
 
-
+         <?php endif; ?>
+        <?php $counter++; ?>
+    <?php endforeach; ?>
 
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="<?= URL_ROOT ?>./public/script/admin.js"></script>

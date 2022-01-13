@@ -55,35 +55,6 @@
                             <i class='bx bxs-trash data-edit-button'></i>
                         </button>
 
-                        <!--Modal for deleting-->
-                        <div class="modal fade" id="delmodalfor<?= $deo['user_id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body container">
-                                        <div class="row">
-                                            <div class="col">
-                                                <h3><i class='bx bxs-alarm-exclamation' style='color:#ff0a0a'></i></h3>
-                                            </div>
-                                            <div class="col-11">
-                                                <h5>Are you sure you want to remove <?= $deo['user_name'] ?> ?</h5>
-                                            </div>
-                                        </div>
-                                        <form action="<?php echo URL_ROOT; ?>/pages/user_management" method='POST'>
-                                            <input type="hidden" name="deo_id_record" value="<?= $deo['user_id'] ?>">
-
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-danger" name="rm_submit">Confirm</button>
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </td>
 
 
@@ -152,6 +123,38 @@
     </div>
 </div>
 
+<?php foreach ($data['users'] as $deo) : ?>
+     <!--Modal for deleting-->
+     <div class="modal fade" id="delmodalfor<?= $deo['user_id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body container">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h3><i class='bx bxs-alarm-exclamation' style='color:#ff0a0a'></i></h3>
+                                            </div>
+                                            <div class="col-11">
+                                                <h5>Are you sure you want to remove <?= $deo['user_name'] ?> ?</h5>
+                                            </div>
+                                        </div>
+                                        <form action="<?php echo URL_ROOT; ?>/pages/user_management" method='POST'>
+                                            <input type="hidden" name="deo_id_record" value="<?= $deo['user_id'] ?>">
+
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-danger" name="rm_submit">Confirm</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<?php endforeach; ?>
+    
 <script>
     function valid_input() {
         if (document.getElementById("pwd").value.length < 7) {
