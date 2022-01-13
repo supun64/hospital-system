@@ -1,7 +1,7 @@
 <?php require_once APP_ROOT . "/views/pages/admin_dashboard.php" ?>
 
 <div class='sub-division' style="padding: 5px; padding-right:10px;">
-
+    <main class="sub-division-main">
     <!-- code snippet to show error message for existing email -->
     <?php
     if (isset($_GET['duplicate'])) { ?>
@@ -19,7 +19,7 @@
         <!-- add new data entry operator-->
         <div class="col-md-1">
             <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#deo-manage-nw-deo-form">
-                &plus;Add New User
+                &plus;Add New
             </button>
         </div>
 
@@ -65,9 +65,11 @@
     </table>
 
     <!-- this is the form for new DEO -->
+            </main>            
+</div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="deo-manage-nw-deo-form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="deo-manage-nw-deo-form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -121,7 +123,6 @@
             </div>
         </div>
     </div>
-</div>
 
 <?php foreach ($data['users'] as $deo) : ?>
      <!--Modal for deleting-->

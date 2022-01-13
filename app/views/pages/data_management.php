@@ -1,91 +1,93 @@
 <?php require_once APP_ROOT . "/views/pages/admin_dashboard.php" ?>
 <div class="sub-division">
-    <div class="data-heading">
-        <h1>Data Management</h1>
-        <?= isset($_GET['record_type']) ? implode(' ', explode('_', strtoupper($_GET['record_type']))) : "Please select the record type.."; ?>
-    </div>
-    <div class="data-search-bar d-flex flex-row justify-content-between">
-        <div class="dropdown">
-            <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                Select the record type..
-            </a>
-
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=vaccinations">Vaccinations</a></li>
-                <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=antigen_tests">Antigen</a></li>
-                <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=pcr_tests">PCR Tests</a></li>
-                <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=covid_deaths">COVID Deaths</a></li>
-                <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=covid_patients">Covid Patients</a></li>
-            </ul>
+    <main class="sub-division-main">
+        <div class="data-heading">
+            <h1>Data Management</h1>
+            <?= isset($_GET['record_type']) ? implode(' ', explode('_', strtoupper($_GET['record_type']))) : "Please select the record type.."; ?>
         </div>
-        <form class="data-select-box">
-            <div class="row row-cols-auto d-flex justify-content-end">
-                <div class="col"><input class="data-search-bar form-control" id='deo-search-bar' type="text" placeholder="Enter Health ID" required></div>
+        <div class="data-search-bar d-flex flex-row justify-content-between">
+            <div class="dropdown">
+                <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    Select the record type..
+                </a>
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=vaccinations">Vaccinations</a></li>
+                    <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=antigen_tests">Antigen</a></li>
+                    <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=pcr_tests">PCR Tests</a></li>
+                    <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=covid_deaths">COVID Deaths</a></li>
+                    <li><a class="dropdown-item" href="<?= URL_ROOT; ?>/pages/data_management?record_type=covid_patients">Covid Patients</a></li>
+                </ul>
             </div>
-        </form>
-    </div>
-    <div>
-        <?php $counter = 1;?>
-        <?php if (isset($data['type']) && count($data) > 2) : ?>
-            <table class="data-table table  table-hover table-responsive" id="deo-table">
-                <tbody>
-                    <thead>
-                        <?php foreach ($data['type'] as $column) : ?>
-                            <td><?= $column ?></td>
-                        <?php endforeach;
-                        unset($data['type']); ?>
-                        <td></td>
-                        <td></td>
-                    </thead>
-                    <?php foreach ($data as $record) : ?>
-                        <tr class="data-table-row">
-                            <?php if (gettype($record) != "string") : ?>
-                                <?php foreach ($record as $key => $value) : ?>
-
-                                    <?php if ($key === "hospital_id" || $key === "id" || $key === "admission_id" || $key === "date") : ?>
-                                        <?php continue; ?>
-
-                                    <?php else : ?>
-
-                                        <td><?= $value ?></td>
-
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-
-                                <td class="data-edit">
-                                    <button class='btn btn-light' data-bs-toggle="modal" data-bs-target="#modalfor<?php echo $data[count($data) - 1] . $counter ?>">
-                                        <i class='data-edit-button bx bxs-edit' style="color: black"></i>
-                                    </button>
-                                </td>
-                                <td>
-                                    <button class='btn btn-light' data-bs-toggle="modal" data-bs-target="#delmodalfor<?php echo $data[count($data) - 1] . $counter ?>">
-                                        <i class='bx bxs-trash data-edit-button'></i>
-                                    </button>
-                                </td>
-                        </tr>
-
-                    <?php endif; ?>
-                    <?php $counter++; ?>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php else : ?>
-            <?php if (!isset($data['type'])) : ?>
-                <div class="alert alert-danger" role="alert">
-                    <h5>You haven't selected the record type yet.</h5>
+            <form class="data-select-box">
+                <div class="row row-cols-auto d-flex justify-content-end">
+                    <div class="col"><input class="data-search-bar form-control" id='deo-search-bar' type="text" placeholder="Enter Health ID" required></div>
                 </div>
-            <?php elseif (count($data) < 3) : ?>
-                <div class="alert alert-danger" role="alert">
-                    <h5>No records of <?= implode(' ', explode('_', $_GET['record_type'])) ?> were updated / inserted today.</h5>
-                </div>
+            </form>
+        </div>
+        <div>
+            <?php $counter = 1;?>
+            <?php if (isset($data['type']) && count($data) > 2) : ?>
+                <table class="data-table table  table-hover table-responsive" id="deo-table">
+                    <tbody>
+                        <thead>
+                            <?php foreach ($data['type'] as $column) : ?>
+                                <td><?= $column ?></td>
+                            <?php endforeach;
+                            unset($data['type']); ?>
+                            <td></td>
+                            <td></td>
+                        </thead>
+                        <?php foreach ($data as $record) : ?>
+                            <tr class="data-table-row">
+                                <?php if (gettype($record) != "string") : ?>
+                                    <?php foreach ($record as $key => $value) : ?>
+
+                                        <?php if ($key === "hospital_id" || $key === "id" || $key === "admission_id" || $key === "date") : ?>
+                                            <?php continue; ?>
+
+                                        <?php else : ?>
+
+                                            <td><?= $value ?></td>
+
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+
+                                    <td class="data-edit">
+                                        <button class='btn btn-light' data-bs-toggle="modal" data-bs-target="#modalfor<?php echo $data[count($data) - 1] . $counter ?>">
+                                            <i class='data-edit-button bx bxs-edit' style="color: black"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class='btn btn-light' data-bs-toggle="modal" data-bs-target="#delmodalfor<?php echo $data[count($data) - 1] . $counter ?>">
+                                            <i class='bx bxs-trash data-edit-button'></i>
+                                        </button>
+                                    </td>
+                            </tr>
+
+                        <?php endif; ?>
+                        <?php $counter++; ?>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else : ?>
+                <?php if (!isset($data['type'])) : ?>
+                    <div class="alert alert-danger" role="alert">
+                        <h5>You haven't selected the record type yet.</h5>
+                    </div>
+                <?php elseif (count($data) < 3) : ?>
+                    <div class="alert alert-danger" role="alert">
+                        <h5>No records of <?= implode(' ', explode('_', $_GET['record_type'])) ?> were updated / inserted today.</h5>
+                    </div>
+                <?php endif; ?>
             <?php endif; ?>
-        <?php endif; ?>
-    </div>
-</div>
+        </div>
+    </main>
 </div>
 
 <!--Modals !>
 <?php $counter = 1;?>
+<?php if(count($data) > 2):?>
     <?php foreach ($data as $record) : ?>
         <?php if (gettype($record) != "string") : ?>
 
@@ -280,6 +282,7 @@
          <?php endif; ?>
         <?php $counter++; ?>
     <?php endforeach; ?>
+<?php endif;?>
 
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="<?= URL_ROOT ?>./public/script/admin.js"></script>
