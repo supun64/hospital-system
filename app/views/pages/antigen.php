@@ -98,7 +98,10 @@
 
 
                                         <td class="covid-detail-data">
-                                            <?php echo $data['personal']['dob'] ?>
+                                            <?php
+                                            $birth_year = (int)explode(" - ", $data['personal']['dob'])[0];
+                                            $curr_year = (int)date("Y");
+                                            echo ($curr_year - $birth_year); ?>
                                         </td>
                                     </tr>
                                 </table>
@@ -287,7 +290,7 @@
 
 <!--email-->
 <?php
-if (isset($data['notification']) && isset($_GET['updated'])) {
+if (isset($data['notification']) && isset($_GET['updated']) && $data['email'] != NULL) {
     $data['notification']->send_email($data['email'], $data['subject'], $data['content']);
 }
 ?>

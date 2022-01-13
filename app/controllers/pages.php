@@ -32,9 +32,9 @@ class Pages extends Controller
 
     public function antigen()
     {
-        if($_SERVER['REQUEST_URI'] == "/hospital-system/pages/find-citizen-id" && $_POST['forget-id-submit'])
+        if ($_SERVER['REQUEST_URI'] == "/hospital-system/pages/find-citizen-id" && $_POST['forget-id-submit'])
             $this->find_citizen_id();
-        elseif(isset($_POST['forget-id-submit']))
+        elseif (isset($_POST['forget-id-submit']))
             $this->find_citizen_id();
 
         $data['personal'] = [];
@@ -49,20 +49,11 @@ class Pages extends Controller
         if (isset($_POST["antigen-search"])) {
 
             $id = $_POST["antigen-search-bar-input"]; // TO get the search input
-            $citizen = $center->get_citizen($id);
-            if ($citizen != NULL) {
 
-                $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob(), 'is_alive' => $citizen->get_is_alive()];    //array list of users
-            }
-
-            $search_records = $center->load_details_by_id($id);
-            if ($search_records != NULL) {
-                foreach ($search_records as $result) {
-                    array_push($data["antigen_tests"], $center->to_array($result));
-                }
-            }
-
-            $data['hospital_id'] = $center->get_hospital_id();
+            $temp_data = $this->search($id, $center, "antigen_tests");
+            $data['personal'] = $temp_data['personal'];
+            $data['antigen_tests'] = $temp_data['antigen_tests'];
+            $data['hospital_id'] = $temp_data['hospital_id'];
 
             if (!$data['personal']) {
                 header('location:' . URL_ROOT . '/pages/antigen?not-user');
@@ -125,24 +116,12 @@ class Pages extends Controller
             $health_id = explode("-", $_GET['updated'])[0];
             $antigen_id = (int)explode("-", $_GET['updated'])[1];
 
-            $citizen = $center->get_citizen($health_id);
-
-            if ($citizen != NULL) {
-
-                $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob(), 'is_alive' => $citizen->get_is_alive()];    //array list of users
-            }
-            $updated_record = NULL;
-            $search_records = $center->load_details_by_id($health_id);
-            if ($search_records != NULL) {
-                foreach ($search_records as $result) {
-                    array_push($data["antigen_tests"], $center->to_array($result));
-                    if ($result->get_id() == $antigen_id) {
-                        $updated_record = $result;
-                    }
-                }
-            }
-
-            $data['hospital_id'] = $center->get_hospital_id();
+            $temp_data = $this->search_after_update($center, $health_id, $antigen_id, "antigen_tests");
+            $data['personal'] = $temp_data['personal'];
+            $data['antigen_tests'] = $temp_data['antigen_tests'];
+            $data['hospital_id'] = $temp_data['hospital_id'];
+            $citizen = $temp_data['citizen'];
+            $updated_record = $temp_data['updated_record'];
 
             $data['email'] = $citizen->get_email();
             $id = $citizen->get_id();
@@ -162,9 +141,9 @@ class Pages extends Controller
 
     public function covid_deaths()
     {
-        if($_SERVER['REQUEST_URI'] == "/hospital-system/pages/find-citizen-id" && $_POST['forget-id-submit'])
+        if ($_SERVER['REQUEST_URI'] == "/hospital-system/pages/find-citizen-id" && $_POST['forget-id-submit'])
             $this->find_citizen_id();
-        elseif(isset($_POST['forget-id-submit']))
+        elseif (isset($_POST['forget-id-submit']))
             $this->find_citizen_id();
 
         $death_center = $this->center_factory->get_center('covid_deaths');
@@ -245,9 +224,9 @@ class Pages extends Controller
 
     public function covid_patients()
     {
-        if($_SERVER['REQUEST_URI'] == "/hospital-system/pages/find-citizen-id" && $_POST['forget-id-submit'])
+        if ($_SERVER['REQUEST_URI'] == "/hospital-system/pages/find-citizen-id" && $_POST['forget-id-submit'])
             $this->find_citizen_id();
-        elseif(isset($_POST['forget-id-submit']))
+        elseif (isset($_POST['forget-id-submit']))
             $this->find_citizen_id();
 
         $data['personal'] = [];
@@ -263,17 +242,13 @@ class Pages extends Controller
         if (isset($_POST["patient-search"])) {
 
             $id = $_POST["patient-search-bar-input"]; // To get the search input(health ID)
-            $citizen = $center->get_citizen($id);
-            if ($citizen != NULL) {
-                $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob(), 'gender' => $citizen->get_gender()];    //array list of users
-            }
+            $temp_data = $this->search($id, $center, "patient_history");
+            $data['personal'] = $temp_data['personal'];
+            $data['patient_history'] = $temp_data['patient_history'];
+            $data['hospital_id'] = $temp_data['hospital_id'];
+            if ($data['patient_history'] != []) {
 
-            $admission_records = $center->load_details_by_id($id);
-            if ($admission_records != NULL) {
-                foreach ($admission_records as $result) {
-                    array_push($data["patient_history"], $center->to_array($result));
-                }
-                $data['final_record'] = ['status' => end($admission_records)->get_status(), 'hospital_id' => end($admission_records)->get_hospital_id()];
+                $data['final_record'] = ['status' => end($data['patient_history'])["status"], 'hospital_id' => end($data['patient_history'])['hospital_id']];
             } else {
                 $data['final_record'] = ['status' => "", 'hospital_id' => ""];
             }
@@ -375,9 +350,9 @@ class Pages extends Controller
 
     public function pcr()
     {
-        if($_SERVER['REQUEST_URI'] == "/hospital-system/pages/find-citizen-id" && $_POST['forget-id-submit'])
+        if ($_SERVER['REQUEST_URI'] == "/hospital-system/pages/find-citizen-id" && $_POST['forget-id-submit'])
             $this->find_citizen_id();
-        elseif(isset($_POST['forget-id-submit']))
+        elseif (isset($_POST['forget-id-submit']))
             $this->find_citizen_id();
 
 
@@ -393,19 +368,11 @@ class Pages extends Controller
         if (isset($_POST["pcr-search"])) {
 
             $id = $_POST["pcr-search-bar-input"]; // TO get the search input
-            $citizen = $center->get_citizen($id);
-            if ($citizen != NULL) {
-                $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob(), 'is_alive' => $citizen->get_is_alive()];    //array list of users
-            }
 
-            $search_records = $center->load_details_by_id($id);
-            if ($search_records != NULL) {
-                foreach ($search_records as $result) {
-                    array_push($data["pcr_tests"], $center->to_array($result));
-                }
-            }
-
-            $data['hospital_id'] = $center->get_hospital_id();
+            $temp_data = $this->search($id, $center, "pcr_tests");
+            $data['personal'] = $temp_data['personal'];
+            $data['pcr_tests'] = $temp_data['pcr_tests'];
+            $data['hospital_id'] = $temp_data['hospital_id'];
 
 
             if (!$data['personal']) {
@@ -466,24 +433,12 @@ class Pages extends Controller
             $health_id = explode("-", $_GET['updated'])[0];
             $pcr_id = (int)explode("-", $_GET['updated'])[1];
 
-            $citizen = $center->get_citizen($health_id);
-
-            if ($citizen != NULL) {
-
-                $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob(), 'is_alive' => $citizen->get_is_alive()];    //array list of users
-            }
-            $updated_record = NULL;
-            $search_records = $center->load_details_by_id($health_id);
-            if ($search_records != NULL) {
-                foreach ($search_records as $result) {
-                    array_push($data["pcr_tests"], $center->to_array($result));
-                    if ($result->get_id() == $pcr_id) {
-                        $updated_record = $result;
-                    }
-                }
-            }
-
-            $data['hospital_id'] = $center->get_hospital_id();
+            $temp_data = $this->search_after_update($center, $health_id, $pcr_id, "pcr_tests");
+            $data['personal'] = $temp_data['personal'];
+            $data['pcr_tests'] = $temp_data['pcr_tests'];
+            $data['hospital_id'] = $temp_data['hospital_id'];
+            $citizen = $temp_data['citizen'];
+            $updated_record = $temp_data['updated_record'];
 
             $data['email'] = $citizen->get_email();
             $id = $citizen->get_id();
@@ -497,16 +452,14 @@ class Pages extends Controller
             }
         }
 
-
-
         $_SESSION["is_admin"] ? header('location:' . URL_ROOT . '/pages/index') : $this->view('/pages/pcr', $data);
     }
 
     public function vaccination()
     {
-        if($_SERVER['REQUEST_URI'] == "/hospital-system/pages/find-citizen-id" && $_POST['forget-id-submit'])
+        if ($_SERVER['REQUEST_URI'] == "/hospital-system/pages/find-citizen-id" && $_POST['forget-id-submit'])
             $this->find_citizen_id();
-        elseif(isset($_POST['forget-id-submit']))
+        elseif (isset($_POST['forget-id-submit']))
             $this->find_citizen_id();
 
         $data['personal'] = [];
@@ -524,19 +477,10 @@ class Pages extends Controller
 
 
             $id = $_POST["vaccine-search-bar-input"]; // TO get the search input
-            $citizen = $center->get_citizen($id);
-            if ($citizen != NULL) {
-                $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob(), 'is_alive' => $citizen->get_is_alive()];    //array list of users
-            }
-
-            $search_records = $center->load_details_by_id($id);
-            if ($search_records != NULL) {
-                foreach ($search_records as $result) {
-                    array_push($data["vaccinations"], $center->to_array($result));
-                }
-            }
-
-            $data['hospital_id'] = $center->get_hospital_id();
+            $temp_data = $this->search($id, $center, "vaccinations");
+            $data['personal'] = $temp_data['personal'];
+            $data['vaccinations'] = $temp_data['vaccinations'];
+            $data['hospital_id'] = $temp_data['hospital_id'];
 
 
             if (!$data['personal']) {
@@ -756,12 +700,62 @@ class Pages extends Controller
             //find correct id for given data with relevent type
             !$_SESSION["is_admin"] ? $this->view($page, $data) : header('location:' . URL_ROOT . '/pages/index');
             return;
-        }else{
-            header('location:' . URL_ROOT . '/pages/error'); 
+        } else {
+            header('location:' . URL_ROOT . '/pages/error');
         }
     }
 
-    public function error(){
+
+    public function search($id, $center, $type)
+    {
+        $citizen = $center->get_citizen($id);
+        if ($citizen != NULL) {
+
+            $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob(), 'is_alive' => $citizen->get_is_alive()];    //array list of users
+        }
+
+
+        $search_records = $center->load_details_by_id($id);
+        $data[$type] = [];
+        if ($search_records != NULL) {
+            foreach ($search_records as $result) {
+                array_push($data[$type], $center->to_array($result));
+            }
+        }
+
+        $data['hospital_id'] = $center->get_hospital_id();
+
+        return $data;
+    }
+
+
+    public function search_after_update($center, $health_id, $updated_id, $type)
+    {
+        $citizen = $center->get_citizen($health_id);
+        $data['citizen'] = $citizen;
+
+        if ($citizen != NULL) {
+
+            $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob(), 'is_alive' => $citizen->get_is_alive()];    //array list of users
+        }
+        $search_records = $center->load_details_by_id($health_id);
+        $data[$type] = [];
+        if ($search_records != NULL) {
+            foreach ($search_records as $result) {
+                array_push($data[$type], $center->to_array($result));
+                if ($result->get_id() == $updated_id) {
+                    $data['updated_record'] = $result;
+                }
+            }
+        }
+
+        $data['hospital_id'] = $center->get_hospital_id();
+        return $data;
+    }
+
+
+    public function error()
+    {
         $this->view("/pages/error");
     }
 }

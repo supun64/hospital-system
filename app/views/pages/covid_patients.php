@@ -94,19 +94,6 @@
 
                                 <tr>
                                     <th class="covid-detail-title">
-                                        Gender
-                                    </th>
-                                    <th>
-                                        :
-                                    </th>
-
-                                    <td class="covid-detail-data">
-                                        <?php echo $data['personal']['gender'] ?>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <th class="covid-detail-title">
                                         Age
                                     </th>
                                     <th>
