@@ -86,7 +86,7 @@ class Users extends Controller
                     if ($result) {
                         header('location:' . URL_ROOT . '/users/login?hospital-id=' . $admin->get_hospital_id());
                     } else {
-                        die('Something went wrong');
+                        header('location:' . URL_ROOT . '/pages/error');
                     }
                 }
             } else {

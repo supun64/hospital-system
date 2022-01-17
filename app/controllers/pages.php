@@ -80,7 +80,7 @@ class Pages extends Controller
             if ($center->add_record($new_antigen)) {
                 header('location:' . URL_ROOT . '/pages/antigen?success');
             } else {
-                die("Something went wrong");
+                header('location:' . URL_ROOT . '/pages/error');
             }
         }
 
@@ -107,7 +107,7 @@ class Pages extends Controller
                 $antigen_id = (string)$new_antigen->get_id();
                 header('location:' . URL_ROOT . '/pages/antigen?updated=' . $antigen_detail['health_id'] . "-" . $antigen_id);
             } else {
-                die("Something went wrong");
+                header('location:' . URL_ROOT . '/pages/error');
             }
         }
 
@@ -202,7 +202,7 @@ class Pages extends Controller
                     $new_patient = $this->record_factory->get_record('covid_patients', $last_record);
                     if ($patient_center->update_record($new_patient)) {
                     } else {
-                        die("Something went wrong :(");
+                        header('location:' . URL_ROOT . '/pages/error');
                     }
                 }
                 $new_death = $this->record_factory->get_record('covid_deaths', $death_details);
@@ -211,7 +211,7 @@ class Pages extends Controller
 
                     header('location:' . URL_ROOT . '/pages/covid_deaths?updated=' . $_POST["add-death-health-id"]);
                 } else {
-                    die("Something went wrong");
+                    header('location:' . URL_ROOT . '/pages/error');
                 }
             } else {
                 $data['error'] = !$citizen ? "Invalid UserID" : "Overriding an existing record is prohibited.";
@@ -279,7 +279,7 @@ class Pages extends Controller
             if ($center->add_record($new_patient)) {
                 header('location:' . URL_ROOT . '/pages/covid_patients?success');
             } else {
-                die("Something went wrong");
+                header('location:' . URL_ROOT . '/pages/error');
             }
         }
 
@@ -318,7 +318,7 @@ class Pages extends Controller
                         $health_id = (string)$new_patient->get_health_id();
                         header('location:' . URL_ROOT . '/pages/covid_patients?updated=' . $health_id);
                     } else {
-                        die("Something went wrong");
+                        header('location:' . URL_ROOT . '/pages/error');
                     }
                 }
             }
@@ -401,7 +401,7 @@ class Pages extends Controller
             if ($center->add_record($new_pcr)) {
                 header('location:' . URL_ROOT . '/pages/pcr?success');
             } else {
-                die("Something went wrong");
+                header('location:' . URL_ROOT . '/pages/error');
             }
         }
 
@@ -424,7 +424,7 @@ class Pages extends Controller
                 $pcr_id = (string)$new_pcr->get_id();
                 header('location:' . URL_ROOT . '/pages/pcr?updated=' . $pcr_detail['health_id'] . "-" . $pcr_id);
             } else {
-                die("Something went wrong");
+                header('location:' . URL_ROOT . '/pages/error');
             }
         }
 
@@ -516,7 +516,7 @@ class Pages extends Controller
             if ($center->add_record($new_vaccine)) {
                 header('location:' . URL_ROOT . '/pages/vaccination?success');
             } else {
-                die("Something went wrong");
+                header('location:' . URL_ROOT . '/pages/error');
             }
         }
 
@@ -590,7 +590,7 @@ class Pages extends Controller
             if ($center->delete_record($_POST['id'])) {
                 header('location:' . URL_ROOT . "/pages/data_management?record_type=$type");
             } else {
-                die('Something went wrong::');
+                header('location:' . URL_ROOT . '/pages/error');
             }
         }
 
@@ -648,7 +648,7 @@ class Pages extends Controller
 
                     $this->view('/pages/user_management', $data);
                 } else {
-                    die('Something went wrong');
+                    header('location:' . URL_ROOT . '/pages/error');
                 }
             }
         }
@@ -659,7 +659,7 @@ class Pages extends Controller
             if ($this->user_handler->remove_user($id)) {
                 header('location:' . URL_ROOT . '/pages/user_management');
             } else {
-                die('Something went wrong');
+                header('location:' . URL_ROOT . '/pages/error');
             }
         }
 
