@@ -705,8 +705,8 @@ class Pages extends Controller
         }
     }
 
-
-    public function search($id, $center, $type)
+    //search
+    private function search($id, $center, $type)
     {
         $citizen = $center->get_citizen($id);
         if ($citizen != NULL) {
@@ -728,8 +728,8 @@ class Pages extends Controller
         return $data;
     }
 
-
-    public function search_after_update($center, $health_id, $updated_id, $type)
+    //search after update
+    private function search_after_update($center, $health_id, $updated_id, $type)
     {
         $citizen = $center->get_citizen($health_id);
         $data['citizen'] = $citizen;
@@ -753,7 +753,7 @@ class Pages extends Controller
         return $data;
     }
 
-
+    //error page
     public function error()
     {
         $this->view("/pages/error");
