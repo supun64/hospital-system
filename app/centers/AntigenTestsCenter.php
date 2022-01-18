@@ -37,7 +37,7 @@ class AntigenTestsCenter extends COVID_Department implements ReportObservable
 
 
         $params = ["status" => $status, "id" => $id, "place" => $place];
-        $previous_status = $this->db->findById("antigen_tests", "id", $id)[0];
+        $previous_status = $this->db->findById("antigen_tests", "id", $id)[0]['status'];
         $result = $this->db->update("antigen_tests", "id", $params);
 
         if ($result && ($previous_status !== $status)) {
