@@ -668,7 +668,7 @@ class Pages extends Controller
         $_SESSION["is_admin"] ? $this->view('/pages/user_management', $data) : header('location:' . URL_ROOT . '/pages/index');
     }
 
-    private function logout()
+    public function logout()
     {
         $this->user_handler->logout();
         header('location:' . URL_ROOT . '/users/login');
