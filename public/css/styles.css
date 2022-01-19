@@ -540,7 +540,6 @@ option {
 
 /*sub divisions styles--------------------------*/
 .sub-division {
-  padding-right: 15px;
   margin: 0;
   float: right;
   right: 0;
@@ -548,8 +547,6 @@ option {
   width: 79%;
 
   margin: 5px;
-
-  padding-right: 30px;
 
   transition: all 0.2s ease-in-out;
 }
