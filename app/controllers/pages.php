@@ -80,7 +80,7 @@ class Pages extends Controller
             if ($center->add_record($new_antigen)) {
                 header('location:' . URL_ROOT . '/pages/antigen?success');
             } else {
-                header('location:' . URL_ROOT . '/pages/error');
+                
             }
         }
 
@@ -107,7 +107,7 @@ class Pages extends Controller
                 $antigen_id = (string)$new_antigen->get_id();
                 header('location:' . URL_ROOT . '/pages/antigen?updated=' . $antigen_detail['health_id'] . "-" . $antigen_id);
             } else {
-                header('location:' . URL_ROOT . '/pages/error');
+                header('location:' . URL_ROOT . '/pages/bad_request');
             }
         }
 
@@ -202,7 +202,7 @@ class Pages extends Controller
                     $new_patient = $this->record_factory->get_record('covid_patients', $last_record);
                     if ($patient_center->update_record($new_patient)) {
                     } else {
-                        header('location:' . URL_ROOT . '/pages/error');
+                        header('location:' . URL_ROOT . '/pages/bad_request');
                     }
                 }
                 $new_death = $this->record_factory->get_record('covid_deaths', $death_details);
@@ -211,7 +211,7 @@ class Pages extends Controller
 
                     header('location:' . URL_ROOT . '/pages/covid_deaths?updated=' . $_POST["add-death-health-id"]);
                 } else {
-                    header('location:' . URL_ROOT . '/pages/error');
+                    header('location:' . URL_ROOT . '/pages/bad_request');
                 }
             } else {
                 $data['error'] = !$citizen ? "Invalid UserID" : "Overriding an existing record is prohibited.";
@@ -279,7 +279,7 @@ class Pages extends Controller
             if ($center->add_record($new_patient)) {
                 header('location:' . URL_ROOT . '/pages/covid_patients?success');
             } else {
-                header('location:' . URL_ROOT . '/pages/error');
+                header('location:' . URL_ROOT . '/pages/bad_request');
             }
         }
 
@@ -318,7 +318,7 @@ class Pages extends Controller
                         $health_id = (string)$new_patient->get_health_id();
                         header('location:' . URL_ROOT . '/pages/covid_patients?updated=' . $health_id);
                     } else {
-                        header('location:' . URL_ROOT . '/pages/error');
+                        header('location:' . URL_ROOT . '/pages/bad_request');
                     }
                 }
             }
@@ -401,7 +401,7 @@ class Pages extends Controller
             if ($center->add_record($new_pcr)) {
                 header('location:' . URL_ROOT . '/pages/pcr?success');
             } else {
-                header('location:' . URL_ROOT . '/pages/error');
+                header('location:' . URL_ROOT . '/pages/bad_request');
             }
         }
 
@@ -424,7 +424,7 @@ class Pages extends Controller
                 $pcr_id = (string)$new_pcr->get_id();
                 header('location:' . URL_ROOT . '/pages/pcr?updated=' . $pcr_detail['health_id'] . "-" . $pcr_id);
             } else {
-                header('location:' . URL_ROOT . '/pages/error');
+                header('location:' . URL_ROOT . '/pages/bad_request');
             }
         }
 
@@ -516,7 +516,7 @@ class Pages extends Controller
             if ($center->add_record($new_vaccine)) {
                 header('location:' . URL_ROOT . '/pages/vaccination?success');
             } else {
-                header('location:' . URL_ROOT . '/pages/error');
+                header('location:' . URL_ROOT . '/pages/bad_request');
             }
         }
 
@@ -590,7 +590,7 @@ class Pages extends Controller
             if ($center->delete_record($_POST['id'])) {
                 header('location:' . URL_ROOT . "/pages/data_management?record_type=$type");
             } else {
-                header('location:' . URL_ROOT . '/pages/error');
+                header('location:' . URL_ROOT . '/pages/bad_request');
             }
         }
 
@@ -648,7 +648,7 @@ class Pages extends Controller
 
                     $this->view('/pages/user_management', $data);
                 } else {
-                    header('location:' . URL_ROOT . '/pages/error');
+                    header('location:' . URL_ROOT . '/pages/bad_request');
                 }
             }
         }
@@ -659,7 +659,7 @@ class Pages extends Controller
             if ($this->user_handler->remove_user($id)) {
                 header('location:' . URL_ROOT . '/pages/user_management');
             } else {
-                header('location:' . URL_ROOT . '/pages/error');
+                header('location:' . URL_ROOT . '/pages/bad_request');
             }
         }
 
@@ -668,7 +668,7 @@ class Pages extends Controller
         $_SESSION["is_admin"] ? $this->view('/pages/user_management', $data) : header('location:' . URL_ROOT . '/pages/index');
     }
 
-    public function logout()
+    private function logout()
     {
         $this->user_handler->logout();
         header('location:' . URL_ROOT . '/users/login');
@@ -701,7 +701,7 @@ class Pages extends Controller
             !$_SESSION["is_admin"] ? $this->view($page, $data) : header('location:' . URL_ROOT . '/pages/index');
             return;
         } else {
-            header('location:' . URL_ROOT . '/pages/error');
+            header('location:' . URL_ROOT . '/pages/page_not_found');
         }
     }
 
@@ -754,8 +754,13 @@ class Pages extends Controller
     }
 
     //error page
-    public function error()
+    public function page_not_found()
     {
         $this->view("/pages/error");
+    }
+
+    public function bad_request()
+    {
+        $this->view("/pages/error-400");
     }
 }

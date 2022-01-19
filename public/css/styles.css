@@ -1538,3 +1538,37 @@ option {
   border-radius: 10px;
 }
 /* General css end */
+
+
+/*error page*/
+.error-page{
+  text-align: center;
+  position:absolute;
+  left:40%;
+  top:34%;
+  margin-left:-50px;
+  margin-top:-50px;
+}
+
+.bad-request{
+  left:46%;
+}
+.error-main{
+  font-size: 90px;
+}
+
+.error-desc{
+  font-family: 'Raleway', sans-serif;
+}
+
+#home-page{
+  font-size: 15px;
+  padding: 5px 15px;
+  border-radius: 25px;
+}
+
+#home-page:hover{
+  color: blue;
+  background-color: white;
+  border: 1px solid blue;
+}

@@ -85,13 +85,13 @@
     </main>
 </div>
 
-<!--Modals !>
+<!--Modals -->
 <?php $counter = 1; ?>
 <?php if (count($data) > 2) : ?>
     <?php foreach ($data as $record) : ?>
         <?php if (gettype($record) != "string") : ?>
 
-            <!-- Modal for updating-->
+<!-- Modal for updating-->
 <?php if ($data[count($data) - 1] === 'antigen_tests' || $data[count($data) - 1] === 'pcr_tests') : ?>
     <div class="modal fade" id="modalfor<?php echo $data[count($data) - 1] . $counter ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

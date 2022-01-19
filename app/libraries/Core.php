@@ -39,7 +39,7 @@ class Core{
             call_user_func_array([$this->controller,$this->method],$this->params);  //call the significant controller function
         }catch(Error $e){
             //private methods of pages
-            call_user_func_array([$this->controller,"error"],[]);
+            call_user_func_array([$this->controller,"page_not_found"],[]);
         }
     }
 
