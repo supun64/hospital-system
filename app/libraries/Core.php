@@ -34,8 +34,13 @@ class Core{
         }
 
         $this->params = $url ? array_values($url): [];   //final array of params
-       
-        call_user_func_array([$this->controller,$this->method],$this->params);  //call the significant controller function
+
+        try{
+            call_user_func_array([$this->controller,$this->method],$this->params);  //call the significant controller function
+        }catch(Error $e){
+            //private methods of pages
+            call_user_func_array([$this->controller,"error"],[]);
+        }
     }
 
     //function to split url
@@ -46,8 +51,4 @@ class Core{
         }
 
     }
-
-
-
-
 }
