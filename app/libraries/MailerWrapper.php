@@ -12,8 +12,8 @@ class MailerWrapper
 
     private function authenticate_server()
     {
-        $this->mail->isMail();                                            //Send using SMTP
-        $this->mail->Host       = 'localhost';                       //Set the SMTP server to send through
+        $this->mail->isMail();                                            //Send using localhost
+        $this->mail->Host       = 'localhost';                       //Set the localhost server to send through
         $this->mail->SMTPAuth   = true;
         $this->mail->SMTPSecure = 'tls';                                  //Enable implicit TLS encryption
         $this->mail->Port       = 587;
@@ -22,7 +22,7 @@ class MailerWrapper
 
     private function authenticate_sender()
     {
-        $this->mail->Username   = 'squ4doption@gmail.com';               //SMTP username
+        $this->mail->Username   = 'squ4doption@gmail.com';               // username
         $this->mail->Password   = 'Abc@123456';
         $this->mail->setFrom('squ4doption@gmail.com', 'squ4doption');
     }
