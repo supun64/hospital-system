@@ -25,7 +25,7 @@
 
             <form class="data-select-box" action="<?php echo URL_ROOT; ?>/pages/user_management" method="POST">
                 <div class="input-group mb-3">
-                    <input type="text" id="deo-search-bar" class="form-control" placeholder="Search DEO ID" aria-label="DEO's username" aria-describedby="button-deo-serach">
+                    <input type="text" id="deo-search-bar" class="form-control" placeholder="Search User ID" aria-label="DEO's username" aria-describedby="button-deo-serach">
                     <!-- <button class="btn btn-outline-primary" type="submit" id="button-deo-search">Search</button> -->
                 </div>
             </form>

@@ -70,7 +70,7 @@ if ($_SESSION['is_admin']) {
                         </ul>
 
                         <form action="<?= URL_ROOT; ?>/pages/settings" method="POST">
-                            
+
                             <div class="settings-info-element form-group">
                                 <label for="fullname">Full Name</label>
                                 <input type="text" class="form-control" id="fullname" required value="<?= isset($data['user_name']) ? $data['user_name'] : ""; ?>" name="users[name]" />
@@ -137,7 +137,7 @@ if ($_SESSION['is_admin']) {
                             <div class="col-md-6">
                                 <p class="settings-info-element mb-2">Password requirements</p>
                                 <p class="settings-info-element small text-muted mb-2">
-                                    To create a new password, you have to meet all of the
+                                    To create a strong password, you have to meet all of the
                                     following requirements:
                                 </p>
                                 <ul class="settings-info-element small text-muted pl-4 mb-0">
