@@ -127,7 +127,12 @@ class Database
     public function findById($table, $primary_key, $value)
     {
         if (is_int($value) || $this->safe($value)) {
-            $query = 'SELECT * FROM `' . $table . '`WHERE ' . $primary_key . ' =' . $value;
+            if (is_int($value)) {
+                $query = 'SELECT * FROM `' . $table . '`WHERE ' . $primary_key . ' =' . $value;
+            } else {
+                $query = 'SELECT * FROM `' . $table . '`WHERE ' . $primary_key . " ='" . $value . "'";
+            }
+
             $query = $this->sql_execute($query);
             return $this->result_set();
         } else {
@@ -140,6 +145,7 @@ class Database
     {
         if (is_int($value) || $this->safe($value)) {
             $query = 'SELECT * FROM ' . $table . ' WHERE ' . $column . " = '" . $value . "'";
+
             $this->sql_execute($query);
             return $this->result_set();
         } else {

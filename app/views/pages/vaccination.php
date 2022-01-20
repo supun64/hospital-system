@@ -99,7 +99,7 @@
 
                         <?php
                         $last_dose = 0;
-                        if (isset($data['vaccinations'])) { ?>
+                        if (isset($data['vaccinations']) && $data['vaccinations']) { ?>
                             <!-- These are the vaccination details -->
 
                             <div class="covid-previous-details">

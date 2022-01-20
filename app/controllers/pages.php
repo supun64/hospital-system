@@ -80,7 +80,6 @@ class Pages extends Controller
             if ($center->add_record($new_antigen)) {
                 header('location:' . URL_ROOT . '/pages/antigen?success');
             } else {
-                
             }
         }
 
@@ -462,6 +461,7 @@ class Pages extends Controller
         elseif (isset($_POST['forget-id-submit']))
             $this->find_citizen_id();
 
+
         $data['personal'] = [];
         $data['vaccinations'] = [];
         $data['hospital_id'] = NULL;
@@ -477,11 +477,11 @@ class Pages extends Controller
 
 
             $id = $_POST["vaccine-search-bar-input"]; // TO get the search input
+
             $temp_data = $this->search($id, $center, "vaccinations");
             $data['personal'] = $temp_data['personal'];
             $data['vaccinations'] = $temp_data['vaccinations'];
             $data['hospital_id'] = $temp_data['hospital_id'];
-
 
             if (!$data['personal']) {
                 header('location:' . URL_ROOT . '/pages/vaccination?not-user');
@@ -708,7 +708,10 @@ class Pages extends Controller
     //search
     private function search($id, $center, $type)
     {
+
+
         $citizen = $center->get_citizen($id);
+
         if ($citizen != NULL) {
 
             $data['personal'] =   ['health_id' => $citizen->get_id(), 'name' => $citizen->get_name(), 'dob' => $citizen->get_dob(), 'is_alive' => $citizen->get_is_alive()];    //array list of users
