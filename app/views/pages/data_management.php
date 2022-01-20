@@ -87,7 +87,7 @@
 
 <!--Modals -->
 <?php $counter = 1; ?>
-<?php if (count($data) >= 2) : ?>
+<?php if (!isset($data['type'])) : ?>
     <?php foreach ($data as $record) : ?>
         <?php if (gettype($record) != "string") : ?>
 
