@@ -18,7 +18,7 @@
         <div class="data-search-bar d-flex flex-row justify-content-between">
             <!-- add new data entry operator-->
             <div class="col-md-1">
-                <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#deo-manage-nw-deo-form">
+                <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#deo-manage-nw-deo-form">
                     &plus;Add New
                 </button>
             </div>
@@ -32,7 +32,7 @@
         </div>
 
         <!-- DEO table -->
-        <table class="table table-hover" id="deo-table">
+        <table class="table table-hover data-table" id="deo-table">
             <thead>
                 <tr>
                     <th scope="col">User ID</th>
@@ -51,7 +51,7 @@
                         <td><?php echo $deo['user_email'] ?></td>
 
                         <td>
-                            <button class='btn btn-light' data-bs-toggle="modal" data-bs-target="#delmodalfor<?= $deo['user_id'] ?>">
+                            <button class='btn btn-light data-update-cus-btn' data-bs-toggle="modal" data-bs-target="#delmodalfor<?= $deo['user_id'] ?>">
                                 <i class='bx bxs-trash data-edit-button'></i>
                             </button>
 

@@ -32,7 +32,7 @@
                     <tbody>
                         <thead>
                             <?php foreach ($data['type'] as $column) : ?>
-                                <td><?= $column ?></td>
+                                <th><?= $column ?></th>
                             <?php endforeach;
                             unset($data['type']); ?>
                             <td></td>
@@ -54,12 +54,12 @@
                                     <?php endforeach; ?>
 
                                     <td class="data-edit">
-                                        <button class='btn btn-outline-info data-update-cus-btn' data-bs-toggle="modal" data-bs-target="#modalfor<?php echo $data[count($data) - 1] . $counter ?>">
+                                        <button class='btn btn-light data-update-cus-btn' data-bs-toggle="modal" data-bs-target="#modalfor<?php echo $data[count($data) - 1] . $counter ?>">
                                             <i class='data-edit-button bx bxs-edit' style="color: black"></i>
                                         </button>
                                     </td>
                                     <td>
-                                        <button class='btn btn-outline-info data-update-cus-btn' data-bs-toggle="modal" data-bs-target="#delmodalfor<?php echo $data[count($data) - 1] . $counter ?>">
+                                        <button class='btn btn-light data-update-cus-btn' data-bs-toggle="modal" data-bs-target="#delmodalfor<?php echo $data[count($data) - 1] . $counter ?>">
                                             <i class='bx bxs-trash data-edit-button'  style="color: black"></i>
                                         </button>
                                     </td>
