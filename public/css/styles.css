@@ -1108,6 +1108,10 @@ option {
   letter-spacing: 10px;
 }
 
+#death-table{
+  width: 100%;
+}
+
 /* test Styles ---------------------------------------- */
 
 .test-toggle-label {
