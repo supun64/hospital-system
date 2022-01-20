@@ -576,7 +576,9 @@ option {
   border-bottom: rgba(1, 43, 107, 0.350) 1px solid;
   font-size: 14px;
 
-  background-color: rgba(246, 247, 248, 0.801);
+  background-color: rgba(246, 247, 248, 0.678);
+
+  backdrop-filter: blur(15px);
 }
 .data-edit {
   font-size: 20px;
@@ -587,7 +589,6 @@ option {
 
 .data-update-cus-btn{
   background-color: rgb(255, 255, 255);
-  border: black 1px solid;
 
   transition: all 0.2s ease-in-out;
 }
@@ -595,7 +596,6 @@ option {
 .data-update-cus-btn:hover{
 
   background-color: rgb(190, 189, 189);
-  border: rgb(255, 255, 255) 1px solid;
 
   transition: all 0.2s ease-in-out;
 
