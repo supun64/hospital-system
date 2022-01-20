@@ -301,7 +301,7 @@ class Pages extends Controller
                             "hospital_id" => $hospital_id,
                             "date" => $_POST["final-discharge-date"],
                             "place" => $_SESSION["hospitalname"],
-                            "comments" => "Died at the hospital - " . $_SESSION["hospitalname"]
+                            "comments" => "Died at - " . $_SESSION["hospitalname"]
                         ];
 
                         $is_citizen = $covid_death_center->get_citizen($id);
