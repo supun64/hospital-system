@@ -78,7 +78,12 @@ class Database
             }
         }
         $sql = rtrim($sql, ',');
-        $sql .= ' WHERE ' . $primary_key . ' = ' . $param_list[$primary_key];
+        if (is_int($param_list[$primary_key])) {
+            $sql .= ' WHERE ' . $primary_key . ' = ' . $param_list[$primary_key];
+        } else {
+            $sql .= ' WHERE ' . $primary_key . " = '" . $param_list[$primary_key] . "'";
+        }
+
         return $this->sql_execute($sql);
     }
 
