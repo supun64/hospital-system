@@ -71,7 +71,7 @@ class Pages extends Controller
                 "hospital_id" => $hospital_id,
                 "date" => $_POST["add-patient-antigen-date"],
                 "status" => "Pending",
-                "place" => $_POST["add-patient-antigen-place"]
+                "place" => $_POST["add-patient-antigen-place"] == "undefined" ? NULL : $_POST["add-patient-antigen-place"]
             ];
 
             $new_antigen = $this->record_factory->get_record('antigen_tests', $antigen_detail);
@@ -391,7 +391,7 @@ class Pages extends Controller
                 "hospital_id" => $hospital_id,
                 "date" => $_POST["add-patient-pcr-date"],
                 "status" => "Pending",
-                "place" => $_POST["add-patient-pcr-place"]
+                "place" => $_POST["add-patient-pcr-place"] == "undefined" ? NULL : $_POST["add-patient-pcr-place"]
             ];
 
             $new_pcr = $this->record_factory->get_record('pcr_tests', $pcr_detail);
