@@ -191,7 +191,7 @@
 
                         <div class=" col-md-6 covid-input">
                             <label for="inputDate" class="form-label-primary covid-input-label">Deceased date</label>
-                            <input type="date" class="form-control covid-input-field" id="inputDate" name="add-death-date" required>
+                            <input type="date" max = "<?= date("Y-m-d"); ?>" value="<?php echo date('d-m-Y'); ?>" class="form-control covid-input-field" id="inputDate" name="add-death-date" required>
                         </div>
 
                         <div class="col-md-8 covid-input">

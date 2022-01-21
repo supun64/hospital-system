@@ -133,6 +133,7 @@ if ($_SESSION['is_admin']) {
                                     <input type="password" class="form-control" id="confirmed_password" name="passwords[confirm_password]" required minlength="8" />
                                     <small id="matching-passwords" class="form-text invisible">Make sure your passwords match.</small>
                                 </div>
+                                <small id="wrong-confirmed-password" class="form-text invisible">Make sure your password is upto standards.</small>
                             </div>
                             <div class="col-md-6">
                                 <p class="settings-info-element mb-2">Password requirements</p>
@@ -143,6 +144,7 @@ if ($_SESSION['is_admin']) {
                                 <ul class="settings-info-element small text-muted pl-4 mb-0">
                                     <li>Minimum 8 character.</li>
                                     <li>At least one special character.</li>
+                                    <li>At least one capital character.</li>
                                     <li>At least one number.</li>
                                     <li>Can’t be the same as a previous password.</li>
                                 </ul>

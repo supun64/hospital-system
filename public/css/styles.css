@@ -675,7 +675,9 @@ option {
 }
 
 #same-password,
-#matching-passwords {
+#matching-passwords,
+#wrong-new-password,
+#wrong-confirmed-password{
   color: red;
 }
 #old_password {

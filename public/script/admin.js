@@ -57,6 +57,7 @@ function validate_password(){
     var old_password = document.querySelector('#old_password').value;
     var new_password = document.querySelector('#new_password').value;
     var confirmed_password = document.querySelector('#confirmed_password').value;
+    var passw=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
 
     if(old_password==new_password && old_password != ""){
         document.querySelector('#same-password').classList.remove('invisible');
@@ -64,6 +65,9 @@ function validate_password(){
     }
     else if(confirmed_password != new_password && new_password != ""){
         document.querySelector('#matching-passwords').classList.remove('invisible');
+        return false;
+    }else if(!passw.test(new_password)){
+        document.querySelector('#wrong-confirmed-password').classList.remove('invisible');
         return false;
     }
     return true;

@@ -88,7 +88,7 @@
 
                     <div class="col-md-6">
                         <label for="deo_mail" class="form-label">Email</label>
-                        <input type="text" class="form-control" name="deo_email" aria-describedby="inputGroupPrepend" required>
+                        <input type="email" class="form-control" name="deo_email" aria-describedby="inputGroupPrepend" required>
 
                     </div>
 

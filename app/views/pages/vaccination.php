@@ -210,7 +210,7 @@
 
                         <div class="col-md-6 covid-input">
                             <label for="inputDate" class="form-label-primary covid-input-label">Vaccinated Date</label>
-                            <input type="date" value="<?php echo date('d-m-Y'); ?>" class="form-control covid-input-field covid-input-field" id="inputDate" name="add-patient-vaccinated-date" required>
+                            <input type="date" max = <?= date("Y-m-d");?> value="<?php echo date('d-m-Y'); ?>" class="form-control covid-input-field covid-input-field" id="inputDate" name="add-patient-vaccinated-date" required>
                         </div>
 
                         <div class="col-md-8 covid-input">

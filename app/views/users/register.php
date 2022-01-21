@@ -82,7 +82,7 @@
             </div>
             <div class="col-sm-4">
                 <label for="admin-email" class="col-form-label-sm">Admin Email</label>
-                <input type="text" class="form-control form-control-sm" placeholder="Enter email" required name="admin-email">
+                <input type="email" class="form-control form-control-sm" placeholder="Enter email" required name="admin-email">
             </div>
 
         </div>
@@ -109,7 +109,7 @@
             <p style="color: red;">Make sure your passwords match.</p>
         </div>
         <div id="len-val-pwd" hidden>
-            <p style="color: red;">At least 8 characters required.</p>
+            <p style="color: red;">Make sure your password is upto standards.</p>
         </div>
 
         <input type="text" name="ran-2" id="ran-id2" hidden>
@@ -130,7 +130,7 @@
     </div>
     <script>
         function valid_input() {
-            if (document.getElementById("admin-password").value.length < 7) {
+            if (! /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{7,15}$/.test(document.getElementById("admin-password").value)) {
                 document.getElementById("len-val-pwd").hidden = false;
             } else {
                 document.getElementById("len-val-pwd").hidden = true;
