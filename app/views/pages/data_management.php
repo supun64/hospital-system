@@ -147,7 +147,7 @@
                                         <label for="floatingInput">Health ID</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="floatingPassword" placeholder="Dose" name="newrecord[dose]" value="<?= $record['dose'] ?>" disabled>
+                                        <input type="text" class="form-control" id="floatingPassword" placeholder="Dose" name="newrecord[dose]" value="<?= $record['dose'] ?>" readonly>
                                         <label for="floatingPassword">Dose</label>
                                     </div>
                                     <div class="form-floating mb-3">
