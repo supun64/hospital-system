@@ -34,12 +34,14 @@ class VaccinationCenter extends COVID_Department
     public  function update_record($record)
     {
         $batch_num = $record->get_batch_num();
+        $vaccine_name = $record->get_vaccine_name();
         $place = $record->get_vaccinated_place();
         $comments = $record->get_comments();
         $id = $record->get_id();
 
         $params = [
             "batch_num" => $batch_num,
+            "vaccine_name" => $vaccine_name,
             "vaccinated_place" => $place,
             "comments" => $comments,
             "id" => $id

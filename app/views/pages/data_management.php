@@ -60,7 +60,7 @@
                                     </td>
                                     <td>
                                         <button class='btn btn-light data-update-cus-btn' data-bs-toggle="modal" data-bs-target="#delmodalfor<?php echo $data[count($data) - 1] . $counter ?>">
-                                            <i class='bx bxs-trash data-edit-button'  style="color: black"></i>
+                                            <i class='bx bxs-trash data-edit-button' style="color: black"></i>
                                         </button>
                                     </td>
                             </tr>
@@ -147,7 +147,7 @@
                                         <label for="floatingInput">Health ID</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="floatingPassword" placeholder="Dose" name="newrecord[dose]" value="<?= $record['dose'] ?>">
+                                        <input type="text" class="form-control" id="floatingPassword" placeholder="Dose" name="newrecord[dose]" value="<?= $record['dose'] ?>" disabled>
                                         <label for="floatingPassword">Dose</label>
                                     </div>
                                     <div class="form-floating mb-3">
